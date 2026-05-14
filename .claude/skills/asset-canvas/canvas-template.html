@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{PROJECT_TITLE}} — Asset Canvas</title>
+    <style>
+        :root {
+            --bg: #111111;
+            --card-bg: #1a1a1a;
+            --card-border: #2a2a2a;
+            --text-primary: #e5e7eb;
+            --text-muted: #6b7280;
+            --text-mono: #9ca3af;
+            --badge-char: #818cf8;
+            --badge-loc: #f472b6;
+            --badge-prop: #fb923c;
+            --status-missing: #2a2a2a;
+            --status-generated: #4ade80;
+            --status-flagged: #f97316;
+            --accent: #60a5fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 24px;
+        }
+
+        /* ── Header ────────────────────────────────────────── */
+        .header {
+            border-bottom: 1px solid #222;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .header .meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ── Progress ──────────────────────────────────────── */
+        .progress-section {
+            margin: 16px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #2a2a2a;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--status-generated);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+
+            width: {
+                    {
+                    PROGRESS_PERCENT
+                }
+            }
+
+            %;
+        }
+
+        /* ── Category Tabs ─────────────────────────────────── */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            border-color: #555;
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: #fff;
+            color: #111;
+            border-color: #fff;
+            font-weight: 600;
+        }
+
+        /* ── Section headers ───────────────────────────────── */
+        .section-header {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin: 28px 0 12px;
+            padding-left: 2px;
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        /* ── Card Grid ─────────────────────────────────────── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Card ──────────────────────────────────────────── */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: #444;
+        }
+
+        .card.status-generated {
+            border-color: var(--status-generated);
+        }
+
+        .card.status-flagged {
+            border-color: var(--status-flagged);
+        }
+
+        /* image placeholder */
+        .card-image {
+            width: 100%;
+            background: var(--status-missing);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image.ratio-3-4 {
+            aspect-ratio: 3/4;
+        }
+
+        .card-image.ratio-16-9 {
+            aspect-ratio: 16/9;
+        }
+
+        .card-image.ratio-1-1 {
+            aspect-ratio: 1/1;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-image .placeholder-text {
+            position: absolute;
+            font-size: 11px;
+            color: #444;
+            letter-spacing: 0.05em;
+        }
+
+        /* status badge in image corner */
+        .status-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        /* card body */
+        .card-body {
+            padding: 10px 12px;
+        }
+
+        .card-category {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .cat-character {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--badge-char);
+        }
+
+        .cat-location {
+            background: rgba(244, 114, 182, 0.15);
+            color: var(--badge-loc);
+        }
+
+        .cat-prop {
+            background: rgba(251, 146, 60, 0.15);
+            color: var(--badge-prop);
+        }
+
+        .card-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .card-filename {
+            font-size: 11px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            color: var(--text-mono);
+            margin-top: 2px;
+        }
+
+        /* collapsible prompt */
+        .prompt-toggle {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #222;
+            user-select: none;
+        }
+
+        .prompt-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .prompt-toggle .arrow {
+            transition: transform 0.2s;
+        }
+
+        .prompt-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .prompt-text {
+            display: none;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .prompt-text.visible {
+            display: block;
+        }
+
+        /* spatial annotation panel */
+        .spatial-panel {
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: rgba(96, 165, 250, 0.07);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 6px;
+            font-size: 11px;
+            color: #93c5fd;
+            line-height: 1.7;
+        }
+
+        .spatial-panel .spatial-title {
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .spatial-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .spatial-key {
+            color: var(--text-muted);
+            min-width: 36px;
+        }
+
+        /* ── Footer ────────────────────────────────────────── */
+        .footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid #222;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── HEADER ─────────────────────────────────────── -->
+    <div class="header">
+        <h1>{{PROJECT_TITLE}} — Asset Canvas</h1>
+        <div class="meta">生成时间: {{DATE}} &nbsp;·&nbsp; 共 {{TOTAL}} 个资产</div>
+    </div>
+
+    <!-- ── PROGRESS ───────────────────────────────────── -->
+    <div class="progress-section">
+        <div class="progress-label">
+            <span>资产完成度</span>
+            <span>{{GENERATED}} / {{TOTAL}} 已生成</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- ── TABS ──────────────────────────────────────── -->
+    <div class="tabs">
+        <button class="tab active" onclick="filterCards('all')">全部 All</button>
+        <button class="tab" onclick="filterCards('character')">角色 Characters</button>
+        <button class="tab" onclick="filterCards('location')">场地 Locations</button>
+        <button class="tab" onclick="filterCards('prop')">道具 Props</button>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- SECTION: CHARACTERS                              -->
+    <!-- ════════════════════════════════════════════════ -->
+    <div class="section-header" data-section="character">🎭 角色 Characters</div>
+    <div class="card-grid" id="grid-character">
+
+        <!-- CARD TEMPLATE — CHARACTER (status-missing example) -->
+        <div class="card status-missing" data-category="character">
+            <div class="card-image ratio-3-4">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-character">Character</span>
+                <div class="card-name">林深 / Lin Shen</div>
+                <div class="card-filename">lin_shen.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">
+                    展开提示词 <span class="arrow">▾</span>
+                </div>
+                <div class="prompt-text">
+                    <!-- PASTE FULL PROMPT HERE -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD TEMPLATE — CHARACTER (status-generated example) -->
+        <div class="card status-generated" data-category="character">
+            <div class="card-image ratio-3-4">
+                <!-- <img src="chen_bo.png" alt="陈伯" /> -->
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">✅</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-character">Character</span>
+                <div class="card-name">陈伯 / Chen Bo</div>
+                <div class="card-filename">chen_bo.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">
+                    展开提示词 <span class="arrow">▾</span>
+                </div>
+                <div class="prompt-text">
+                    <!-- PASTE FULL PROMPT HERE -->
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid-character -->
+
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- SECTION: LOCATIONS                               -->
+    <!-- ════════════════════════════════════════════════ -->
+    <div class="section-header" data-section="location">🏠 场地 Locations</div>
+    <div class="card-grid" id="grid-location">
+
+        <!-- CARD TEMPLATE — LOCATION (with spatial annotation example) -->
+        <div class="card status-generated" data-category="location">
+            <div class="card-image ratio-16-9">
+                <!-- <img src="lin_room_wide.png" alt="林深出租屋·全景" /> -->
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">✅</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">林深的出租屋·全景</div>
+                <div class="card-filename">lin_room_wide.png</div>
+
+                <!-- Spatial annotation panel (only on location cards) -->
+                <div class="spatial-panel">
+                    <div class="spatial-title">📐 空间标注</div>
+                    <div class="spatial-row"><span class="spatial-key">镜头</span> 正面广角，从门口往里看</div>
+                    <div class="spatial-row"><span class="spatial-key">角色</span> 林深 (床边，左后方)</div>
+                    <div class="spatial-row"><span class="spatial-key">道具</span> 录音笔 + 信封 (桌面中央)</div>
+                    <div class="spatial-row"><span class="spatial-key">光源</span> 右侧窗外城市夜光，冷蓝</div>
+                </div>
+
+                <div class="prompt-toggle" onclick="togglePrompt(this)">
+                    展开提示词 <span class="arrow">▾</span>
+                </div>
+                <div class="prompt-text">
+                    <!-- PASTE FULL PROMPT HERE -->
+                </div>
+            </div>
+        </div>
+
+        <!-- More location cards follow same pattern -->
+
+    </div><!-- /grid-location -->
+
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- SECTION: PROPS                                   -->
+    <!-- ════════════════════════════════════════════════ -->
+    <div class="section-header" data-section="prop">🎬 道具 Props</div>
+    <div class="card-grid" id="grid-prop">
+
+        <!-- CARD TEMPLATE — PROP -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image ratio-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">旧录音笔 / Old Recorder</div>
+                <div class="card-filename">recorder.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">
+                    展开提示词 <span class="arrow">▾</span>
+                </div>
+                <div class="prompt-text">
+                    <!-- PASTE FULL PROMPT HERE -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ⚠️ flagged card example -->
+        <div class="card status-flagged" data-category="prop">
+            <div class="card-image ratio-1-1">
+                <!-- <img src="envelope_note.png" alt="信封" /> -->
+                <span class="placeholder-text">待审核</span>
+                <span class="status-badge">⚠️</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">匿名信封与纸条 / Envelope & Note</div>
+                <div class="card-filename">envelope_note.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">
+                    展开提示词 <span class="arrow">▾</span>
+                </div>
+                <div class="prompt-text">
+                    <!-- PASTE FULL PROMPT HERE -->
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid-prop -->
+
+
+    <!-- ── FOOTER ─────────────────────────────────────── -->
+    <div class="footer">
+        <span>Asset Canvas · {{PROJECT_SLUG}}</span>
+        <span>Generated by asset-canvas skill</span>
+    </div>
+
+    <script>
+        // Tab filtering
+        function filterCards(category) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const sections = document.querySelectorAll('.section-header, .card-grid');
+            if (category === 'all') {
+                sections.forEach(el => el.style.display = '');
+                return;
+            }
+            sections.forEach(el => {
+                if (el.dataset.section) {
+                    el.style.display = el.dataset.section === category ? '' : 'none';
+                }
+                if (el.id && el.id.startsWith('grid-')) {
+                    el.style.display = el.id === `grid-${category}` ? '' : 'none';
+                }
+            });
+        }
+
+        // Prompt toggle
+        function togglePrompt(toggle) {
+            toggle.classList.toggle('open');
+            const text = toggle.nextElementSibling;
+            text.classList.toggle('visible');
+        }
+    </script>
+</body>
+
+</html>

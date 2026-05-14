@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>《证词之外》— Asset Canvas</title>
+    <style>
+        :root {
+            --bg: #111111;
+            --card-bg: #202020;
+            --card-border: #2a2a2a;
+            --text-primary: #e5e7eb;
+            --text-muted: #6b7280;
+            --text-mono: #9ca3af;
+            --badge-char: #818cf8;
+            --badge-loc: #f472b6;
+            --badge-prop: #fb923c;
+            --status-generated: #4ade80;
+            --status-flagged: #f97316;
+            --accent: #60a5fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 28px 32px;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #222;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .header .meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Progress */
+        .progress-section {
+            margin: 16px 0 24px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #222;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--status-generated);
+            border-radius: 3px;
+            width: 0%;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            border-color: #555;
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: #fff;
+            color: #111;
+            border-color: #fff;
+            font-weight: 600;
+        }
+
+        /* Section header */
+        .section-header {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin: 32px 0 14px;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 1100px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 440px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: #3a3a3a;
+        }
+
+        .card.status-generated {
+            border-color: var(--status-generated);
+        }
+
+        .card.status-flagged {
+            border-color: var(--status-flagged);
+        }
+
+        /* Card image */
+        .card-image {
+            width: 100%;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image.r-3-4 {
+            aspect-ratio: 3/4;
+        }
+
+        .card-image.r-16-9 {
+            aspect-ratio: 16/9;
+        }
+
+        .card-image.r-1-1 {
+            aspect-ratio: 1/1;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .placeholder-text {
+            font-size: 11px;
+            color: #383838;
+            letter-spacing: 0.08em;
+            position: absolute;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        /* Card body */
+        .card-body {
+            padding: 8px 10px 10px;
+        }
+
+        .card-category {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .cat-character {
+            background: rgba(129, 140, 248, .15);
+            color: var(--badge-char);
+        }
+
+        .cat-location {
+            background: rgba(244, 114, 182, .15);
+            color: var(--badge-loc);
+        }
+
+        .cat-prop {
+            background: rgba(251, 146, 60, .15);
+            color: var(--badge-prop);
+        }
+
+        .card-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .card-filename {
+            font-size: 11px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            color: var(--text-mono);
+            margin-top: 2px;
+        }
+
+        /* Prompt toggle */
+        .prompt-toggle {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #222;
+            user-select: none;
+        }
+
+        .prompt-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .prompt-toggle .arrow {
+            transition: transform .2s;
+            display: inline-block;
+        }
+
+        .prompt-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .prompt-text {
+            display: none;
+            font-size: 11px;
+            color: #888;
+            margin-top: 6px;
+            line-height: 1.7;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .prompt-text.visible {
+            display: block;
+        }
+
+        /* Spatial panel */
+        .spatial-panel {
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: rgba(96, 165, 250, .07);
+            border: 1px solid rgba(96, 165, 250, .2);
+            border-radius: 6px;
+            font-size: 11px;
+            color: #93c5fd;
+            line-height: 1.8;
+        }
+
+        .spatial-title {
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .s-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .s-key {
+            color: var(--text-muted);
+            min-width: 32px;
+        }
+
+        /* ── Assignment Matrix ──────────────────────── */
+        .matrix-section {
+            margin-top: 52px;
+            border-top: 2px solid #333;
+            padding-top: 28px;
+        }
+
+        .matrix-heading {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .matrix-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .matrix-wrap {
+            overflow-x: auto;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .matrix-table th,
+        .matrix-table td {
+            border: 1px solid #222;
+            padding: 0;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Column headers (scenes) */
+        .matrix-table thead th {
+            background: #161616;
+            color: var(--text-muted);
+            font-weight: 700;
+            padding: 6px 4px;
+            white-space: nowrap;
+            min-width: 70px;
+        }
+
+        .matrix-table thead th.asset-hdr {
+            text-align: left;
+            padding: 6px 10px;
+            min-width: 200px;
+            color: var(--text-primary);
+            font-size: 10px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .matrix-table thead th.count-hdr {
+            min-width: 36px;
+            color: var(--accent);
+        }
+
+        .th-scene-id {
+            display: block;
+            font-size: 9px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .th-scene-name {
+            display: block;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        /* Asset rows */
+        .matrix-table tbody tr {
+            background: #161616;
+            transition: background 0.1s;
+        }
+
+        .matrix-table tbody tr:hover {
+            background: #1d1d1d;
+        }
+
+        .asset-cell {
+            text-align: left !important;
+            padding: 6px 10px !important;
+        }
+
+        .asset-row-inner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .asset-row-thumb {
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
+            background: #252525;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            overflow: hidden;
+        }
+
+        .asset-row-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .asset-row-info {
+            overflow: hidden;
+        }
+
+        .asset-row-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+
+        .asset-row-file {
+            font-size: 9px;
+            color: var(--text-muted);
+            font-family: "SF Mono", "Fira Code", monospace;
+        }
+
+        /* Clickable matrix cell */
+        .mx-cell {
+            cursor: pointer;
+            width: 70px;
+            height: 38px;
+            transition: background 0.1s;
+        }
+
+        .mx-cell:hover {
+            background: rgba(96, 165, 250, .08);
+        }
+
+        .mx-cell.checked {
+            background: rgba(74, 222, 128, .1);
+            color: var(--status-generated);
+            font-size: 14px;
+        }
+
+        .mx-cell:not(.checked) {
+            color: #2a2a2a;
+            font-size: 11px;
+        }
+
+        /* Count cell */
+        .mx-count {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 0 8px !important;
+        }
+
+        .mx-count.has-count {
+            color: var(--status-generated);
+        }
+
+        /* Footer summary row */
+        .matrix-table tfoot td {
+            background: #111;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 5px 4px;
+            color: var(--text-muted);
+        }
+
+        .matrix-table tfoot td.total-label {
+            text-align: left;
+            padding-left: 10px;
+            font-size: 10px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .matrix-table tfoot td.scene-total {
+            color: var(--accent);
+        }
+
+        /* Category divider rows */
+        .cat-divider-row td {
+            background: #111 !important;
+            padding: 4px 10px !important;
+            text-align: left !important;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-color: #1a1a1a !important;
+        }
+
+        /* dragging */
+        .card.dragging {
+            opacity: 0.45;
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 44px;
+            padding-top: 16px;
+            border-top: 1px solid #222;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>《证词之外》— Asset Canvas</h1>
+        <div class="meta">生成时间: 2026-05-14 &nbsp;·&nbsp; 共 16 个资产 &nbsp;·&nbsp; 角色 ×2 &nbsp;·&nbsp; 场地 ×6 &nbsp;·&nbsp;
+            道具 ×8</div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-section">
+        <div class="progress-label">
+            <span>资产完成度</span>
+            <span id="progress-text">0 / 14 已生成</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab active" onclick="filterCards('all', this)">全部 (16)</button>
+        <button class="tab" onclick="filterCards('character', this)">🎭 角色 (2)</button>
+        <button class="tab" onclick="filterCards('location', this)">🏠 场地 (6)</button>
+        <button class="tab" onclick="filterCards('prop', this)">🎬 道具 (8)</button>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  CHARACTERS                                -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section-header" id="section-character">🎭 角色 Characters</div>
+    <div class="card-grid" id="grid-character">
+
+        <!-- 1. Lin Shen -->
+        <div class="card status-missing" data-category="character">
+            <div class="card-image r-3-4">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-character">Character</span>
+                <div class="card-name">林深 / Lin Shen</div>
+                <div class="card-filename">lin_shen.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    中国男性，30岁左右，偏瘦，颧骨略突出，黑色微长乱发，额前碎发，明显深黑眼圈，偏白偏黄疲惫肤色，无胡须，下颌线清晰，右手无名指轻微向内弯；正面半身定妆照，纯黑背景，85mm镜头，人物居中，深灰近黑连帽外套拉链到胸口，内搭深色圆领T恤，外套口袋微鼓，表情克制、疲惫、微微警觉，眼睛湿润但不落泪，眼神光清晰，嘴唇干燥微抿；灯光仅左侧45度冷蓝窗光照亮半张脸，右半脸沉入阴影，无补光；8K超写实照片，毛孔、汗毛、不对称痣、眼圈下毛细血管清晰，真实亚洲男性骨相；禁止卡通，禁止插画，禁止3D渲染，禁止游戏CG，禁止多余人物，禁止夸张表情。
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Chen Bo -->
+        <div class="card status-missing" data-category="character">
+            <div class="card-image r-3-4">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-character">Character</span>
+                <div class="card-name">陈伯 / Chen Bo</div>
+                <div class="card-filename">chen_bo.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    中国男性，62到65岁，身高感偏矮，背微驼但不虚弱，面部瘦削，颧骨高，法令纹深，花白短寸贴头皮，浓而杂乱的眉毛，眉尾微垂，眼睛不大但极其平静，像一潭死水；正面半身定妆照，纯黑背景，85mm镜头，人物居中，泛白的深蓝色物业保安制服，纽扣扣到最上面一颗，左胸口袋插旧圆珠笔，腰间挂一大串旧铜钥匙；表情平静到近乎冷漠，嘴角水平，下颌微微前收；灯光仅暖黄色走廊灯从正上方偏后照下，额头和鼻梁有高光，眼窝深陷阴影，无补光；8K超写实照片，老年斑、额头皱纹、鼻翼毛孔、花白胡茬清晰；禁止卡通，禁止插画，禁止3D渲染，禁止游戏CG，禁止夸张邪笑，禁止多余人物。
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid-character -->
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  LOCATIONS                                 -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section-header" id="section-location">🏠 场地 Locations</div>
+    <div class="card-grid" id="grid-location">
+
+        <!-- 3. Lin Room Wide -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">林深的出租屋·全景</div>
+                <div class="card-filename">lin_room_wide.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    室内广角全景，略带15度俯角，从门口往里看，极小出租屋单间约8平米；没开灯，唯一光源是右侧墙窗户外城市夜景透过薄白窗帘渗入的冷蓝白光（窗户在右侧墙，与床同侧）；窗光从右侧斜切入室内，在地板中央留下一条冷蓝斜面光带，床面与右侧墙被窗光轻微打亮，左侧书桌区偏暗，近镜头的门口区域最暗；单人床靠右侧墙，床头方向即窗户，被子皱乱堆叠，枕边随意搭着一件深色外套；床正对面（左侧墙方向）廉价书桌靠墙，桌前廉价塑料靠背椅微微向外推开，桌面凌乱，隐约可见银灰色录音笔、耳机线缠绕和撕开的信封轮廓；书桌右腿旁地面一个小塑料垃圾桶，外卖盒和瘪矿泉水瓶堆出桶口；地面有污迹；发黄白墙有污渍，天花板有旧水渍印，一根裸露灯线从天花板垂下接一个空灯座，无灯泡；整体冷蓝灰色调，光线极暗，轻微haze，纵深感强；8K超写实照片，室内全部灯关闭，仅右侧窗外城市夜光；禁止插画，禁止3D，禁止游戏CG，禁止暖光，禁止人物出镜，禁止额外家具。
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Lin Room Desk -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">林深的出租屋·桌面</div>
+                <div class="card-filename">lin_room_desk.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具场景俯拍特写，70度俯角，廉价书桌桌面（桌子位于房间左侧墙，与门口对向），冷蓝灰光线仅来自右侧——即房间右侧窗户方向（床同侧）透过薄窗帘渗入的城市夜光；桌面摆放：一支旧银灰色录音笔横放居中，黑色入耳式耳机线缠绕凌乱压在录音笔旁，一个已撕开的牛皮纸信封正面朝上写"林深
+                    亲收"左下角印"长宁公寓"，信封旁一张白色纸条折叠，桌角一杯喝了一半的凉白开水痕迹可见；桌面底部边缘隐约可见一把廉价塑料椅靠背顶端探出；桌面有灰尘、圆珠笔划痕；右侧冷蓝光勾勒出录音笔金属边缘和信封折痕，左侧偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止暖光，禁止人物手部出镜，禁止多余道具。
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Corridor Wide -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">七楼走廊·全景</div>
+                <div class="card-filename">corridor_wide.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    室内广角全景，老式居民公寓七楼走廊，从走廊近端（靠楼梯口侧）朝里看；走廊窄而长约1.5米宽，低矮天花板；左侧墙近处是305室深棕色旧铁门，右侧墙近处与其正对面是306室深棕色旧铁门，两扇门相对；继续往里，右侧墙更远处307室铁门隐入阴影，隐约可见门上贴有封条；旧灰色水磨石地面延伸向远端，墙面泛黄白色乳胶漆，下半部深绿色墙裙漆，有污渍和划痕；天花板圆形声控灯仅头顶一盏亮着发冷白偏蓝光，其余灯灭，走廊远端隐入黑暗；整体冷蓝灰绿色调，轻微haze，单点透视感强；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜，禁止现代装修风格。
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Corridor 307 -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">七楼走廊·307门口</div>
+                <div class="card-filename">corridor_307.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    室内近景，平视正面，老式居民楼走廊307室门口；一扇深棕色旧铁门居中，门面有划痕和污迹，门上贴着泛黄警方封条一端翘起；铁门上方居中白底黑字搪瓷门牌"307"；门框左侧墙面贴一张泛黄物业印刷告示纸，纸上黑色宋体印刷"管道检修
+                    暂停入住"，纸张右上角和左下角向外卷起，胶带一端脱落；门框右侧走廊墙上约1米高处有红色手动消防报警器，红色塑料外壳，玻璃面板后击碎按钮；地面水磨石有灰尘，灯光仅走廊声控灯冷白光从斜上方打下；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜。
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Room 307 Entry -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">307室·入口视角</div>
+                <div class="card-filename">room_307_entry.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    室内广角全景，从玄关站立视角往客厅方向看；空置公寓客厅约15平米，无家具，仅正中央一张老旧木桌，桌上放一只红漆斑驳的老式小型监听音箱，红色LED指示灯微微亮着；旧木地板满是灰尘；正对面大窗户挂半透明旧白窗帘，一道冷白月光从窗帘缝隙斜切入室内打在木桌上；左墙空白，右墙有一扇紧闭的卧室门；天花板白色石膏板，天花板中间偏靠墙处有一个极小的暗装播音孔，不仔细看会忽略；室内无其他照明，灯光仅冷蓝月光与音箱红色指示灯微光，轻微haze；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜，禁止现代家具。
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Room 307 Reverse -->
+        <div class="card status-missing" data-category="location">
+            <div class="card-image r-16-9">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-location">Location</span>
+                <div class="card-name">307室·反角视角</div>
+                <div class="card-filename">room_307_reverse.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    室内广角，从客厅中央往玄关和大门方向看的反角；背景是客厅木桌和窗户（月光从背后打来），前方是玄关区域；铁门半开，走廊冷白声控灯光从门外射入，在玄关地面形成一条长条光斑；玄关天花板与墙壁交角处有一个哑光黑色小塑料盒子，约5厘米大，有一个极小绿色LED指示灯亮着，几乎不显眼；从门口缝隙隐约可以看到走廊墙上红色消防报警器的一角；旧木地板，玄关地面有灰尘脚印；整体双光源：前方走廊冷白光，后方月光冷蓝，中间玄关区偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜。
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid-location -->
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  PROPS                                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section-header" id="section-prop">🎬 道具 Props</div>
+    <div class="card-grid" id="grid-prop">
+
+        <!-- 9. Recorder (wrong attempt) -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">旧录音笔·错误尝试 / Old Recorder — Error</div>
+                <div class="card-filename">recorder.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，纯黑背景，45度俯拍，一支旧数码录音笔，银灰色金属外壳，约12厘米长、2.5厘米宽，边角掉漆露出金属底色，背面一道浅划痕，明显使用磨损；正面小型OLED屏幕亮起，显示口令输入界面，上方写"口令"，下方输入框内是七位错误数字"4
+                    7 2 9 0 1
+                    8"，下方红色小字"口令错误"，屏幕旁边三个实体按键，顶部一个3.5毫米耳机孔；单一冷白柔光从左上方打下，金属表面可见指纹油渍和微划痕，屏幕发光但不溢光；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止手持。
+                </div>
+            </div>
+        </div>
+
+        <!-- 9b. Recorder Unlocked -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">旧录音笔·解锁瞬间 / Old Recorder — Unlocked</div>
+                <div class="card-filename">recorder_unlocked.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，纯黑背景，45度俯拍，一支旧数码录音笔，银灰色金属外壳，约12厘米长、2.5厘米宽，边角掉漆露出金属底色，背面一道浅划痕，明显使用磨损；正面小型OLED屏幕亮起，显示口令输入界面，上方写"口令"，下方输入框内显示四个英文大写字母"L
+                    E F
+                    T"，下方绿色小字"口令正确"，屏幕因绿色状态灯微微泛出淡绿光晕映在录音笔金属边框上；屏幕旁边三个实体按键，顶部一个3.5毫米耳机孔；单一冷白柔光从左上方打下，金属表面可见指纹油渍和微划痕，屏幕发光但不溢光；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止手持。
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Envelope & Note -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">匿名信封与纸条 / Envelope & Note</div>
+                <div class="card-filename">envelope_note.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">道具特写，深色木桌面背景，俯拍，一个标准C5牛皮纸信封，已撕开，撕口不整齐，信封正面中央手写"林深
+                    亲收"，左下角印刷体小字"长宁公寓"；旁边展开一张白色纸条，约8厘米乘12厘米，纸条正面朝上，用黑色签字笔手写"如果你想知道你妹妹的死亡真相"，纸条旁边隐约露出背面另一行字的痕迹；上方暖白台灯光照下，纸张纹理、牛皮纸纤维、折痕、墨水渗透清晰；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余手部，禁止多余道具。
+                </div>
+            </div>
+        </div>
+
+        <!-- 11a. Speaker OFF -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">老式音箱·待机 LED 关</div>
+                <div class="card-filename">speaker_off.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，纯黑背景，正面偏右30度拍摄，一只老式小型监听音箱，约20厘米高、15厘米宽、12厘米深，木质箱体，暗红色油漆斑驳脱落，露出浅色木底，正面黑色金属网罩轻微锈蚀，右上角一个圆形红色LED指示灯当前灭着；底座黑色塑料，侧面贴一张旧标签纸，褪色蓝字"307
+                    备份"，标签边缘发黄卷起；背面有旧电源线和一个SD卡插槽，露出微型SD卡边缘；左侧单一侧光强调漆面剥落和金属锈蚀质感；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止人物手持。
+                </div>
+            </div>
+        </div>
+
+        <!-- 11b. Speaker ON -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">老式音箱·播放 LED 亮</div>
+                <div class="card-filename">speaker_on.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，纯黑背景，正面偏右30度拍摄，一只老式小型监听音箱，约20厘米高、15厘米宽、12厘米深，木质箱体，暗红色油漆斑驳脱落，露出浅色木底，正面黑色金属网罩轻微锈蚀，右上角一个圆形红色LED指示灯当前亮着，发出稳定暗红色光，灯光微微映红旁边的木质箱体；底座黑色塑料，侧面贴一张旧标签纸，褪色蓝字"307
+                    备份"，标签边缘发黄卷起；背面有旧电源线和一个SD卡插槽，露出微型SD卡边缘；左侧单一侧光强调漆面剥落和金属锈蚀质感，右上角LED红光形成局部小光晕；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止人物手持。
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Sensor Box -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">玄关小黑盒 / Sensor Box</div>
+                <div class="card-filename">sensor_box.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，安装状态，从下往上仰拍约30度，一个哑光黑色塑料小盒子，约5厘米乘3厘米乘2厘米，用两颗十字螺丝固定在天花板和墙壁交接的顶角处，正面一个极小圆形LED指示灯，发出微弱绿色光，侧面一根细黑色线缆延伸进天花板；整体很不起眼，背景是泛黄白色天花板与墙壁交界；灯光仅走廊声控灯冷白余光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止夸张科技感，禁止多余设备。
+                </div>
+            </div>
+        </div>
+
+        <!-- 13. Fire Alarm -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">消防报警器 / Fire Alarm</div>
+                <div class="card-filename">fire_alarm.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">
+                    道具特写，安装状态，平视正面拍摄，一个标准中国式手动火灾报警按钮，红色塑料外壳，约10厘米乘10厘米乘5厘米，安装在米白色走廊墙上，正面透明玻璃面板后是红色击碎按钮，玻璃上方白字"火警"，下方白字"击碎玻璃
+                    按下按钮"，外壳上方一个小型红色指示灯但当前不亮，墙面有轻微污渍和划痕；灯光仅走廊声控灯冷白光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余设备，禁止手入镜。</div>
+            </div>
+        </div>
+
+        <!-- 14. Notice -->
+        <div class="card status-missing" data-category="prop">
+            <div class="card-image r-1-1">
+                <span class="placeholder-text">待生成</span>
+                <span class="status-badge">⬜</span>
+            </div>
+            <div class="card-body">
+                <span class="card-category cat-prop">Prop</span>
+                <div class="card-name">物业告示 / Building Notice</div>
+                <div class="card-filename">notice.png</div>
+                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
+                <div class="prompt-text">道具特写，安装状态，平视正面拍摄，一张A4大小白纸，用透明胶带贴在深棕色铁门门框旁边的墙上，纸张已经泛黄，右上角和左下角向外卷起，纸上黑色宋体印刷"管道检修
+                    暂停入住"，下方小字"长宁公寓物业管理处"，最下方日期模糊不清；胶带也已泛黄，其中一条胶带一端脱落，那个纸角翘起；灯光仅走廊声控灯冷白光，纸面轻微反光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余纸张，禁止人物手部。
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid-prop -->
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  ASSIGNMENT MATRIX                         -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="matrix-section">
+        <div class="matrix-heading">📋 场景分配矩阵 Assignment Matrix</div>
+        <div class="matrix-sub">点击交叉格标记该资产用于该场景。行末显示使用场景数，列末显示该场景资产数。</div>
+
+        <div class="matrix-wrap">
+            <table class="matrix-table" id="matrix">
+                <thead>
+                    <tr>
+                        <th class="asset-hdr">资产 Asset</th>
+                        <th><span class="th-scene-id">S0</span><span class="th-scene-name">出租屋<br>冷开场</span></th>
+                        <th><span class="th-scene-id">S1</span><span class="th-scene-name">走廊<br>林深到来</span></th>
+                        <th><span class="th-scene-id">S2</span><span class="th-scene-name">307室<br>音箱播放</span></th>
+                        <th><span class="th-scene-id">S3</span><span class="th-scene-name">307门口<br>陈伯+假声</span></th>
+                        <th><span class="th-scene-id">S4</span><span class="th-scene-name">307室内<br>口令破解</span></th>
+                        <th><span class="th-scene-id">S5</span><span class="th-scene-name">走廊<br>砸报警器</span></th>
+                        <th><span class="th-scene-id">S6</span><span class="th-scene-name">走廊尾声<br>林深离开</span></th>
+                        <th class="count-hdr">#</th>
+                    </tr>
+                </thead>
+                <tbody id="matrix-body">
+                    <!-- Characters -->
+                    <tr class="cat-divider-row">
+                        <td colspan="9">🎭 角色 Characters</td>
+                    </tr>
+                    <tr data-asset="lin_shen.png" data-cat="character">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎭</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">林深</div>
+                                    <div class="asset-row-file">lin_shen.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="chen_bo.png" data-cat="character">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎭</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">陈伯</div>
+                                    <div class="asset-row-file">chen_bo.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <!-- Locations -->
+                    <tr class="cat-divider-row">
+                        <td colspan="9">🏠 场地 Locations</td>
+                    </tr>
+                    <tr data-asset="lin_room_wide.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">出租屋·全景</div>
+                                    <div class="asset-row-file">lin_room_wide.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="lin_room_desk.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">出租屋·桌面</div>
+                                    <div class="asset-row-file">lin_room_desk.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="corridor_wide.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">走廊·全景</div>
+                                    <div class="asset-row-file">corridor_wide.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="corridor_307.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">走廊·307门口</div>
+                                    <div class="asset-row-file">corridor_307.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="room_307_entry.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">307室·入口</div>
+                                    <div class="asset-row-file">room_307_entry.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="room_307_reverse.png" data-cat="location">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🏠</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">307室·反角</div>
+                                    <div class="asset-row-file">room_307_reverse.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <!-- Props -->
+                    <tr class="cat-divider-row">
+                        <td colspan="9">🎬 道具 Props</td>
+                    </tr>
+                    <tr data-asset="recorder.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">录音笔·错误尝试</div>
+                                    <div class="asset-row-file">recorder.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="recorder_unlocked.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🟢</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">录音笔·解锁瞬间</div>
+                                    <div class="asset-row-file">recorder_unlocked.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="envelope_note.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">信封与纸条</div>
+                                    <div class="asset-row-file">envelope_note.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="speaker_off.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">音箱·待机(OFF)</div>
+                                    <div class="asset-row-file">speaker_off.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="speaker_on.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🔴</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">音箱·播放(ON)</div>
+                                    <div class="asset-row-file">speaker_on.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="sensor_box.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">玄关小黑盒</div>
+                                    <div class="asset-row-file">sensor_box.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="fire_alarm.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">消防报警器</div>
+                                    <div class="asset-row-file">fire_alarm.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                    <tr data-asset="notice.png" data-cat="prop">
+                        <td class="asset-cell">
+                            <div class="asset-row-inner">
+                                <div class="asset-row-thumb">🎬</div>
+                                <div class="asset-row-info">
+                                    <div class="asset-row-name">物业告示</div>
+                                    <div class="asset-row-file">notice.png</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-count">0</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="total-label">合计 Total</td>
+                        <td class="scene-total" id="st-0">0</td>
+                        <td class="scene-total" id="st-1">0</td>
+                        <td class="scene-total" id="st-2">0</td>
+                        <td class="scene-total" id="st-3">0</td>
+                        <td class="scene-total" id="st-4">0</td>
+                        <td class="scene-total" id="st-5">0</td>
+                        <td class="scene-total" id="st-6">0</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div><!-- /matrix-wrap -->
+    </div><!-- /matrix-section -->
+
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span>《证词之外》Asset Canvas · zhengci-zhiwai</span>
+        <span>Generated by asset-canvas skill · 2026-05-14</span>
+    </div>
+
+    <script>
+        // ── Tab filtering ──────────────────────────────
+        function filterCards(cat, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            const allSections = ['character', 'location', 'prop'];
+            allSections.forEach(s => {
+                const header = document.getElementById('section-' + s);
+                const grid = document.getElementById('grid-' + s);
+                const show = (cat === 'all' || cat === s);
+                if (header) header.style.display = show ? '' : 'none';
+                if (grid) grid.style.display = show ? '' : 'none';
+            });
+        }
+
+        // ── Prompt toggle ──────────────────────────────
+        function togglePrompt(toggle) {
+            toggle.classList.toggle('open');
+            toggle.nextElementSibling.classList.toggle('visible');
+        }
+
+        // ── Matrix: click to toggle cell ───────────────
+        function toggleMx(cell) {
+            cell.classList.toggle('checked');
+            cell.textContent = cell.classList.contains('checked') ? '✓' : '';
+            updateMatrixTotals();
+        }
+
+        function updateMatrixTotals() {
+            const tbody = document.getElementById('matrix-body');
+            const rows = tbody.querySelectorAll('tr[data-asset]');
+
+            // Row counts
+            rows.forEach(row => {
+                const checked = row.querySelectorAll('.mx-cell.checked').length;
+                const countCell = row.querySelector('.mx-count');
+                countCell.textContent = checked;
+                countCell.classList.toggle('has-count', checked > 0);
+            });
+
+            // Column counts (scenes 0-6)
+            for (let s = 0; s < 7; s++) {
+                const colIdx = s + 2; // 1=asset col, 2..8=scene cols
+                let count = 0;
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('.mx-cell');
+                    if (cells[s] && cells[s].classList.contains('checked')) count++;
+                });
+                const totalCell = document.getElementById('st-' + s);
+                if (totalCell) {
+                    totalCell.textContent = count;
+                    totalCell.style.color = count > 0 ? 'var(--status-generated)' : 'var(--text-muted)';
+                }
+            }
+        }
+
+        // ── Card drag: update matrix row emoji when image available ──
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.card').forEach(card => {
+                card.setAttribute('draggable', 'true');
+                card.style.cursor = 'grab';
+                card.addEventListener('dragstart', e => {
+                    card.classList.add('dragging');
+                });
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
