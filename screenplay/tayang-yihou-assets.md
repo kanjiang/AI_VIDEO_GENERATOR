@@ -1,5 +1,7 @@
 # 打烊以后 资产清单
 
+目录关系总览见：`file-relationship-map.md`
+
 用途：为逐镜 AI prompt 生成准备角色图、场景图、关键道具图
 
 当前状态：脚本、分镜节拍表、逐镜 shot list 已完成；下一步生成 prompt 前，需要先锁定资产

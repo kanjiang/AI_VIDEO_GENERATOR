@@ -56,6 +56,12 @@
             margin-top: 4px;
         }
 
+        .header .note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
         /* Progress */
         .progress-section {
             margin: 16px 0 24px;
@@ -570,14 +576,16 @@
     <div class="header">
         <h1>《证词之外》— Asset Canvas</h1>
         <div class="meta">生成时间: 2026-05-14 &nbsp;·&nbsp; 共 16 个资产 &nbsp;·&nbsp; 角色 ×2 &nbsp;·&nbsp; 场地 ×6 &nbsp;·&nbsp;
-            道具 ×8</div>
+            <div class="note">补充说明：assets/zhengci-zhiwai/linshen_sketch.png 为额外草图参考，不计入当前 16 张主资产，也不参与下游图参引用。</div>
+            道具 ×8
+        </div>
     </div>
 
     <!-- PROGRESS -->
     <div class="progress-section">
         <div class="progress-label">
             <span>资产完成度</span>
-            <span id="progress-text">0 / 14 已生成</span>
+            <span id="progress-text">0 / 16 已生成</span>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progress-fill"></div>
@@ -600,10 +608,10 @@
     <div class="card-grid" id="grid-character">
 
         <!-- 1. Lin Shen -->
-        <div class="card status-missing" data-category="character">
+        <div class="card status-generated" data-category="character">
             <div class="card-image r-3-4">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/lin_shen.png" alt="lin_shen.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-character">Character</span>
@@ -617,10 +625,10 @@
         </div>
 
         <!-- 2. Chen Bo -->
-        <div class="card status-missing" data-category="character">
+        <div class="card status-generated" data-category="character">
             <div class="card-image r-3-4">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/chen_bo.png" alt="chen_bo.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-character">Character</span>
@@ -643,10 +651,10 @@
     <div class="card-grid" id="grid-location">
 
         <!-- 3. Lin Room Wide -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/lin_room_wide.png" alt="lin_room_wide.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -660,10 +668,10 @@
         </div>
 
         <!-- 4. Lin Room Desk -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/lin_room_desk.png" alt="lin_room_desk.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -678,10 +686,10 @@
         </div>
 
         <!-- 5. Corridor Wide -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/corridor_wide.png" alt="corridor_wide.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -695,10 +703,10 @@
         </div>
 
         <!-- 6. Corridor 307 -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/corridor_307.png" alt="corridor_307.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -713,10 +721,10 @@
         </div>
 
         <!-- 7. Room 307 Entry -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/room_307_entry.png" alt="room_307_entry.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -724,16 +732,16 @@
                 <div class="card-filename">room_307_entry.png</div>
                 <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
                 <div class="prompt-text">
-                    室内广角全景，从玄关站立视角往客厅方向看；空置公寓客厅约15平米，无家具，仅正中央一张老旧木桌，桌上放一只红漆斑驳的老式小型监听音箱，红色LED指示灯微微亮着；旧木地板满是灰尘；正对面大窗户挂半透明旧白窗帘，一道冷白月光从窗帘缝隙斜切入室内打在木桌上；左墙空白，右墙有一扇紧闭的卧室门；天花板白色石膏板，天花板中间偏靠墙处有一个极小的暗装播音孔，不仔细看会忽略；室内无其他照明，灯光仅冷蓝月光与音箱红色指示灯微光，轻微haze；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜，禁止现代家具。
+                    室内广角全景，从玄关站立视角往客厅方向看；老旧长期停租公寓客厅，约15平米；客厅中央一张老旧木桌，桌上只有一只红漆斑驳的老式小监听音箱，红色LED微亮；正对面大窗挂半透明旧白窗帘，冷白月光从窗帘缝斜切进来打在木桌上，窗下有老式铸铁暖气片；天花板中部垂着一个旧白炽灯泡和发黄灯线，灯泡不亮，只作为老公寓残留构件存在；左墙靠窗那半段摆一张塌陷的旧双人布沙发，沙发不碰到木桌；左墙靠玄关这半段只有一把收起的旧折叠椅斜靠墙边，留出从门口通往木桌的通道；右墙中段是一扇紧闭卧室门；玄关左侧靠墙卷着一块落灰旧地垫，右侧墙面靠门后位置一个老旧电表箱；靠玄关一侧天花板偏中位置有一个极小暗装播音孔；旧木地板满是灰尘，室内无其他照明，轻微haze；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物，禁止现代家具，禁止生成极简样板间，禁止把家具摆成温馨正常居住状态，禁止堵住门口到木桌的直线路径。
                 </div>
             </div>
         </div>
 
         <!-- 8. Room 307 Reverse -->
-        <div class="card status-missing" data-category="location">
+        <div class="card status-generated" data-category="location">
             <div class="card-image r-16-9">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/room_307_reverse.png" alt="room_307_reverse.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-location">Location</span>
@@ -741,7 +749,7 @@
                 <div class="card-filename">room_307_reverse.png</div>
                 <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
                 <div class="prompt-text">
-                    室内广角，从客厅中央往玄关和大门方向看的反角；背景是客厅木桌和窗户（月光从背后打来），前方是玄关区域；铁门半开，走廊冷白声控灯光从门外射入，在玄关地面形成一条长条光斑；玄关天花板与墙壁交角处有一个哑光黑色小塑料盒子，约5厘米大，有一个极小绿色LED指示灯亮着，几乎不显眼；从门口缝隙隐约可以看到走廊墙上红色消防报警器的一角；旧木地板，玄关地面有灰尘脚印；整体双光源：前方走廊冷白光，后方月光冷蓝，中间玄关区偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜。
+                    室内广角，从客厅靠窗一侧回看玄关和大门方向；画面左前景带到中央木桌一角和桌上老式监听音箱的模糊轮廓，月光从镜头背后窗户方向打来；天花板中部能隐约带到一个垂下的旧白炽灯泡和发黄灯线，灯泡不亮；左侧中后段能看到靠左墙、贴窗一侧那张塌陷旧双人布沙发的一段轮廓；正前方是玄关和半开的铁门，走廊冷白声控灯从门外射入，在地面形成一条长条光斑；玄关左侧靠墙卷着一块落灰旧地垫，地垫后方同一面墙上斜靠一把收起的旧折叠椅，右侧墙面靠门后位置一个老旧电表箱；玄关顶角有一个哑光黑色小塑料盒子，约5厘米大，极小绿色LED微亮，几乎不显眼，旁边还能带到一个普通老旧天花板播音孔或开孔网罩；门缝里隐约可见走廊墙上红色消防报警器一角；旧木地板，玄关地面有灰尘脚印；整体前方走廊冷白光、后方月光冷蓝，中间玄关区偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物，禁止生成极简现代空厅或纯空摄影棚，禁止把家具拍成崭新整洁状态，禁止把沙发或折叠椅挪到门口正前方。
                 </div>
             </div>
         </div>
@@ -756,10 +764,10 @@
     <div class="card-grid" id="grid-prop">
 
         <!-- 9. Recorder (wrong attempt) -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/recorder.png" alt="recorder.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -775,10 +783,10 @@
         </div>
 
         <!-- 9b. Recorder Unlocked -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/recorder_unlocked.png" alt="recorder_unlocked.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -794,10 +802,10 @@
         </div>
 
         <!-- 10. Envelope & Note -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/envelope_note.png" alt="envelope_note.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -811,10 +819,10 @@
         </div>
 
         <!-- 11a. Speaker OFF -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/speaker_off.png" alt="speaker_off.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -829,10 +837,10 @@
         </div>
 
         <!-- 11b. Speaker ON -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/speaker_on.png" alt="speaker_on.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -847,10 +855,10 @@
         </div>
 
         <!-- 12. Sensor Box -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/sensor_box.png" alt="sensor_box.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -864,10 +872,10 @@
         </div>
 
         <!-- 13. Fire Alarm -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/fire_alarm.png" alt="fire_alarm.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -881,10 +889,10 @@
         </div>
 
         <!-- 14. Notice -->
-        <div class="card status-missing" data-category="prop">
+        <div class="card status-generated" data-category="prop">
             <div class="card-image r-1-1">
-                <span class="placeholder-text">待生成</span>
-                <span class="status-badge">⬜</span>
+                <img src="../assets/zhengci-zhiwai/notice.png" alt="notice.png">
+                <span class="status-badge">✅</span>
             </div>
             <div class="card-body">
                 <span class="card-category cat-prop">Prop</span>
@@ -937,14 +945,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-count">7</td>
                     </tr>
                     <tr data-asset="chen_bo.png" data-cat="character">
                         <td class="asset-cell">
@@ -959,11 +967,11 @@
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <!-- Locations -->
                     <tr class="cat-divider-row">
@@ -979,14 +987,14 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">1</td>
                     </tr>
                     <tr data-asset="lin_room_desk.png" data-cat="location">
                         <td class="asset-cell">
@@ -998,14 +1006,14 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">1</td>
                     </tr>
                     <tr data-asset="corridor_wide.png" data-cat="location">
                         <td class="asset-cell">
@@ -1018,13 +1026,13 @@
                             </div>
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <tr data-asset="corridor_307.png" data-cat="location">
                         <td class="asset-cell">
@@ -1037,13 +1045,13 @@
                             </div>
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <tr data-asset="room_307_entry.png" data-cat="location">
                         <td class="asset-cell">
@@ -1057,12 +1065,12 @@
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">2</td>
                     </tr>
                     <tr data-asset="room_307_reverse.png" data-cat="location">
                         <td class="asset-cell">
@@ -1077,11 +1085,11 @@
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <!-- Props -->
                     <tr class="cat-divider-row">
@@ -1099,12 +1107,12 @@
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <tr data-asset="recorder_unlocked.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1120,10 +1128,10 @@
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">1</td>
                     </tr>
                     <tr data-asset="envelope_note.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1135,14 +1143,14 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">2</td>
                     </tr>
                     <tr data-asset="speaker_off.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1175,12 +1183,12 @@
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">4</td>
                     </tr>
                     <tr data-asset="sensor_box.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1193,13 +1201,13 @@
                             </div>
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <tr data-asset="fire_alarm.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1212,13 +1220,13 @@
                             </div>
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                     <tr data-asset="notice.png" data-cat="prop">
                         <td class="asset-cell">
@@ -1231,13 +1239,13 @@
                             </div>
                         </td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
+                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
                         <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
+                        <td class="mx-count">3</td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -1265,6 +1273,16 @@
     </div>
 
     <script>
+        function updateCardProgress() {
+            const cards = document.querySelectorAll('.card');
+            const generated = document.querySelectorAll('.card.status-generated').length;
+            const total = cards.length;
+            const text = document.getElementById('progress-text');
+            const fill = document.getElementById('progress-fill');
+            if (text) text.textContent = `${generated} / ${total} 已生成`;
+            if (fill) fill.style.width = `${total ? (generated / total) * 100 : 0}%`;
+        }
+
         // ── Tab filtering ──────────────────────────────
         function filterCards(cat, btn) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1322,6 +1340,8 @@
 
         // ── Card drag: update matrix row emoji when image available ──
         document.addEventListener('DOMContentLoaded', () => {
+            updateCardProgress();
+            updateMatrixTotals();
             document.querySelectorAll('.card').forEach(card => {
                 card.setAttribute('draggable', 'true');
                 card.style.cursor = 'grab';
