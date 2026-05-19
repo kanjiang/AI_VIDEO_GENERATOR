@@ -73,9 +73,9 @@
 | 22 | 022 | 4s | S4 | 错误口令屏幕特写 | 红字"口令错误" | recorder |
 | 23 | 023 | 5s | S4 | 想到不是数字而是方向 | 无台词 | lin_shen, recorder, chen_bo |
 | 24 | 024 | 5s | S4 | 输入 L-E-F-T 解锁 | 按键声+解锁提示音 | recorder_unlocked, lin_shen |
-| 25 | 025 | **10s** | S4 | 隐藏录音落地真相 | 林晚："哥，这栋楼一直在偷录住户的声音。" / "他们把人说过的话拆开，再拼成这个人自己。样本和名单，都在这支录音笔里。" / **"陈伯要是来拿，别给。"** | lin_shen, chen_bo, recorder_unlocked, room_307_reverse |
+| 25 | 025 | **10s** | S4 | 隐藏录音落地真相 | 林晚："哥，这栋楼一直在偷录住户的声音。他们把人声拆开重拼。" / **"样本和名单都在这支录音笔里。陈伯来拿，别给。"** | lin_shen, chen_bo, recorder_unlocked, room_307_reverse |
 | 26 | 026 | 7s | S4 | 左手私人记忆击中林深 | 林晚："小时候停电，你嘴上说不怕。睡着前，还是一定要攥着我的左手。" / "因为你右手一紧张，就会……"（断） | lin_shen, recorder_unlocked, chen_bo |
-| 27 | 027 | **8s** | S4 | 假声重复+林深推理闭环 | 假声重复 / 林深："它只会放这一句。" **"你们要的，不是录音笔。""是里面的东西。"** | lin_shen, sensor_box, speaker_off, room_307_reverse |
+| 27 | 027 | **8s** | S4 | 假声重复+林深推理闭环 | 假声重复 / 林深："它只会放这一句。" **"你们要的是里面的东西，不是录音笔。"** | lin_shen, sensor_box, speaker_off, room_307_reverse |
 | 28 | 028 | 6s | S4 | 陈伯第一次进门 | 陈伯："名单，还拷给谁了？" | lin_shen, chen_bo, room_307_reverse, speaker_off, recorder_unlocked |
 
 ---

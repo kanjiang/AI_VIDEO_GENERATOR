@@ -106,6 +106,135 @@ Hard rendering constraints of the Seedance 2.0 engine:
 
 ---
 
+## EMOTION CONTROL LAYER (HUMAN CHARACTERS)
+
+When a shot contains a human performer, express emotion as controllable physical behavior, not abstract labels.
+
+**Core formula:**
+- **Emotion state = facial detail + hand action + body posture + gaze direction**
+
+### 1. Facial decomposition (mandatory for close shots)
+Decompose facial emotion into three micro-components:
+- **Mouth state** (corner lift/press, lip tension, release)
+- **Eye state** (focus lock, blink frequency, gaze stability)
+- **Face-muscle state** (jaw tension, brow compression, cheek lift)
+
+Do not use vague words alone ("sad", "angry", "nervous") without physical cues.
+
+### 2. Action lock (emotion must have a carrier)
+Each emotional beat must include at least one body carrier:
+- Hand behavior (finger press, grip/release, cover mouth, touch object)
+- Posture behavior (shoulder rise/drop, lean angle, center-of-mass shift)
+- Gaze path (A -> B -> lock, or brief avoid -> return)
+
+If no carrier is present, rewrite the beat with concrete motion.
+
+### 3. Intensity and timing control
+Default to subtle realism:
+- **light**: <20% amplitude, 0.3-1.0s
+- **medium**: 20%-50% amplitude, 1.0-2.0s
+- **strong**: >50% amplitude, >2.0s (use sparingly)
+
+Per shot: keep **1 primary emotion + 1 secondary fluctuation** maximum.
+
+### 4. Shot-scale adaptation
+- **Close / MCU / CU / ECU**: facial decomposition required.
+- **Medium**: facial + hand + posture.
+- **Wide / Extreme wide**: prioritize posture and gaze direction; do not force unreadable micro-face details.
+
+### 5. Dialogue-scene compatibility
+Respect existing rule: Dynamic Description uses physical behavior, not emotion labels.
+- ✅ "mouth corners press, gaze drops right, jaw tightens, then eyes return to target"
+- ❌ "she feels misunderstood and hurt"
+
+### 6. Anti-fake performance constraints
+For human shots, avoid model overacting loops:
+- No repeated same-amplitude head snaps or eye pops.
+- No slogan-style shouting unless user explicitly requests it.
+- No exaggerated crying/laughing unless user explicitly requests it.
+- No disconnected facial change without body carrier.
+
+### 6.1 Camera movement control layer (prompt-ready)
+Use one primary camera intent per beat. Motion must always point to a clear subject.
+
+- **Push-in**: static-to-near approach toward a clear subject (person/object/emotion core). Use for emotional pressure and focus lock.
+- **Pull-out**: near-to-wide reveal. Only use when there is meaningful environment information to expose.
+- **Tracking**:
+	- Rear follow: immersion in character experience.
+	- Side follow: character + environment relation.
+	- Front follow: prioritize expression and action detail.
+- **360 orbit**: reinforce protagonist centrality.
+- **Dolly zoom (Hitchcock zoom)**: depict psychological shock/tension spike.
+- **Tilt-up**: low-to-high emphasis for scale, authority, or pressure.
+
+Speed guidance:
+- **Slow push-in**: restrained, suppressed emotion.
+- **Fast push-in**: rapid approach to a clear subject at emotional turning points; used for instant impact, surprise, or excitement.
+
+Anti-chaos constraints:
+- No subjectless camera drift.
+- No repeated arbitrary speed changes.
+- Do not stack multiple dominant camera intents in one short beat.
+- For micro-expression close-ups, keep camera movement minimal and stable.
+
+### 6.2 Unified performance-camera master formula
+For human-centered shots, apply this merged control logic by default:
+
+- **Screen result = emotion state + action carrier + camera intent + speed strategy + negative constraints**
+- **Emotion state = mouth state + eye state + face-muscle state**
+- **Action carrier = hand action + body posture + gaze direction**
+- Keep one primary emotion and one secondary fluctuation per shot.
+- Keep one primary camera intent per beat.
+
+Quick quality gate before output:
+- Is mouth/eye/face decomposition explicit?
+- Is there at least one hand/posture/gaze carrier?
+- Is camera intent singular and clear?
+- Is speed strategy explicit (slow push-in vs fast push-in)?
+- Does fast push-in have a clear subject?
+- Are anti-chaos constraints present?
+
+### 7. Reusable EN + ZH snippets
+Use these as composable fragments inside Dynamic Description.
+
+**Snippet A — restrained tension / 轻微紧张**
+- EN: "Mouth corners press into a thin line, blink rate rises slightly, jaw tightens. Right thumb rubs the index knuckle once. Shoulders lift and settle. Gaze moves from the door handle to the partner's eyes and locks there."
+- ZH: "嘴角轻抿成细线，眨眼频率略升，下颌轻绷；右手拇指轻蹭食指关节一次，肩线小幅上提后回落，视线从门把手移到对方眼睛并定住。"
+
+**Snippet B — misunderstood but controlled / 被误会后的克制反应**
+- EN: "Mouth corners dip for half a beat, then return to neutral. Eyes redden slightly without tears. Brow compresses briefly, then releases. Fingers tighten around the sleeve and loosen. Gaze drops down-right for a moment, then returns to eye contact."
+- ZH: "嘴角先短暂下压再回到平直，眼眶微红但不掉泪，眉心短收后放开；手指先攥紧袖口再松开，视线先落右下再抬回对视。"
+
+**Snippet C — controlled anger / 克制愤怒**
+- EN: "Mouth edges stay tense, eyes hold a sharp fixed line, jaw muscle pulses once. Chin lifts by a few degrees, torso leans forward slightly, palms tighten without swinging."
+- ZH: "嘴角边缘保持绷紧，目光锐利且停留稳定，咬肌轻起伏一次；下巴微抬，身体轻度前倾，手掌收紧但不摆臂。"
+
+**Snippet D — surprise / 惊讶**
+- EN: "Mouth parts for a brief beat, eyes widen then settle, brows rise and drop quickly. Fingers pause on the object, torso leans back slightly then returns. Gaze locks on the trigger point, then shifts to the partner."
+- ZH: "嘴角短时微张，眼裂放大后回稳，眉毛上抬再快速回落；手指在物体上短暂停住，躯干轻微后撤后回正，视线先锁定触发点再转向对方。"
+
+**Snippet E — fear (restrained) / 害怕（克制）**
+- EN: "Mouth corners tighten into a thin press, blink rate increases, jaw pulls inward. One hand tightens briefly, thumb rubs the knuckle once. Shoulders rise, center of mass shifts half a step back. Gaze scans for an exit, then returns to the threat."
+- ZH: "嘴角绷紧成细线，眨眼频率上升，下颌轻收；一只手短时收紧并用拇指蹭过指节一次，肩线上提，重心后移半步，视线先扫出口再回到风险源。"
+
+**Snippet F — sadness (restrained) / 悲伤（克制）**
+- EN: "Mouth corners dip then return to neutral, eyes moisten slightly without tears, brow compresses for half a beat. Fingers grip the sleeve and release. Breathing turns shallow. Gaze drops to the floor, then lifts back to eye contact."
+- ZH: "嘴角先下压后回到平直，眼眶微湿但不落泪，眉心短收半拍；手指先攥紧袖口再松开，呼吸变浅，视线先落地面再抬回对视。"
+
+**Snippet G — disgust (restrained) / 厌恶（克制）**
+- EN: "Upper lip lifts slightly, nose wings tighten, eyes stop on the object for a short beat then pull away. Wrist retracts inward, torso leans back by a few degrees. Gaze moves from the trigger object to a neutral side target."
+- ZH: "上唇轻提，鼻翼轻收，目光在触发物上短停后迅速移开；手腕内收，躯干后仰数度，视线从触发物转向中性侧方目标。"
+
+**Snippet H — pleasant surprise / 惊喜（正向）**
+- EN: "Mouth opens lightly then curves upward, eyes brighten and hold steady, cheeks lift. Fingers relax and open naturally. Shoulders soften, torso leans in slightly. Gaze stays on the revealed subject before briefly checking the partner."
+- ZH: "嘴角先轻张后上扬，眼神变亮且稳定，脸颊上提；手指放松并自然打开，肩线放松，躯干轻微前倾，视线先停在目标上再短暂看向同伴。"
+
+**Snippet I — confusion / 困惑**
+- EN: "Mouth stays pressed with one side slightly lower, brow pinches softly, eyes alternate between object A and person B. One hand hovers mid-air with a tiny stop. Head tilts a few degrees, then returns to center."
+- ZH: "嘴角保持轻抿且单侧微压，眉心轻皱，视线在物体 A 与人物 B 之间往返；一只手停在半空短暂停顿，头部微侧后回到中轴。"
+
+---
+
 ## CUT RULES
 
 ### 1. Double contrast (mandatory)
