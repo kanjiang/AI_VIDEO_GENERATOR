@@ -1,11 +1,31 @@
 {
   "name": "ai_video_generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Script-to-video workspace and web tool scaffold",
+  "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:screenplay": "node screenplay/build_screenplay.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "build:screenplay": "node screenplay/build_screenplay.js",
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "docx": "^9.5.1",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "typescript": "^5.8.3"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,17 @@
+{
+  "taskId": "task_submit_zhengci-zhiwai_003_mock",
+  "projectSlug": "zhengci-zhiwai",
+  "shotId": "003",
+  "providerName": "mock",
+  "providerTaskId": "mock_remote_zhengci-zhiwai_003",
+  "resultUrls": [
+    "mock://outputs/zhengci-zhiwai/003/result.mp4"
+  ],
+  "rawPayload": {
+    "providerTaskId": "mock_remote_zhengci-zhiwai_003",
+    "resultUrls": [
+      "mock://outputs/zhengci-zhiwai/003/result.mp4"
+    ]
+  },
+  "savedAt": "2026-05-21T02:52:21.415Z"
+}
