@@ -10,6 +10,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "build:screenplay": "node screenplay/build_screenplay.js",
+    "build:storyboard": "node screenplay/build_storyboard.js",
+    "build:storyboard:zzw": "node screenplay/build_storyboard.js zhengci-zhiwai",
     "test": "echo \"No tests configured\""
   },
   "dependencies": {

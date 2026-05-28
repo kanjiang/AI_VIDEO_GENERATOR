@@ -59,8 +59,15 @@ export function getVideoProvider(name: string) {
 
 export function listVideoProviders(): VideoProviderSummary[] {
   return VIDEO_PROVIDER_NAMES.map((name) => {
-    const { buildTaskId: _, ...provider } = providers[name];
-    return provider;
+    const provider = providers[name];
+
+    return {
+      name: provider.name,
+      label: provider.label,
+      description: provider.description,
+      isAvailable: provider.isAvailable,
+      capabilities: provider.capabilities,
+    };
   });
 }
 

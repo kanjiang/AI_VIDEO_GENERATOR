@@ -8,17 +8,20 @@
     <style>
         :root {
             --bg: #111111;
-            --card-bg: #202020;
+            --panel: #171717;
+            --card-bg: #1a1a1a;
             --card-border: #2a2a2a;
             --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
             --text-muted: #6b7280;
-            --text-mono: #9ca3af;
+            --accent: #60a5fa;
             --badge-char: #818cf8;
             --badge-loc: #f472b6;
             --badge-prop: #fb923c;
+            --badge-ref: #22c55e;
             --status-generated: #4ade80;
             --status-flagged: #f97316;
-            --accent: #60a5fa;
+            --status-reference: #22c55e;
         }
 
         * {
@@ -30,145 +33,148 @@
         body {
             background: var(--bg);
             color: var(--text-primary);
-            font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             line-height: 1.5;
-            padding: 28px 32px;
+            padding: 28px 32px 40px;
         }
 
-        /* Header */
         .header {
-            border-bottom: 1px solid #222;
-            padding-bottom: 20px;
-            margin-bottom: 24px;
+            border-bottom: 1px solid #232323;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
         }
 
         .header h1 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            color: #fff;
             letter-spacing: -0.02em;
+            color: #ffffff;
         }
 
-        .header .meta {
+        .meta {
+            margin-top: 8px;
+            color: var(--text-secondary);
             font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
         }
 
-        .header .note {
+        .note {
+            margin-top: 8px;
+            padding: 10px 12px;
+            border: 1px solid #2b2b2b;
+            border-radius: 8px;
+            background: var(--panel);
+            color: var(--text-muted);
             font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 6px;
         }
 
-        /* Progress */
         .progress-section {
-            margin: 16px 0 24px;
+            margin: 18px 0 24px;
         }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
+            gap: 12px;
             font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 6px;
-            background: #222;
-            border-radius: 3px;
+            height: 8px;
+            background: #202020;
+            border-radius: 999px;
             overflow: hidden;
+            border: 1px solid #262626;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--status-generated);
-            border-radius: 3px;
-            width: 0%;
+            width: 0;
+            background: linear-gradient(90deg, #34d399 0%, #4ade80 100%);
+            transition: width 0.2s ease;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 8px;
-            margin-bottom: 28px;
             flex-wrap: wrap;
+            margin-bottom: 28px;
         }
 
         .tab {
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 7px 14px;
+            border-radius: 999px;
             border: 1px solid #333;
             background: transparent;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .tab:hover {
-            border-color: #555;
+            border-color: #4b5563;
             color: var(--text-primary);
         }
 
         .tab.active {
-            background: #fff;
-            color: #111;
-            border-color: #fff;
+            background: #ffffff;
+            color: #111111;
+            border-color: #ffffff;
             font-weight: 600;
         }
 
-        /* Section header */
+        .section {
+            margin-bottom: 30px;
+        }
+
         .section-header {
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin: 32px 0 14px;
+            margin-bottom: 14px;
             padding-left: 10px;
             border-left: 3px solid var(--accent);
         }
 
-        /* Grid */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 980px) {
             .card-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media (max-width: 700px) {
-            .card-grid {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 560px) {
+            body {
+                padding: 20px 16px 28px;
             }
-        }
 
-        @media (max-width: 440px) {
             .card-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Card */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
         .card:hover {
             border-color: #3a3a3a;
+            transform: translateY(-1px);
         }
 
         .card.status-generated {
@@ -179,27 +185,32 @@
             border-color: var(--status-flagged);
         }
 
-        /* Card image */
+        .card.status-reference {
+            border-color: var(--status-reference);
+        }
+
         .card-image {
+            position: relative;
             width: 100%;
-            background: #1e1e1e;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
+            background: #202020;
+            border-bottom: 1px solid #262626;
         }
 
-        .card-image.r-3-4 {
-            aspect-ratio: 3/4;
+        .ratio-character {
+            aspect-ratio: 3 / 4;
         }
 
-        .card-image.r-16-9 {
-            aspect-ratio: 16/9;
+        .ratio-location {
+            aspect-ratio: 16 / 9;
         }
 
-        .card-image.r-1-1 {
-            aspect-ratio: 1/1;
+        .ratio-prop,
+        .ratio-reference {
+            aspect-ratio: 1 / 1;
         }
 
         .card-image img {
@@ -209,1149 +220,662 @@
             display: block;
         }
 
-        .placeholder-text {
+        .placeholder {
+            color: #3f3f46;
             font-size: 11px;
-            color: #383838;
-            letter-spacing: 0.08em;
-            position: absolute;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 0 16px;
         }
 
         .status-badge {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 14px;
+            top: 10px;
+            right: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 11px;
             line-height: 1;
+            background: rgba(0, 0, 0, 0.72);
+            color: #ffffff;
+            backdrop-filter: blur(4px);
         }
 
-        /* Card body */
         .card-body {
-            padding: 8px 10px 10px;
+            padding: 12px 14px 14px;
+        }
+
+        .card-meta-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
         .card-category {
             display: inline-block;
+            padding: 3px 8px;
+            border-radius: 999px;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 2px 7px;
-            border-radius: 10px;
-            margin-bottom: 6px;
+            color: #ffffff;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid #383838;
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
         .cat-character {
-            background: rgba(129, 140, 248, .15);
-            color: var(--badge-char);
+            background: var(--badge-char);
         }
 
         .cat-location {
-            background: rgba(244, 114, 182, .15);
-            color: var(--badge-loc);
+            background: var(--badge-loc);
         }
 
         .cat-prop {
-            background: rgba(251, 146, 60, .15);
-            color: var(--badge-prop);
+            background: var(--badge-prop);
+        }
+
+        .cat-reference {
+            background: var(--badge-ref);
         }
 
         .card-name {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #ffffff;
             line-height: 1.3;
         }
 
-        .card-filename {
-            font-size: 11px;
-            font-family: "SF Mono", "Fira Code", monospace;
-            color: var(--text-mono);
-            margin-top: 2px;
+        .card-file {
+            margin-top: 4px;
+            color: var(--text-secondary);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            word-break: break-all;
         }
 
-        /* Prompt toggle */
         .prompt-toggle {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            color: var(--text-muted);
+            margin-top: 12px;
+            color: var(--accent);
+            font-size: 12px;
             cursor: pointer;
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px solid #222;
             user-select: none;
         }
 
         .prompt-toggle:hover {
-            color: var(--text-primary);
-        }
-
-        .prompt-toggle .arrow {
-            transition: transform .2s;
-            display: inline-block;
-        }
-
-        .prompt-toggle.open .arrow {
-            transform: rotate(180deg);
+            color: #93c5fd;
         }
 
         .prompt-text {
             display: none;
-            font-size: 11px;
-            color: #888;
-            margin-top: 6px;
-            line-height: 1.7;
-            max-height: 220px;
-            overflow-y: auto;
-            padding-right: 4px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #303030;
+            color: #cbd5e1;
+            font-size: 12px;
+            white-space: pre-wrap;
         }
 
         .prompt-text.visible {
             display: block;
         }
 
-        /* Spatial panel */
-        .spatial-panel {
-            margin-top: 8px;
-            padding: 8px 10px;
-            background: rgba(96, 165, 250, .07);
-            border: 1px solid rgba(96, 165, 250, .2);
-            border-radius: 6px;
-            font-size: 11px;
-            color: #93c5fd;
-            line-height: 1.8;
-        }
-
-        .spatial-title {
-            font-weight: 700;
-            font-size: 10px;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .s-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        .s-key {
-            color: var(--text-muted);
-            min-width: 32px;
-        }
-
-        /* ── Assignment Matrix ──────────────────────── */
-        .matrix-section {
-            margin-top: 52px;
-            border-top: 2px solid #333;
-            padding-top: 28px;
-        }
-
-        .matrix-heading {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .matrix-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .matrix-wrap {
-            overflow-x: auto;
-        }
-
-        .matrix-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 11px;
-        }
-
-        .matrix-table th,
-        .matrix-table td {
-            border: 1px solid #222;
-            padding: 0;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        /* Column headers (scenes) */
-        .matrix-table thead th {
-            background: #161616;
-            color: var(--text-muted);
-            font-weight: 700;
-            padding: 6px 4px;
-            white-space: nowrap;
-            min-width: 70px;
-        }
-
-        .matrix-table thead th.asset-hdr {
-            text-align: left;
-            padding: 6px 10px;
-            min-width: 200px;
-            color: var(--text-primary);
-            font-size: 10px;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-        }
-
-        .matrix-table thead th.count-hdr {
-            min-width: 36px;
-            color: var(--accent);
-        }
-
-        .th-scene-id {
-            display: block;
-            font-size: 9px;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-
-        .th-scene-name {
-            display: block;
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 400;
-            line-height: 1.3;
-        }
-
-        /* Asset rows */
-        .matrix-table tbody tr {
-            background: #161616;
-            transition: background 0.1s;
-        }
-
-        .matrix-table tbody tr:hover {
-            background: #1d1d1d;
-        }
-
-        .asset-cell {
-            text-align: left !important;
-            padding: 6px 10px !important;
-        }
-
-        .asset-row-inner {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .asset-row-thumb {
-            width: 26px;
-            height: 26px;
-            border-radius: 4px;
-            background: #252525;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            overflow: hidden;
-        }
-
-        .asset-row-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .asset-row-info {
-            overflow: hidden;
-        }
-
-        .asset-row-name {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 150px;
-        }
-
-        .asset-row-file {
-            font-size: 9px;
-            color: var(--text-muted);
-            font-family: "SF Mono", "Fira Code", monospace;
-        }
-
-        /* Clickable matrix cell */
-        .mx-cell {
-            cursor: pointer;
-            width: 70px;
-            height: 38px;
-            transition: background 0.1s;
-        }
-
-        .mx-cell:hover {
-            background: rgba(96, 165, 250, .08);
-        }
-
-        .mx-cell.checked {
-            background: rgba(74, 222, 128, .1);
-            color: var(--status-generated);
-            font-size: 14px;
-        }
-
-        .mx-cell:not(.checked) {
-            color: #2a2a2a;
-            font-size: 11px;
-        }
-
-        /* Count cell */
-        .mx-count {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            padding: 0 8px !important;
-        }
-
-        .mx-count.has-count {
-            color: var(--status-generated);
-        }
-
-        /* Footer summary row */
-        .matrix-table tfoot td {
-            background: #111;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 5px 4px;
-            color: var(--text-muted);
-        }
-
-        .matrix-table tfoot td.total-label {
-            text-align: left;
-            padding-left: 10px;
-            font-size: 10px;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-        }
-
-        .matrix-table tfoot td.scene-total {
-            color: var(--accent);
-        }
-
-        /* Category divider rows */
-        .cat-divider-row td {
-            background: #111 !important;
-            padding: 4px 10px !important;
-            text-align: left !important;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            border-color: #1a1a1a !important;
-        }
-
-        /* dragging */
-        .card.dragging {
-            opacity: 0.45;
-            transform: scale(0.98);
-        }
-
-        /* Footer */
         .footer {
-            margin-top: 44px;
-            padding-top: 16px;
-            border-top: 1px solid #222;
-            font-size: 11px;
-            color: var(--text-muted);
+            margin-top: 36px;
+            padding-top: 14px;
+            border-top: 1px solid #232323;
             display: flex;
             justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 11px;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- HEADER -->
     <div class="header">
         <h1>《证词之外》— Asset Canvas</h1>
-        <div class="meta">生成时间: 2026-05-14 &nbsp;·&nbsp; 共 16 个资产 &nbsp;·&nbsp; 角色 ×2 &nbsp;·&nbsp; 场地 ×6 &nbsp;·&nbsp;
-            <div class="note">补充说明：assets/zhengci-zhiwai/linshen_sketch.png 为额外草图参考，不计入当前 16 张主资产，也不参与下游图参引用。</div>
-            道具 ×8
-        </div>
+        <div class="meta">生成时间：2026-05-25 · 全量节点 44 个 · 图像资产 43 张 · 声音参考 1 个 · 主资产 20 张 · 补充资产 24 个</div>
+        <div class="note">本页按当前全量资产重建，主范围与优先级基准来自 zhengci-zhiwai-asset-prompts.md 与
+            zhengci-zhiwai-final-generation-list.md。完成度只统计可生成图像的 43 个资产；LinWanVoice 单独作为声音参考节点展示，不计入图片生成进度。</div>
     </div>
 
-    <!-- PROGRESS -->
     <div class="progress-section">
         <div class="progress-label">
-            <span>资产完成度</span>
-            <span id="progress-text">0 / 16 已生成</span>
+            <span>图像资产完成度</span>
+            <span id="progress-text">0 / 43 已生成</span>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progress-fill"></div>
         </div>
     </div>
 
-    <!-- TABS -->
     <div class="tabs">
-        <button class="tab active" onclick="filterCards('all', this)">全部 (16)</button>
-        <button class="tab" onclick="filterCards('character', this)">🎭 角色 (2)</button>
-        <button class="tab" onclick="filterCards('location', this)">🏠 场地 (6)</button>
-        <button class="tab" onclick="filterCards('prop', this)">🎬 道具 (8)</button>
+        <button class="tab active" data-filter="all">全部 (44)</button>
+        <button class="tab" data-filter="character">🎭 角色 (5)</button>
+        <button class="tab" data-filter="location">🏠 场地 (20)</button>
+        <button class="tab" data-filter="prop">🎬 道具 (18)</button>
+        <button class="tab" data-filter="reference">🎙️ 参考 (1)</button>
     </div>
 
+    <div id="sections-root"></div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  CHARACTERS                                -->
-    <!-- ══════════════════════════════════════════ -->
-    <div class="section-header" id="section-character">🎭 角色 Characters</div>
-    <div class="card-grid" id="grid-character">
-
-        <!-- 1. Lin Shen -->
-        <div class="card status-generated" data-category="character">
-            <div class="card-image r-3-4">
-                <img src="../assets/zhengci-zhiwai/lin_shen.png" alt="lin_shen.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-character">Character</span>
-                <div class="card-name">林深 / Lin Shen</div>
-                <div class="card-filename">lin_shen.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    中国男性，30岁左右，偏瘦，颧骨略突出，黑色微长乱发，额前碎发，明显深黑眼圈，偏白偏黄疲惫肤色，无胡须，下颌线清晰，右手无名指轻微向内弯；正面半身定妆照，纯黑背景，85mm镜头，人物居中，深灰近黑连帽外套拉链到胸口，内搭深色圆领T恤，外套口袋微鼓，表情克制、疲惫、微微警觉，眼睛湿润但不落泪，眼神光清晰，嘴唇干燥微抿；灯光仅左侧45度冷蓝窗光照亮半张脸，右半脸沉入阴影，无补光；8K超写实照片，毛孔、汗毛、不对称痣、眼圈下毛细血管清晰，真实亚洲男性骨相；禁止卡通，禁止插画，禁止3D渲染，禁止游戏CG，禁止多余人物，禁止夸张表情。
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. Chen Bo -->
-        <div class="card status-generated" data-category="character">
-            <div class="card-image r-3-4">
-                <img src="../assets/zhengci-zhiwai/chen_bo.png" alt="chen_bo.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-character">Character</span>
-                <div class="card-name">陈伯 / Chen Bo</div>
-                <div class="card-filename">chen_bo.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    中国男性，62到65岁，身高感偏矮，背微驼但不虚弱，面部瘦削，颧骨高，法令纹深，花白短寸贴头皮，浓而杂乱的眉毛，眉尾微垂，眼睛不大但极其平静，像一潭死水；正面半身定妆照，纯黑背景，85mm镜头，人物居中，泛白的深蓝色物业保安制服，纽扣扣到最上面一颗，左胸口袋插旧圆珠笔，腰间挂一大串旧铜钥匙；表情平静到近乎冷漠，嘴角水平，下颌微微前收；灯光仅暖黄色走廊灯从正上方偏后照下，额头和鼻梁有高光，眼窝深陷阴影，无补光；8K超写实照片，老年斑、额头皱纹、鼻翼毛孔、花白胡茬清晰；禁止卡通，禁止插画，禁止3D渲染，禁止游戏CG，禁止夸张邪笑，禁止多余人物。
-                </div>
-            </div>
-        </div>
-
-    </div><!-- /grid-character -->
-
-
-    <!-- ══════════════════════════════════════════ -->
-    <!--  LOCATIONS                                 -->
-    <!-- ══════════════════════════════════════════ -->
-    <div class="section-header" id="section-location">🏠 场地 Locations</div>
-    <div class="card-grid" id="grid-location">
-
-        <!-- 3. Lin Room Wide -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/lin_room_wide.png" alt="lin_room_wide.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">林深的出租屋·全景</div>
-                <div class="card-filename">lin_room_wide.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    室内广角全景，略带15度俯角，从门口往里看，极小出租屋单间约8平米；没开灯，唯一光源是右侧墙窗户外城市夜景透过薄白窗帘渗入的冷蓝白光（窗户在右侧墙，与床同侧）；窗光从右侧斜切入室内，在地板中央留下一条冷蓝斜面光带，床面与右侧墙被窗光轻微打亮，左侧书桌区偏暗，近镜头的门口区域最暗；单人床靠右侧墙，床头方向即窗户，被子皱乱堆叠，枕边随意搭着一件深色外套；床正对面（左侧墙方向）廉价书桌靠墙，桌前廉价塑料靠背椅微微向外推开，桌面凌乱，隐约可见银灰色录音笔、耳机线缠绕和撕开的信封轮廓；书桌右腿旁地面一个小塑料垃圾桶，外卖盒和瘪矿泉水瓶堆出桶口；地面有污迹；发黄白墙有污渍，天花板有旧水渍印，一根裸露灯线从天花板垂下接一个空灯座，无灯泡；整体冷蓝灰色调，光线极暗，轻微haze，纵深感强；8K超写实照片，室内全部灯关闭，仅右侧窗外城市夜光；禁止插画，禁止3D，禁止游戏CG，禁止暖光，禁止人物出镜，禁止额外家具。
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. Lin Room Desk -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/lin_room_desk.png" alt="lin_room_desk.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">林深的出租屋·桌面</div>
-                <div class="card-filename">lin_room_desk.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具场景俯拍特写，70度俯角，廉价书桌桌面（桌子位于房间左侧墙，与门口对向），冷蓝灰光线仅来自右侧——即房间右侧窗户方向（床同侧）透过薄窗帘渗入的城市夜光；桌面摆放：一支旧银灰色录音笔横放居中，黑色入耳式耳机线缠绕凌乱压在录音笔旁，一个已撕开的牛皮纸信封正面朝上写"林深
-                    亲收"左下角印"长宁公寓"，信封旁一张白色纸条折叠，桌角一杯喝了一半的凉白开水痕迹可见；桌面底部边缘隐约可见一把廉价塑料椅靠背顶端探出；桌面有灰尘、圆珠笔划痕；右侧冷蓝光勾勒出录音笔金属边缘和信封折痕，左侧偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止暖光，禁止人物手部出镜，禁止多余道具。
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Corridor Wide -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/corridor_wide.png" alt="corridor_wide.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">七楼走廊·全景</div>
-                <div class="card-filename">corridor_wide.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    室内广角全景，老式居民公寓七楼走廊，从走廊近端（靠楼梯口侧）朝里看；走廊窄而长约1.5米宽，低矮天花板；左侧墙近处是305室深棕色旧铁门，右侧墙近处与其正对面是306室深棕色旧铁门，两扇门相对；继续往里，右侧墙更远处307室铁门隐入阴影，隐约可见门上贴有封条；旧灰色水磨石地面延伸向远端，墙面泛黄白色乳胶漆，下半部深绿色墙裙漆，有污渍和划痕；天花板圆形声控灯仅头顶一盏亮着发冷白偏蓝光，其余灯灭，走廊远端隐入黑暗；整体冷蓝灰绿色调，轻微haze，单点透视感强；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜，禁止现代装修风格。
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. Corridor 307 -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/corridor_307.png" alt="corridor_307.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">七楼走廊·307门口</div>
-                <div class="card-filename">corridor_307.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    室内近景，平视正面，老式居民楼走廊307室门口；一扇深棕色旧铁门居中，门面有划痕和污迹，门上贴着泛黄警方封条一端翘起；铁门上方居中白底黑字搪瓷门牌"307"；门框左侧墙面贴一张泛黄物业印刷告示纸，纸上黑色宋体印刷"管道检修
-                    暂停入住"，纸张右上角和左下角向外卷起，胶带一端脱落；门框右侧走廊墙上约1米高处有红色手动消防报警器，红色塑料外壳，玻璃面板后击碎按钮；地面水磨石有灰尘，灯光仅走廊声控灯冷白光从斜上方打下；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物出镜。
-                </div>
-            </div>
-        </div>
-
-        <!-- 7. Room 307 Entry -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/room_307_entry.png" alt="room_307_entry.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">307室·入口视角</div>
-                <div class="card-filename">room_307_entry.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    室内广角全景，从玄关站立视角往客厅方向看；老旧长期停租公寓客厅，约15平米；客厅中央一张老旧木桌，桌上只有一只红漆斑驳的老式小监听音箱，红色LED微亮；正对面大窗挂半透明旧白窗帘，冷白月光从窗帘缝斜切进来打在木桌上，窗下有老式铸铁暖气片；天花板中部垂着一个旧白炽灯泡和发黄灯线，灯泡不亮，只作为老公寓残留构件存在；左墙靠窗那半段摆一张塌陷的旧双人布沙发，沙发不碰到木桌；左墙靠玄关这半段只有一把收起的旧折叠椅斜靠墙边，留出从门口通往木桌的通道；右墙中段是一扇紧闭卧室门；玄关左侧靠墙卷着一块落灰旧地垫，右侧墙面靠门后位置一个老旧电表箱；靠玄关一侧天花板偏中位置有一个极小暗装播音孔；旧木地板满是灰尘，室内无其他照明，轻微haze；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物，禁止现代家具，禁止生成极简样板间，禁止把家具摆成温馨正常居住状态，禁止堵住门口到木桌的直线路径。
-                </div>
-            </div>
-        </div>
-
-        <!-- 8. Room 307 Reverse -->
-        <div class="card status-generated" data-category="location">
-            <div class="card-image r-16-9">
-                <img src="../assets/zhengci-zhiwai/room_307_reverse.png" alt="room_307_reverse.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-location">Location</span>
-                <div class="card-name">307室·反角视角</div>
-                <div class="card-filename">room_307_reverse.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    室内广角，从客厅靠窗一侧回看玄关和大门方向；画面左前景带到中央木桌一角和桌上老式监听音箱的模糊轮廓，月光从镜头背后窗户方向打来；天花板中部能隐约带到一个垂下的旧白炽灯泡和发黄灯线，灯泡不亮；左侧中后段能看到靠左墙、贴窗一侧那张塌陷旧双人布沙发的一段轮廓；正前方是玄关和半开的铁门，走廊冷白声控灯从门外射入，在地面形成一条长条光斑；玄关左侧靠墙卷着一块落灰旧地垫，地垫后方同一面墙上斜靠一把收起的旧折叠椅，右侧墙面靠门后位置一个老旧电表箱；玄关顶角有一个哑光黑色小塑料盒子，约5厘米大，极小绿色LED微亮，几乎不显眼，旁边还能带到一个普通老旧天花板播音孔或开孔网罩；门缝里隐约可见走廊墙上红色消防报警器一角；旧木地板，玄关地面有灰尘脚印；整体前方走廊冷白光、后方月光冷蓝，中间玄关区偏暗；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止人物，禁止生成极简现代空厅或纯空摄影棚，禁止把家具拍成崭新整洁状态，禁止把沙发或折叠椅挪到门口正前方。
-                </div>
-            </div>
-        </div>
-
-    </div><!-- /grid-location -->
-
-
-    <!-- ══════════════════════════════════════════ -->
-    <!--  PROPS                                     -->
-    <!-- ══════════════════════════════════════════ -->
-    <div class="section-header" id="section-prop">🎬 道具 Props</div>
-    <div class="card-grid" id="grid-prop">
-
-        <!-- 9. Recorder (wrong attempt) -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/recorder.png" alt="recorder.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">旧录音笔·错误尝试 / Old Recorder — Error</div>
-                <div class="card-filename">recorder.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，纯黑背景，45度俯拍，一支旧数码录音笔，银灰色金属外壳，约12厘米长、2.5厘米宽，边角掉漆露出金属底色，背面一道浅划痕，明显使用磨损；正面小型OLED屏幕亮起，显示口令输入界面，上方写"口令"，下方输入框内是七位错误数字"4
-                    7 2 9 0 1
-                    8"，下方红色小字"口令错误"，屏幕旁边三个实体按键，顶部一个3.5毫米耳机孔；单一冷白柔光从左上方打下，金属表面可见指纹油渍和微划痕，屏幕发光但不溢光；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止手持。
-                </div>
-            </div>
-        </div>
-
-        <!-- 9b. Recorder Unlocked -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/recorder_unlocked.png" alt="recorder_unlocked.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">旧录音笔·解锁瞬间 / Old Recorder — Unlocked</div>
-                <div class="card-filename">recorder_unlocked.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，纯黑背景，45度俯拍，一支旧数码录音笔，银灰色金属外壳，约12厘米长、2.5厘米宽，边角掉漆露出金属底色，背面一道浅划痕，明显使用磨损；正面小型OLED屏幕亮起，显示口令输入界面，上方写"口令"，下方输入框内显示四个英文大写字母"L
-                    E F
-                    T"，下方绿色小字"口令正确"，屏幕因绿色状态灯微微泛出淡绿光晕映在录音笔金属边框上；屏幕旁边三个实体按键，顶部一个3.5毫米耳机孔；单一冷白柔光从左上方打下，金属表面可见指纹油渍和微划痕，屏幕发光但不溢光；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止手持。
-                </div>
-            </div>
-        </div>
-
-        <!-- 10. Envelope & Note -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/envelope_note.png" alt="envelope_note.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">匿名信封与纸条 / Envelope & Note</div>
-                <div class="card-filename">envelope_note.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">道具特写，深色木桌面背景，俯拍，一个标准C5牛皮纸信封，已撕开，撕口不整齐，信封正面中央手写"林深
-                    亲收"，左下角印刷体小字"长宁公寓"；旁边展开一张白色纸条，约8厘米乘12厘米，纸条正面朝上，用黑色签字笔手写"如果你想知道你妹妹的死亡真相"，纸条旁边隐约露出背面另一行字的痕迹；上方暖白台灯光照下，纸张纹理、牛皮纸纤维、折痕、墨水渗透清晰；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余手部，禁止多余道具。
-                </div>
-            </div>
-        </div>
-
-        <!-- 11a. Speaker OFF -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/speaker_off.png" alt="speaker_off.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">老式音箱·待机 LED 关</div>
-                <div class="card-filename">speaker_off.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，纯黑背景，正面偏右30度拍摄，一只老式小型监听音箱，约20厘米高、15厘米宽、12厘米深，木质箱体，暗红色油漆斑驳脱落，露出浅色木底，正面黑色金属网罩轻微锈蚀，右上角一个圆形红色LED指示灯当前灭着；底座黑色塑料，侧面贴一张旧标签纸，褪色蓝字"307
-                    备份"，标签边缘发黄卷起；背面有旧电源线和一个SD卡插槽，露出微型SD卡边缘；左侧单一侧光强调漆面剥落和金属锈蚀质感；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止人物手持。
-                </div>
-            </div>
-        </div>
-
-        <!-- 11b. Speaker ON -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/speaker_on.png" alt="speaker_on.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">老式音箱·播放 LED 亮</div>
-                <div class="card-filename">speaker_on.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，纯黑背景，正面偏右30度拍摄，一只老式小型监听音箱，约20厘米高、15厘米宽、12厘米深，木质箱体，暗红色油漆斑驳脱落，露出浅色木底，正面黑色金属网罩轻微锈蚀，右上角一个圆形红色LED指示灯当前亮着，发出稳定暗红色光，灯光微微映红旁边的木质箱体；底座黑色塑料，侧面贴一张旧标签纸，褪色蓝字"307
-                    备份"，标签边缘发黄卷起；背面有旧电源线和一个SD卡插槽，露出微型SD卡边缘；左侧单一侧光强调漆面剥落和金属锈蚀质感，右上角LED红光形成局部小光晕；8K超写实产品摄影；禁止插画，禁止3D，禁止游戏CG，禁止多余道具，禁止人物手持。
-                </div>
-            </div>
-        </div>
-
-        <!-- 12. Sensor Box -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/sensor_box.png" alt="sensor_box.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">玄关小黑盒 / Sensor Box</div>
-                <div class="card-filename">sensor_box.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，安装状态，从下往上仰拍约30度，一个哑光黑色塑料小盒子，约5厘米乘3厘米乘2厘米，用两颗十字螺丝固定在天花板和墙壁交接的顶角处，正面一个极小圆形LED指示灯，发出微弱绿色光，侧面一根细黑色线缆延伸进天花板；整体很不起眼，背景是泛黄白色天花板与墙壁交界；灯光仅走廊声控灯冷白余光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止夸张科技感，禁止多余设备。
-                </div>
-            </div>
-        </div>
-
-        <!-- 13. Fire Alarm -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/fire_alarm.png" alt="fire_alarm.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">消防报警器 / Fire Alarm</div>
-                <div class="card-filename">fire_alarm.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">
-                    道具特写，安装状态，平视正面拍摄，一个标准中国式手动火灾报警按钮，红色塑料外壳，约10厘米乘10厘米乘5厘米，安装在米白色走廊墙上，正面透明玻璃面板后是红色击碎按钮，玻璃上方白字"火警"，下方白字"击碎玻璃
-                    按下按钮"，外壳上方一个小型红色指示灯但当前不亮，墙面有轻微污渍和划痕；灯光仅走廊声控灯冷白光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余设备，禁止手入镜。</div>
-            </div>
-        </div>
-
-        <!-- 14. Notice -->
-        <div class="card status-generated" data-category="prop">
-            <div class="card-image r-1-1">
-                <img src="../assets/zhengci-zhiwai/notice.png" alt="notice.png">
-                <span class="status-badge">✅</span>
-            </div>
-            <div class="card-body">
-                <span class="card-category cat-prop">Prop</span>
-                <div class="card-name">物业告示 / Building Notice</div>
-                <div class="card-filename">notice.png</div>
-                <div class="prompt-toggle" onclick="togglePrompt(this)">展开提示词 <span class="arrow">▾</span></div>
-                <div class="prompt-text">道具特写，安装状态，平视正面拍摄，一张A4大小白纸，用透明胶带贴在深棕色铁门门框旁边的墙上，纸张已经泛黄，右上角和左下角向外卷起，纸上黑色宋体印刷"管道检修
-                    暂停入住"，下方小字"长宁公寓物业管理处"，最下方日期模糊不清；胶带也已泛黄，其中一条胶带一端脱落，那个纸角翘起；灯光仅走廊声控灯冷白光，纸面轻微反光；8K超写实照片；禁止插画，禁止3D，禁止游戏CG，禁止多余纸张，禁止人物手部。
-                </div>
-            </div>
-        </div>
-
-    </div><!-- /grid-prop -->
-
-
-    <!-- ══════════════════════════════════════════ -->
-    <!--  ASSIGNMENT MATRIX                         -->
-    <!-- ══════════════════════════════════════════ -->
-    <div class="matrix-section">
-        <div class="matrix-heading">📋 场景分配矩阵 Assignment Matrix</div>
-        <div class="matrix-sub">点击交叉格标记该资产用于该场景。行末显示使用场景数，列末显示该场景资产数。</div>
-
-        <div class="matrix-wrap">
-            <table class="matrix-table" id="matrix">
-                <thead>
-                    <tr>
-                        <th class="asset-hdr">资产 Asset</th>
-                        <th><span class="th-scene-id">S0</span><span class="th-scene-name">出租屋<br>冷开场</span></th>
-                        <th><span class="th-scene-id">S1</span><span class="th-scene-name">走廊<br>林深到来</span></th>
-                        <th><span class="th-scene-id">S2</span><span class="th-scene-name">307室<br>音箱播放</span></th>
-                        <th><span class="th-scene-id">S3</span><span class="th-scene-name">307门口<br>陈伯+假声</span></th>
-                        <th><span class="th-scene-id">S4</span><span class="th-scene-name">307室内<br>口令破解</span></th>
-                        <th><span class="th-scene-id">S5</span><span class="th-scene-name">走廊<br>砸报警器</span></th>
-                        <th><span class="th-scene-id">S6</span><span class="th-scene-name">走廊尾声<br>林深离开</span></th>
-                        <th class="count-hdr">#</th>
-                    </tr>
-                </thead>
-                <tbody id="matrix-body">
-                    <!-- Characters -->
-                    <tr class="cat-divider-row">
-                        <td colspan="9">🎭 角色 Characters</td>
-                    </tr>
-                    <tr data-asset="lin_shen.png" data-cat="character">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎭</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">林深</div>
-                                    <div class="asset-row-file">lin_shen.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-count">7</td>
-                    </tr>
-                    <tr data-asset="chen_bo.png" data-cat="character">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎭</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">陈伯</div>
-                                    <div class="asset-row-file">chen_bo.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <!-- Locations -->
-                    <tr class="cat-divider-row">
-                        <td colspan="9">🏠 场地 Locations</td>
-                    </tr>
-                    <tr data-asset="lin_room_wide.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">出租屋·全景</div>
-                                    <div class="asset-row-file">lin_room_wide.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">1</td>
-                    </tr>
-                    <tr data-asset="lin_room_desk.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">出租屋·桌面</div>
-                                    <div class="asset-row-file">lin_room_desk.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">1</td>
-                    </tr>
-                    <tr data-asset="corridor_wide.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">走廊·全景</div>
-                                    <div class="asset-row-file">corridor_wide.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <tr data-asset="corridor_307.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">走廊·307门口</div>
-                                    <div class="asset-row-file">corridor_307.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <tr data-asset="room_307_entry.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">307室·入口</div>
-                                    <div class="asset-row-file">room_307_entry.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">2</td>
-                    </tr>
-                    <tr data-asset="room_307_reverse.png" data-cat="location">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🏠</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">307室·反角</div>
-                                    <div class="asset-row-file">room_307_reverse.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <!-- Props -->
-                    <tr class="cat-divider-row">
-                        <td colspan="9">🎬 道具 Props</td>
-                    </tr>
-                    <tr data-asset="recorder.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">录音笔·错误尝试</div>
-                                    <div class="asset-row-file">recorder.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <tr data-asset="recorder_unlocked.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🟢</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">录音笔·解锁瞬间</div>
-                                    <div class="asset-row-file">recorder_unlocked.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">1</td>
-                    </tr>
-                    <tr data-asset="envelope_note.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">信封与纸条</div>
-                                    <div class="asset-row-file">envelope_note.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">2</td>
-                    </tr>
-                    <tr data-asset="speaker_off.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">音箱·待机(OFF)</div>
-                                    <div class="asset-row-file">speaker_off.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">0</td>
-                    </tr>
-                    <tr data-asset="speaker_on.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🔴</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">音箱·播放(ON)</div>
-                                    <div class="asset-row-file">speaker_on.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">4</td>
-                    </tr>
-                    <tr data-asset="sensor_box.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">玄关小黑盒</div>
-                                    <div class="asset-row-file">sensor_box.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <tr data-asset="fire_alarm.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">消防报警器</div>
-                                    <div class="asset-row-file">fire_alarm.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                    <tr data-asset="notice.png" data-cat="prop">
-                        <td class="asset-cell">
-                            <div class="asset-row-inner">
-                                <div class="asset-row-thumb">🎬</div>
-                                <div class="asset-row-info">
-                                    <div class="asset-row-name">物业告示</div>
-                                    <div class="asset-row-file">notice.png</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-cell checked" onclick="toggleMx(this)">✓</td>
-                        <td class="mx-cell" onclick="toggleMx(this)"></td>
-                        <td class="mx-count">3</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td class="total-label">合计 Total</td>
-                        <td class="scene-total" id="st-0">0</td>
-                        <td class="scene-total" id="st-1">0</td>
-                        <td class="scene-total" id="st-2">0</td>
-                        <td class="scene-total" id="st-3">0</td>
-                        <td class="scene-total" id="st-4">0</td>
-                        <td class="scene-total" id="st-5">0</td>
-                        <td class="scene-total" id="st-6">0</td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div><!-- /matrix-wrap -->
-    </div><!-- /matrix-section -->
-
-
-    <!-- FOOTER -->
     <div class="footer">
-        <span>《证词之外》Asset Canvas · zhengci-zhiwai</span>
-        <span>Generated by asset-canvas skill · 2026-05-14</span>
+        <span>《证词之外》Asset Canvas · 主资产 + 补充资产版</span>
+        <span>Generated by GitHub Copilot · 2026-05-25</span>
     </div>
 
     <script>
-        function updateCardProgress() {
-            const cards = document.querySelectorAll('.card');
-            const generated = document.querySelectorAll('.card.status-generated').length;
-            const total = cards.length;
+        const existingFiles = new Set([
+            'lin_shen.png',
+            'chen_bo.png',
+            'room_307_entry.png',
+            'room_307_reverse.png'
+        ]);
+
+        const mainAssets = [
+            {
+                filename: 'lin_shen.png',
+                category: 'character',
+                labelZh: '林深',
+                labelEn: 'Lin Shen',
+                prompt: `30岁左右中国男性，偏瘦，颧骨略突出，黑色微长乱发，额前碎发略垂，深黑眼圈明显，肤色偏白偏黄、长期熬夜的疲惫质感，无胡须，下颌线清晰，嘴唇偏干，眼神克制但警觉；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，深灰近黑连帽外套拉链到胸口，内搭深色圆领 T 恤，表情平静、压抑、像努力维持理性；灯光仅左前方 45 度冷白光打亮半张脸，另一半脸沉入阴影，无补光；8K 超写实照片，真实亚洲男性皮肤纹理、毛孔、眼袋、细碎汗毛可见；禁止夸张邪笑，禁止多余人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'zhou_yan.png',
+                category: 'character',
+                labelZh: '周妍',
+                labelEn: 'Zhou Yan',
+                prompt: `二十多岁中国女性，短发或及肩直发，发尾略乱，肤色自然偏白，眼下有轻微疲态，五官利落，表情敏感而倔强；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，深色旧夹克内搭浅灰 T 恤，肩上有一点城市灰尘感，像刚从旧楼里赶来；表情克制、警惕、压着恐惧但不脆弱，眼神盯住镜头外某个点；灯光仅一侧冷白楼道光，自然打出鼻梁和下颌阴影，无美容感；8K 超写实照片，真实皮肤细节清晰；禁止浓妆，禁止柔焦滤镜，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
+            },
+            {
+                filename: 'chen_bo.png',
+                category: 'character',
+                labelZh: '陈伯',
+                labelEn: 'Chen Bo',
+                prompt: `六十岁左右中国男性，身材偏矮，背微驼但不虚弱，面部瘦削，颧骨高，法令纹深，花白短寸贴头皮，浓而杂乱的眉毛，目光稳定、眨眼很少；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，泛白的深蓝色物业保安制服，纽扣扣到最上面，左胸口袋插旧圆珠笔，腰间挂一串旧铜钥匙；表情平静到近乎冷漠，不带明显恶相；灯光仅暖黄走廊顶灯从正上方偏后照下，额头和鼻梁有高光，眼窝深陷；8K 超写实照片，皱纹、色斑、胡茬和旧制服纤维清晰；禁止夸张邪笑，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
+            },
+            {
+                filename: 'lin_wan_bound.png',
+                category: 'character',
+                labelZh: '林晚',
+                labelEn: 'Lin Wan',
+                prompt: `二十多岁中国女性，长发略乱，脸色苍白但仍有生命感，唇色偏淡，眼神疲惫、清醒、长期被囚后的虚弱感；半身定妆照，背景为失焦的冷色监控室或采样室，不是纯黑背景，85mm 镜头，人物居中偏左，穿简单浅色旧上衣，肩颈处有轻微束缚痕迹但不血腥；手臂或肩部呈现被固定在椅子上的状态，表情不是尖叫，而是被迫保持安静的绝望；灯光仅冷白监控屏反光和极弱设备顶灯；8K 超写实照片，皮肤和头发细节清晰；禁止血浆，禁止暴力夸张，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
+            },
+            {
+                filename: 'study_room_wide.png',
+                category: 'location',
+                labelZh: '林深书房全景',
+                labelEn: 'Study Room Wide',
+                prompt: `室内广角全景，夜晚，廉价出租屋改成的简陋书房，约 8 到 10 平米，从门口向里看；房间只亮一盏桌上台灯，整体其余区域沉入暗部；左侧靠墙是一张旧书桌，桌上有笔记本电脑、鼠标、耳机和几张写着凌乱提示词的白纸；书桌前廉价椅子被坐出磨损，右侧有单人床或折叠床轮廓但不抢主体；墙面发黄，有旧水渍，天花板普通，不现代；光源逻辑非常明确，只允许桌面暖白台灯和极弱窗外冷蓝夜光；画面氛围安静、压抑、像有人长期在这里做声音工作；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨家庭感。比例 16:9`
+            },
+            {
+                filename: 'corridor_307_door.png',
+                category: 'location',
+                labelZh: '三楼307门口',
+                labelEn: '307 Corridor Door',
+                prompt: `老式居民公寓三楼走廊，平视正面拍摄 307 室门口；深棕色旧铁门居中，门面有划痕、掉漆、灰尘，门上方是白底黑字搪瓷门牌“307”；门口干净，没有任何案发隔离痕迹，也没有现代电子锁；门框一侧墙面发黄，墙角有旧污渍；地面是老旧水磨石，走廊冷白声控灯从斜上方打下；整体感觉像半搬空公寓层，不是命案现场；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止错误楼层门牌，禁止任何隔离贴纸或警示条。比例 16:9`
+            },
+            {
+                filename: 'room_307_entry.png',
+                category: 'location',
+                labelZh: '307室入口视角',
+                labelEn: 'Room 307 Entry View',
+                prompt: `室内广角全景，从玄关站立视角往 307 客厅方向看；这是半搬空、刚被放弃不久的老公寓客厅，约 15 平米，木地板积灰，墙面留有搬走家具后的浅色印记；客厅中央偏前是一张老旧木桌，桌上放一只小型智能音箱，体积约 15 厘米见方，状态熄灭，外观是普通家用旧款设备，不带专业录音棚气质；左侧靠墙有塌陷旧沙发，右侧中段是一扇紧闭卧室门，玄关侧墙有老旧弱电箱；窗边透入冷灰夜光，房内没有主灯，只有很弱环境反射；整体要显得停摆、冷、像被突然遗弃；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止极简样板间，禁止把客厅拍成正常温馨居住状态。比例 16:9`
+            },
+            {
+                filename: 'room_307_reverse.png',
+                category: 'location',
+                labelZh: '307室反角视角',
+                labelEn: 'Room 307 Reverse View',
+                prompt: `室内广角，从客厅靠窗一侧回看 307 玄关和大门；左前景可带到木桌一角和桌上的小型智能音箱轮廓，正前方是玄关和半开的铁门，门外走廊冷白灯在地面形成一条长光斑；玄关右侧墙面可见一个老旧弱电箱，绿灯微亮，作为房内仍有弱电供电的证据；天花板边缘可非常轻地带到一个普通老式播音孔，但不能夸张；整体前方冷白、后方冷灰，中间暗部压住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止现代摄影棚质感。比例 16:9`
+            },
+            {
+                filename: 'fire_stair_wide.png',
+                category: 'location',
+                labelZh: '消防楼梯间',
+                labelEn: 'Fire Stair Wide',
+                prompt: `老式高层公寓内部消防楼梯间，广角全景，从一层半的平台位置看上下楼梯结构；灰色水泥墙、金属扶手、声控顶灯、旧安全门，空间冷、空、回声感强；楼梯间灯只亮局部几盏，形成一段亮一段暗的纵深；不要现代商场质感，不要彩色安全标识过多；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止脏乱到废墟程度。比例 16:9`
+            },
+            {
+                filename: 'floor29_wide.png',
+                category: 'location',
+                labelZh: '二十九楼走廊',
+                labelEn: '29F Corridor Wide',
+                prompt: `高层公寓二十九楼走廊，广角全景，空间空旷，冷白平光，玻璃墙、机房门、远处露台铁门同时入画；这里不像住宅层，更像被切出来的设备禁区，没有生活痕迹，没有装饰物；地面干净但缺乏人气，线条笔直，冷气和低频设备感隐约存在；画面必须把“空、冷、权限异常”一次立住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨办公楼气质。比例 16:9`
+            },
+            {
+                filename: 'device_room_wide.png',
+                category: 'location',
+                labelZh: '设备间全景',
+                labelEn: 'Device Room Wide',
+                prompt: `室内广角全景，二十九楼设备间，像真实运转的人声采样机房，不是科幻实验室；成排硬盘柜、工作台、显示器、拾音器、线缆、小型墙面音箱、散热风扇都在空间里，但布局整洁、可维护；灯光只允许冷青设备光和屏幕冷光，空间纵深清楚；要让人一眼看出这里长期记录和处理声音数据；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止霓虹赛博朋克。比例 16:9`
+            },
+            {
+                filename: 'terrace_wide.png',
+                category: 'location',
+                labelZh: '露台全景',
+                labelEn: 'Terrace Wide',
+                prompt: `夜晚高层露台广角全景，城市高空风压感明显，护栏、维修箱和放在维修箱上的一部白色手机同时入画；露台地面微湿或积灰，铁门在一侧，远处城市灯海虚焦但真实；护栏连接处看起来有老化风险，但不是一眼就能看出被人为破坏；光源只允许城市夜光和极弱安全灯反射；画面必须先把“危险空间”交代清楚；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'study_screen_waveform.png',
+                category: 'prop',
+                labelZh: '电脑音频编辑界面',
+                labelEn: 'Study Screen Waveform',
+                prompt: `电脑屏幕内容特写，正面略偏左角度，屏幕上是专业但不夸张的音频编辑软件界面；同一段女性语音波形被反复拖回起点，时间线清晰，局部可见多条剪切拼接痕迹；屏幕旁边不要出现多余聊天窗口或花哨软件，只保留波形、时间轴、播放头和少量中文项目备注；整体来自电脑自身冷光，屏幕真实可拍；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止复杂赛博 UI。比例 16:9`
+            },
+            {
+                filename: 'smart_speaker_idle.png',
+                category: 'prop',
+                labelZh: '307智能音箱待机',
+                labelEn: 'Smart Speaker Idle',
+                prompt: `道具特写，纯黑背景或极暗旧木桌背景，一只小型老款智能音箱，深灰或磨旧黑色外壳，体积约 15 厘米见方，不是圆筒型蓝牙音箱，也不是任何专业音频设备；顶部一圈极弱蓝色待机灯微亮，机身有轻微灰尘和使用磨损；设计普通、家用、旧款，不能高科技炫目；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止多余道具。比例 16:9`
+            },
+            {
+                filename: 'smart_speaker_unlocked.png',
+                category: 'prop',
+                labelZh: '307智能音箱解锁后',
+                labelEn: 'Smart Speaker Unlocked',
+                prompt: `道具特写，纯黑背景或极暗旧木桌背景，与 smart_speaker_idle.png 同一台家用旧款智能音箱，外观一致；顶部指示灯由蓝转为稳定绿色，表示已解锁并进入播放前状态，机身侧边有轻微灰尘和旧划痕；整体仍旧低调真实，不是未来感设备；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止额外界面悬浮。比例 16:9`
+            },
+            {
+                filename: 'wall_speaker_red.png',
+                category: 'prop',
+                labelZh: '墙面音箱红灯状态',
+                labelEn: 'Wall Speaker Red',
+                prompt: `安装在设备间墙面的老式小型广播音箱特写，米白或浅灰塑料外壳，边缘略旧，正下方一个小红灯亮起；背景是冷青色设备间墙面或机柜边缘，音箱必须像建筑系统一部分，而不是独立音响；质感真实、普通、长期使用；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止赛博机械感。比例 16:9`
+            },
+            {
+                filename: 'ceiling_speaker.png',
+                category: 'prop',
+                labelZh: '天花板广播音箱',
+                labelEn: 'Ceiling Speaker',
+                prompt: `天花板嵌入式广播音箱近景，白色金属网罩，普通建筑消防广播或公共播音设备风格，安装在老旧但非废弃的天花板上；旁边可带一点冷白顶灯或天花板接缝，整体极普通、极不显眼；质感必须真实，不夸张科技；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'device_screen_popup.png',
+                category: 'prop',
+                labelZh: '设备间弹窗界面',
+                labelEn: 'Device Screen Popup',
+                prompt: `电脑屏幕界面特写，屏幕上跳出一个简洁系统弹窗，中文内容清晰写着“林晚 语音复刻模型——生成完成”；弹窗背后能隐约看见音频文件列表或处理界面，但不要杂乱；整体 UI 极简、工业软件风格、真实办公系统感，不要未来感，不要霓虹；主要光源是屏幕冷白光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止复杂 HUD。比例 16:9`
+            },
+            {
+                filename: 'hard_drive_rack.png',
+                category: 'prop',
+                labelZh: '硬盘柜近景',
+                labelEn: 'Hard Drive Rack',
+                prompt: `设备间硬盘柜近景，一排机架式硬盘或存储模块，指示灯规律闪烁，冷青色环境中可以看到金属边框、标签、散热孔和细小划痕；整体像长期稳定运转的数据存储设备，不是未来机甲；不要品牌 Logo，不要夸张 RGB 灯效；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'white_phone_call.png',
+                category: 'prop',
+                labelZh: '白色手机通话中',
+                labelEn: 'White Phone Call',
+                prompt: `道具特写，一部白色旧款智能手机放在露台维修箱或粗糙金属台面上，屏幕亮着通话界面，整体有裂纹或轻度摔伤，但仍在通话中；屏幕 UI 简洁真实，只显示通话状态和外放图标，不出现夸张 app；周围环境带一点夜风中的高层露台冷光反射；要让人一眼明白这是诱导周妍靠近栏杆的声源；白色手机壳花纹需与 ZhouYanPhoneCaseCue 保持同款可识别关系；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            }
+        ];
+
+        const supplementalAssets = [
+            {
+                filename: 'study_desk_wide.png',
+                category: 'location',
+                tier: 'P1 补充',
+                labelZh: '书房桌面组合视角',
+                labelEn: 'StudyDeskWide',
+                prompt: `室内近广角，书房桌面组合构图，主体是旧书桌、笔记本电脑、台灯和坐在桌前的林深上半身位置关系；桌面上有鼠标、耳机、几张写着零散字句的白纸，但不能杂乱到像垃圾堆；台灯暖白光只照亮桌面和林深前臂，周围房间其余区域压暗；电脑屏幕停在音频编辑界面，但不需要拍清具体字句；整体构图要服务开场和 callback，像一个长期做声音工作的人在夜里独自守着桌面；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止额外人物。比例 16:9`
+            },
+            {
+                filename: 'room_307_power_box.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '307弱电箱绿灯近景',
+                labelEn: 'Room307PowerBox',
+                prompt: `安装状态近景，307 玄关弱电箱局部，旧白色或发黄金属箱门半闭，面板上一个小绿灯稳定亮着，周围墙面发旧、冷、无装饰；这是一种很普通、容易被忽略的民用弱电设备，不要高科技感；灯光只允许走廊冷白反射和箱体自身极弱指示灯；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止夸张闪烁。比例 16:9`
+            },
+            {
+                filename: 'smart_speaker_blue.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '智能音箱待机蓝灯',
+                labelEn: 'SmartSpeakerBlue',
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，深灰或磨旧黑色外壳，体积约 15 厘米见方，机身落灰；顶部一圈蓝色待机灯以固定频率轻微闪烁，不刺眼、不高科技；背景为极暗旧木桌或307阴暗角落；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'smart_speaker_red.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '智能音箱口令输入前红灯',
+                labelEn: 'SmartSpeakerRed',
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯变为稳定暗红色，像进入口令输入或待确认状态，红光不能过亮，不能有未来感界面；背景为极暗旧木桌或307房间暗部；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止悬浮界面。比例 16:9`
+            },
+            {
+                filename: 'smart_speaker_red_green.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '智能音箱红绿闪烁转绿',
+                labelEn: 'SmartSpeakerRedGreen',
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯处于红绿交替闪烁将要转为纯绿的过渡状态，光感必须老旧、延迟、朴素，不要做成炫技科技特效；背景极暗，重点只落在指示灯状态变化；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'device_screen_files.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '设备间文件列表界面',
+                labelEn: 'DeviceScreenFiles',
+                prompt: `电脑屏幕界面特写，真实工业软件风格的文件列表窗口，屏幕上滚动可见中文文件名，如“喘息”“争吵”“哭泣”“求救”“门锁回放”等，列表整洁、冷白、可读，不要赛博，不要霓虹；界面背后可有极简进度条或文件时间列，但不要复杂 HUD；整体来自屏幕自身冷光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'white_phone_call_broken.png',
+                category: 'prop',
+                tier: 'P1 补充',
+                labelZh: '白色手机摔裂后漏声',
+                labelEn: 'WhitePhoneCallBroken',
+                prompt: `道具特写，一部白色旧款智能手机摔裂在高层露台粗糙地面上，屏幕布满碎纹，局部间歇亮灭，外放状态仍在继续；机壳边角崩口、玻璃裂纹和露台灰尘都要真实，像刚经历一次剧烈坠地；背景只带一点夜风中的高层冷光反射；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'railing_joint_close.png',
+                category: 'location',
+                tier: 'P1 补充',
+                labelZh: '护栏连接处近景',
+                labelEn: 'RailingJointClose',
+                prompt: `高层露台护栏连接处近景，金属连接件略有老化和应力痕迹，局部螺丝和焊点真实可见，表面有轻微风化、细小锈迹和冷夜反光；必须像真实长期使用中的安全设施，不是施工中的半成品，也不是一眼可见的人为破坏；背景虚化为高空夜景和露台边缘冷光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止夸张断裂。比例 16:9`
+            },
+            {
+                filename: 'room_307_half_moved.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '半搬空307全景',
+                labelEn: 'Room307HalfMoved',
+                prompt: `室内广角全景，半搬空的员工公寓307，墙面留有拆走挂画和家具后的浅印，地面有极薄灰，空间冷、停摆、被突然放弃；画面主体是空出来的客厅关系和少量残留生活痕迹，不要把中央木桌和智能音箱拍得过近；窗边透入冷灰夜光，房内没有主灯；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨居住感。比例 16:9`
+            },
+            {
+                filename: 'room_307_table.png',
+                category: 'prop',
+                tier: 'P2 补充',
+                labelZh: '307桌面局部',
+                labelEn: 'Room307Table',
+                prompt: `桌面近景，307 客厅里老旧木桌或茶几局部，杯底印、半包纸巾、入住手册等生活残留散在表面，落一层极薄灰；光线冷、平、无主灯，只允许窗外冷灰环境光；画面要空、冷、干，像生活被中断后留下的平面证据；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'room_307_door_direction.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '307朝门口方向构图',
+                labelEn: 'Room307DoorDirection',
+                prompt: `室内中广角，从307客厅中段朝玄关和门口方向看，门外冷白走廊光切入地面形成长条光斑，室内本体保持冷灰暗部；画面需要清楚交代人物未来看向门口或同时望向门外的轴线关系；木桌或智能音箱可在前景边缘轻带，不抢主体；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'room_307_door.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '307房门内侧',
+                labelEn: 'Room307Door',
+                prompt: `307 房门内侧近景，老旧铁门、门框、锁舌和门牌反向关系清楚，门面有使用磨损、划痕和旧漆面；光线来自门外走廊冷白光和室内极弱反射，真实、克制；构图服务于关门、开门、门槛站位和门锁触发监控的镜头；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'fire_stair_door.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '消防铁门近景',
+                labelEn: 'FireStairDoor',
+                prompt: `老式公寓消防铁门近景，门轴、把手、边框和门缝冷白光关系清楚，铁门有旧漆、碰撞痕迹和轻微锈迹；门内是更冷、更空的楼梯间光，门外仍保留公寓层的压抑感；必须像真实高层消防通道，不要现代商场感；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'fire_stair_top.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '楼梯顶部俯拍位',
+                labelEn: 'FireStairTop',
+            prompt: `高层公寓消防楼梯从顶部俯拍的空间结构图，能看清楼梯折返、平台、扶手和声控灯逐级分布，空间狭长、冷、回声感强；灯光只允许现实存在的冷白顶灯，一段亮一段暗；这是路径和压迫感视角，不要人物出镜；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'fire_stair_mid.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '楼梯转角背影位',
+                labelEn: 'FireStairMid',
+                prompt: `消防楼梯中段转角处的背影构图参考，机位停在楼梯转角平台，能看见上一段和下一段楼梯的连接关系；空间冷白、旧、安静，扶手和墙面质感真实；画面要服务“一个人落后半步跟着另一个人”的背影调度，不需要人物出镜；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'floor29_door.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '二十九楼安全门近景',
+                labelEn: 'Floor29Door',
+                prompt: `二十九楼安全门近景，门体、门框、闭门器和门外惨白冷光关系清楚；门内仍是消防楼梯的冷白光，门外是更冷、更平、更不像住宅层的楼面光；整体要让人一眼觉得这是进入异常区域的阈值；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'device_room_door_crack.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '设备间虚掩门缝',
+                labelEn: 'DeviceRoomDoorCrack',
+                prompt: `二十九楼设备间虚掩门缝近景，门缝里漏出更冷、更青的设备间光，门内有轻微设备嗡鸣感；门板、门把手、缝隙宽度和门外走廊冷白光关系要真实，不夸张；这是一条会把人吸过去的门缝，不是恐怖片鬼门；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'device_to_terrace_door.png',
+                category: 'location',
+                tier: 'P2 补充',
+                labelZh: '设备间朝露台方向构图',
+                labelEn: 'DeviceToTerraceDoor',
+                prompt: `从设备间内部朝露台铁门方向看的中广角构图，前景可轻带设备间边缘、机柜或桌角，远处是露台铁门和更冷的方向性环境光；空间关系必须清楚，让观众能理解人物为什么会被那边吸过去；整体仍然是现实工业感，不要科幻通道感；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'zhou_yan_phone.png',
+                category: 'prop',
+                tier: 'P3 细节',
+                labelZh: '周妍手机聊天界面',
+                labelEn: 'ZhouYanPhone',
+                prompt: `手机屏幕界面特写，真实中国常见聊天软件界面风格，不出现品牌 logo；聊天对象备注为“林晚”，对话框刚弹出一条新语音，界面克制、简洁、可信，不做赛博 UI；机身边缘可见旧手机壳边角，轻微开裂且花纹清楚，需与 WhitePhoneCall 道具保持同款花纹；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'zhou_yan_phone_case_cue.png',
+                category: 'prop',
+                tier: 'P3 细节',
+                labelZh: '周妍手机壳边角导线',
+                labelEn: 'ZhouYanPhoneCaseCue',
+                prompt: `手机边角特写，只拍周妍手中手机的壳边角局部：旧、轻微开裂、低饱和花纹清楚，不拍品牌，不拍完整屏幕。该花纹必须可在后续露台白色手机上对应识别为同款关系线索。光线冷白克制，背景可轻带307暗部，不出现额外关系道具；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'lin_shen_hand.png',
+                category: 'character',
+                tier: 'P3 细节',
+                labelZh: '林深手部局部',
+                labelEn: 'LinShenHand',
+                prompt: `人物局部特写，只拍中国男性的手部和一小段手腕，手指骨感明显，肤色偏白偏黄，指节和青筋真实可见，右手无名指轻微向内弯，指甲短、无修饰；光线冷白克制，背景可虚化为书房桌面或307暗部；这只手要服务拖拽波形、按键、触碰音箱等近景动作；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'study_paper.png',
+                category: 'prop',
+                tier: 'P3 细节',
+                labelZh: '书桌纸面关键词提示',
+                labelEn: 'StudyPaper',
+                prompt: `桌面纸面特写，一张普通白纸放在旧书桌上，黑色中性笔手写“307”“访问权限”“声纹阈值”等零散字样，其中部分字被重重划掉，旁边可见笔帽或笔尖痕迹；光线只来自桌面台灯暖白光和极弱冷色环境光，纸张纤维和划痕清晰；整体像临时工作笔记，不像工整线索卡；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'zhou_yan_phone_gallery.png',
+                category: 'prop',
+                tier: 'P3 细节',
+                labelZh: '周妍手机相册边角',
+                labelEn: 'ZhouYanPhoneGallery',
+                prompt: `手机屏幕局部近景，真实相册界面边角露出几张早前偷拍的普通机房或设备间照片缩略图，缩略图内容偏冷色、普通、没有强戏剧感；界面必须像真实手机相册，不出现品牌 logo，不出现夸张拼贴排版；它的任务是让“以前偷拍过的只是普通机房”这个信息成立；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+            },
+            {
+                filename: 'LinWanVoice',
+                category: 'reference',
+                tier: '声音参考',
+                referenceOnly: true,
+                labelZh: '林晚声音参考',
+                labelEn: 'LinWanVoice',
+                prompt: `声音节点参考，不建议单独生成静态图片。建议直接在 Seedance 或音频节点里锁定同一条声线：女性、二十多岁、虚弱但清醒、气息偏轻、尾音不飘、带一点长期压抑后的干涩感。若必须做视觉占位，可临时复用 study_screen_waveform.png 或 device_screen_popup.png，避免额外生成一张无实际价值的人像或波形图。`
+            }
+        ];
+
+        const assets = [...mainAssets, ...supplementalAssets].map(asset => ({
+            ...asset,
+            tier: asset.tier || 'Main 主资产',
+            status: asset.referenceOnly ? 'reference' : (existingFiles.has(asset.filename) ? 'generated' : 'missing'),
+            imagePath: asset.referenceOnly ? '' : `../assets/zhengci-zhiwai/${asset.filename}`
+        }));
+
+        const categoryOrder = ['character', 'location', 'prop', 'reference'];
+
+        const categoryMeta = {
+            character: { title: '🎭 角色 Characters', className: 'cat-character', label: 'Character', ratio: 'ratio-character' },
+            location: { title: '🏠 场地 Locations', className: 'cat-location', label: 'Location', ratio: 'ratio-location' },
+            prop: { title: '🎬 道具 Props', className: 'cat-prop', label: 'Prop', ratio: 'ratio-prop' },
+            reference: { title: '🎙️ 参考 Reference', className: 'cat-reference', label: 'Reference', ratio: 'ratio-reference' }
+        };
+
+        function getStatusBadge(status) {
+            if (status === 'generated') return '✅ 已生成';
+            if (status === 'flagged') return '⚠️ 待复核';
+            if (status === 'reference') return '🎙️ 参考';
+            return '⬜ 待生成';
+        }
+
+        function renderSections(filter = 'all') {
+            const root = document.getElementById('sections-root');
+            root.innerHTML = '';
+
+            categoryOrder.forEach(category => {
+                if (filter !== 'all' && filter !== category) {
+                    return;
+                }
+
+                const section = document.createElement('section');
+                section.className = 'section';
+
+                const header = document.createElement('div');
+                header.className = 'section-header';
+                header.textContent = categoryMeta[category].title;
+                section.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'card-grid';
+
+                assets.filter(asset => asset.category === category).forEach(asset => {
+                    const card = document.createElement('article');
+                    card.className = `card status-${asset.status}`;
+
+                    const imageWrap = document.createElement('div');
+                    imageWrap.className = `card-image ${categoryMeta[category].ratio}`;
+
+                    if (asset.status === 'generated') {
+                        const img = document.createElement('img');
+                        img.src = asset.imagePath;
+                        img.alt = asset.filename;
+                        imageWrap.appendChild(img);
+                    } else {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder';
+                        placeholder.textContent = asset.status === 'reference' ? '声音参考' : '待生成';
+                        imageWrap.appendChild(placeholder);
+                    }
+
+                    const badge = document.createElement('span');
+                    badge.className = 'status-badge';
+                    badge.textContent = getStatusBadge(asset.status);
+                    imageWrap.appendChild(badge);
+
+                    const body = document.createElement('div');
+                    body.className = 'card-body';
+
+                    const metaRow = document.createElement('div');
+                    metaRow.className = 'card-meta-row';
+
+                    const categoryBadge = document.createElement('span');
+                    categoryBadge.className = `card-category ${categoryMeta[category].className}`;
+                    categoryBadge.textContent = categoryMeta[category].label;
+                    metaRow.appendChild(categoryBadge);
+
+                    const tierBadge = document.createElement('span');
+                    tierBadge.className = 'tier-badge';
+                    tierBadge.textContent = asset.tier;
+                    metaRow.appendChild(tierBadge);
+
+                    body.appendChild(metaRow);
+
+                    const name = document.createElement('div');
+                    name.className = 'card-name';
+                    name.textContent = `${asset.labelZh} / ${asset.labelEn}`;
+                    body.appendChild(name);
+
+                    const file = document.createElement('div');
+                    file.className = 'card-file';
+                    file.textContent = asset.filename;
+                    body.appendChild(file);
+
+                    const toggle = document.createElement('div');
+                    toggle.className = 'prompt-toggle';
+                    toggle.textContent = '展开提示词 ▼';
+                    body.appendChild(toggle);
+
+                    const prompt = document.createElement('div');
+                    prompt.className = 'prompt-text';
+                    prompt.textContent = asset.prompt;
+                    body.appendChild(prompt);
+
+                    toggle.addEventListener('click', () => {
+                        const visible = prompt.classList.toggle('visible');
+                        toggle.textContent = visible ? '收起提示词 ▲' : '展开提示词 ▼';
+                    });
+
+                    card.appendChild(imageWrap);
+                    card.appendChild(body);
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                root.appendChild(section);
+            });
+        }
+
+        function updateProgress() {
+            const visualAssets = assets.filter(asset => asset.status !== 'reference');
+            const generated = visualAssets.filter(asset => asset.status === 'generated').length;
+            const total = visualAssets.length;
             const text = document.getElementById('progress-text');
             const fill = document.getElementById('progress-fill');
-            if (text) text.textContent = `${generated} / ${total} 已生成`;
-            if (fill) fill.style.width = `${total ? (generated / total) * 100 : 0}%`;
+            text.textContent = `${generated} / ${total} 已生成`;
+            fill.style.width = `${(generated / total) * 100}%`;
         }
 
-        // ── Tab filtering ──────────────────────────────
-        function filterCards(cat, btn) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            btn.classList.add('active');
-            const allSections = ['character', 'location', 'prop'];
-            allSections.forEach(s => {
-                const header = document.getElementById('section-' + s);
-                const grid = document.getElementById('grid-' + s);
-                const show = (cat === 'all' || cat === s);
-                if (header) header.style.display = show ? '' : 'none';
-                if (grid) grid.style.display = show ? '' : 'none';
-            });
-        }
-
-        // ── Prompt toggle ──────────────────────────────
-        function togglePrompt(toggle) {
-            toggle.classList.toggle('open');
-            toggle.nextElementSibling.classList.toggle('visible');
-        }
-
-        // ── Matrix: click to toggle cell ───────────────
-        function toggleMx(cell) {
-            cell.classList.toggle('checked');
-            cell.textContent = cell.classList.contains('checked') ? '✓' : '';
-            updateMatrixTotals();
-        }
-
-        function updateMatrixTotals() {
-            const tbody = document.getElementById('matrix-body');
-            const rows = tbody.querySelectorAll('tr[data-asset]');
-
-            // Row counts
-            rows.forEach(row => {
-                const checked = row.querySelectorAll('.mx-cell.checked').length;
-                const countCell = row.querySelector('.mx-count');
-                countCell.textContent = checked;
-                countCell.classList.toggle('has-count', checked > 0);
-            });
-
-            // Column counts (scenes 0-6)
-            for (let s = 0; s < 7; s++) {
-                const colIdx = s + 2; // 1=asset col, 2..8=scene cols
-                let count = 0;
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('.mx-cell');
-                    if (cells[s] && cells[s].classList.contains('checked')) count++;
+        function bindTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderSections(tab.dataset.filter);
                 });
-                const totalCell = document.getElementById('st-' + s);
-                if (totalCell) {
-                    totalCell.textContent = count;
-                    totalCell.style.color = count > 0 ? 'var(--status-generated)' : 'var(--text-muted)';
-                }
-            }
+            });
         }
 
-        // ── Card drag: update matrix row emoji when image available ──
         document.addEventListener('DOMContentLoaded', () => {
-            updateCardProgress();
-            updateMatrixTotals();
-            document.querySelectorAll('.card').forEach(card => {
-                card.setAttribute('draggable', 'true');
-                card.style.cursor = 'grab';
-                card.addEventListener('dragstart', e => {
-                    card.classList.add('dragging');
-                });
-                card.addEventListener('dragend', () => {
-                    card.classList.remove('dragging');
-                });
-            });
+            updateProgress();
+            bindTabs();
+            renderSections('all');
         });
     </script>
 </body>

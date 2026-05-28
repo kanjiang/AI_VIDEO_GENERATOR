@@ -1,5 +1,6 @@
 import { importProjectFromWorkspace } from "@/server/importers/project";
 import { DEFAULT_VIDEO_PROVIDER_NAME, assertVideoProviderAvailable, getVideoProvider } from "@/server/providers/video/registry";
+import type { VideoProviderSubmitPayload } from "@/server/providers/video/types";
 import { assemblePromptBundle } from "@/server/prompts/assembler";
 import { getDatabase } from "@/server/storage/sqlite";
 import { persistTaskResultManifest } from "@/server/storage/task-results";
@@ -96,6 +97,28 @@ async function buildProviderSubmitPayload(
         }
       : null,
   };
+}
+
+export async function buildProjectSubmitPayloadPreviews(rootPath: string, slug: string, shotIds?: string[]) {
+  const project = await importProjectFromWorkspace(rootPath, slug);
+  const resolvedShotIds = Array.from(
+    new Set(shotIds?.length ? shotIds : project.data.generationItems.map((item) => item.shotNo).concat(project.data.shots.map((item) => item.shotNo))),
+  ).sort();
+
+  const previews = await Promise.all(
+    resolvedShotIds.map(async (shotId) => {
+      const taskId = `preview_${slug}_${shotId}_http_generic`;
+      const payload = (await buildProviderSubmitPayload(rootPath, project, slug, taskId, shotId)) as VideoProviderSubmitPayload;
+
+      return {
+        taskId,
+        shotId,
+        payload,
+      };
+    }),
+  );
+
+  return previews;
 }
 
 export async function ensureProjectTaskSeed(rootPath: string, slug: string) {

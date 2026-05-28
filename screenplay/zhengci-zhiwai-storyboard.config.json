@@ -1,0 +1,56 @@
+{
+    "fallbackAssets": {
+        "StudyScreen": {
+            "alias": "StudyScreen",
+            "fileName": "study_screen_waveform.png",
+            "description": "兼容别名，映射到 StudyScreenWaveform",
+            "canonicalAlias": "StudyScreenWaveform"
+        },
+        "SmartSpeakerGreen": {
+            "alias": "SmartSpeakerGreen",
+            "fileName": "smart_speaker_unlocked.png",
+            "description": "兼容别名，映射到 SmartSpeakerUnlocked",
+            "canonicalAlias": "SmartSpeakerUnlocked"
+        },
+        "FireStairWide": {
+            "alias": "FireStairWide",
+            "fileName": "fire_stair_wide.png",
+            "description": "消防楼梯间全景"
+        },
+        "FireStairDoor": {
+            "alias": "FireStairDoor",
+            "fileName": "fire_stair_door.png",
+            "description": "消防铁门近景"
+        },
+        "FireStairTop": {
+            "alias": "FireStairTop",
+            "fileName": "fire_stair_top.png",
+            "description": "楼梯顶部俯拍位"
+        },
+        "FireStairMid": {
+            "alias": "FireStairMid",
+            "fileName": "fire_stair_mid.png",
+            "description": "楼梯转角背影位"
+        },
+        "Floor29Door": {
+            "alias": "Floor29Door",
+            "fileName": "floor29_door.png",
+            "description": "二十九楼安全门近景"
+        },
+        "Room307HalfMoved": {
+            "alias": "Room307HalfMoved",
+            "fileName": "room_307_half_moved.png",
+            "description": "半搬空307全景"
+        },
+        "Room307Table": {
+            "alias": "Room307Table",
+            "fileName": "room_307_table.png",
+            "description": "307桌面局部"
+        },
+        "Room307Door": {
+            "alias": "Room307Door",
+            "fileName": "room_307_door.png",
+            "description": "307房门内侧"
+        }
+    }
+}

@@ -27,6 +27,14 @@ type HttpGenericConfigStatus = {
   notes: string[];
 };
 
+export type HttpGenericSubmitBodyPreview = {
+  submitUrl: string | null;
+  mode: HttpGenericSubmitBodyMode;
+  templateConfigured: boolean;
+  requestBody: unknown | null;
+  error: string | null;
+};
+
 function normalizeSubmitBodyMode(value: string | undefined): HttpGenericSubmitBodyMode {
   return value?.trim().toLowerCase() === "template" ? "template" : "raw";
 }
@@ -174,6 +182,31 @@ export function getHttpGenericConfigStatus(): HttpGenericConfigStatus {
       config.resultUrlTemplate ? `结果抓取模板已配置：${config.resultUrlTemplate}` : "未配置 VIDEO_HTTP_GENERIC_RESULT_URL_TEMPLATE 时，无法抓取远端输出结果。",
     ],
   };
+}
+
+export function previewHttpGenericSubmitBody(input: VideoProviderSubmitInput): HttpGenericSubmitBodyPreview {
+  const config = getHttpGenericConfig();
+
+  try {
+    return {
+      submitUrl: config.submitUrl,
+      mode: config.submitBodyMode,
+      templateConfigured: Boolean(config.submitBodyTemplate),
+      requestBody: mapHttpGenericSubmitBody(input, {
+        mode: config.submitBodyMode,
+        template: config.submitBodyTemplate,
+      }),
+      error: null,
+    };
+  } catch (error) {
+    return {
+      submitUrl: config.submitUrl,
+      mode: config.submitBodyMode,
+      templateConfigured: Boolean(config.submitBodyTemplate),
+      requestBody: null,
+      error: error instanceof Error ? error.message : "请求体映射失败",
+    };
+  }
 }
 
 function buildTemplatedUrl(
