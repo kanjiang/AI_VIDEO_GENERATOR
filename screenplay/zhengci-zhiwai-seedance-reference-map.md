@@ -27,10 +27,10 @@
 | Room307Entry | room_307_entry.png | 307 入口视角 |
 | Room307DoorDirection | room_307_door_direction.png | 307 朝门口方向构图 |
 | Room307PowerBox | room_307_power_box.png | 307 弱电箱绿灯 |
-| SmartSpeakerBlue | smart_speaker_blue.png | 307 音箱待机蓝灯 |
-| SmartSpeakerRed | smart_speaker_red.png | 307 音箱口令输入前红灯 |
-| SmartSpeakerRedGreen | smart_speaker_red_green.png | 307 音箱红绿转绿 |
-| SmartSpeakerUnlocked | smart_speaker_unlocked.png | 307 音箱解锁后 |
+| SmartSpeakerBlue | smart_speaker_blue.png | 307 音箱待机蓝灯（触摸屏熄灭） |
+| SmartSpeakerRed | smart_speaker_red.png | 307 音箱口令输入前红灯（触摸屏亮起数字口令界面） |
+| SmartSpeakerRedGreen | smart_speaker_red_green.png | 307 音箱红绿转绿（触摸屏显示口令校验中） |
+| SmartSpeakerUnlocked | smart_speaker_unlocked.png | 307 音箱解锁后（触摸屏显示解锁状态） |
 | ZhouYanPhone | zhou_yan_phone.png | 周妍手机聊天界面 |
 | ZhouYanPhoneCaseCue | zhou_yan_phone_case_cue.png | 周妍手机壳边角导线 |
 | Floor29Wide | floor29_wide.png | 二十九楼走廊 |

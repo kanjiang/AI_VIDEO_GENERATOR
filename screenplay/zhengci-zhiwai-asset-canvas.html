@@ -385,13 +385,6 @@
     </div>
 
     <script>
-        const existingFiles = new Set([
-            'lin_shen.png',
-            'chen_bo.png',
-            'room_307_entry.png',
-            'room_307_reverse.png'
-        ]);
-
         const mainAssets = [
             {
                 filename: 'lin_shen.png',
@@ -440,14 +433,14 @@
                 category: 'location',
                 labelZh: '307室入口视角',
                 labelEn: 'Room 307 Entry View',
-                prompt: `室内广角全景，从玄关站立视角往 307 客厅方向看；这是半搬空、刚被放弃不久的老公寓客厅，约 15 平米，木地板积灰，墙面留有搬走家具后的浅色印记；客厅中央偏前是一张老旧木桌，桌上放一只小型智能音箱，体积约 15 厘米见方，状态熄灭，外观是普通家用旧款设备，不带专业录音棚气质；左侧靠墙有塌陷旧沙发，右侧中段是一扇紧闭卧室门，玄关侧墙有老旧弱电箱；窗边透入冷灰夜光，房内没有主灯，只有很弱环境反射；整体要显得停摆、冷、像被突然遗弃；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止极简样板间，禁止把客厅拍成正常温馨居住状态。比例 16:9`
+                prompt: `室内广角全景，从玄关站立视角往 307 客厅方向看；这是半搬空、刚被放弃不久的老公寓客厅，约 15 平米，木地板积灰，墙面留有搬走家具后的浅色印记；客厅中央偏前是一张老旧木桌，桌上放一只大个智能音箱，机身高度约 25-30 厘米，状态熄灭，外观是普通家用旧款设备，机身正面带大尺寸触摸屏（熄屏状态），可用于后续数字口令输入，不带专业录音棚气质；左侧靠墙有塌陷旧沙发，右侧中段是一扇紧闭卧室门，玄关侧墙有老旧弱电箱；窗边透入冷灰夜光，房内没有主灯，只有很弱环境反射；整体要显得停摆、冷、像被突然遗弃；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止极简样板间，禁止把客厅拍成正常温馨居住状态。比例 16:9`
             },
             {
                 filename: 'room_307_reverse.png',
                 category: 'location',
                 labelZh: '307室反角视角',
                 labelEn: 'Room 307 Reverse View',
-                prompt: `室内广角，从客厅靠窗一侧回看 307 玄关和大门；左前景可带到木桌一角和桌上的小型智能音箱轮廓，正前方是玄关和半开的铁门，门外走廊冷白灯在地面形成一条长光斑；玄关右侧墙面可见一个老旧弱电箱，绿灯微亮，作为房内仍有弱电供电的证据；天花板边缘可非常轻地带到一个普通老式播音孔，但不能夸张；整体前方冷白、后方冷灰，中间暗部压住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止现代摄影棚质感。比例 16:9`
+                prompt: `室内广角，从客厅靠窗一侧回看 307 玄关和大门；左前景可带到木桌一角和桌上的大个智能音箱轮廓，音箱正面大尺寸触摸屏位置需可辨识（可熄屏），正前方是玄关和半开的铁门，门外走廊冷白灯在地面形成一条长光斑；玄关右侧墙面可见一个老旧弱电箱，绿灯微亮，作为房内仍有弱电供电的证据；天花板边缘可非常轻地带到一个普通老式播音孔，但不能夸张；整体前方冷白、后方冷灰，中间暗部压住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止现代摄影棚质感。比例 16:9`
             },
             {
                 filename: 'fire_stair_wide.png',
@@ -489,14 +482,14 @@
                 category: 'prop',
                 labelZh: '307智能音箱待机',
                 labelEn: 'Smart Speaker Idle',
-                prompt: `道具特写，纯黑背景或极暗旧木桌背景，一只小型老款智能音箱，深灰或磨旧黑色外壳，体积约 15 厘米见方，不是圆筒型蓝牙音箱，也不是任何专业音频设备；顶部一圈极弱蓝色待机灯微亮，机身有轻微灰尘和使用磨损；设计普通、家用、旧款，不能高科技炫目；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止多余道具。比例 16:9`
+                prompt: `道具特写，纯黑背景或极暗旧木桌背景，一只老款智能音箱，深灰或磨旧黑色外壳，机身高度约 25-30 厘米，不是圆筒型蓝牙音箱，也不是任何专业音频设备；顶部一圈极弱蓝色待机灯微亮，机身正面必须有大尺寸触摸屏（待机时熄屏），用于后续数字口令输入，机身有轻微灰尘和使用磨损；设计普通、家用、旧款，不能高科技炫目；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止多余道具。比例 16:9`
             },
             {
                 filename: 'smart_speaker_unlocked.png',
                 category: 'prop',
                 labelZh: '307智能音箱解锁后',
                 labelEn: 'Smart Speaker Unlocked',
-                prompt: `道具特写，纯黑背景或极暗旧木桌背景，与 smart_speaker_idle.png 同一台家用旧款智能音箱，外观一致；顶部指示灯由蓝转为稳定绿色，表示已解锁并进入播放前状态，机身侧边有轻微灰尘和旧划痕；整体仍旧低调真实，不是未来感设备；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止额外界面悬浮。比例 16:9`
+                prompt: `道具特写，纯黑背景或极暗旧木桌背景，与 smart_speaker_idle.png 同一台家用旧款智能音箱，外观一致；顶部指示灯由蓝转为稳定绿色，表示已解锁并进入播放前状态，机身正面大尺寸触摸屏可见“解锁成功”或空白待播放界面，机身侧边有轻微灰尘和旧划痕；整体仍旧低调真实，不是未来感设备；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止额外界面悬浮。比例 16:9`
             },
             {
                 filename: 'wall_speaker_red.png',
@@ -558,7 +551,7 @@
                 tier: 'P1 补充',
                 labelZh: '智能音箱待机蓝灯',
                 labelEn: 'SmartSpeakerBlue',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，深灰或磨旧黑色外壳，体积约 15 厘米见方，机身落灰；顶部一圈蓝色待机灯以固定频率轻微闪烁，不刺眼、不高科技；背景为极暗旧木桌或307阴暗角落；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，深灰或磨旧黑色外壳，机身高度约 25-30 厘米，机身落灰；顶部一圈蓝色待机灯以固定频率轻微闪烁，不刺眼、不高科技；机身正面必须有大尺寸触摸屏（待机时熄屏），用于后续数字口令输入，不得缺失；背景为极暗旧木桌或307阴暗角落；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
             },
             {
                 filename: 'smart_speaker_red.png',
@@ -566,7 +559,7 @@
                 tier: 'P1 补充',
                 labelZh: '智能音箱口令输入前红灯',
                 labelEn: 'SmartSpeakerRed',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯变为稳定暗红色，像进入口令输入或待确认状态，红光不能过亮，不能有未来感界面；背景为极暗旧木桌或307房间暗部；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止悬浮界面。比例 16:9`
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯变为稳定暗红色，像进入口令输入或待确认状态，红光不能过亮；机身正面大尺寸触摸屏亮起密码输入界面（简洁数字输入框），不做未来感 UI；背景为极暗旧木桌或307房间暗部；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止悬浮界面。比例 16:9`
             },
             {
                 filename: 'smart_speaker_red_green.png',
@@ -574,7 +567,7 @@
                 tier: 'P1 补充',
                 labelZh: '智能音箱红绿闪烁转绿',
                 labelEn: 'SmartSpeakerRedGreen',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯处于红绿交替闪烁将要转为纯绿的过渡状态，光感必须老旧、延迟、朴素，不要做成炫技科技特效；背景极暗，重点只落在指示灯状态变化；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
+                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯处于红绿交替闪烁将要转为纯绿的过渡状态，光感必须老旧、延迟、朴素，不要做成炫技科技特效；机身正面大尺寸触摸屏应显示“口令校验中”或数字输入进度样式（简洁、非科幻 UI），明确这是可输入数字口令的设备；背景极暗，重点只落在指示灯状态变化；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
             },
             {
                 filename: 'device_screen_files.png',
@@ -734,7 +727,7 @@
         const assets = [...mainAssets, ...supplementalAssets].map(asset => ({
             ...asset,
             tier: asset.tier || 'Main 主资产',
-            status: asset.referenceOnly ? 'reference' : (existingFiles.has(asset.filename) ? 'generated' : 'missing'),
+            status: asset.referenceOnly ? 'reference' : 'missing',
             imagePath: asset.referenceOnly ? '' : `../assets/zhengci-zhiwai/${asset.filename}`
         }));
 
@@ -752,6 +745,30 @@
             if (status === 'flagged') return '⚠️ 待复核';
             if (status === 'reference') return '🎙️ 参考';
             return '⬜ 待生成';
+        }
+
+        function probeImage(path) {
+            return new Promise(resolve => {
+                const img = new Image();
+
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+
+                img.src = path;
+            });
+        }
+
+        async function refreshAssetStatusByFiles() {
+            const checks = assets.map(async asset => {
+                if (asset.referenceOnly) {
+                    return;
+                }
+
+                const exists = await probeImage(asset.imagePath);
+                asset.status = exists ? 'generated' : 'missing';
+            });
+
+            await Promise.all(checks);
         }
 
         function renderSections(filter = 'all') {
@@ -872,7 +889,8 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            await refreshAssetStatusByFiles();
             updateProgress();
             bindTabs();
             renderSections('all');

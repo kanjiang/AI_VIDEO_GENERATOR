@@ -43,8 +43,8 @@
 | 11 | device_room_wide.png | 场地 | 设备间全景 |
 | 12 | terrace_wide.png | 场地 | 露台全景 |
 | 13 | study_screen_waveform.png | 道具/UI | 开场与闪回音频编辑界面 |
-| 14 | smart_speaker_idle.png | 道具 | 307 智能音箱待机 |
-| 15 | smart_speaker_unlocked.png | 道具 | 307 智能音箱解锁后 |
+| 14 | smart_speaker_idle.png | 道具 | 307 智能音箱待机（触摸屏熄灭） |
+| 15 | smart_speaker_unlocked.png | 道具 | 307 智能音箱解锁后（触摸屏显示解锁状态） |
 | 16 | wall_speaker_red.png | 道具 | 设备间墙面音箱红灯 |
 | 17 | ceiling_speaker.png | 道具 | 天花板广播音箱 |
 | 18 | device_screen_popup.png | 道具/UI | “林晚 语音复刻模型——生成完成” |
@@ -56,9 +56,9 @@
 第一优先：一旦测试包失败就立刻补
 - StudyDeskWide：书房桌面与电脑、台灯、林深坐姿的组合构图，用于 001、005
 - Room307PowerBox：307 玄关弱电箱绿灯近景，用于 008
-- SmartSpeakerBlue：307 智能音箱待机蓝灯状态，用于 009
-- SmartSpeakerRed：307 智能音箱进入口令输入前的红灯状态，用于 018
-- SmartSpeakerRedGreen：307 智能音箱红绿闪烁转绿状态，用于 021
+- SmartSpeakerBlue：307 智能音箱待机蓝灯状态（触摸屏熄灭可见），用于 009
+- SmartSpeakerRed：307 智能音箱进入口令输入前的红灯状态（触摸屏亮起数字口令界面），用于 018
+- SmartSpeakerRedGreen：307 智能音箱红绿闪烁转绿状态（触摸屏显示口令校验中），用于 021
 - DeviceScreenFiles：设备间文件列表界面，用于 038
 - WhitePhoneCallBroken：露台白色手机摔裂后仍漏声的状态，用于 064-066
 - RailingJointClose：露台护栏连接处近景，用于 056
@@ -168,7 +168,7 @@
 ### 批次 B：第一幕下半（014-025）
 源文件：screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
 内容：林深赶到、保全语音、数字口令解锁、指向二十九楼设备间
-目的：锁定林深前期好人姿态与“在音箱输入屏输入双段口令且后半截被遮挡”的私密性
+目的：锁定林深前期好人姿态与“在音箱触摸屏输入双段口令且后半截被遮挡”的私密性
 
 ### 批次 C：第二幕上半（026-035）
 源文件：screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
@@ -228,7 +228,7 @@
 - 林晚终场必须是“还活着但被持续采样”，不是尸体感
 
 ### 道具一致性
-- 307 智能音箱分待机蓝灯与解锁绿灯两种状态
+- 307 智能音箱分待机蓝灯（触摸屏熄灭）、口令输入红灯（触摸屏亮起）、解锁绿灯（触摸屏显示解锁）三种状态
 - 设备间弹窗文案固定为“林晚 语音复刻模型——生成完成”
 - 露台白色手机始终是通话诱导声源，不要变成录像界面
 - 硬盘柜与控制界面必须统一成真实工业软件感
