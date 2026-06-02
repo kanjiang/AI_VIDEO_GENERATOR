@@ -162,8 +162,12 @@ Core requirements for this mode:
 
 - one artistic 16:9 character identity board
 - use the reference image as the primary subject source
-- emphasize identity, silhouette, costume logic, props, and emotional aura
-- cinematic layout, but not a storyboard grid
+- pure white or soft off-white background only
+- no environment, no props used as scene dressing, no logos, no watermarks
+- cinematic art-book layout, not a storyboard grid or reference-sheet chart
+- asymmetrical composition with large breathing space and clean separation between all figure studies
+- strict identity lock across all views: same face, hair, costume, body proportions, pose language, and visual personality
+- include a hero full-body anchor plus smaller clean supporting studies and detail zones
 - allow a more polished presentation than the rough storyboard mode unless the user asks for sketch treatment
 
 Preferred Chinese output shape:
@@ -175,24 +179,36 @@ Preferred Chinese output shape:
 
 [主体]：使用参考图像。
 
-[身份定位]：明确角色的职业、阶层、处境、气质与核心矛盾。
+[背景]：纯白色或柔和的米白色背景。无环境、无道具、无标志、无水印。
 
-[造型要求]：强调服装层次、轮廓特征、材质关系、道具识别点、姿态控制与面部神情。
+[设计方向]：不要创建标准的角色参考表。创建一张电影般的身份板，感觉像是高端动画工作室的角色研究与艺术书布局的结合。布局应不对称、优雅且视觉上令人难忘，使用大片留白、多样化的图像比例和有意的不平衡。避免网格、蓝图设计、目录布局和重复的转场展示。
 
-[画面设计]：以电影化方式组织主体、留白、局部特写、小型辅助元素、版面节奏与视觉焦点，使整张身份板既有展示感，也有角色叙事含义。
+[重要布局规则]：不要重叠任何角色图像。每个视角必须有清晰的分离和呼吸空间。保持所有身体、肖像、轮廓和细节研究的视觉区分。无裁剪面部、无隐藏肢体、无堆叠人物、无合并姿势。
 
-[氛围与灯光]：说明色调倾向、光线方向、空间气压、情绪温度与视觉质感。
+[主要构图]：放置一个大型英雄全身视角，略微偏离中心作为视觉锚点。围绕它，以干净的间距排列较小的辅助研究：中性全身视角、背面视角、侧面视角、坐姿、倾斜姿势、蹲姿、俯视身体角度、仰视身体角度、富有表现力的肖像研究。每个视角都应像一个独立、干净的角色研究，而不是来自一个场景的帧。
 
-[附加信息]：可加入关键词标签、简短批注、材质说明、身份标签或世界观提示，但不要把画面做成信息过载的海报排版。
+[身份锁定]：在所有视角中保持严格的身份一致性：相同面部、相同面部比例、相同发型、相同服装、相同身体比例、相同姿势语言、相同视觉个性。
+
+[有用参考细节]：为了服务未来的图像和视频生成，必须明确呈现清晰的面部形状、清晰的发型轮廓、清晰的服装轮廓、清晰的身体形状、清晰的手部、清晰的姿势和清晰的表情范围。
+
+[艺术性部分]：包含一个小轮廓研究区域，带有 2-3 个简化的黑色角色轮廓；包含一个小表情研究区域，带有细微的情感变化；包含一个小细节研究区域，展示面部、头发和服装的关键视觉特征。
+
+[文本设计]：添加一个时尚的角色 ID 块，保持简约、大胆且艺术导向。仅使用：名称、角色、核心情绪、视觉标志。仅在有帮助的地方使用小型手写风格标签。允许使用细微的编辑箭头和标注标记，但保持简约和优雅。
+
+[风格]：简约、电影感、高端、艺术书般、干净、富有表现力、适用于制作。
+
+[最终目标]：最终图像应感觉像一张艺术性的角色身份板，旨在帮助 AI 模型理解角色的面部、轮廓、服装、姿势和情感范围。
 ```
 
 Default identity-board guidance:
 
-- the main figure should dominate the composition
-- supporting insets may show hands, props, profile, footwear, or facial tension
-- keep the board cinematic and curated rather than commercial-poster-like
-- preserve the subject's reference-image identity markers
-- prioritize role readability over decorative complexity
+- the large hero full-body figure should act as the visual anchor and sit slightly off-center
+- supporting studies must remain separate, non-overlapping, and clearly breathable
+- do not collapse the board into a model sheet, turnaround chart, storyboard grid, or poster montage
+- preserve the subject's reference-image identity markers in every view without drift
+- keep all faces, limbs, silhouettes, and clothing reads fully visible and uncropped
+- include silhouette studies, expression studies, and detail studies as small dedicated zones
+- prioritize production usefulness for future image/video generation over decorative complexity
 
 If the user gives only a bare identity-board request, do not ask follow-up questions first. Output the locked identity-board scaffold using the supplied subject reference.
 
