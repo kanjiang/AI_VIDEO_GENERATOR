@@ -5,13 +5,15 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/next-dev-no-trace.js",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "build:screenplay": "node screenplay/build_screenplay.js",
     "build:storyboard": "node screenplay/build_storyboard.js",
     "build:storyboard:zzw": "node screenplay/build_storyboard.js zhengci-zhiwai",
+    "preview:static": "node scripts/build-static-preview.js",
+    "preview:static:zzw": "node scripts/build-static-preview.js zhengci-zhiwai",
     "test": "echo \"No tests configured\""
   },
   "dependencies": {

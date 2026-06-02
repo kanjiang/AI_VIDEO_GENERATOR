@@ -1,4 +1,7 @@
 {
+    "promptFiles": [
+        "zhengci-zhiwai-storyboard-prompts.md"
+    ],
     "fallbackAssets": {
         "StudyScreen": {
             "alias": "StudyScreen",

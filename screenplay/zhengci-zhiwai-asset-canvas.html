@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>《证词之外》— Asset Canvas</title>
+    <title>《证词之外》Asset Canvas</title>
     <style>
         :root {
             --bg: #111111;
@@ -14,206 +14,182 @@
             --text-primary: #e5e7eb;
             --text-secondary: #9ca3af;
             --text-muted: #6b7280;
-            --accent: #60a5fa;
             --badge-char: #818cf8;
             --badge-loc: #f472b6;
             --badge-prop: #fb923c;
-            --badge-ref: #22c55e;
             --status-generated: #4ade80;
-            --status-flagged: #f97316;
-            --status-reference: #22c55e;
+            --status-missing: #4b5563;
+            --status-flagged: #f59e0b;
         }
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
-            background: var(--bg);
+            margin: 0;
+            background: radial-gradient(circle at top, #1c1c1c 0%, #111111 48%, #0b0b0b 100%);
             color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
-            padding: 28px 32px 40px;
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            padding: 28px;
+        }
+
+        .wrap {
+            max-width: 1500px;
+            margin: 0 auto;
         }
 
         .header {
-            border-bottom: 1px solid #232323;
-            padding-bottom: 18px;
-            margin-bottom: 18px;
+            border: 1px solid #232323;
+            background: rgba(23, 23, 23, 0.92);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: #ffffff;
+            margin: 0 0 6px;
+            font-size: 28px;
         }
 
         .meta {
-            margin-top: 8px;
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 13px;
+            line-height: 1.6;
         }
 
         .note {
-            margin-top: 8px;
+            margin-top: 12px;
             padding: 10px 12px;
-            border: 1px solid #2b2b2b;
-            border-radius: 8px;
-            background: var(--panel);
-            color: var(--text-muted);
-            font-size: 12px;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            background: #151515;
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
         }
 
-        .progress-section {
-            margin: 18px 0 24px;
+        .progress-panel {
+            margin-top: 16px;
         }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
             gap: 12px;
-            font-size: 12px;
             color: var(--text-secondary);
+            font-size: 13px;
             margin-bottom: 8px;
         }
 
-        .progress-bar {
+        .progress-track {
             width: 100%;
-            height: 8px;
-            background: #202020;
+            height: 10px;
             border-radius: 999px;
+            background: #222222;
+            border: 1px solid #2f2f2f;
             overflow: hidden;
-            border: 1px solid #262626;
         }
 
         .progress-fill {
             height: 100%;
             width: 0;
             background: linear-gradient(90deg, #34d399 0%, #4ade80 100%);
-            transition: width 0.2s ease;
         }
 
-        .tabs {
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tabs,
+        .legend {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 28px;
         }
 
-        .tab {
-            padding: 7px 14px;
+        .tab,
+        .legend-pill {
+            padding: 8px 14px;
             border-radius: 999px;
-            border: 1px solid #333;
+            border: 1px solid #333333;
             background: transparent;
             color: var(--text-secondary);
             font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        .tab:hover {
-            border-color: #4b5563;
-            color: var(--text-primary);
+        .tab {
+            cursor: pointer;
         }
 
         .tab.active {
-            background: #ffffff;
+            background: #f4f4f5;
             color: #111111;
-            border-color: #ffffff;
+            border-color: #f4f4f5;
             font-weight: 600;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
-        .section-header {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
+        .section h2 {
+            font-size: 14px;
             text-transform: uppercase;
-            margin-bottom: 14px;
-            padding-left: 10px;
-            border-left: 3px solid var(--accent);
+            letter-spacing: 0.16em;
+            color: var(--text-muted);
+            margin: 0 0 12px;
         }
 
-        .card-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 14px;
         }
 
-        @media (max-width: 980px) {
-            .card-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 560px) {
-            body {
-                padding: 20px 16px 28px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
-        .card:hover {
-            border-color: #3a3a3a;
-            transform: translateY(-1px);
+        .card.generated {
+            border-color: rgba(74, 222, 128, 0.65);
         }
 
-        .card.status-generated {
-            border-color: var(--status-generated);
+        .card.flagged {
+            border-color: rgba(245, 158, 11, 0.65);
         }
 
-        .card.status-flagged {
-            border-color: var(--status-flagged);
-        }
-
-        .card.status-reference {
-            border-color: var(--status-reference);
-        }
-
-        .card-image {
+        .thumb {
             position: relative;
-            width: 100%;
+            background: #202020;
+            border-bottom: 1px solid #262626;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: #202020;
-            border-bottom: 1px solid #262626;
         }
 
-        .ratio-character {
+        .thumb.character {
             aspect-ratio: 3 / 4;
         }
 
-        .ratio-location {
+        .thumb.location {
             aspect-ratio: 16 / 9;
         }
 
-        .ratio-prop,
-        .ratio-reference {
+        .thumb.prop {
             aspect-ratio: 1 / 1;
         }
 
-        .card-image img {
+        .thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -221,35 +197,31 @@
         }
 
         .placeholder {
-            color: #3f3f46;
-            font-size: 11px;
-            letter-spacing: 0.14em;
+            color: #4b5563;
             text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 11px;
             text-align: center;
-            padding: 0 16px;
+            line-height: 1.7;
+            padding: 0 12px;
         }
 
         .status-badge {
             position: absolute;
             top: 10px;
             right: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 8px;
+            padding: 5px 9px;
             border-radius: 999px;
-            font-size: 11px;
-            line-height: 1;
             background: rgba(0, 0, 0, 0.72);
+            font-size: 11px;
             color: #ffffff;
-            backdrop-filter: blur(4px);
         }
 
         .card-body {
-            padding: 12px 14px 14px;
+            padding: 14px;
         }
 
-        .card-meta-row {
+        .row {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
@@ -257,644 +229,298 @@
             margin-bottom: 8px;
         }
 
-        .card-category {
-            display: inline-block;
-            padding: 3px 8px;
+        .priority {
+            padding: 4px 8px;
             border-radius: 999px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            font-size: 11px;
+            border: 1px solid #333333;
+            color: var(--text-secondary);
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 11px;
             color: #ffffff;
         }
 
-        .tier-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 999px;
-            border: 1px solid #383838;
-            color: var(--text-secondary);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .cat-character {
+        .badge.character {
             background: var(--badge-char);
         }
 
-        .cat-location {
+        .badge.location {
             background: var(--badge-loc);
         }
 
-        .cat-prop {
+        .badge.prop {
             background: var(--badge-prop);
         }
 
-        .cat-reference {
-            background: var(--badge-ref);
+        .card h3 {
+            margin: 0 0 4px;
+            font-size: 18px;
+            line-height: 1.35;
         }
 
-        .card-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-            line-height: 1.3;
-        }
-
-        .card-file {
-            margin-top: 4px;
+        .card .en {
             color: var(--text-secondary);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
             font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .filename {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
             word-break: break-all;
         }
 
-        .prompt-toggle {
-            margin-top: 12px;
-            color: var(--accent);
-            font-size: 12px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .prompt-toggle:hover {
-            color: #93c5fd;
-        }
-
-        .prompt-text {
-            display: none;
+        details {
+            border: 1px solid #2b2b2b;
+            border-radius: 12px;
+            background: #151515;
+            padding: 10px 12px;
             margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed #303030;
-            color: #cbd5e1;
-            font-size: 12px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #dbe3ef;
+            font-size: 13px;
+        }
+
+        .prompt {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 10px;
             white-space: pre-wrap;
         }
 
-        .prompt-text.visible {
-            display: block;
+        .spatial-note {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px dashed #3b3b3b;
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.6;
+            background: #141414;
         }
 
-        .footer {
-            margin-top: 36px;
-            padding-top: 14px;
-            border-top: 1px solid #232323;
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            color: var(--text-muted);
-            font-size: 11px;
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1>《证词之外》— Asset Canvas</h1>
-        <div class="meta">生成时间：2026-05-25 · 全量节点 44 个 · 图像资产 43 张 · 声音参考 1 个 · 主资产 20 张 · 补充资产 24 个</div>
-        <div class="note">本页按当前全量资产重建，主范围与优先级基准来自 zhengci-zhiwai-asset-prompts.md 与
-            zhengci-zhiwai-final-generation-list.md。完成度只统计可生成图像的 43 个资产；LinWanVoice 单独作为声音参考节点展示，不计入图片生成进度。</div>
-    </div>
+    <div class="wrap">
+        <header class="header">
+            <h1>《证词之外》Asset Canvas</h1>
+            <div class="meta">生成日期：2026-06-01 · 当前版本：新版 72 镜重拆 · 主资产 20 张 + 二层补充 10 张</div>
+            <div class="note">当前画布已切到最新剧本口径。旧版“消防楼梯”“陈伯具象身份”“林晚监控终幕”节点已移除。场地空间标注目前仍待补充，后续如需进入 blocking
+                阶段，请在生成好场地图后补录镜头朝向、角色站位与主要光源。</div>
+            <div class="progress-panel">
+                <div class="progress-label">
+                    <span id="progressText">0 / 0 已生成</span>
+                    <span id="missingText">仍缺 0 张</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </header>
 
-    <div class="progress-section">
-        <div class="progress-label">
-            <span>图像资产完成度</span>
-            <span id="progress-text">0 / 43 已生成</span>
+        <div class="toolbar">
+            <div class="tabs">
+                <button class="tab active" data-filter="all">全部</button>
+                <button class="tab" data-filter="character">Characters</button>
+                <button class="tab" data-filter="location">Locations</button>
+                <button class="tab" data-filter="prop">Props</button>
+            </div>
+            <div class="legend">
+                <span class="legend-pill">✅ 已生成</span>
+                <span class="legend-pill">⬜ 待生成</span>
+                <span class="legend-pill">⚠️ 待复核</span>
+            </div>
         </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
-        </div>
-    </div>
 
-    <div class="tabs">
-        <button class="tab active" data-filter="all">全部 (44)</button>
-        <button class="tab" data-filter="character">🎭 角色 (5)</button>
-        <button class="tab" data-filter="location">🏠 场地 (20)</button>
-        <button class="tab" data-filter="prop">🎬 道具 (18)</button>
-        <button class="tab" data-filter="reference">🎙️ 参考 (1)</button>
-    </div>
+        <section class="section" data-section="main">
+            <h2>Main Assets</h2>
+            <div class="grid" id="mainGrid"></div>
+        </section>
 
-    <div id="sections-root"></div>
-
-    <div class="footer">
-        <span>《证词之外》Asset Canvas · 主资产 + 补充资产版</span>
-        <span>Generated by GitHub Copilot · 2026-05-25</span>
+        <section class="section" data-section="secondary">
+            <h2>Secondary Assets</h2>
+            <div class="grid" id="secondaryGrid"></div>
+        </section>
     </div>
 
     <script>
-        const mainAssets = [
-            {
-                filename: 'lin_shen.png',
-                category: 'character',
-                labelZh: '林深',
-                labelEn: 'Lin Shen',
-                prompt: `30岁左右中国男性，偏瘦，颧骨略突出，黑色微长乱发，额前碎发略垂，深黑眼圈明显，肤色偏白偏黄、长期熬夜的疲惫质感，无胡须，下颌线清晰，嘴唇偏干，眼神克制但警觉；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，深灰近黑连帽外套拉链到胸口，内搭深色圆领 T 恤，表情平静、压抑、像努力维持理性；灯光仅左前方 45 度冷白光打亮半张脸，另一半脸沉入阴影，无补光；8K 超写实照片，真实亚洲男性皮肤纹理、毛孔、眼袋、细碎汗毛可见；禁止夸张邪笑，禁止多余人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'zhou_yan.png',
-                category: 'character',
-                labelZh: '周妍',
-                labelEn: 'Zhou Yan',
-                prompt: `二十多岁中国女性，短发或及肩直发，发尾略乱，肤色自然偏白，眼下有轻微疲态，五官利落，表情敏感而倔强；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，深色旧夹克内搭浅灰 T 恤，肩上有一点城市灰尘感，像刚从旧楼里赶来；表情克制、警惕、压着恐惧但不脆弱，眼神盯住镜头外某个点；灯光仅一侧冷白楼道光，自然打出鼻梁和下颌阴影，无美容感；8K 超写实照片，真实皮肤细节清晰；禁止浓妆，禁止柔焦滤镜，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
-            },
-            {
-                filename: 'chen_bo.png',
-                category: 'character',
-                labelZh: '陈伯',
-                labelEn: 'Chen Bo',
-                prompt: `六十岁左右中国男性，身材偏矮，背微驼但不虚弱，面部瘦削，颧骨高，法令纹深，花白短寸贴头皮，浓而杂乱的眉毛，目光稳定、眨眼很少；正面半身定妆照，纯黑背景，85mm 镜头，人物居中，泛白的深蓝色物业保安制服，纽扣扣到最上面，左胸口袋插旧圆珠笔，腰间挂一串旧铜钥匙；表情平静到近乎冷漠，不带明显恶相；灯光仅暖黄走廊顶灯从正上方偏后照下，额头和鼻梁有高光，眼窝深陷；8K 超写实照片，皱纹、色斑、胡茬和旧制服纤维清晰；禁止夸张邪笑，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
-            },
-            {
-                filename: 'lin_wan_bound.png',
-                category: 'character',
-                labelZh: '林晚',
-                labelEn: 'Lin Wan',
-                prompt: `二十多岁中国女性，长发略乱，脸色苍白但仍有生命感，唇色偏淡，眼神疲惫、清醒、长期被囚后的虚弱感；半身定妆照，背景为失焦的冷色监控室或采样室，不是纯黑背景，85mm 镜头，人物居中偏左，穿简单浅色旧上衣，肩颈处有轻微束缚痕迹但不血腥；手臂或肩部呈现被固定在椅子上的状态，表情不是尖叫，而是被迫保持安静的绝望；灯光仅冷白监控屏反光和极弱设备顶灯；8K 超写实照片，皮肤和头发细节清晰；禁止血浆，禁止暴力夸张，禁止插画，禁止 3D，禁止游戏 CG，禁止多余人物。比例 16:9`
-            },
-            {
-                filename: 'study_room_wide.png',
-                category: 'location',
-                labelZh: '林深书房全景',
-                labelEn: 'Study Room Wide',
-                prompt: `室内广角全景，夜晚，廉价出租屋改成的简陋书房，约 8 到 10 平米，从门口向里看；房间只亮一盏桌上台灯，整体其余区域沉入暗部；左侧靠墙是一张旧书桌，桌上有笔记本电脑、鼠标、耳机和几张写着凌乱提示词的白纸；书桌前廉价椅子被坐出磨损，右侧有单人床或折叠床轮廓但不抢主体；墙面发黄，有旧水渍，天花板普通，不现代；光源逻辑非常明确，只允许桌面暖白台灯和极弱窗外冷蓝夜光；画面氛围安静、压抑、像有人长期在这里做声音工作；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨家庭感。比例 16:9`
-            },
-            {
-                filename: 'corridor_307_door.png',
-                category: 'location',
-                labelZh: '三楼307门口',
-                labelEn: '307 Corridor Door',
-                prompt: `老式居民公寓三楼走廊，平视正面拍摄 307 室门口；深棕色旧铁门居中，门面有划痕、掉漆、灰尘，门上方是白底黑字搪瓷门牌“307”；门口干净，没有任何案发隔离痕迹，也没有现代电子锁；门框一侧墙面发黄，墙角有旧污渍；地面是老旧水磨石，走廊冷白声控灯从斜上方打下；整体感觉像半搬空公寓层，不是命案现场；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止错误楼层门牌，禁止任何隔离贴纸或警示条。比例 16:9`
-            },
-            {
-                filename: 'room_307_entry.png',
-                category: 'location',
-                labelZh: '307室入口视角',
-                labelEn: 'Room 307 Entry View',
-                prompt: `室内广角全景，从玄关站立视角往 307 客厅方向看；这是半搬空、刚被放弃不久的老公寓客厅，约 15 平米，木地板积灰，墙面留有搬走家具后的浅色印记；客厅中央偏前是一张老旧木桌，桌上放一只大个智能音箱，机身高度约 25-30 厘米，状态熄灭，外观是普通家用旧款设备，机身正面带大尺寸触摸屏（熄屏状态），可用于后续数字口令输入，不带专业录音棚气质；左侧靠墙有塌陷旧沙发，右侧中段是一扇紧闭卧室门，玄关侧墙有老旧弱电箱；窗边透入冷灰夜光，房内没有主灯，只有很弱环境反射；整体要显得停摆、冷、像被突然遗弃；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止极简样板间，禁止把客厅拍成正常温馨居住状态。比例 16:9`
-            },
-            {
-                filename: 'room_307_reverse.png',
-                category: 'location',
-                labelZh: '307室反角视角',
-                labelEn: 'Room 307 Reverse View',
-                prompt: `室内广角，从客厅靠窗一侧回看 307 玄关和大门；左前景可带到木桌一角和桌上的大个智能音箱轮廓，音箱正面大尺寸触摸屏位置需可辨识（可熄屏），正前方是玄关和半开的铁门，门外走廊冷白灯在地面形成一条长光斑；玄关右侧墙面可见一个老旧弱电箱，绿灯微亮，作为房内仍有弱电供电的证据；天花板边缘可非常轻地带到一个普通老式播音孔，但不能夸张；整体前方冷白、后方冷灰，中间暗部压住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止现代摄影棚质感。比例 16:9`
-            },
-            {
-                filename: 'fire_stair_wide.png',
-                category: 'location',
-                labelZh: '消防楼梯间',
-                labelEn: 'Fire Stair Wide',
-                prompt: `老式高层公寓内部消防楼梯间，广角全景，从一层半的平台位置看上下楼梯结构；灰色水泥墙、金属扶手、声控顶灯、旧安全门，空间冷、空、回声感强；楼梯间灯只亮局部几盏，形成一段亮一段暗的纵深；不要现代商场质感，不要彩色安全标识过多；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止脏乱到废墟程度。比例 16:9`
-            },
-            {
-                filename: 'floor29_wide.png',
-                category: 'location',
-                labelZh: '二十九楼走廊',
-                labelEn: '29F Corridor Wide',
-                prompt: `高层公寓二十九楼走廊，广角全景，空间空旷，冷白平光，玻璃墙、机房门、远处露台铁门同时入画；这里不像住宅层，更像被切出来的设备禁区，没有生活痕迹，没有装饰物；地面干净但缺乏人气，线条笔直，冷气和低频设备感隐约存在；画面必须把“空、冷、权限异常”一次立住；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨办公楼气质。比例 16:9`
-            },
-            {
-                filename: 'device_room_wide.png',
-                category: 'location',
-                labelZh: '设备间全景',
-                labelEn: 'Device Room Wide',
-                prompt: `室内广角全景，二十九楼设备间，像真实运转的人声采样机房，不是科幻实验室；成排硬盘柜、工作台、显示器、拾音器、线缆、小型墙面音箱、散热风扇都在空间里，但布局整洁、可维护；灯光只允许冷青设备光和屏幕冷光，空间纵深清楚；要让人一眼看出这里长期记录和处理声音数据；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止霓虹赛博朋克。比例 16:9`
-            },
-            {
-                filename: 'terrace_wide.png',
-                category: 'location',
-                labelZh: '露台全景',
-                labelEn: 'Terrace Wide',
-                prompt: `夜晚高层露台广角全景，城市高空风压感明显，护栏、维修箱和放在维修箱上的一部白色手机同时入画；露台地面微湿或积灰，铁门在一侧，远处城市灯海虚焦但真实；护栏连接处看起来有老化风险，但不是一眼就能看出被人为破坏；光源只允许城市夜光和极弱安全灯反射；画面必须先把“危险空间”交代清楚；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'study_screen_waveform.png',
-                category: 'prop',
-                labelZh: '电脑音频编辑界面',
-                labelEn: 'Study Screen Waveform',
-                prompt: `电脑屏幕内容特写，正面略偏左角度，屏幕上是专业但不夸张的音频编辑软件界面；同一段女性语音波形被反复拖回起点，时间线清晰，局部可见多条剪切拼接痕迹；屏幕旁边不要出现多余聊天窗口或花哨软件，只保留波形、时间轴、播放头和少量中文项目备注；整体来自电脑自身冷光，屏幕真实可拍；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止复杂赛博 UI。比例 16:9`
-            },
-            {
-                filename: 'smart_speaker_idle.png',
-                category: 'prop',
-                labelZh: '307智能音箱待机',
-                labelEn: 'Smart Speaker Idle',
-                prompt: `道具特写，纯黑背景或极暗旧木桌背景，一只老款智能音箱，深灰或磨旧黑色外壳，机身高度约 25-30 厘米，不是圆筒型蓝牙音箱，也不是任何专业音频设备；顶部一圈极弱蓝色待机灯微亮，机身正面必须有大尺寸触摸屏（待机时熄屏），用于后续数字口令输入，机身有轻微灰尘和使用磨损；设计普通、家用、旧款，不能高科技炫目；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止多余道具。比例 16:9`
-            },
-            {
-                filename: 'smart_speaker_unlocked.png',
-                category: 'prop',
-                labelZh: '307智能音箱解锁后',
-                labelEn: 'Smart Speaker Unlocked',
-                prompt: `道具特写，纯黑背景或极暗旧木桌背景，与 smart_speaker_idle.png 同一台家用旧款智能音箱，外观一致；顶部指示灯由蓝转为稳定绿色，表示已解锁并进入播放前状态，机身正面大尺寸触摸屏可见“解锁成功”或空白待播放界面，机身侧边有轻微灰尘和旧划痕；整体仍旧低调真实，不是未来感设备；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止额外界面悬浮。比例 16:9`
-            },
-            {
-                filename: 'wall_speaker_red.png',
-                category: 'prop',
-                labelZh: '墙面音箱红灯状态',
-                labelEn: 'Wall Speaker Red',
-                prompt: `安装在设备间墙面的老式小型广播音箱特写，米白或浅灰塑料外壳，边缘略旧，正下方一个小红灯亮起；背景是冷青色设备间墙面或机柜边缘，音箱必须像建筑系统一部分，而不是独立音响；质感真实、普通、长期使用；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止赛博机械感。比例 16:9`
-            },
-            {
-                filename: 'ceiling_speaker.png',
-                category: 'prop',
-                labelZh: '天花板广播音箱',
-                labelEn: 'Ceiling Speaker',
-                prompt: `天花板嵌入式广播音箱近景，白色金属网罩，普通建筑消防广播或公共播音设备风格，安装在老旧但非废弃的天花板上；旁边可带一点冷白顶灯或天花板接缝，整体极普通、极不显眼；质感必须真实，不夸张科技；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'device_screen_popup.png',
-                category: 'prop',
-                labelZh: '设备间弹窗界面',
-                labelEn: 'Device Screen Popup',
-                prompt: `电脑屏幕界面特写，屏幕上跳出一个简洁系统弹窗，中文内容清晰写着“林晚 语音复刻模型——生成完成”；弹窗背后能隐约看见音频文件列表或处理界面，但不要杂乱；整体 UI 极简、工业软件风格、真实办公系统感，不要未来感，不要霓虹；主要光源是屏幕冷白光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止复杂 HUD。比例 16:9`
-            },
-            {
-                filename: 'hard_drive_rack.png',
-                category: 'prop',
-                labelZh: '硬盘柜近景',
-                labelEn: 'Hard Drive Rack',
-                prompt: `设备间硬盘柜近景，一排机架式硬盘或存储模块，指示灯规律闪烁，冷青色环境中可以看到金属边框、标签、散热孔和细小划痕；整体像长期稳定运转的数据存储设备，不是未来机甲；不要品牌 Logo，不要夸张 RGB 灯效；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'white_phone_call.png',
-                category: 'prop',
-                labelZh: '白色手机通话中',
-                labelEn: 'White Phone Call',
-                prompt: `道具特写，一部白色旧款智能手机放在露台维修箱或粗糙金属台面上，屏幕亮着通话界面，整体有裂纹或轻度摔伤，但仍在通话中；屏幕 UI 简洁真实，只显示通话状态和外放图标，不出现夸张 app；周围环境带一点夜风中的高层露台冷光反射；要让人一眼明白这是诱导周妍靠近栏杆的声源；白色手机壳花纹需与 ZhouYanPhoneCaseCue 保持同款可识别关系；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            }
+        const assets = [
+            { priority: 'main', category: 'character', zh: '林深', en: 'Lin Shen', filename: 'lin_shen.png', status: 'generated', prompt: '30岁左右中国男性，体面管理层外壳下压着极深控制欲；深炭灰夹克、深色内搭、深色长裤、低调皮鞋；角色设定板，纯白背景，超写实。' },
+            { priority: 'main', category: 'character', zh: '周妍', en: 'Zhou Yan', filename: 'zhou_yan.png', status: 'generated', prompt: '二十多岁中国女性，短发或及肩直发，眼神锐利，状态是被逼成长的执行者；深色旧夹克、浅灰内搭、深色长裤；角色设定板，纯白背景，超写实。' },
+            { priority: 'main', category: 'character', zh: '林晚', en: 'Lin Wan Confined', filename: 'lin_wan_bound.png', status: 'generated', prompt: '二十多岁中国女性，疲惫但清醒，被隔绝和受控，不拍血腥；浅色旧上衣与深色长裤；角色设定板，纯白背景，超写实。' },
+            { priority: 'main', category: 'character', zh: '心腹保安轮廓', en: 'Security Guard Shadow', filename: 'security_guard_shadow.png', status: 'missing', prompt: '匿名物业安保执行者，制服规整，轮廓化、逆光化，禁止清楚露脸；角色设定板，纯白背景，超写实。' },
+
+            { priority: 'main', category: 'location', zh: '林深书房', en: 'Study Room Wide', filename: 'study_room_wide.png', status: 'generated', prompt: '夜晚私人书房广角全景，深色木桌、台灯、电脑、耳机、文件纸整齐摆放；暖白台灯加极弱冷蓝窗光；克制、理性、压抑。', spatial: '空间标注待补：建议补录书桌朝向、门口机位、台灯主光方向。' },
+            { priority: 'main', category: 'location', zh: '307入口视角', en: 'Room 307 Entry', filename: 'room_307_entry.png', status: 'generated', prompt: '老旧但住过人的员工公寓客厅广角，从玄关看向客厅；半搬空、木地板旧、角落有老旧智能音箱，冷灰夜光渗入。', spatial: '空间标注待补：建议补录门口到音箱的轴线、周妍初始站位。' },
+            { priority: 'main', category: 'location', zh: '307反角视角', en: 'Room 307 Reverse', filename: 'room_307_reverse.png', status: 'generated', prompt: '从307客厅靠窗一侧回看玄关和大门，门外冷白光切入室内，空间关系清楚、已装修、有生活痕迹。', spatial: '空间标注待补：建议补录门缝光斑方向与音箱前景位置。' },
+            { priority: 'main', category: 'location', zh: '电梯轿厢', en: 'Elevator Cabin', filename: 'elevator_cabin.png', status: 'missing', prompt: '老式高层住宅电梯轿厢内部广角，金属门、旧楼层面板、冷白顶灯，狭窄压迫。', spatial: '空间标注待补：建议补录人物前后站位与15层停顿时门缝方向。' },
+            { priority: 'main', category: 'location', zh: '29楼走廊', en: 'Floor 29 Wide', filename: 'floor29_wide.png', status: 'missing', prompt: '冷白平光的29楼走廊广角，设备间门与露台铁门都能辨认，像被切出来的权限禁区。', spatial: '空间标注待补：建议补录设备间门、露台门和人物前进轴线。' },
+            { priority: 'main', category: 'location', zh: '设备间全景', en: 'Device Room Wide', filename: 'device_room_wide.png', status: 'missing', prompt: '成排机柜、工作台、屏幕和广播音箱组成的声音工厂，不是科幻实验室，冷屏与指示灯照明。', spatial: '空间标注待补：建议补录机柜排布、工作台位置和露台门方向。' },
+            { priority: 'main', category: 'location', zh: '露台全景', en: 'Terrace Wide', filename: 'terrace_wide.png', status: 'generated', prompt: '高层露台广角，护栏、维修箱、白色手机和露台门同框，城市夜景冰冷虚焦。', spatial: '空间标注待补：建议补录维修箱与护栏相对位置、门体方向。' },
+            { priority: 'main', category: 'location', zh: '林晚软禁房间', en: 'Locked Room Wide', filename: 'locked_room_wide.png', status: 'missing', prompt: '昏暗密闭房间广角，窗帘紧闭、门锁厚重、环境简陋但非血腥，重点是隔绝与受控。', spatial: '空间标注待补：建议补录门、窗、床位或椅位的相对关系。' },
+
+            { priority: 'main', category: 'prop', zh: '书房桌面组合', en: 'Study Desk Wide', filename: 'study_desk_wide.png', status: 'generated', prompt: '深色木桌、笔记本、台灯、耳机和工作纸的组合构图，暖白台灯照亮桌面，周围压暗。' },
+            { priority: 'main', category: 'prop', zh: '隐藏声纹界面', en: 'Study Screen Waveform', filename: 'study_screen_waveform.png', status: 'generated', prompt: '专业音频编辑界面特写，多条女性语音波形、剪切片段与中文工程标记，工业化真实风格。' },
+            { priority: 'main', category: 'prop', zh: '音箱待机蓝灯', en: 'Smart Speaker Idle', filename: 'smart_speaker_idle.png', status: 'generated', prompt: '老旧家用智能音箱，熄屏待机，顶部蓝灯极弱，纯白背景，产品摄影。' },
+            { priority: 'main', category: 'prop', zh: '音箱口令校验中', en: 'Smart Speaker Red Green', filename: 'smart_speaker_red_green.png', status: 'generated', prompt: '同一台旧款音箱，红绿交替闪烁转绿，触摸屏显示简洁校验界面。' },
+            { priority: 'main', category: 'prop', zh: '音箱解锁成功', en: 'Smart Speaker Unlocked', filename: 'smart_speaker_unlocked.png', status: 'generated', prompt: '同一台旧款音箱，绿色稳定灯，触摸屏显示解锁成功或待播放状态。' },
+            { priority: 'main', category: 'prop', zh: '采样文件列表', en: 'Device Screen Files', filename: 'device_screen_files.png', status: 'generated', prompt: '工业软件窗口内滚动显示喘息、争吵、哭泣等中文文件名，冷白真实可读。' },
+            { priority: 'main', category: 'prop', zh: '露台白色手机', en: 'White Phone Call', filename: 'white_phone_call.png', status: 'generated', prompt: '白色旧款手机放在露台维修箱上，通话界面亮起，处于外放状态，周围带夜风冷光。' },
+            { priority: 'main', category: 'prop', zh: '微型录音笔', en: 'Recorder Pen Close', filename: 'recorder_pen_close.png', status: 'missing', prompt: '小型金属录音笔近景，低调、真实、略有磨损，像常年放在外套口袋里。' },
+
+            { priority: 'secondary', category: 'prop', zh: '未知来电手机界面', en: 'Unknown Caller Phone', filename: 'unknown_caller_phone.png', status: 'missing', prompt: '真实手机UI，展示未知来电或语音回放页面，不出现品牌logo。' },
+            { priority: 'secondary', category: 'prop', zh: '生活照与耳机', en: 'Study Photo Set', filename: 'study_photo_set.png', status: 'missing', prompt: '书桌局部特写，生活照与耳机并置，暗示兄妹关系但不煽情。' },
+            { priority: 'secondary', category: 'prop', zh: '周妍手机壳导线', en: 'Zhou Yan Phone Case Cue', filename: 'zhou_yan_phone_case_cue.png', status: 'missing', prompt: '手机壳边角裂纹与花纹局部特写，用于与露台白色手机形成回扣。' },
+            { priority: 'secondary', category: 'prop', zh: '门缝手电压迫', en: 'Security Flashlight Gap', filename: 'security_flashlight_gap.png', status: 'missing', prompt: '从室内看房门门缝，两束手电光交错扫过，压迫感强，不见清晰人脸。' },
+            { priority: 'secondary', category: 'prop', zh: '电梯楼层面板', en: 'Elevator Panel 29', filename: 'elevator_panel_29.png', status: 'missing', prompt: '老式电梯楼层面板特写，可显示15层卡停和29层抵达状态。' },
+            { priority: 'secondary', category: 'location', zh: '设备间门缝冷光', en: 'Device Room Door Crack', filename: 'device_room_door_crack.png', status: 'missing', prompt: '29楼设备间虚掩门缝近景，门缝里漏出冷光和一点设备轮廓。', spatial: '空间标注待补：建议补录门缝朝向和门外人物站位。' },
+            { priority: 'secondary', category: 'prop', zh: '墙面广播音箱红灯', en: 'Wall Speaker Red', filename: 'wall_speaker_red.png', status: 'generated', prompt: '老式墙面广播音箱特写，边缘略旧，红色指示灯亮起。' },
+            { priority: 'secondary', category: 'prop', zh: '护栏连接处', en: 'Railing Joint Close', filename: 'railing_joint_close.png', status: 'generated', prompt: '高层露台护栏连接件近景，金属老化与焊点真实可见，但不明显暴露人为破坏。' },
+            { priority: 'secondary', category: 'prop', zh: '收益后台', en: 'Audio Profit Dashboard', filename: 'audio_profit_dashboard.png', status: 'missing', prompt: '后台数据面板展示收音样本、声纹售卖和收益数字，像工业管理后台。' },
+            { priority: 'secondary', category: 'prop', zh: '黑色制式皮鞋', en: 'Ground Shoes Close', filename: 'ground_shoes_close.png', status: 'missing', prompt: '地面低角度特写，黑色制式皮鞋走入昏暗地面，只服务匿名收尾。' }
         ];
 
-        const supplementalAssets = [
-            {
-                filename: 'study_desk_wide.png',
-                category: 'location',
-                tier: 'P1 补充',
-                labelZh: '书房桌面组合视角',
-                labelEn: 'StudyDeskWide',
-                prompt: `室内近广角，书房桌面组合构图，主体是旧书桌、笔记本电脑、台灯和坐在桌前的林深上半身位置关系；桌面上有鼠标、耳机、几张写着零散字句的白纸，但不能杂乱到像垃圾堆；台灯暖白光只照亮桌面和林深前臂，周围房间其余区域压暗；电脑屏幕停在音频编辑界面，但不需要拍清具体字句；整体构图要服务开场和 callback，像一个长期做声音工作的人在夜里独自守着桌面；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止额外人物。比例 16:9`
-            },
-            {
-                filename: 'room_307_power_box.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '307弱电箱绿灯近景',
-                labelEn: 'Room307PowerBox',
-                prompt: `安装状态近景，307 玄关弱电箱局部，旧白色或发黄金属箱门半闭，面板上一个小绿灯稳定亮着，周围墙面发旧、冷、无装饰；这是一种很普通、容易被忽略的民用弱电设备，不要高科技感；灯光只允许走廊冷白反射和箱体自身极弱指示灯；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止夸张闪烁。比例 16:9`
-            },
-            {
-                filename: 'smart_speaker_blue.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '智能音箱待机蓝灯',
-                labelEn: 'SmartSpeakerBlue',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，深灰或磨旧黑色外壳，机身高度约 25-30 厘米，机身落灰；顶部一圈蓝色待机灯以固定频率轻微闪烁，不刺眼、不高科技；机身正面必须有大尺寸触摸屏（待机时熄屏），用于后续数字口令输入，不得缺失；背景为极暗旧木桌或307阴暗角落；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'smart_speaker_red.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '智能音箱口令输入前红灯',
-                labelEn: 'SmartSpeakerRed',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯变为稳定暗红色，像进入口令输入或待确认状态，红光不能过亮；机身正面大尺寸触摸屏亮起密码输入界面（简洁数字输入框），不做未来感 UI；背景为极暗旧木桌或307房间暗部；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG，禁止悬浮界面。比例 16:9`
-            },
-            {
-                filename: 'smart_speaker_red_green.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '智能音箱红绿闪烁转绿',
-                labelEn: 'SmartSpeakerRedGreen',
-                prompt: `道具特写，与 smart_speaker_idle.png 同一台旧款家用智能音箱，外观完全一致；顶部指示灯处于红绿交替闪烁将要转为纯绿的过渡状态，光感必须老旧、延迟、朴素，不要做成炫技科技特效；机身正面大尺寸触摸屏应显示“口令校验中”或数字输入进度样式（简洁、非科幻 UI），明确这是可输入数字口令的设备；背景极暗，重点只落在指示灯状态变化；8K 超写实产品摄影，禁止人物手持，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'device_screen_files.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '设备间文件列表界面',
-                labelEn: 'DeviceScreenFiles',
-                prompt: `电脑屏幕界面特写，真实工业软件风格的文件列表窗口，屏幕上滚动可见中文文件名，如“喘息”“争吵”“哭泣”“求救”“门锁回放”等，列表整洁、冷白、可读，不要赛博，不要霓虹；界面背后可有极简进度条或文件时间列，但不要复杂 HUD；整体来自屏幕自身冷光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'white_phone_call_broken.png',
-                category: 'prop',
-                tier: 'P1 补充',
-                labelZh: '白色手机摔裂后漏声',
-                labelEn: 'WhitePhoneCallBroken',
-                prompt: `道具特写，一部白色旧款智能手机摔裂在高层露台粗糙地面上，屏幕布满碎纹，局部间歇亮灭，外放状态仍在继续；机壳边角崩口、玻璃裂纹和露台灰尘都要真实，像刚经历一次剧烈坠地；背景只带一点夜风中的高层冷光反射；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'railing_joint_close.png',
-                category: 'location',
-                tier: 'P1 补充',
-                labelZh: '护栏连接处近景',
-                labelEn: 'RailingJointClose',
-                prompt: `高层露台护栏连接处近景，金属连接件略有老化和应力痕迹，局部螺丝和焊点真实可见，表面有轻微风化、细小锈迹和冷夜反光；必须像真实长期使用中的安全设施，不是施工中的半成品，也不是一眼可见的人为破坏；背景虚化为高空夜景和露台边缘冷光；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG，禁止夸张断裂。比例 16:9`
-            },
-            {
-                filename: 'room_307_half_moved.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '半搬空307全景',
-                labelEn: 'Room307HalfMoved',
-                prompt: `室内广角全景，半搬空的员工公寓307，墙面留有拆走挂画和家具后的浅印，地面有极薄灰，空间冷、停摆、被突然放弃；画面主体是空出来的客厅关系和少量残留生活痕迹，不要把中央木桌和智能音箱拍得过近；窗边透入冷灰夜光，房内没有主灯；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG，禁止温馨居住感。比例 16:9`
-            },
-            {
-                filename: 'room_307_table.png',
-                category: 'prop',
-                tier: 'P2 补充',
-                labelZh: '307桌面局部',
-                labelEn: 'Room307Table',
-                prompt: `桌面近景，307 客厅里老旧木桌或茶几局部，杯底印、半包纸巾、入住手册等生活残留散在表面，落一层极薄灰；光线冷、平、无主灯，只允许窗外冷灰环境光；画面要空、冷、干，像生活被中断后留下的平面证据；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'room_307_door_direction.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '307朝门口方向构图',
-                labelEn: 'Room307DoorDirection',
-                prompt: `室内中广角，从307客厅中段朝玄关和门口方向看，门外冷白走廊光切入地面形成长条光斑，室内本体保持冷灰暗部；画面需要清楚交代人物未来看向门口或同时望向门外的轴线关系；木桌或智能音箱可在前景边缘轻带，不抢主体；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'room_307_door.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '307房门内侧',
-                labelEn: 'Room307Door',
-                prompt: `307 房门内侧近景，老旧铁门、门框、锁舌和门牌反向关系清楚，门面有使用磨损、划痕和旧漆面；光线来自门外走廊冷白光和室内极弱反射，真实、克制；构图服务于关门、开门、门槛站位和门锁触发监控的镜头；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'fire_stair_door.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '消防铁门近景',
-                labelEn: 'FireStairDoor',
-                prompt: `老式公寓消防铁门近景，门轴、把手、边框和门缝冷白光关系清楚，铁门有旧漆、碰撞痕迹和轻微锈迹；门内是更冷、更空的楼梯间光，门外仍保留公寓层的压抑感；必须像真实高层消防通道，不要现代商场感；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'fire_stair_top.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '楼梯顶部俯拍位',
-                labelEn: 'FireStairTop',
-            prompt: `高层公寓消防楼梯从顶部俯拍的空间结构图，能看清楼梯折返、平台、扶手和声控灯逐级分布，空间狭长、冷、回声感强；灯光只允许现实存在的冷白顶灯，一段亮一段暗；这是路径和压迫感视角，不要人物出镜；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'fire_stair_mid.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '楼梯转角背影位',
-                labelEn: 'FireStairMid',
-                prompt: `消防楼梯中段转角处的背影构图参考，机位停在楼梯转角平台，能看见上一段和下一段楼梯的连接关系；空间冷白、旧、安静，扶手和墙面质感真实；画面要服务“一个人落后半步跟着另一个人”的背影调度，不需要人物出镜；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'floor29_door.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '二十九楼安全门近景',
-                labelEn: 'Floor29Door',
-                prompt: `二十九楼安全门近景，门体、门框、闭门器和门外惨白冷光关系清楚；门内仍是消防楼梯的冷白光，门外是更冷、更平、更不像住宅层的楼面光；整体要让人一眼觉得这是进入异常区域的阈值；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'device_room_door_crack.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '设备间虚掩门缝',
-                labelEn: 'DeviceRoomDoorCrack',
-                prompt: `二十九楼设备间虚掩门缝近景，门缝里漏出更冷、更青的设备间光，门内有轻微设备嗡鸣感；门板、门把手、缝隙宽度和门外走廊冷白光关系要真实，不夸张；这是一条会把人吸过去的门缝，不是恐怖片鬼门；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'device_to_terrace_door.png',
-                category: 'location',
-                tier: 'P2 补充',
-                labelZh: '设备间朝露台方向构图',
-                labelEn: 'DeviceToTerraceDoor',
-                prompt: `从设备间内部朝露台铁门方向看的中广角构图，前景可轻带设备间边缘、机柜或桌角，远处是露台铁门和更冷的方向性环境光；空间关系必须清楚，让观众能理解人物为什么会被那边吸过去；整体仍然是现实工业感，不要科幻通道感；8K 超写实照片，禁止人物，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'zhou_yan_phone.png',
-                category: 'prop',
-                tier: 'P3 细节',
-                labelZh: '周妍手机聊天界面',
-                labelEn: 'ZhouYanPhone',
-                prompt: `手机屏幕界面特写，真实中国常见聊天软件界面风格，不出现品牌 logo；聊天对象备注为“林晚”，对话框刚弹出一条新语音，界面克制、简洁、可信，不做赛博 UI；机身边缘可见旧手机壳边角，轻微开裂且花纹清楚，需与 WhitePhoneCall 道具保持同款花纹；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'zhou_yan_phone_case_cue.png',
-                category: 'prop',
-                tier: 'P3 细节',
-                labelZh: '周妍手机壳边角导线',
-                labelEn: 'ZhouYanPhoneCaseCue',
-                prompt: `手机边角特写，只拍周妍手中手机的壳边角局部：旧、轻微开裂、低饱和花纹清楚，不拍品牌，不拍完整屏幕。该花纹必须可在后续露台白色手机上对应识别为同款关系线索。光线冷白克制，背景可轻带307暗部，不出现额外关系道具；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'lin_shen_hand.png',
-                category: 'character',
-                tier: 'P3 细节',
-                labelZh: '林深手部局部',
-                labelEn: 'LinShenHand',
-                prompt: `人物局部特写，只拍中国男性的手部和一小段手腕，手指骨感明显，肤色偏白偏黄，指节和青筋真实可见，右手无名指轻微向内弯，指甲短、无修饰；光线冷白克制，背景可虚化为书房桌面或307暗部；这只手要服务拖拽波形、按键、触碰音箱等近景动作；8K 超写实照片，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'study_paper.png',
-                category: 'prop',
-                tier: 'P3 细节',
-                labelZh: '书桌纸面关键词提示',
-                labelEn: 'StudyPaper',
-                prompt: `桌面纸面特写，一张普通白纸放在旧书桌上，黑色中性笔手写“307”“访问权限”“声纹阈值”等零散字样，其中部分字被重重划掉，旁边可见笔帽或笔尖痕迹；光线只来自桌面台灯暖白光和极弱冷色环境光，纸张纤维和划痕清晰；整体像临时工作笔记，不像工整线索卡；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'zhou_yan_phone_gallery.png',
-                category: 'prop',
-                tier: 'P3 细节',
-                labelZh: '周妍手机相册边角',
-                labelEn: 'ZhouYanPhoneGallery',
-                prompt: `手机屏幕局部近景，真实相册界面边角露出几张早前偷拍的普通机房或设备间照片缩略图，缩略图内容偏冷色、普通、没有强戏剧感；界面必须像真实手机相册，不出现品牌 logo，不出现夸张拼贴排版；它的任务是让“以前偷拍过的只是普通机房”这个信息成立；8K 超写实照片，禁止人物手部，禁止插画，禁止 3D，禁止游戏 CG。比例 16:9`
-            },
-            {
-                filename: 'LinWanVoice',
-                category: 'reference',
-                tier: '声音参考',
-                referenceOnly: true,
-                labelZh: '林晚声音参考',
-                labelEn: 'LinWanVoice',
-                prompt: `声音节点参考，不建议单独生成静态图片。建议直接在 Seedance 或音频节点里锁定同一条声线：女性、二十多岁、虚弱但清醒、气息偏轻、尾音不飘、带一点长期压抑后的干涩感。若必须做视觉占位，可临时复用 study_screen_waveform.png 或 device_screen_popup.png，避免额外生成一张无实际价值的人像或波形图。`
-            }
-        ];
+        const root = '../assets/zhengci-zhiwai/';
+        const mainGrid = document.getElementById('mainGrid');
+        const secondaryGrid = document.getElementById('secondaryGrid');
+        const tabs = [...document.querySelectorAll('.tab')];
 
-        const assets = [...mainAssets, ...supplementalAssets].map(asset => ({
-            ...asset,
-            tier: asset.tier || 'Main 主资产',
-            status: asset.referenceOnly ? 'reference' : 'missing',
-            imagePath: asset.referenceOnly ? '' : `../assets/zhengci-zhiwai/${asset.filename}`
-        }));
+        function badgeClass(category) {
+            return category === 'character' ? 'character' : category === 'location' ? 'location' : 'prop';
+        }
 
-        const categoryOrder = ['character', 'location', 'prop', 'reference'];
+        function categoryLabel(category) {
+            return category === 'character' ? 'Character' : category === 'location' ? 'Location' : 'Prop';
+        }
 
-        const categoryMeta = {
-            character: { title: '🎭 角色 Characters', className: 'cat-character', label: 'Character', ratio: 'ratio-character' },
-            location: { title: '🏠 场地 Locations', className: 'cat-location', label: 'Location', ratio: 'ratio-location' },
-            prop: { title: '🎬 道具 Props', className: 'cat-prop', label: 'Prop', ratio: 'ratio-prop' },
-            reference: { title: '🎙️ 参考 Reference', className: 'cat-reference', label: 'Reference', ratio: 'ratio-reference' }
-        };
-
-        function getStatusBadge(status) {
+        function statusLabel(status) {
             if (status === 'generated') return '✅ 已生成';
             if (status === 'flagged') return '⚠️ 待复核';
-            if (status === 'reference') return '🎙️ 参考';
             return '⬜ 待生成';
         }
 
-        function probeImage(path) {
-            return new Promise(resolve => {
-                const img = new Image();
+        function renderCard(asset) {
+            const card = document.createElement('article');
+            card.className = `card ${asset.status}`;
+            card.dataset.category = asset.category;
 
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
+            const thumb = document.createElement('div');
+            thumb.className = `thumb ${asset.category}`;
 
-                img.src = path;
-            });
+            if (asset.status === 'generated' || asset.status === 'flagged') {
+                const img = document.createElement('img');
+                img.src = root + asset.filename;
+                img.alt = asset.en;
+                thumb.appendChild(img);
+            } else {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'placeholder';
+                placeholder.innerHTML = '待生成<br />' + asset.en.toUpperCase();
+                thumb.appendChild(placeholder);
+            }
+
+            const badge = document.createElement('span');
+            badge.className = 'status-badge';
+            badge.textContent = statusLabel(asset.status);
+            thumb.appendChild(badge);
+
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            body.innerHTML = `
+        <div class="row">
+          <span class="priority">${asset.priority === 'main' ? 'Main' : 'Secondary'}</span>
+          <span class="badge ${badgeClass(asset.category)}">${categoryLabel(asset.category)}</span>
+        </div>
+        <h3>${asset.zh}</h3>
+        <div class="en">${asset.en}</div>
+        <div class="filename">${asset.filename}</div>
+      `;
+
+            const details = document.createElement('details');
+            const summary = document.createElement('summary');
+            summary.textContent = '展开提示词';
+            const prompt = document.createElement('div');
+            prompt.className = 'prompt';
+            prompt.textContent = asset.prompt;
+            details.appendChild(summary);
+            details.appendChild(prompt);
+            body.appendChild(details);
+
+            if (asset.category === 'location') {
+                const note = document.createElement('div');
+                note.className = 'spatial-note';
+                note.textContent = asset.spatial || '空间标注待补：请在该场地图生成后补录镜头朝向、角色站位、道具摆放与光源方向。';
+                body.appendChild(note);
+            }
+
+            card.appendChild(thumb);
+            card.appendChild(body);
+            return card;
         }
 
-        async function refreshAssetStatusByFiles() {
-            const checks = assets.map(async asset => {
-                if (asset.referenceOnly) {
+        function mountAssets(filter = 'all') {
+            mainGrid.innerHTML = '';
+            secondaryGrid.innerHTML = '';
+
+            assets.forEach((asset) => {
+                if (filter !== 'all' && asset.category !== filter) {
                     return;
                 }
 
-                const exists = await probeImage(asset.imagePath);
-                asset.status = exists ? 'generated' : 'missing';
-            });
-
-            await Promise.all(checks);
-        }
-
-        function renderSections(filter = 'all') {
-            const root = document.getElementById('sections-root');
-            root.innerHTML = '';
-
-            categoryOrder.forEach(category => {
-                if (filter !== 'all' && filter !== category) {
-                    return;
+                const card = renderCard(asset);
+                if (asset.priority === 'main') {
+                    mainGrid.appendChild(card);
+                } else {
+                    secondaryGrid.appendChild(card);
                 }
-
-                const section = document.createElement('section');
-                section.className = 'section';
-
-                const header = document.createElement('div');
-                header.className = 'section-header';
-                header.textContent = categoryMeta[category].title;
-                section.appendChild(header);
-
-                const grid = document.createElement('div');
-                grid.className = 'card-grid';
-
-                assets.filter(asset => asset.category === category).forEach(asset => {
-                    const card = document.createElement('article');
-                    card.className = `card status-${asset.status}`;
-
-                    const imageWrap = document.createElement('div');
-                    imageWrap.className = `card-image ${categoryMeta[category].ratio}`;
-
-                    if (asset.status === 'generated') {
-                        const img = document.createElement('img');
-                        img.src = asset.imagePath;
-                        img.alt = asset.filename;
-                        imageWrap.appendChild(img);
-                    } else {
-                        const placeholder = document.createElement('div');
-                        placeholder.className = 'placeholder';
-                        placeholder.textContent = asset.status === 'reference' ? '声音参考' : '待生成';
-                        imageWrap.appendChild(placeholder);
-                    }
-
-                    const badge = document.createElement('span');
-                    badge.className = 'status-badge';
-                    badge.textContent = getStatusBadge(asset.status);
-                    imageWrap.appendChild(badge);
-
-                    const body = document.createElement('div');
-                    body.className = 'card-body';
-
-                    const metaRow = document.createElement('div');
-                    metaRow.className = 'card-meta-row';
-
-                    const categoryBadge = document.createElement('span');
-                    categoryBadge.className = `card-category ${categoryMeta[category].className}`;
-                    categoryBadge.textContent = categoryMeta[category].label;
-                    metaRow.appendChild(categoryBadge);
-
-                    const tierBadge = document.createElement('span');
-                    tierBadge.className = 'tier-badge';
-                    tierBadge.textContent = asset.tier;
-                    metaRow.appendChild(tierBadge);
-
-                    body.appendChild(metaRow);
-
-                    const name = document.createElement('div');
-                    name.className = 'card-name';
-                    name.textContent = `${asset.labelZh} / ${asset.labelEn}`;
-                    body.appendChild(name);
-
-                    const file = document.createElement('div');
-                    file.className = 'card-file';
-                    file.textContent = asset.filename;
-                    body.appendChild(file);
-
-                    const toggle = document.createElement('div');
-                    toggle.className = 'prompt-toggle';
-                    toggle.textContent = '展开提示词 ▼';
-                    body.appendChild(toggle);
-
-                    const prompt = document.createElement('div');
-                    prompt.className = 'prompt-text';
-                    prompt.textContent = asset.prompt;
-                    body.appendChild(prompt);
-
-                    toggle.addEventListener('click', () => {
-                        const visible = prompt.classList.toggle('visible');
-                        toggle.textContent = visible ? '收起提示词 ▲' : '展开提示词 ▼';
-                    });
-
-                    card.appendChild(imageWrap);
-                    card.appendChild(body);
-                    grid.appendChild(card);
-                });
-
-                section.appendChild(grid);
-                root.appendChild(section);
             });
         }
 
         function updateProgress() {
-            const visualAssets = assets.filter(asset => asset.status !== 'reference');
-            const generated = visualAssets.filter(asset => asset.status === 'generated').length;
-            const total = visualAssets.length;
-            const text = document.getElementById('progress-text');
-            const fill = document.getElementById('progress-fill');
-            text.textContent = `${generated} / ${total} 已生成`;
-            fill.style.width = `${(generated / total) * 100}%`;
+            const total = assets.length;
+            const generated = assets.filter((asset) => asset.status === 'generated').length;
+            const missing = assets.filter((asset) => asset.status !== 'generated').length;
+            document.getElementById('progressText').textContent = `${generated} / ${total} 已生成`;
+            document.getElementById('missingText').textContent = `仍缺 ${missing} 张`;
+            document.getElementById('progressFill').style.width = `${(generated / total) * 100}%`;
         }
 
-        function bindTabs() {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(item => item.classList.remove('active'));
-                    tab.classList.add('active');
-                    renderSections(tab.dataset.filter);
-                });
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach((item) => item.classList.remove('active'));
+                tab.classList.add('active');
+                mountAssets(tab.dataset.filter);
             });
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            await refreshAssetStatusByFiles();
-            updateProgress();
-            bindTabs();
-            renderSections('all');
         });
+
+        updateProgress();
+        mountAssets('all');
     </script>
 </body>
 

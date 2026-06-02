@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zhengci-zhiwai 静态预览入口</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --surface: rgba(255, 252, 246, 0.86);
+      --surface-strong: #fff8ee;
+      --text: #1f1b16;
+      --muted: #6e6253;
+      --line: rgba(31, 27, 22, 0.12);
+      --accent: #9c3d16;
+      --accent-soft: #f1d7c7;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(156, 61, 22, 0.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(57, 94, 73, 0.12), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    main {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+    .hero {
+      display: grid;
+      gap: 24px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255, 248, 238, 0.96), rgba(255, 252, 246, 0.82));
+      box-shadow: 0 24px 80px rgba(73, 54, 35, 0.08);
+    }
+    .hero--canvas { position: relative; overflow: hidden; }
+    .hero--canvas::after {
+      content: "";
+      position: absolute;
+      inset: auto -8% -32% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(156, 61, 22, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .hero h1 { margin: 0; font-size: clamp(40px, 7vw, 74px); line-height: 0.95; }
+    .hero p { margin: 0; max-width: 780px; color: var(--muted); font-size: 18px; line-height: 1.7; }
+    .stack { display: grid; gap: 12px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .chip--warn { background: rgba(153, 45, 34, 0.12); color: #8d2a20; }
+    .chip--ok { background: rgba(57, 94, 73, 0.12); color: #2b573f; }
+    .chip--muted { background: rgba(31, 27, 22, 0.06); color: var(--muted); }
+    .card {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+    }
+    .card h2, .card h3 { margin: 0 0 10px; font-size: 22px; }
+    .mono {
+      color: var(--muted);
+      line-height: 1.65;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 13px;
+    }
+    .endpoint {
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+    .endpoint strong {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 14px;
+    }
+    .prompt-preview {
+      margin: 8px 0 0;
+      padding: 14px 16px;
+      white-space: pre-wrap;
+      border-radius: 14px;
+      background: rgba(31, 27, 22, 0.04);
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      color: var(--text);
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .hero-canvas-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .hero-canvas-meta__panel {
+      display: grid;
+      gap: 8px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      background: rgba(255, 252, 246, 0.74);
+    }
+    .hero-canvas-meta__panel strong { font-size: 22px; }
+    .hero-canvas-meta__label {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .workflow-node__actions, .workflow-inspector__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .workflow-node__link {
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 27, 22, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text);
+      font-size: 14px;
+    }
+    .workflow-node__link--primary {
+      background: var(--accent);
+      color: #fff8ee;
+      border-color: transparent;
+    }
+    .project-studio {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+      padding: 24px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 244, 0.72);
+      overflow: hidden;
+    }
+    .project-studio__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(31, 27, 22, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 27, 22, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .project-studio__track {
+      position: absolute;
+      left: 8%;
+      right: 10%;
+      top: 124px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(156, 61, 22, 0.22), rgba(57, 94, 73, 0.2));
+      pointer-events: none;
+    }
+    .project-studio__column {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(31, 27, 22, 0.09);
+      background: rgba(255, 252, 246, 0.92);
+      box-shadow: 0 18px 42px rgba(73, 54, 35, 0.07);
+    }
+    .project-studio__column--overview { grid-column: span 3; margin-top: 14px; }
+    .project-studio__column--storyboard { grid-column: span 5; margin-top: 64px; }
+    .project-studio__column--assets { grid-column: span 4; margin-top: 20px; }
+    .project-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .project-kpi {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(156, 61, 22, 0.12);
+      background: linear-gradient(160deg, rgba(255, 248, 238, 0.94), rgba(245, 236, 222, 0.62));
+    }
+    .project-kpi span { color: var(--accent); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .project-kpi strong { font-size: 28px; line-height: 1; }
+    .project-link-list, .project-mini-list, .storyboard-scene-list, .provider-config-meta { display: grid; gap: 10px; }
+    .project-callout {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      background: rgba(255, 248, 238, 0.78);
+    }
+    .task-summary-grid, .provider-config-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .task-panel { display: grid; gap: 20px; overflow: hidden; }
+    .task-panel__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .task-panel__toolbar { display: flex; flex-wrap: wrap; gap: 10px; }
+    .task-summary-card {
+      display: grid;
+      gap: 6px;
+      padding: 18px;
+      border: 1px solid rgba(156, 61, 22, 0.14);
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(255, 248, 238, 0.96), rgba(245, 236, 222, 0.72));
+    }
+    .task-summary-card strong { font-size: 34px; line-height: 1; }
+    .task-summary-card__label, .provider-config-meta__label {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .task-summary-card__hint { color: var(--muted); font-size: 13px; }
+    .task-selection-panel {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 248, 238, 0.72);
+      border: 1px solid var(--line);
+    }
+    .task-selection-panel__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+    .task-selection-panel__meta h3 { margin: 0 0 4px; }
+    .task-selection-panel__meta p { margin: 0; }
+    .task-selection-panel__badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(156, 61, 22, 0.1);
+      color: var(--accent);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .provider-grid, .task-selection-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .provider-card {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(31, 27, 22, 0.12);
+      background: rgba(255, 252, 246, 0.92);
+      color: var(--text);
+      text-align: left;
+    }
+    .provider-card strong { font-size: 17px; }
+    .provider-card span, .provider-card small { color: var(--muted); }
+    .provider-card--selected {
+      border-color: rgba(156, 61, 22, 0.52);
+      background: linear-gradient(160deg, rgba(250, 229, 214, 0.96), rgba(255, 248, 238, 0.94));
+      box-shadow: inset 0 0 0 1px rgba(156, 61, 22, 0.18);
+    }
+    .task-batch-actions, .task-filter-group, .task-card__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .task-group-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .task-group-heading h4 { margin: 0; font-size: 17px; }
+    .task-group-heading span { color: var(--muted); font-size: 13px; }
+    .task-shot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+    .task-shot-chip {
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border: 1px solid rgba(31, 27, 22, 0.1);
+      border-radius: 16px;
+      background: rgba(255, 252, 246, 0.94);
+      color: var(--text);
+      text-align: left;
+    }
+    .task-shot-chip span {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 14px;
+    }
+    .task-shot-chip small { color: var(--muted); font-size: 12px; }
+    .task-shot-chip--selected {
+      border-color: rgba(156, 61, 22, 0.52);
+      background: linear-gradient(160deg, rgba(250, 229, 214, 0.96), rgba(255, 248, 238, 0.94));
+      box-shadow: inset 0 0 0 1px rgba(156, 61, 22, 0.18);
+    }
+    .task-empty-state {
+      margin: 0;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(31, 27, 22, 0.16);
+      color: var(--muted);
+      background: rgba(255, 252, 246, 0.72);
+    }
+    .task-list-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+    }
+    .task-list-toolbar h3, .task-list-toolbar p { margin: 0; }
+    .task-filter-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 27, 22, 0.12);
+      background: rgba(255, 248, 238, 0.88);
+      color: var(--text);
+      font: inherit;
+    }
+    .task-filter-chip--active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff8ee;
+    }
+    .task-list { display: grid; gap: 14px; }
+    .task-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(251, 246, 239, 0.88));
+    }
+    .task-card__topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .task-card__title { font-size: 20px; line-height: 1.1; }
+    .task-card__subline {
+      color: var(--muted);
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+    .task-card__metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .task-progress {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(31, 27, 22, 0.08);
+      overflow: hidden;
+    }
+    .task-progress__bar {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #9c3d16, #d2744e);
+    }
+    .task-status-badge {
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .task-status-badge--queued { background: rgba(157, 126, 45, 0.12); color: #7e5d12; }
+    .task-status-badge--running { background: rgba(44, 101, 124, 0.12); color: #1f6177; }
+    .task-status-badge--succeeded { background: rgba(57, 94, 73, 0.12); color: #2b573f; }
+    .task-status-badge--failed { background: rgba(153, 45, 34, 0.12); color: #8d2a20; }
+    .task-error-note, .task-muted-note { margin: 0; font-size: 14px; }
+    .task-error-note { color: #8d2a20; }
+    .task-muted-note { color: var(--muted); }
+    .action-button {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font: inherit;
+    }
+    .action-button--primary { background: var(--accent); color: #fff8ee; }
+    .action-button--ghost { background: rgba(255, 248, 238, 0.82); border-color: rgba(31, 27, 22, 0.12); color: var(--text); }
+    .action-button--success { background: rgba(57, 94, 73, 0.12); border-color: rgba(57, 94, 73, 0.2); color: #2b573f; }
+    .action-button--danger { background: rgba(153, 45, 34, 0.12); border-color: rgba(153, 45, 34, 0.2); color: #8d2a20; }
+    .provider-config-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(251, 246, 239, 0.88));
+    }
+    .provider-config-card__header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .provider-config-card__header span, .provider-config-card p { color: var(--muted); }
+    .provider-config-badge {
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .provider-config-badge--ready { background: rgba(57, 94, 73, 0.12); color: #2b573f; }
+    .provider-config-badge--pending { background: rgba(157, 126, 45, 0.12); color: #7e5d12; }
+    .prompt-workspace { display: grid; gap: 16px; }
+    .storyboard-shot-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .prompt-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      background: rgba(255, 250, 244, 0.86);
+    }
+    .prompt-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .storyboard-asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+    .storyboard-asset-thumb {
+      display: grid;
+      gap: 8px;
+      overflow: hidden;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      background: rgba(255, 252, 246, 0.96);
+    }
+    .storyboard-asset-thumb__image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 12px;
+      background: rgba(31, 27, 22, 0.05);
+    }
+    .storyboard-asset-thumb__label, .storyboard-asset-thumb strong, .storyboard-asset-thumb span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .storyboard-asset-thumb strong { color: var(--text); }
+    .storyboard-asset-thumb--missing, .storyboard-asset-thumb--empty {
+      align-content: center;
+      min-height: 120px;
+      background: rgba(31, 27, 22, 0.04);
+    }
+    .storyboard-asset-meta-list { display: grid; gap: 10px; }
+    .storyboard-asset-meta-item {
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      background: rgba(255, 252, 246, 0.72);
+    }
+    .storyboard-asset-meta-item__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .storyboard-asset-meta-item__header strong { font-size: 15px; }
+    .preview-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .preview-nav__link {
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(31, 27, 22, 0.1);
+      background: rgba(255, 252, 246, 0.9);
+    }
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .index-card {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 24px 80px rgba(73, 54, 35, 0.08);
+    }
+    .index-card h2 { margin: 0; font-size: 28px; }
+    .source-list { display: grid; gap: 8px; }
+    .source-list a { color: var(--accent); }
+    @media (max-width: 720px) {
+      main { width: min(100% - 28px, 1120px); padding-top: 28px; }
+      .hero { padding: 24px; border-radius: 24px; }
+      .hero p { font-size: 16px; }
+      .project-studio { grid-template-columns: 1fr; padding: 18px; }
+      .project-studio__track, .project-studio__grid { display: none; }
+      .project-studio__column--overview, .project-studio__column--storyboard, .project-studio__column--assets {
+        grid-column: auto;
+        margin-top: 0;
+      }
+      .project-kpi-grid { grid-template-columns: 1fr 1fr; }
+      .prompt-card__header, .task-card__topline, .provider-config-card__header, .task-panel__header, .task-selection-panel__meta, .task-group-heading, .task-list-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .storyboard-shot-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero hero--canvas">
+      <p class="eyebrow">Static Preview Entry</p>
+      <h1>Zhengci Zhiwai</h1>
+      <p>这套静态预览专门用于绕过当前 Windows 上 Next 启动挂起的问题，直接确认项目详情页和 storyboard 页的版式、信息顺序与内容完整度。</p>
+      <div class="chip-row">
+        <span class="chip">镜头 72</span>
+        <span class="chip">场次 6</span>
+        <span class="chip">Prompt 72</span>
+        <span class="chip">任务 13</span>
+      </div>
+    </section>
+
+    <section class="index-grid">
+      <article class="index-card">
+        <p class="eyebrow">Project</p>
+        <h2>项目详情预览</h2>
+        <p>对应 Next 项目页的三栏制作台布局，包含总览、镜头与 prompt 预览、资产与任务摘要。</p>
+        <div class="chip-row">
+          <span class="chip chip--ok">镜头 72</span>
+          <span class="chip chip--muted">任务 13</span>
+        </div>
+        <div class="workflow-node__actions">
+          <a class="workflow-node__link workflow-node__link--primary" href="./project.html">打开项目详情</a>
+        </div>
+      </article>
+
+      <article class="index-card">
+        <p class="eyebrow">Storyboard</p>
+        <h2>分镜页预览</h2>
+        <p>对应 Next storyboard 页的场次卡片与逐镜资产卡片，保留图像缩略图、任务摘要和 prompt 预览。</p>
+        <div class="chip-row">
+          <span class="chip chip--ok">场次 6</span>
+          <span class="chip chip--muted">图像资产 15/39</span>
+        </div>
+        <div class="workflow-node__actions">
+          <a class="workflow-node__link workflow-node__link--primary" href="./storyboard.html">打开 storyboard</a>
+          <a class="workflow-node__link" href="../storyboard/zhengci-zhiwai.storyboard.html">打开原 storyboard HTML</a>
+        </div>
+      </article>
+
+      <article class="index-card">
+        <p class="eyebrow">Sources</p>
+        <h2>数据来源</h2>
+        <p>预览页直接读取现有 storyboard 产物与任务库，不依赖 Next 运行时。</p>
+        <div class="source-list mono">
+          <a href="../storyboard/zhengci-zhiwai.storyboard.json">storyboard JSON</a>
+          <a href="../storyboard/zhengci-zhiwai.storyboard.html">原 storyboard HTML</a>
+          <span>tasks from .app-data/ai-video-generator.sqlite</span>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

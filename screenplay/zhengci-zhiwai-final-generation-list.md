@@ -1,253 +1,131 @@
-# 《证词之外》最终视频生成清单（当前版）
+# 《证词之外》最终视频生成清单（2026-06-01 重拆版）
 
-生成日期：2026-05-21
-推荐方案：以逐镜版为主、合并版为辅。当前主执行结构为 72 个镜头，建议先做测试包，再按三幕顺序批量生成，最后在剪辑阶段压到约 5 分钟成片。
-
----
+生成日期：2026-06-01
+执行策略：以新版 72 镜为唯一顺序基准，先做 12 镜测试包，再批量生成全片。
 
 ## 一、当前版源文件关系
 
 1. 主剧本：screenplay/zhengci-zhiwai-screenplay.md
 2. 分镜节拍：screenplay/zhengci-zhiwai-storyboard-beats.md
 3. 总 shot list：screenplay/zhengci-zhiwai-shot-list.md
-4. 第一幕逐镜：screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
-5. 第二幕逐镜：screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
-6. 第三幕逐镜：screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-7. 第一幕合并版：screenplay/zhengci-zhiwai-act1-video-prompts.md
-8. 第二幕合并版：screenplay/zhengci-zhiwai-act2-video-prompts.md
-9. 第三幕合并版：screenplay/zhengci-zhiwai-act3-video-prompts.md
-10. 资产图提示词：screenplay/zhengci-zhiwai-asset-prompts.md
-11. 测试批次：screenplay/zhengci-zhiwai-seedance-test-batch.md
+4. 参考图映射：screenplay/zhengci-zhiwai-seedance-reference-map.md
+5. 资产提示词：screenplay/zhengci-zhiwai-asset-prompts.md
+6. 资产画布：screenplay/zhengci-zhiwai-asset-canvas.html
+7. storyboard prompt 源：screenplay/zhengci-zhiwai-storyboard-prompts.md
 
 执行原则：
+
 - 所有逐镜生成以 72 镜 shot list 为唯一顺序基准。
-- 所有图参命名以 asset prompts 当前版为准，不再沿用旧版旧道具体系。
-- 合并版只用于快速验证节奏，不替代逐镜版。
+- 所有资产命名以当前重拆后的 alias 和文件名为准，不再沿用旧版陈伯/消防楼梯/监控终幕体系。
+- 项目详情页、storyboard 页和资产画布都以本轮 generation list 为执行顺序参考。
 
----
+## 二、12 镜测试包
 
-## 二、当前资产清单（20 张主资产）
-
-| # | 文件名 | 类型 | 用途 |
-| --- | --- | --- | --- |
-| 1 | lin_shen.png | 角色 | 林深定妆照 |
-| 2 | zhou_yan.png | 角色 | 周妍定妆照 |
-| 3 | chen_bo.png | 角色 | 陈伯定妆照 |
-| 4 | lin_wan_bound.png | 角色 | 林晚被控制状态 |
-| 5 | study_room_wide.png | 场地 | 书房冷开场 |
-| 6 | corridor_307_door.png | 场地 | 三楼 307 门口 |
-| 7 | room_307_entry.png | 场地 | 307 室入口视角 |
-| 8 | room_307_reverse.png | 场地 | 307 室反角视角 |
-| 9 | fire_stair_wide.png | 场地 | 消防楼梯 |
-| 10 | floor29_wide.png | 场地 | 二十九楼走廊 |
-| 11 | device_room_wide.png | 场地 | 设备间全景 |
-| 12 | terrace_wide.png | 场地 | 露台全景 |
-| 13 | study_screen_waveform.png | 道具/UI | 开场与闪回音频编辑界面 |
-| 14 | smart_speaker_idle.png | 道具 | 307 智能音箱待机（触摸屏熄灭） |
-| 15 | smart_speaker_unlocked.png | 道具 | 307 智能音箱解锁后（触摸屏显示解锁状态） |
-| 16 | wall_speaker_red.png | 道具 | 设备间墙面音箱红灯 |
-| 17 | ceiling_speaker.png | 道具 | 天花板广播音箱 |
-| 18 | device_screen_popup.png | 道具/UI | “林晚 语音复刻模型——生成完成” |
-| 19 | hard_drive_rack.png | 道具 | 硬盘柜和存储系统 |
-| 20 | white_phone_call.png | 道具 | 露台白色手机通话状态 |
-
-二层补充图参规划：
-
-第一优先：一旦测试包失败就立刻补
-- StudyDeskWide：书房桌面与电脑、台灯、林深坐姿的组合构图，用于 001、005
-- Room307PowerBox：307 玄关弱电箱绿灯近景，用于 008
-- SmartSpeakerBlue：307 智能音箱待机蓝灯状态（触摸屏熄灭可见），用于 009
-- SmartSpeakerRed：307 智能音箱进入口令输入前的红灯状态（触摸屏亮起数字口令界面），用于 018
-- SmartSpeakerRedGreen：307 智能音箱红绿闪烁转绿状态（触摸屏显示口令校验中），用于 021
-- DeviceScreenFiles：设备间文件列表界面，用于 038
-- WhitePhoneCallBroken：露台白色手机摔裂后仍漏声的状态，用于 064-066
-- RailingJointClose：露台护栏连接处近景，用于 056
-
-第二优先：若空间连续性不稳再补
-- Room307HalfMoved：半搬空307全景基底，用于 006-017
-- Room307Table：307 茶几或木桌局部，用于 007
-- Room307DoorDirection：307 室内朝门口方向构图，用于 024-025
-- Room307Door：307 房门内侧与门框关系，用于 026、060
-- FireStairDoor：消防铁门与楼梯间冷光，用于 027
-- FireStairTop：楼梯顶部俯拍位，用于 029
-- FireStairMid：楼梯转角背影位，用于 030
-- Floor29Door：29 楼安全门近景，用于 031
-- DeviceRoomDoorCrack：设备间虚掩门缝，用于 034
-- DeviceToTerraceDoor：设备间朝露台铁门方向构图，用于 048
-
-第三优先：若表演和道具细节不稳再补
-- ZhouYanPhone：周妍手机聊天界面，用于 010、015
-- ZhouYanPhoneCaseCue：周妍手机壳边角导线（与露台白色手机同花纹），用于 012
-- LinShenHand：林深手部局部，用于 003、018、021
-- StudyPaper：书桌纸面“307 / 访问权限 / 声纹阈值”，用于 004
-- ZhouYanPhoneGallery：手机相册边角露出旧偷拍照片，用于 040
-- LinWanVoice：仅声音设定参考，不要求画面出人，用于 022-024 的语音统一
-
----
-
-## 三、测试优先顺序（先做这一批）
-
-### 当前工作区就绪状态
-
-已存在，可直接复用：
-- lin_shen.png
-- chen_bo.png
-- room_307_entry.png
-- study_room_wide 的旧近似替代：lin_room_wide.png
-
-仍缺失，补齐后再跑当前 11 镜测试更稳：
-- zhou_yan.png
-- lin_wan_bound.png
-- study_room_wide.png
-- study_screen_waveform.png
-- corridor_307_door.png
-- smart_speaker_unlocked.png
-- device_screen_popup.png
-- terrace_wide.png
-- white_phone_call.png
-
-可作为旧版近似底图但不建议直接混用：
-- corridor_307.png：可参考门口旧构图，但当前版应改成 corridor_307_door.png
-- corridor_wide.png：仍可作为老公寓走廊气质参考，但当前测试包本轮不直接依赖
-- room_307_reverse.png：仍可用于后续 307 反角镜头参考
-
-结论：
-- 先生成缺失的 9 张主资产，再跑 11 镜测试，性价比最高。
-- 如果你只想立刻试跑一小批，目前最接近可跑的是 Shot 001；但它仍建议补出 study_room_wide.png，而不要继续沿用 lin_room_wide.png。
-
-推荐生成顺序（最小可开测路径）：
-1. study_room_wide.png：解锁 Shot 001 的正式测试底图。
-2. study_screen_waveform.png：解锁 Shot 002，并把开场 callback 组完整闭合。
-3. zhou_yan.png：解锁 Shot 052、057，并为后续大量镜头建立角色一致性。
-4. smart_speaker_unlocked.png：解锁 Shot 021，是第一幕关键机制镜头。
-5. device_screen_popup.png：解锁 Shot 043、072，并为终幕系统界面统一视觉基底。
-6. terrace_wide.png：解锁 Shot 050、052、056、057 的空间基底，是第三幕测试核心。
-7. white_phone_call.png：解锁 Shot 050，并为 064-066 的后续破裂手机状态提供母体。
-8. lin_wan_bound.png：解锁 Shot 070，直接决定终极反转是否成立。
-9. corridor_307_door.png：解锁 Shot 060，让“即时触发首段语音”的监控门口关系站住。
-
-按这个顺序的最小分批建议：
-- 第一批：study_room_wide.png、study_screen_waveform.png、zhou_yan.png、smart_speaker_unlocked.png
-- 第二批：device_screen_popup.png、terrace_wide.png、white_phone_call.png
-- 第三批：lin_wan_bound.png、corridor_307_door.png
-
-每批完成后可立即验证的测试镜头：
-- 第一批完成后：001、002、021
-- 第二批完成后：043、050、052、056、057、072
-- 第三批完成后：060、070
-
-当前优先测试包以 screenplay/zhengci-zhiwai-seedance-test-batch.md 为准，共 11 镜：
-
-| 批次序号 | Shot | 目标 |
+| 序号 | Shot | 目标 |
 | --- | --- | --- |
-| 1 | 001 | 开场误导是否成立 |
-| 2 | 002 | 波形 callback 是否清楚 |
-| 3 | 021 | 智能音箱解锁是否可信 |
-| 4 | 043 | 语音复刻模型弹窗是否击中反转 |
-| 5 | 050 | 白色手机诱导是否成立 |
-| 6 | 052 | 林深“像救人”的两层解读是否成立 |
-| 7 | 056 | 护栏异响是否真实 |
-| 8 | 057 | 坠落是否成立 |
-| 9 | 060 | 即时触发机制是否讲清 |
-| 10 | 070 | 林晚未死的监控反转是否成立 |
-| 11 | 072 | 系统播报终幕是否够冷 |
+| 1 | 005 | 未知来电是否足够切开冷开场 |
+| 2 | 015 | “找我哥”语音是否可信又带轻微人工感 |
+| 3 | 025 | 音箱口令校验是否成立 |
+| 4 | 029 | 解锁成功的机械感是否站得住 |
+| 5 | 036 | 电梯卡在15层的压迫是否有效 |
+| 6 | 045 | 设备间文件列表能否一眼说明非法采样 |
+| 7 | 047 | 墙面音箱假求救是否足够诡异 |
+| 8 | 053 | 露台空间危险性是否讲清 |
+| 9 | 060 | “救人假象”是否成立 |
+| 10 | 063 | 松手反转是否命中 |
+| 11 | 071 | 录音笔自动回放是否清晰 |
+| 12 | 072 | 黑鞋收尾是否保持匿名压迫 |
 
-建议：
-- 测试包全部通过后，再进入整幕批量生成。
-- 若测试包里 050 / 052 / 056 / 057 任何一镜失效，先不要批量做第三幕。
+## 三、72 镜逐镜生成表
 
----
+| 序号 | Shot | 时长 | 场次 | 镜头摘要 | 生成目标 | 参考资产 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 001 | 5秒 | S0 | 林深书房定场 | 立普通加班外壳 | LinShen, StudyRoomWide | 不泄底 |
+| 2 | 002 | 4秒 | S0 | 书桌留白 | 立生活化桌面 | StudyDeskWide, StudyPhotoSet | 只留正常物件 |
+| 3 | 003 | 4秒 | S0 | 干净屏幕 | 维持正常办公错觉 | StudyDeskWide | 禁止后台痕迹 |
+| 4 | 004 | 4秒 | S0 | 克制敲击 | 埋开场回收点 | StudyDeskWide | 只拍手部动作 |
+| 5 | 005 | 4秒 | S0 | 未知来电亮起 | 切断静默并开局 | UnknownCallerPhone | 号码必须陌生 |
+| 6 | 006 | 4秒 | S0 | 警惕一闪 | 给出极短真实反应 | LinShen | 不能夸张 |
+| 7 | 007 | 6秒 | S0 | 接起电话 | 说明双方陌生 | LinShen, UnknownCallerPhone | 周妍只给必要信息 |
+| 8 | 008 | 7秒 | S0 | 装作陌生 | 确立林深伪装 | LinShen, UnknownCallerPhone | 307信息落点清楚 |
+| 9 | 009 | 5秒 | S0 | 立刻出门 | 完成入局动作 | LinShen, StudyDeskWide | 动作利落 |
+| 10 | 010 | 5秒 | S0 | 黑场转307 | 压进下场空间 | StudyRoomWide | 用关门声转场 |
+| 11 | 011 | 5秒 | S1 | 307停摆空间 | 立住旧公寓死寂 | Room307Entry | 监控感构图 |
+| 12 | 012 | 4秒 | S1 | 生活残留 | 留双人生活痕迹 | Room307Reverse | 不拍得过满 |
+| 13 | 013 | 5秒 | S1 | 周妍反复拨号 | 说明失联仍持续 | ZhouYan, Room307Entry | 冷静而焦灼 |
+| 14 | 014 | 4秒 | S1 | 点开语音 | 压一拍再入线索 | UnknownCallerPhone | 手指停顿清楚 |
+| 15 | 015 | 6秒 | S1 | 听见找我哥 | 落下线索与人工感 | ZhouYan, UnknownCallerPhone | 先听后看四周 |
+| 16 | 016 | 3秒 | S1 | 手机壳导线 | 埋白色手机回扣 | ZhouYanPhoneCaseCue | 一闪而过 |
+| 17 | 017 | 4秒 | S1 | 待机音箱 | 让陷阱先潜伏 | SmartSpeakerIdle, Room307Entry | 蓝灯低频闪 |
+| 18 | 018 | 4秒 | S1 | 林深入场 | 带急迫感入屋 | LinShen, Room307Entry | 先看人再看屋 |
+| 19 | 019 | 5秒 | S1 | 陌生确认 | 建立陌生关系与戒备 | LinShen, ZhouYan | 不可像旧识 |
+| 20 | 020 | 6秒 | S1 | 周妍交代线索 | 压实非法收音背景 | ZhouYan | 语速稳信息密 |
+| 21 | 021 | 5秒 | S1 | 林深继续追问 | 保持协助者姿态 | LinShen | 只问线索 |
+| 22 | 022 | 5秒 | S1 | 递交手机 | 让“只有你能开”成立 | LinShen, UnknownCallerPhone | 同步点出音箱权限 |
+| 23 | 023 | 5秒 | S1 | 听完无破绽 | 完整伪装忧虑 | LinShen, UnknownCallerPhone | 神色要稳 |
+| 24 | 024 | 4秒 | S1 | 走向音箱 | 建立即将输入口令 | LinShen, SmartSpeakerIdle | 不能拍清界面 |
+| 25 | 025 | 5秒 | S1 | 口令加载 | 锁住机制真实性 | SmartSpeakerRed, SmartSpeakerRedGreen | 老旧延迟感 |
+| 26 | 026 | 4秒 | S1 | 门缝扫光 | 外部压迫第一次出现 | SecurityFlashlightGap | 光束必须窄狠 |
+| 27 | 027 | 4秒 | S1 | 一起噤声 | 伪造共同躲险 | LinShen, ZhouYan | 身位关系清楚 |
+| 28 | 028 | 6秒 | S1 | 去拿备用钥匙 | 压迫暂撤不解除 | SecurityFlashlightGap | 保安不露脸 |
+| 29 | 029 | 4秒 | S1 | 解锁成功 | 机械卡点成立 | SmartSpeakerUnlocked | 绿灯状态清楚 |
+| 30 | 030 | 7秒 | S1 | 线索指向29楼 | 完成纵向转场 | SmartSpeakerUnlocked, ZhouYan | 语音与催进同镜 |
+| 31 | 031 | 4秒 | S2 | 离开307 | 切入纵向移动 | Room307Entry | 房门轻合 |
+| 32 | 032 | 4秒 | S2 | 冲进电梯 | 建立新路径 | ElevatorCabin, ElevatorPanel29 | 禁用消防楼梯 |
+| 33 | 033 | 5秒 | S2 | 判断更大阴影 | 保留周妍主动判断 | ZhouYan, ElevatorCabin | 台词压低 |
+| 34 | 034 | 4秒 | S2 | 温和催进 | 林深继续推进节奏 | LinShen, ElevatorCabin | 语气温和 |
+| 35 | 035 | 4秒 | S2 | 楼层跳动 | 制造纵向煎熬 | ElevatorPanel29 | 数字可读 |
+| 36 | 036 | 5秒 | S2 | 停在十五层 | 完成密闭惊吓 | ElevatorCabin, ElevatorPanel29 | 灯光频闪 |
+| 37 | 037 | 4秒 | S2 | 周妍戒备 | 拉紧人物状态 | ZhouYan, ElevatorCabin | 扫门缝 |
+| 38 | 038 | 4秒 | S2 | 林深护位 | 继续伪保护 | LinShen, ElevatorCabin | 一寸挡位 |
+| 39 | 039 | 5秒 | S2 | 门外脚步 | 威胁靠声音完成 | ElevatorCabin | 不见人脸 |
+| 40 | 040 | 4秒 | S2 | 黑暗僵持 | 留窒息空白 | ElevatorCabin, ZhouYan | 时间拉长 |
+| 41 | 041 | 5秒 | S2 | 电梯重启 | 恢复运行太恰好 | ElevatorPanel29, ElevatorCabin | 29层重新亮起 |
+| 42 | 042 | 6秒 | S2 | 29楼入口 | 先讲清设备间与露台关系 | Floor29Wide | 空旷冷白 |
+| 43 | 043 | 4秒 | S3 | 推门进设备间 | 转入声音工厂 | DeviceRoomDoorCrack, Floor29Wide | 冷意扑面 |
+| 44 | 044 | 6秒 | S3 | 设备间全景 | 立长期运转中枢 | DeviceRoomWide | 非临时现场 |
+| 45 | 045 | 5秒 | S3 | 采样文件列表 | 一眼看懂非法采样 | DeviceScreenFiles | 中文条目可读 |
+| 46 | 046 | 4秒 | S3 | 周妍取证 | 强化她的主动性 | ZhouYan, DeviceScreenFiles | 快速偷拍 |
+| 47 | 047 | 5秒 | S3 | 墙里求救声 | 空间本身变声源 | WallSpeakerRed | 红灯必须亮起 |
+| 48 | 048 | 4秒 | S3 | 被声音拽走 | 查证切成救人 | ZhouYan, WallSpeakerRed | 转身要快 |
+| 49 | 049 | 4秒 | S3 | 假装追赶 | 林深继续装帮忙 | LinShen, ZhouYan | 嘴上劝阻 |
+| 50 | 050 | 4秒 | S3 | 穿过通道 | 连续到露台 | DeviceRoomWide, TerraceWide | 风声渐起 |
+| 51 | 051 | 4秒 | S3 | 推开露台门 | 外景压迫开始 | TerraceWide | 夜风灌镜头 |
+| 52 | 052 | 4秒 | S3 | 诱饵亮起 | 手机先牵引人物 | WhitePhoneCall | 震动亮屏 |
+| 53 | 053 | 6秒 | S4 | 露台定场 | 先讲清高空结构 | TerraceWide | 危险空间成立 |
+| 54 | 054 | 4秒 | S4 | 认出晚晚手机 | 抬高希望值 | ZhouYan, WhitePhoneCall | 脱口而出 |
+| 55 | 055 | 4秒 | S4 | 退路锁死 | 客观切断退路 | TerraceWide | 门锁声闷重 |
+| 56 | 056 | 5秒 | S4 | 伪保护动作 | 继续误判林深 | LinShen, ZhouYan, TerraceWide | 没真带离边缘 |
+| 57 | 057 | 4秒 | S4 | 挣开控制 | 周妍主动挣脱 | ZhouYan | 执念压过警觉 |
+| 58 | 058 | 5秒 | S4 | 越过安全线 | 主动探向手机 | ZhouYan, WhitePhoneCall, TerraceWide | 身体重心外移 |
+| 59 | 059 | 3秒 | S4 | 护栏裂响 | 给坠落物理锚点 | RailingJointClose | 裂响真实 |
+| 60 | 060 | 5秒 | S4 | 瞬间翻坠 | 完成“救人假象” | LinShen, ZhouYan, TerraceWide | 先抓住手腕 |
+| 61 | 061 | 5秒 | S5 | 最后的好人脸 | 反转前最后安慰 | LinShen | 仰拍逆光 |
+| 62 | 062 | 4秒 | S5 | 焦急褪净 | 黑化渐变成立 | LinShen | 眼神冷下来 |
+| 63 | 063 | 5秒 | S5 | 缓慢松手 | 终极反转落点 | LinShen | 台词与松手同拍 |
+| 64 | 064 | 5秒 | S5 | 慢镜下坠 | 打开闪回通道 | TerraceWide, ZhouYan | 环境抽离 |
+| 65 | 065 | 5秒 | S5 | 利润后台 | 揭示商业动机 | LinShen, AudioProfitDashboard | 暴利感清楚 |
+| 66 | 066 | 5秒 | S5 | 林晚软禁 | 落真实处境 | LinWanConfined, LockedRoomWide | 活着但被控制 |
+| 67 | 067 | 5秒 | S5 | 开场真相 | 回收书房伏笔 | LinShen, StudyScreenWaveform, StudyDeskWide | 真界面显形 |
+| 68 | 068 | 6秒 | S5 | 预设陷阱 | 完成布局闭环 | RailingJointClose, ElevatorPanel29, SecurityGuardShadow | 快切完成 |
+| 69 | 069 | 5秒 | S5 | 全程假面 | 拆穿前文表演 | LinShen, SmartSpeakerUnlocked, ElevatorCabin | 用对白碎片回响 |
+| 70 | 070 | 4秒 | S5 | 回到露台 | 林深情绪归零 | LinShen, TerraceWide | 冷风回归 |
+| 71 | 071 | 6秒 | S5 | 录音笔回放 | 给真相短暂外放窗口 | RecorderPenClose | 台词必须完整 |
+| 72 | 072 | 6秒 | S5 | 黑鞋收尾 | 保持匿名压迫 | GroundShoesClose, RecorderPenClose | 只拍脚和手 |
 
-## 四、整片批量生成顺序（72 镜）
+## 四、批量生成顺序
 
-### 批次 A：第一幕上半（001-013）
-源文件：screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
-内容：书房冷开场、307 回访、弱电前提、死者来信
-目的：先锁人物、书房、307 室、智能音箱待机状态
+### 批次 A：书房与307设局（001-030）
+目标：锁定林深伪装、307停摆空间和音箱解锁链条。
 
-### 批次 B：第一幕下半（014-025）
-源文件：screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
-内容：林深赶到、保全语音、数字口令解锁、指向二十九楼设备间
-目的：锁定林深前期好人姿态与“在音箱触摸屏输入双段口令且后半截被遮挡”的私密性
+### 批次 B：电梯与设备间压迫（031-052）
+目标：锁定15层停顿、29楼异常权限和声音工厂质感。
 
-### 批次 C：第二幕上半（026-035）
-源文件：screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
-内容：离开307、消防楼梯、二十九楼走廊、设备间门缝诱导
-目的：锁定三楼到二十九楼的空间连续性
+### 批次 C：露台与坠落回收（053-072）
+目标：锁定白色手机诱导、松手反转、闪回真相与录音笔收尾。
 
-### 批次 D：第二幕下半（036-048）
-源文件：screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
-内容：设备间全景、硬盘柜、文件列表、弹窗、转向露台
-目的：锁定声音工厂质感和真假声源分层
+## 五、通过标准
 
-### 批次 E：第三幕上半（049-056）
-源文件：screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-内容：露台危险空间、白色手机、伪保护、退路消失、护栏异响
-目的：锁定露台诱导链条是否真实可信
-
-### 批次 F：第三幕中段（057-063）
-源文件：screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-内容：坠落、五段闪回、回到坠落视角
-目的：锁定反转信息的命中顺序与闪回密度
-
-### 批次 G：第三幕收尾（064-072）
-源文件：screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-内容：物证清除、陈伯接回现实线、控制室、林晚未死、系统播报
-目的：锁定最终冷结尾和“样本化”主题
-
----
-
-## 五、合并版使用时机
-
-如果模型状态不稳定、想先看段落节奏，可按以下顺序跑合并版：
-
-| 幕 | 文件 | 建议用途 |
-| --- | --- | --- |
-| 第一幕 | screenplay/zhengci-zhiwai-act1-video-prompts.md | 先看开场误导、307 回访、音箱解锁节奏 |
-| 第二幕 | screenplay/zhengci-zhiwai-act2-video-prompts.md | 先看楼层迁移、设备间信息落地 |
-| 第三幕 | screenplay/zhengci-zhiwai-act3-video-prompts.md | 先看露台诱导、闪回、终幕冷收尾 |
-
-合并版只用于：
-- 快速测试风格和空间
-- 检查信息密度是否过载
-- 检查角色脸和灯光是否稳定
-
-合并版不用于：
-- 最终镜头级交付
-- 精确控制闪回落点
-- 精确控制露台动作安全逻辑
-
----
-
-## 六、关键一致性检查
-
-### 角色一致性
-- 林深前半程必须像帮助者，不允许过早显露操控欲
-- 周妍必须是主动追真相的人，不拍成被拖着走
-- 陈伯前半程尽量延后暴露，终场才完整接回现实线
-- 林晚终场必须是“还活着但被持续采样”，不是尸体感
-
-### 道具一致性
-- 307 智能音箱分待机蓝灯（触摸屏熄灭）、口令输入红灯（触摸屏亮起）、解锁绿灯（触摸屏显示解锁）三种状态
-- 设备间弹窗文案固定为“林晚 语音复刻模型——生成完成”
-- 露台白色手机始终是通话诱导声源，不要变成录像界面
-- 硬盘柜与控制界面必须统一成真实工业软件感
-
-### 空间一致性
-- 307 所在楼层必须始终保持为三楼，禁止错误楼层漂移
-- 去二十九楼的路线必须经消防楼梯
-- 露台铁门、护栏、维修箱和白色手机的位置关系必须固定
-- 控制室要延续设备间的现实工业感，不要科幻化
-
----
-
-## 七、通过标准
-
-进入整片批量前，至少满足以下条件：
-- [ ] 11 镜测试包已通过
-- [ ] 林深、周妍、陈伯、林晚四张角色资产已稳定
-- [ ] 307、消防楼梯、29 楼走廊、设备间、露台五个主场景已锁定
-- [ ] 智能音箱、设备弹窗、白色手机、监控屏四组关键道具已稳定
-- [ ] 第三幕 050 / 052 / 056 / 057 / 070 / 072 的因果链已经成立
-
-达到以上条件后，再开始整片 72 镜批量生成。
+- 12镜测试包通过后，再批量跑全片。
+- 关键镜头 025、029、036、045、053、060、063、071、072 任意一镜失效，都不能进入整片批量阶段。
+- 若新 reference map 绑定与 storyboard 页面显示不一致，以本 generation list 的顺序和摘要为准回查。
