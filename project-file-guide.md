@@ -94,7 +94,6 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 | --- | --- |
 | screenplay/zhengci-zhiwai-treatment.md | 项目 treatment / 概念整理 |
 | screenplay/zhengci-zhiwai-screenplay.md | 主剧本 Markdown 版本 |
-| screenplay/zhengci-zhiwai-screenplay.txt | 主剧本文本版 |
 | screenplay/zhengci-zhiwai-storyboard-beats.md | 故事板节拍拆分 |
 | screenplay/zhengci-zhiwai-shot-list.md | 当前 72 镜唯一顺序基准 |
 | screenplay/zhengci-zhiwai-final-generation-list.md | 12 镜测试包与 72 镜批量生成顺序真源 |
