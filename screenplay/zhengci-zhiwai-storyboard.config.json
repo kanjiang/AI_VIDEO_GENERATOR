@@ -15,45 +15,77 @@
             "description": "兼容别名，映射到 SmartSpeakerUnlocked",
             "canonicalAlias": "SmartSpeakerUnlocked"
         },
-        "FireStairWide": {
-            "alias": "FireStairWide",
-            "fileName": "fire_stair_wide.png",
-            "description": "消防楼梯间全景"
-        },
-        "FireStairDoor": {
-            "alias": "FireStairDoor",
-            "fileName": "fire_stair_door.png",
-            "description": "消防铁门近景"
-        },
-        "FireStairTop": {
-            "alias": "FireStairTop",
-            "fileName": "fire_stair_top.png",
-            "description": "楼梯顶部俯拍位"
-        },
-        "FireStairMid": {
-            "alias": "FireStairMid",
-            "fileName": "fire_stair_mid.png",
-            "description": "楼梯转角背影位"
-        },
         "Floor29Door": {
             "alias": "Floor29Door",
             "fileName": "floor29_door.png",
-            "description": "二十九楼安全门近景"
+            "description": "二十九楼安全门近景",
+            "canonicalAlias": "Floor29Door"
         },
         "Room307HalfMoved": {
             "alias": "Room307HalfMoved",
             "fileName": "room_307_half_moved.png",
-            "description": "半搬空307全景"
+            "description": "半搬空307全景",
+            "canonicalAlias": "Room307HalfMoved"
         },
         "Room307Table": {
             "alias": "Room307Table",
             "fileName": "room_307_table.png",
-            "description": "307桌面局部"
+            "description": "307桌面局部",
+            "canonicalAlias": "Room307Table"
         },
         "Room307Door": {
             "alias": "Room307Door",
             "fileName": "room_307_door.png",
-            "description": "307房门内侧"
+            "description": "307房门内侧",
+            "canonicalAlias": "Room307Door"
+        },
+        "Room307DoorDirection": {
+            "alias": "Room307DoorDirection",
+            "fileName": "room_307_door_direction.png",
+            "description": "307室内朝门口方向构图",
+            "canonicalAlias": "Room307DoorDirection"
+        },
+        "DeviceToTerraceDoor": {
+            "alias": "DeviceToTerraceDoor",
+            "fileName": "device_to_terrace_door.png",
+            "description": "设备间朝露台方向构图",
+            "canonicalAlias": "DeviceToTerraceDoor"
+        },
+        "HardDriveRack": {
+            "alias": "HardDriveRack",
+            "fileName": "hard_drive_rack.png",
+            "description": "设备间硬盘柜近景",
+            "canonicalAlias": "HardDriveRack"
+        },
+        "ZhouYanPhone": {
+            "alias": "ZhouYanPhone",
+            "fileName": "zhou_yan_phone.png",
+            "description": "周妍手机聊天或语音界面",
+            "canonicalAlias": "ZhouYanPhone"
+        },
+        "ZhouYanPhoneGallery": {
+            "alias": "ZhouYanPhoneGallery",
+            "fileName": "zhou_yan_phone_gallery.png",
+            "description": "周妍手机相册边角",
+            "canonicalAlias": "ZhouYanPhoneGallery"
+        },
+        "LinShenHand": {
+            "alias": "LinShenHand",
+            "fileName": "lin_shen_hand.png",
+            "description": "林深手部局部",
+            "canonicalAlias": "LinShenHand"
+        },
+        "StudyPaper": {
+            "alias": "StudyPaper",
+            "fileName": "study_paper.png",
+            "description": "书桌纸面关键词提示",
+            "canonicalAlias": "StudyPaper"
+        },
+        "CeilingSpeaker": {
+            "alias": "CeilingSpeaker",
+            "fileName": "ceiling_speaker.png",
+            "description": "天花板广播音箱",
+            "canonicalAlias": "CeilingSpeaker"
         }
     }
 }

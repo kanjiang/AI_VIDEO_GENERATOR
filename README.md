@@ -1,5 +1,13 @@
 # AI_VIDEO_GENERATOR
 
+## File Guide
+
+如果需要先理解工程里每个主要目录和文件是做什么的，先看：
+
+```text
+project-file-guide.md
+```
+
 ## Storyboard CLI
 
 项目里现在有一个独立的故事板生成器，用来把当前视频工作流压成一个可浏览的故事板页面：
@@ -75,3 +83,44 @@ screenplay/<slug>-storyboard.config.json
 ```
 
 当前 zhengci-zhiwai 已经把旧 alias 兼容映射移到了这个配置文件里，后续别的项目也可以按同样方式扩展，而不用继续改 CLI 主脚本。
+
+## Video Prompt CLI
+
+项目里现在还有一个逐镜 prompt 生成器，用来把 zhengci-zhiwai 当前的 shot list、generation list 和 reference map 同步成可执行 prompt 文档：
+
+- 输入：shot list、final generation list、reference map
+- 输出：三幕逐镜 prompt、三幕 multi-shot prompt、storyboard prompt 源
+- 目的：避免 act1/act2/act3 prompt 与 storyboard prompt 各自漂移
+
+### 默认运行
+
+```bash
+node screenplay/build_video_prompts.js
+```
+
+### 当前会重写的文件
+
+```text
+screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
+screenplay/zhengci-zhiwai-act1-video-prompts.md
+screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
+screenplay/zhengci-zhiwai-act2-video-prompts.md
+screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
+screenplay/zhengci-zhiwai-act3-video-prompts.md
+screenplay/zhengci-zhiwai-storyboard-prompts.md
+```
+
+### 推荐回归顺序
+
+```bash
+node screenplay/build_video_prompts.js
+node screenplay/build_storyboard.js zhengci-zhiwai
+```
+
+如果还在补图，再检查：
+
+```text
+screenplay/zhengci-zhiwai-missing-assets.md
+screenplay/zhengci-zhiwai-missing-assets-task-board.md
+project-file-guide.md
+```

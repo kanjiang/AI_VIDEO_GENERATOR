@@ -1,6 +1,6 @@
 {
   "projectSlug": "zhengci-zhiwai",
-  "generatedAt": "2026-06-01T09:48:18.113Z",
+  "generatedAt": "2026-06-02T07:26:18.389Z",
   "sourceFiles": {
     "shotList": "screenplay\\zhengci-zhiwai-shot-list.md",
     "referenceMap": "screenplay\\zhengci-zhiwai-seedance-reference-map.md",
@@ -15,9 +15,9 @@
     "totalScenes": 6,
     "shotsWithBindings": 72,
     "shotsWithPrompts": 72,
-    "assetsDefined": 39,
-    "visualAssetsGenerated": 15,
-    "visualAssetsTotal": 39
+    "assetsDefined": 43,
+    "visualAssetsGenerated": 18,
+    "visualAssetsTotal": 43
   },
   "warnings": {
     "unresolvedAliases": [],
@@ -37,8 +37,8 @@
           "dialogueOrSound": "低频设备底噪",
           "duration": "5秒",
           "notes": "开场必须像普通加班状态",
-          "promptTitle": "书房定场",
-          "promptText": "冷暖反差书房里，林深独坐桌前，表面只是普通加班状态。",
+          "promptTitle": "林深书房定场",
+          "promptText": "冷暖反差书房里，林深独坐桌前，神情平和克制。重点是立普通加班外壳，执行时不泄底。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -89,7 +89,7 @@
           "duration": "4秒",
           "notes": "强化“正常人”假象",
           "promptTitle": "书桌留白",
-          "promptText": "桌面只留生活照、耳机和整齐文具，不出现任何幕后痕迹。",
+          "promptText": "桌上只有电脑、生活照、闲置耳机和整齐文具，没有反派痕迹。重点是立生活化桌面，执行时只留正常物件。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "StudyDeskWide",
@@ -140,7 +140,7 @@
           "duration": "4秒",
           "notes": "禁止过早剧透声纹编辑",
           "promptTitle": "干净屏幕",
-          "promptText": "电脑前台仅显示普通办公界面，绝不提前暴露声纹编辑后台。",
+          "promptText": "电脑前台只显示普通办公界面，后台编辑窗口被完全遮住。重点是维持正常办公错觉，执行时禁止后台痕迹。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "StudyDeskWide"
@@ -178,7 +178,7 @@
           "duration": "4秒",
           "notes": "动作要稳定、理性",
           "promptTitle": "克制敲击",
-          "promptText": "手部近景里，林深平稳敲键，动作理性克制。",
+          "promptText": "林深指尖平稳敲键，像收尾工作，实则在做最后参数微调。重点是埋开场回收点，执行时只拍手部动作。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "StudyDeskWide"
@@ -215,8 +215,8 @@
           "dialogueOrSound": "手机铃声",
           "duration": "4秒",
           "notes": "铃声打破静默",
-          "promptTitle": "未知来电",
-          "promptText": "未知来电突然亮起，切断书房静默。",
+          "promptTitle": "未知来电亮起",
+          "promptText": "手机屏幕骤亮，来电显示“未知来电”。重点是切断静默并开局，执行时号码必须陌生。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "UnknownCallerPhone"
@@ -254,7 +254,7 @@
           "duration": "4秒",
           "notes": "情绪切换要极快",
           "promptTitle": "警惕一闪",
-          "promptText": "林深眼底只闪过极短警惕，随即恢复平和表情。",
+          "promptText": "林深眼底闪过短促警惕，随即恢复温和表情。重点是给出极短真实反应，执行时不能夸张。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen"
@@ -292,7 +292,7 @@
           "duration": "6秒",
           "notes": "先立起“被突然卷入”的姿态",
           "promptTitle": "接起电话",
-          "promptText": "林深以陌生和疑惑姿态接起周妍的电话。",
+          "promptText": "林深接起电话，表面是陌生与疑惑。重点是说明双方陌生，执行时周妍只给必要信息。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -343,7 +343,7 @@
           "duration": "7秒",
           "notes": "必须拍出他在装陌生",
           "promptTitle": "装作陌生",
-          "promptText": "他压住情绪追问对方身份，同时被307这个地点吸住注意。",
+          "promptText": "林深压住情绪追问对方是谁，随后被长林公寓307吸住注意。重点是确立林深伪装，执行时307信息落点清楚。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -394,7 +394,7 @@
           "duration": "5秒",
           "notes": "动作利落，像焦急寻妹",
           "promptTitle": "立刻出门",
-          "promptText": "林深合电脑、抓外套、起身离开，动作利落。",
+          "promptText": "他挂断后快速合上电脑，抓起外套起身。重点是完成入局动作，执行时动作利落。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -444,8 +444,8 @@
           "dialogueOrSound": "脚步声、关门声",
           "duration": "5秒",
           "notes": "用黑场压进307",
-          "promptTitle": "黑场转入307",
-          "promptText": "背影冲出书房，关门声砸进楼道后切黑。",
+          "promptTitle": "黑场转307",
+          "promptText": "林深匆忙出门，关门声砸进空楼道，黑场转下场。重点是压进下场空间，执行时用关门声转场。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "StudyRoomWide"
@@ -487,8 +487,8 @@
           "dialogueOrSound": "环境静音",
           "duration": "5秒",
           "notes": "先交代“生活突然中断”",
-          "promptTitle": "停摆307",
-          "promptText": "半搬空的307客厅和门缝冷光一起入画，空间空旷死寂。",
+          "promptTitle": "307停摆空间",
+          "promptText": "307客厅半搬空、光线被门缝切开，空间空旷死寂。重点是立住旧公寓死寂，执行时监控感构图。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "Room307Entry"
@@ -526,7 +526,7 @@
           "duration": "4秒",
           "notes": "生活痕迹必须真实",
           "promptTitle": "生活残留",
-          "promptText": "双人杯印、纸巾和薄灰作为停摆痕迹静静留在桌面上。",
+          "promptText": "茶几上双人杯印、残留纸巾和薄灰并置。重点是留双人生活痕迹，执行时不拍得过满。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "Room307Reverse"
@@ -563,8 +563,8 @@
           "dialogueOrSound": "关机提示音",
           "duration": "5秒",
           "notes": "她要冷静，不失控",
-          "promptTitle": "反复拨号",
-          "promptText": "周妍在黑厅里一遍遍拨林晚电话，保持冷静。",
+          "promptTitle": "周妍反复拨号",
+          "promptText": "周妍独自站在黑厅里，一遍遍拨林晚电话。重点是说明失联仍持续，执行时冷静而焦灼。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -615,7 +615,7 @@
           "duration": "4秒",
           "notes": "先压一拍再放语音",
           "promptTitle": "点开语音",
-          "promptText": "她调出林晚留下的唯一语音，悬停一拍后点开。",
+          "promptText": "她调出林晚留下的唯一语音，拇指悬停后点开。重点是压一拍再入线索，执行时手指停顿清楚。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "UnknownCallerPhone"
@@ -653,7 +653,7 @@
           "duration": "6秒",
           "notes": "语音要带轻微人工感",
           "promptTitle": "听见找我哥",
-          "promptText": "周妍听语音时神色发沉，下意识环视黑暗房间。",
+          "promptText": "周妍听语音时脸色发沉，下意识环视黑暗房间。重点是落下线索与人工感，执行时先听后看四周。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -704,7 +704,7 @@
           "duration": "3秒",
           "notes": "为露台白色手机花纹回扣埋线",
           "promptTitle": "手机壳导线",
-          "promptText": "手机壳边角裂纹和花纹短暂入画，作为后续回扣。",
+          "promptText": "周妍手机壳边角裂纹与花纹短暂入画。重点是埋白色手机回扣，执行时一闪而过。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYanPhoneCaseCue"
@@ -742,7 +742,7 @@
           "duration": "4秒",
           "notes": "音箱是当前场景的暗雷",
           "promptTitle": "待机音箱",
-          "promptText": "角落里的黑色智能音箱仅以极低频蓝灯闪烁示意存在。",
+          "promptText": "黑色智能音箱静置角落，顶部蓝灯极低频闪烁。重点是让陷阱先潜伏，执行时蓝灯低频闪。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SmartSpeakerIdle",
@@ -793,7 +793,7 @@
           "duration": "4秒",
           "notes": "入场先带急迫感",
           "promptTitle": "林深入场",
-          "promptText": "林深带着气息微喘推门进来，先看周妍再扫全屋。",
+          "promptText": "房门被快速推开，林深带着气息微喘冲进来。重点是带急迫感入屋，执行时先看人再看屋。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -844,7 +844,7 @@
           "duration": "5秒",
           "notes": "两人仍是陌生关系",
           "promptTitle": "陌生确认",
-          "promptText": "周妍保持戒备确认身份，林深满脸担忧与急切。",
+          "promptText": "周妍保持戒备确认身份，林深满脸担忧与急切。重点是建立陌生关系与戒备，执行时不可像旧识。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -894,8 +894,8 @@
           "dialogueOrSound": "周妍对白",
           "duration": "6秒",
           "notes": "她是主动传递信息的人",
-          "promptTitle": "交代线索",
-          "promptText": "周妍高密度交代非法收音与林晚失联。",
+          "promptTitle": "周妍交代线索",
+          "promptText": "周妍快速交代非法收音与林晚失联，语速稳、信息密。重点是压实非法收音背景，执行时语速稳信息密。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan"
@@ -932,8 +932,8 @@
           "dialogueOrSound": "林深对白",
           "duration": "5秒",
           "notes": "他像在协助排查",
-          "promptTitle": "继续追问",
-          "promptText": "林深追问语音内容和线索位置，像在协助排查。",
+          "promptTitle": "林深继续追问",
+          "promptText": "林深顺着她的话追问：语音还有什么，线索在哪。重点是保持协助者姿态，执行时只问线索。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen"
@@ -971,7 +971,7 @@
           "duration": "5秒",
           "notes": "把“只有你能开”落死",
           "promptTitle": "递交手机",
-          "promptText": "周妍把手机交给林深，并强调音箱只有兄妹权限。",
+          "promptText": "周妍把手机递给林深，强调音箱只有兄妹权限。重点是让“只有你能开”成立，执行时同步点出音箱权限。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1022,7 +1022,7 @@
           "duration": "5秒",
           "notes": "完美伪装忧虑",
           "promptTitle": "听完无破绽",
-          "promptText": "林深认真听完语音，情绪凝重但毫无破绽。",
+          "promptText": "林深认真听完语音，眼神凝重但没有破绽。重点是完整伪装忧虑，执行时神色要稳。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1073,7 +1073,7 @@
           "duration": "4秒",
           "notes": "不能拍清完整口令",
           "promptTitle": "走向音箱",
-          "promptText": "林深站到音箱前并侧身遮住输入界面。",
+          "promptText": "林深走向音箱并侧身遮住输入界面，周妍只看到肩背。重点是建立即将输入口令，执行时不能拍清界面。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1124,7 +1124,7 @@
           "duration": "5秒",
           "notes": "强调老旧系统延迟感",
           "promptTitle": "口令加载",
-          "promptText": "音箱进入红绿交替的老旧加载状态。",
+          "promptText": "音箱灯色由暗转红绿交替，屏幕进入口令加载状态。重点是锁住机制真实性，执行时老旧延迟感。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SmartSpeakerRed",
@@ -1175,7 +1175,7 @@
           "duration": "4秒",
           "notes": "第一轮外部压迫出现",
           "promptTitle": "门缝扫光",
-          "promptText": "门缝外两束手电来回扫过，外面有人逼近。",
+          "promptText": "门外两束手电在门缝来回扫过，外面有人逼近。重点是外部压迫第一次出现，执行时光束必须窄狠。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SecurityFlashlightGap"
@@ -1213,7 +1213,7 @@
           "duration": "4秒",
           "notes": "营造共同躲险假象",
           "promptTitle": "一起噤声",
-          "promptText": "林深抬手示意噤声，身体微挡在周妍身前。",
+          "promptText": "林深立刻抬手示意噤声，身体微挡在周妍身前。重点是伪造共同躲险，执行时身位关系清楚。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1263,8 +1263,8 @@
           "dialogueOrSound": "保安门外对白",
           "duration": "6秒",
           "notes": "危机先撤不解除",
-          "promptTitle": "备用钥匙",
-          "promptText": "门外保安低喝后决定去拿备用钥匙，危机暂时撤离。",
+          "promptTitle": "去拿备用钥匙",
+          "promptText": "门外低喝“谁在里面”，短暂停顿后决定去拿备用钥匙。重点是压迫暂撤不解除，执行时保安不露脸。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SecurityFlashlightGap"
@@ -1302,7 +1302,7 @@
           "duration": "4秒",
           "notes": "卡点必须利落",
           "promptTitle": "解锁成功",
-          "promptText": "绿灯骤亮，机械音打断死寂。",
+          "promptText": "绿灯骤亮，机械音打断死寂，音箱解锁成功。重点是机械卡点成立，执行时绿灯状态清楚。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SmartSpeakerUnlocked"
@@ -1340,7 +1340,7 @@
           "duration": "7秒",
           "notes": "用音箱完成转场推力",
           "promptTitle": "线索指向29楼",
-          "promptText": "AI录音明确指向二十九楼设备间，林深立刻催周妍离开。",
+          "promptText": "AI录音播出“线索在二十九楼设备间”，林深立即催周妍离开。重点是完成纵向转场，执行时语音与催进同镜。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "SmartSpeakerUnlocked",
@@ -1396,7 +1396,7 @@
           "duration": "4秒",
           "notes": "切到纵向移动段落",
           "promptTitle": "离开307",
-          "promptText": "两人快步离开307，房门在身后轻轻合拢。",
+          "promptText": "两人快步离开307，房门在身后轻轻合拢。重点是切入纵向移动，执行时房门轻合。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "Room307Entry"
@@ -1434,7 +1434,7 @@
           "duration": "4秒",
           "notes": "路径改为电梯，不再走消防楼梯",
           "promptTitle": "冲进电梯",
-          "promptText": "林深直接按下29楼，不给周妍复盘空间。",
+          "promptText": "两人冲进电梯，林深直接按下29楼。重点是建立新路径，执行时禁用电梯路径。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ElevatorCabin",
@@ -1485,7 +1485,7 @@
           "duration": "5秒",
           "notes": "她仍在判断，不是被牵着走",
           "promptTitle": "判断更大阴影",
-          "promptText": "周妍压低声音判断这栋楼的问题远比她们想得更大。",
+          "promptText": "周妍压低声音判断：这栋楼的问题比她们想得更大。重点是保留周妍主动判断，执行时台词压低。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -1536,7 +1536,7 @@
           "duration": "4秒",
           "notes": "假帮忙姿态继续",
           "promptTitle": "温和催进",
-          "promptText": "林深用温和口吻推动继续上楼。",
+          "promptText": "林深用温和口吻回一句“越诡异越要先拿到线索”。重点是林深继续推进节奏，执行时语气温和。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1587,7 +1587,7 @@
           "duration": "4秒",
           "notes": "用数字跳动制造煎熬",
           "promptTitle": "楼层跳动",
-          "promptText": "电梯楼层数字缓慢上跳，轿厢死寂压人。",
+          "promptText": "电梯楼层数字缓慢上跳，轿厢死寂。重点是制造纵向煎熬，执行时数字可读。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ElevatorPanel29"
@@ -1625,7 +1625,7 @@
           "duration": "5秒",
           "notes": "把失重感拍出来",
           "promptTitle": "停在十五层",
-          "promptText": "电梯毫无预兆卡在15层，灯光骤然频闪。",
+          "promptText": "电梯毫无预兆卡在15层，灯光明暗疯狂闪烁。重点是完成密闭惊吓，执行时灯光频闪。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ElevatorCabin",
@@ -1676,7 +1676,7 @@
           "duration": "4秒",
           "notes": "她的警惕必须可见",
           "promptTitle": "周妍戒备",
-          "promptText": "周妍背脊绷紧，眼神迅速扫向门缝。",
+          "promptText": "周妍背脊绷紧，屏息不动，眼神开始快速扫门缝。重点是拉紧人物状态，执行时扫门缝。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -1727,7 +1727,7 @@
           "duration": "4秒",
           "notes": "继续制造保护姿态",
           "promptTitle": "林深护位",
-          "promptText": "林深抬手做噤声手势，身体挡在她前面一寸。",
+          "promptText": "林深抬手做噤声手势，身体挡在她前面一寸。重点是继续伪保护，执行时一寸挡位。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -1778,7 +1778,7 @@
           "duration": "5秒",
           "notes": "压迫要靠声音完成",
           "promptTitle": "门外脚步",
-          "promptText": "缓慢拖沓的脚步停在轿厢外，像在隔门观察。",
+          "promptText": "门外缓慢拖沓脚步停在门口，像有人隔门观察。重点是威胁靠声音完成，执行时不见人脸。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ElevatorCabin"
@@ -1816,7 +1816,7 @@
           "duration": "4秒",
           "notes": "留一拍窒息空白",
           "promptTitle": "黑暗僵持",
-          "promptText": "两人在黑暗里一动不动，时间被刻意拉长。",
+          "promptText": "黑暗里两人一动不动，时间被拉长。重点是留窒息空白，执行时时间拉长。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -1867,7 +1867,7 @@
           "duration": "5秒",
           "notes": "危机解除得过于“恰好”",
           "promptTitle": "电梯重启",
-          "promptText": "危机过去后电梯自行重启，29层缓缓亮起。",
+          "promptText": "电梯自行重启，灯光恢复正常，门在29楼缓缓打开。重点是恢复运行太恰好，执行时29层重新亮起。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ElevatorPanel29",
@@ -1918,7 +1918,7 @@
           "duration": "6秒",
           "notes": "先把陷阱入口交代清楚",
           "promptTitle": "29楼入口",
-          "promptText": "29楼走廊空旷无光，尽头设备间门虚掩透冷光。",
+          "promptText": "29楼走廊空旷无光，尽头设备间门虚掩透冷光。重点是先讲清设备间与露台关系，执行时空旷冷白。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "Floor29Wide"
@@ -1961,7 +1961,7 @@
           "duration": "4秒",
           "notes": "转入核心中枢",
           "promptTitle": "推门进设备间",
-          "promptText": "设备间冷风和机器噪声一起扑出，带人进入核心中枢。",
+          "promptText": "两人推开设备间门，冷风和机器噪声一起扑出。重点是转入声音工厂，执行时冷意扑面。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "DeviceRoomDoorCrack",
@@ -2011,8 +2011,8 @@
           "dialogueOrSound": "机器持续低鸣",
           "duration": "6秒",
           "notes": "明确这里长期运转",
-          "promptTitle": "声音工厂",
-          "promptText": "成排机柜和工作台铺开，像长期运转的声音工厂。",
+          "promptTitle": "设备间全景",
+          "promptText": "成排机柜、工作台和线缆铺满设备间，像声音工厂心脏。重点是立长期运转中枢，执行时非临时现场。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "DeviceRoomWide"
@@ -2049,8 +2049,8 @@
           "dialogueOrSound": "风扇声",
           "duration": "5秒",
           "notes": "违法采样性质必须落地",
-          "promptTitle": "采样文件",
-          "promptText": "文件列表滚动住户声音采样名，违法性质一眼可懂。",
+          "promptTitle": "采样文件列表",
+          "promptText": "文件列表滚动：夜间喘息、争吵破音、压抑哭泣等。重点是一眼看懂非法采样，执行时中文条目可读。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "DeviceScreenFiles"
@@ -2088,7 +2088,7 @@
           "duration": "4秒",
           "notes": "她第一反应是取证",
           "promptTitle": "周妍取证",
-          "promptText": "周妍第一反应是举手机快速偷拍，神情迅速冷下来。",
+          "promptText": "周妍立刻举手机偷拍，表情迅速冷下来。重点是强化她的主动性，执行时快速偷拍。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -2139,7 +2139,7 @@
           "duration": "5秒",
           "notes": "声源从设备间内部出现",
           "promptTitle": "墙里求救声",
-          "promptText": "墙面广播音箱红灯骤亮，林晚声音从墙里响起。",
+          "promptText": "墙面音箱红灯骤亮，预设音频突然接管空间。重点是空间本身变声源，执行时红灯必须亮起。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "WallSpeakerRed"
@@ -2177,7 +2177,7 @@
           "duration": "4秒",
           "notes": "“救人”压过“取证”",
           "promptTitle": "被声音拽走",
-          "promptText": "周妍短暂停顿后，立刻被那道声音拖向露台方向。",
+          "promptText": "周妍听见林晚声音，短暂停顿后转身冲向露台方向。重点是查证切成救人，执行时转身要快。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -2228,7 +2228,7 @@
           "duration": "4秒",
           "notes": "他必须像被动追赶",
           "promptTitle": "假装追赶",
-          "promptText": "林深装作慌张追上去，嘴上不断劝她别冲动。",
+          "promptText": "林深装作慌张追上去，嘴上让她别冲动。重点是林深继续装帮忙，执行时嘴上劝阻。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -2279,7 +2279,7 @@
           "duration": "4秒",
           "notes": "设备间与露台动线清楚",
           "promptTitle": "穿过通道",
-          "promptText": "两人从设备间快速穿向露台门，动线清楚而急迫。",
+          "promptText": "两人从设备间冲向露台门，空间纵深被拉长。重点是连续到露台，执行时风声渐起。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "DeviceRoomWide",
@@ -2330,7 +2330,7 @@
           "duration": "4秒",
           "notes": "转入外景压迫",
           "promptTitle": "推开露台门",
-          "promptText": "露台门一开，夜风立刻灌进镜头。",
+          "promptText": "露台门被推开，夜风猛地灌入镜头。重点是外景压迫开始，执行时夜风灌镜头。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "TerraceWide"
@@ -2368,7 +2368,7 @@
           "duration": "4秒",
           "notes": "手机先于人物完成牵引",
           "promptTitle": "诱饵亮起",
-          "promptText": "维修箱上的白色手机剧烈震动并亮屏。",
+          "promptText": "维修箱上的白色手机剧烈震动，屏幕亮起。重点是手机先牵引人物，执行时震动亮屏。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "WhitePhoneCall"
@@ -2411,7 +2411,7 @@
           "duration": "6秒",
           "notes": "先建立危险空间结构",
           "promptTitle": "露台定场",
-          "promptText": "高空露台、围栏、维修箱和白色手机同框，城市夜色冰冷虚焦。",
+          "promptText": "高空露台、围栏、维修箱和白色手机同框，城市夜景冰冷虚焦。重点是先讲清高空结构，执行时危险空间成立。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "TerraceWide"
@@ -2448,8 +2448,8 @@
           "dialogueOrSound": "周妍对白",
           "duration": "4秒",
           "notes": "希望感骤然抬起",
-          "promptTitle": "看见晚晚手机",
-          "promptText": "周妍瞬间认出手机，以为希望就在眼前。",
+          "promptTitle": "认出晚晚手机",
+          "promptText": "周妍瞬间锁定手机位置，脱口而出“是晚晚的手机”。重点是抬高希望值，执行时脱口而出。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -2500,7 +2500,7 @@
           "duration": "4秒",
           "notes": "明确两人已被困",
           "promptTitle": "退路锁死",
-          "promptText": "露台铁门在身后液压合拢，退路被客观切断。",
+          "promptText": "身后露台铁门无声液压合拢，咔嗒锁死退路。重点是客观切断退路，执行时门锁声闷重。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "TerraceWide"
@@ -2538,7 +2538,7 @@
           "duration": "5秒",
           "notes": "伪保护要足够真实",
           "promptTitle": "伪保护动作",
-          "promptText": "林深攥住周妍小臂，像在保护她不靠近边缘。",
+          "promptText": "林深上前攥住周妍小臂，像在阻止她冒险。重点是继续误判林深，执行时没真带离边缘。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -2602,7 +2602,7 @@
           "duration": "4秒",
           "notes": "她主动挣脱，不是被推着走",
           "promptTitle": "挣开控制",
-          "promptText": "周妍用力挣开，坚持必须把手机拿到手。",
+          "promptText": "周妍用力挣开，执拗地说必须把手机拿到手。重点是周妍主动挣脱，执行时执念压过警觉。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan"
@@ -2640,7 +2640,7 @@
           "duration": "5秒",
           "notes": "坠落前的主动动作成立",
           "promptTitle": "越过安全线",
-          "promptText": "她俯身去够手机，身体重心明显越过安全线。",
+          "promptText": "她俯身探向手机，身体重心明显越过安全线。重点是主动探向手机，执行时身体重心外移。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "ZhouYan",
@@ -2704,7 +2704,7 @@
           "duration": "3秒",
           "notes": "危险先以声响预警",
           "promptTitle": "护栏裂响",
-          "promptText": "护栏连接处传出极细微但清楚的金属裂响。",
+          "promptText": "护栏连接处传出极细微金属断裂声。重点是给坠落物理锚点，执行时裂响真实。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "RailingJointClose"
@@ -2742,7 +2742,7 @@
           "duration": "5秒",
           "notes": "先给“救人”视觉假象",
           "promptTitle": "瞬间翻坠",
-          "promptText": "护栏松脱，周妍向外翻坠，林深一把抓住她手腕。",
+          "promptText": "护栏瞬间松脱，周妍身体向外翻坠，林深一把抓住她手腕。重点是完成“救人假象”，执行时先抓住手腕。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -2811,7 +2811,7 @@
           "duration": "5秒",
           "notes": "最后一瞬仍不能露底",
           "promptTitle": "最后的好人脸",
-          "promptText": "周妍悬空仰视，看到的仍是焦急救人的林深。",
+          "promptText": "周妍悬在高楼外侧，仰视林深仍是一张焦急救人的脸。重点是反转前最后安慰，执行时仰拍逆光。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen"
@@ -2849,7 +2849,7 @@
           "duration": "4秒",
           "notes": "黑化是连续变化，不是突变",
           "promptTitle": "焦急褪净",
-          "promptText": "林深脸上的焦急逐渐褪去，露出真正冷意。",
+          "promptText": "林深脸上焦急逐渐褪净，手指开始缓慢松开。重点是黑化渐变成立，执行时眼神冷下来。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen"
@@ -2887,7 +2887,7 @@
           "duration": "5秒",
           "notes": "终极反转台词必须落在松手瞬间",
           "promptTitle": "缓慢松手",
-          "promptText": "他一根根松开手指，同时说出真正台词。",
+          "promptText": "攥着手腕的手指刻意一根根松脱，没有犹豫。重点是终极反转落点，执行时台词与松手同拍。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen"
@@ -2925,7 +2925,7 @@
           "duration": "5秒",
           "notes": "进入闪回通道",
           "promptTitle": "慢镜下坠",
-          "promptText": "周妍在失重中缓慢坠落，环境声几乎抽离。",
+          "promptText": "周妍失重下坠，整座楼体与夜色一起拉开距离。重点是打开闪回通道，执行时环境抽离。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "TerraceWide",
@@ -2976,7 +2976,7 @@
           "duration": "5秒",
           "notes": "第一刀揭露真实身份",
           "promptTitle": "利润后台",
-          "promptText": "闪回到公司后台，揭开林深通过全域收音牟利的真实身份。",
+          "promptText": "林深坐在公司老板工位浏览全域收音、声纹售卖后台，收益弹窗跳出。重点是揭示商业动机，执行时暴利感清楚。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -3027,7 +3027,7 @@
           "duration": "5秒",
           "notes": "改为“林晚被囚禁”，不再是监控绑椅终幕",
           "promptTitle": "林晚软禁",
-          "promptText": "闪回到昏暗密闭房间，林晚被软禁并与外界隔绝。",
+          "promptText": "昏暗密闭房间里，林晚被软禁、窗帘紧闭、设备被收走。重点是落真实处境，执行时活着但被控制。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinWanConfined",
@@ -3078,7 +3078,7 @@
           "duration": "5秒",
           "notes": "回收开篇伏笔",
           "promptTitle": "开场真相",
-          "promptText": "闪回回到书房，隐藏图层里的声纹编辑和求救语音生成轨道彻底显形。",
+          "promptText": "回到开场书房，这次拉近看清隐藏图层：林深在批量编辑林晚声纹。重点是回收书房伏笔，执行时真界面显形。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -3142,7 +3142,7 @@
           "duration": "6秒",
           "notes": "把物理布局与电梯布局一起补齐",
           "promptTitle": "预设陷阱",
-          "promptText": "闪回快切：护栏被人松动，电梯15层卡顿与巡逻时间被提前安排。",
+          "promptText": "白天露台上有人悄悄松动护栏螺丝；另一处有人预设15层卡顿和巡逻节点。重点是完成布局闭环，执行时快切完成。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "RailingJointClose",
@@ -3206,7 +3206,7 @@
           "duration": "5秒",
           "notes": "拆穿全程假面",
           "promptTitle": "全程假面",
-          "promptText": "闪回回收电话、307与电梯里的所有温柔保护，全都被重看成表演。",
+          "promptText": "林深接电话的慌乱、307里的担忧、电梯里的保护，全都被重看成表演。重点是拆穿前文表演，执行时用对白碎片回响。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -3270,7 +3270,7 @@
           "duration": "4秒",
           "notes": "回到现实收冷",
           "promptTitle": "回到露台",
-          "promptText": "现实线恢复，林深站直身体，脸上所有情绪完全清零。",
+          "promptText": "闪回截断，林深站直身体，脸上情绪全部清零。重点是林深情绪归零，执行时冷风回归。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "LinShen",
@@ -3321,7 +3321,7 @@
           "duration": "6秒",
           "notes": "关键物证从口袋触发",
           "promptTitle": "录音笔回放",
-          "promptText": "周妍落地后，口袋里的录音笔受撞自动启动并回放那句台词。",
+          "promptText": "周妍坠落落地，外套口袋里的微型录音笔受撞自动启动并回放台词。重点是给真相短暂外放窗口，执行时台词必须完整。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "RecorderPenClose"
@@ -3359,7 +3359,7 @@
           "duration": "6秒",
           "notes": "终场身份保持匿名，不再具象化“陈伯”",
           "promptTitle": "黑鞋收尾",
-          "promptText": "一双黑色制式皮鞋进入画面，捡走录音笔后消失在夜色里。",
+          "promptText": "一双黑色制式皮鞋走入画面，弯腰拾起录音笔后离开，只留空地与黑场。重点是保持匿名压迫，执行时只拍脚和手。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "GroundShoesClose",
