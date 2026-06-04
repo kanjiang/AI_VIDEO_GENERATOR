@@ -381,9 +381,9 @@
 
     <script>
         const assets = [
-            { priority: 'main', category: 'character', zh: '林深', en: 'Lin Shen', filename: 'lin_shen.png', prompt: '16:9 角色身份板。温和可靠的都市男性外壳下藏冷静控制欲，深炭灰夹克与深色内搭统一，允许少量电话侧影和书桌冷光辅助切片，禁止纯白证件式拼板。' },
-            { priority: 'main', category: 'character', zh: '周妍', en: 'Zhou Yan', filename: 'zhou_yan.png', prompt: '16:9 角色身份板。现实、清醒、冷静、带一点酷感且有判断力的年轻女性，深色利落夹克与冷灰内搭，允许手机光、门缝冷光和取证姿态辅助切片，禁止柔弱受害者模板。' },
-            { priority: 'main', category: 'character', zh: '林晚', en: 'Lin Wan Confined', filename: 'lin_wan_bound.png', prompt: '16:9 特殊状态身份板。重点是活着、被隔绝、被软禁、仍试图留下证词，可带门锁、窗帘和倾听轮廓；脸上不要伤口，服装保持简洁干净，不拍血腥、不拍受虐奇观。' },
+            { priority: 'main', category: 'character', zh: '林深', en: 'Lin Shen', filename: 'lin_shen.png', prompt: '16:9 三视图角色参考板。纯白或柔和米白背景，清晰分开正面、侧面、背面三视图；温和可靠的都市男性外壳下藏冷静控制欲，深炭灰夹克与深色内搭统一，禁止环境和道具干扰。' },
+            { priority: 'main', category: 'character', zh: '周妍', en: 'Zhou Yan', filename: 'zhou_yan.png', prompt: '16:9 三视图角色参考板。纯白或柔和米白背景，清晰分开正面、侧面、背面三视图；现实、清醒、冷静、带一点酷感且有判断力，深色连帽短款皮衣、白色内搭、牛仔长裤与白鞋统一，禁止柔弱受害者模板。' },
+            { priority: 'main', category: 'character', zh: '林晚', en: 'Lin Wan Confined', filename: 'lin_wan_bound.png', prompt: '16:9 三视图角色参考板。纯白或柔和米白背景，清晰分开正面、侧面、背面三视图；重点是活着、被隔绝、被软禁后的压抑状态，脸上不要伤口，服装保持简洁干净，不拍血腥、不拍受虐奇观。' },
             { priority: 'main', category: 'character', zh: '心腹保安轮廓', en: 'Security Guard Shadow', filename: 'security_guard_shadow.png', prompt: '16:9 匿名轮廓身份板。逆光、半遮脸、制式站姿和皮鞋局部为主，保持制度化执行者气质，禁止清楚露脸和人格化反派表演。' },
 
             { priority: 'main', category: 'location', zh: '林深书房', en: 'Study Room Wide', filename: 'study_room_wide.png', prompt: '16:9 场景锚点图。从门口稳定看向书桌工作区，锁定桌面、座位、电脑光与门口关系；普通夜间加班书房，不直接暴露黑产本质。', spatial: '空间标注待补：补录书桌朝向、门口机位、台灯主光方向。' },
@@ -405,7 +405,7 @@
             { priority: 'main', category: 'prop', zh: '微型录音笔', en: 'Recorder Pen Close', filename: 'recorder_pen_close.png', prompt: '小型金属录音笔近景。真实、低调、略有磨损，像长期放在外套口袋里的随身设备。' },
 
             { priority: 'p1', category: 'prop', zh: '未知来电手机界面', en: 'Unknown Caller Phone', filename: 'unknown_caller_phone.png', prompt: '手机屏幕特写，真实未知来电或语音回放页面，不出现品牌 logo。' },
-            { priority: 'p1', category: 'prop', zh: '生活照与耳机', en: 'Study Photo Set', filename: 'study_photo_set.png', prompt: '书桌局部特写。林晚生活照与闲置耳机并置，构图克制，只做关系暗示。' },
+            { priority: 'p1', category: 'prop', zh: '兄妹合照与耳机', en: 'Study Photo Set', filename: 'study_photo_set.png', prompt: '书桌局部特写。林晚和林深的兄妹合照与闲置耳机并置，合照自然克制，只做关系暗示。' },
             { priority: 'p1', category: 'prop', zh: '周妍手机壳导线', en: 'Zhou Yan Phone Case Cue', filename: 'zhou_yan_phone_case_cue.png', prompt: '旧手机壳边角裂纹与低饱和花纹局部特写，用于和露台白色手机形成同款回扣。' },
             { priority: 'p1', category: 'prop', zh: '音箱红灯待输入', en: 'Smart Speaker Red', filename: 'smart_speaker_red.png', prompt: '与待机版同机型。顶部状态灯稳定红色，屏幕显示极简口令输入前界面，是校验前置状态。' },
             { priority: 'p1', category: 'prop', zh: '门缝手电压迫', en: 'Security Flashlight Gap', filename: 'security_flashlight_gap.png', prompt: '从室内看房门门缝，两束手电光交错扫过，不拍清人物脸，强调压迫感。' },
