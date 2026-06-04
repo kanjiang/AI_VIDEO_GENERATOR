@@ -105,6 +105,7 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 | 路径 | 用途 |
 | --- | --- |
 | screenplay/zhengci-zhiwai-storyboard-prompts.md | storyboard 页面与 JSON 读取的 prompt 源 |
+| screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md | 12 镜测试包用的 12 宫格电影分镜提示词 |
 | screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md | 第一幕逐镜视频提示词 |
 | screenplay/zhengci-zhiwai-act1-video-prompts.md | 第一幕 multi-shot 压缩版提示词 |
 | screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md | 第二幕逐镜视频提示词 |

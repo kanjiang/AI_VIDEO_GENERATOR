@@ -1,132 +1,135 @@
 # 《证词之外》参考图驱动生成 SOP
 
-这份文档把当前仓库里已经存在的《证词之外》素材，收束成一套可直接执行的低抽卡工作流。
+这份文档现在只承担一个角色：把《证词之外》当前仍在使用的真源文件、执行顺序和排障方法压成一页可操作摘要。
 
-核心原则不是“直接写长视频提示词反复抽卡”，而是先把静态约束拆成三层，再进入视频生成：
+重要边界：
 
-`角色身份板 -> 黑白故事板表格 -> 场景图 -> 视频生成`
+1. 这不是程序配置文件，不会被脚本直接读取。
+2. 这也不是剧情真源，剧情、镜号、生成顺序和图参绑定仍以真源文件为准。
+3. 当这份 SOP 与真源冲突时，永远以真源优先。
 
-这样做的目标，是让视频阶段只负责动态执行，而不再同时重新猜角色、空间、镜头和灯光。
+当前工作流已经更新为：
 
-## 一、当前项目的源文件锚点
+`三视图角色参考板 -> 场景锚点图 -> 12 宫格电影分镜 -> 视频生成`
 
-当前项目已经有足够完整的基础文件，不需要再从零搭流程。
+目标很明确：把角色、空间、镜头节奏这些静态约束先锁住，再让视频阶段只负责“动起来”，而不是重新猜设定。
 
-### 文本与结构源
+## 一、当前真源文件锚点
+
+### 文本与结构真源
 
 1. `screenplay/zhengci-zhiwai-screenplay.md`：主剧本
 2. `screenplay/zhengci-zhiwai-storyboard-beats.md`：分镜节拍
 3. `screenplay/zhengci-zhiwai-shot-list.md`：72 镜唯一顺序基准
-4. `screenplay/zhengci-zhiwai-storyboard-prompts.md`：storyboard prompt 源
-5. `screenplay/zhengci-zhiwai-storyboard.config.json`：storyboard 生成配置
+4. `screenplay/zhengci-zhiwai-final-generation-list.md`：当前生成顺序与测试包真源
+5. `screenplay/zhengci-zhiwai-seedance-reference-map.md`：逐镜参考图 alias 绑定
 
-### 资产与参考源
+### Prompt 与生成真源
 
-1. `screenplay/zhengci-zhiwai-seedance-reference-map.md`：逐镜参考图绑定
-2. `screenplay/zhengci-zhiwai-asset-prompts.md`：资产生成提示词
-3. `screenplay/zhengci-zhiwai-asset-canvas.html`：资产追踪画布
-4. `screenplay/zhengci-zhiwai-missing-assets.md`：当前 storyboard 缺图汇总
-5. `screenplay/zhengci-zhiwai-missing-assets-task-board.md`：按 Batch A/B/C 拆开的补图顺序
-6. `screenplay/zhengci-zhiwai-asset-batch-supplement-03.md`：Batch A 直投包
-7. `screenplay/zhengci-zhiwai-asset-batch-supplement-04.md`：Batch B 直投包
-8. `screenplay/zhengci-zhiwai-asset-batch-supplement-05.md`：Batch C 直投包
+1. `screenplay/build_video_prompts.js`：同步生成 act video prompts 与 storyboard prompt 的脚本
+2. `screenplay/zhengci-zhiwai-storyboard-prompts.md`：storyboard 页面与 JSON 使用的 prompt 源
+3. `screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md`：12 镜测试包用的 12 宫格电影分镜提示词
+4. `screenplay/reference-driven-video-prompt-template.md`：参考图驱动视频提示词模板
+5. `screenplay/zhengci-zhiwai-storyboard.config.json`：storyboard 配置与 fallback alias 映射
 
-### 生成执行源
+### 资产与追踪真源
 
-1. `screenplay/zhengci-zhiwai-final-generation-list.md`：12 镜测试包与 72 镜批量顺序
+1. `screenplay/zhengci-zhiwai-asset-prompts.md`：主资产生成提示词
+2. `screenplay/zhengci-zhiwai-asset-canvas.html`：资产看板与进度追踪
+3. `screenplay/zhengci-zhiwai-missing-assets.md`：当前 storyboard 缺图汇总
+4. `screenplay/zhengci-zhiwai-missing-assets-task-board.md`：缺图批次看板
+5. `screenplay/zhengci-zhiwai-asset-batch-supplement-03.md`：Batch A 直投包
+6. `screenplay/zhengci-zhiwai-asset-batch-supplement-04.md`：Batch B 直投包
+7. `screenplay/zhengci-zhiwai-asset-batch-supplement-05.md`：Batch C 直投包
+
+### 输出与回归入口
+
+1. `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.html`：当前故事板浏览页
 2. `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.json`：当前故事板结构化输出
-3. `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.html`：当前故事板浏览页
-4. `screenplay/build_video_prompts.js`：act prompt 与 storyboard prompt 同步生成脚本
+3. `screenplay/zhengci-zhiwai-navigation.md`：项目导航页
+4. `screenplay/zhengci-zhiwai-next-steps.md`：当前最优先执行清单
 
-## 二、这部片子的低抽卡执行逻辑
+## 二、当前有效的低抽卡逻辑
 
-《证词之外》不是高密度动作片，它更依赖：
+《证词之外》真正容易抽卡失控的，不是单个好看镜头，而是四件事：
 
-1. 角色伪装是否成立
-2. 空间诱导是否可信
-3. 镜头信息是否清晰地把观众一步步推入陷阱
-4. 关键道具和空间是否跨镜稳定
+1. 林深的伪装是否稳定成立
+2. 周妍和林晚的状态是否跨镜一致
+3. 307、电梯、设备间、露台这些空间是否保持连续
+4. 关键道具与结构点是否在剧情节点上稳定回收
 
-因此这部片子的视频生成，不应该先跑视频，而应该先锁 3 类静态参考：
+因此当前项目的执行顺序不应该是“先写长视频提示词再反复抽”。
 
-1. 人物身份
-2. 镜头结构
-3. 空间锚点
+当前正确顺序是：
 
-最后才进入视频生成。
+1. 先锁主角色的三视图角色参考板
+2. 再锁核心场景锚点图
+3. 再把关键测试镜头写成 12 宫格电影分镜页
+4. 最后才进入视频生成与测试包回归
 
-## 三、第一层：角色身份板怎么接到当前项目
+## 三、第一层：三视图角色参考板
 
-角色身份板的目标，是先锁定人物在全片中的稳定视觉身份，而不是生成单张好看人像。
+当前项目的人物资产已经不再默认走“角色身份板”口径，而是三视图角色参考板。
 
-当前项目里优先级最高的角色锚点是：
+当前角色锚点优先级：
 
-1. `LinShen`：林深，必须稳定维持“温和、可靠、理性、后期冷掉”的两层身份
-2. `ZhouYan`：周妍，必须稳定维持“冷静、主动取证、被诱导但不是愚蠢”的状态
-3. `LinWanConfined`：林晚，必须明确“活着但被控制”的状态锚点
-4. `SecurityGuardShadow`：匿名保安，只需要轮廓与匿名压迫，不需要具象化人物设定
+1. `LinShen`：林深，必须同时稳定“温和可靠外壳”和“冷静控制欲内层”
+2. `ZhouYan`：周妍，必须稳定“冷静、审慎、带一点酷感、能主动判断”
+3. `LinWanConfined`：林晚，必须稳定“活着、被控制、疲惫但清醒”
+4. `SecurityGuardShadow`：匿名执行者，只需匿名轮廓压迫，不需人格细化
 
-建议执行顺序：
+当前主入口：
 
-1. 先做 `LinShen` 和 `ZhouYan` 的正式身份板。
-2. 再做 `LinWanConfined` 的特殊状态身份板。
-3. `SecurityGuardShadow` 只做轮廓型身份参考，不做复杂角色展示板。
-
-对应模板入口：
-
-1. `screenplay/character-identity-board-prompt-example.md`
-2. `.claude/skills/storyboard-table-skill/SKILL.md` 中的角色身份板模式
+1. `screenplay/zhengci-zhiwai-asset-prompts.md`
+2. `screenplay/zhengci-zhiwai-asset-batch-01.md`
+3. `screenplay/zhengci-zhiwai-asset-batch-03.md`
+4. `screenplay/zhengci-zhiwai-asset-canvas.html`
 
 执行要求：
 
-1. 林深必须先锁“正常人外壳”，不能一开始就带明显反派气质。
-2. 周妍必须锁“主动判断能力”，不能做成单纯受害者。
-3. 林晚只需要提供足以支持录音、失联、软禁回收的状态统一性。
-4. 保安只需要匿名压迫锚点，不要浪费抽卡次数在身份细化上。
-5. 角色身份板默认使用纯白色或柔和米白色背景，不带环境、标志、水印和无关道具。
-6. 版式必须是非网格、非标准参考表的艺术书式布局：一个英雄全身主视角，加若干彼此分离的辅助研究视角。
-7. 所有视角必须不重叠、不裁脸、不藏肢体，并在面部、发型、服装、身体比例和姿势语言上严格一致。
-8. 默认补三个小区域：黑色轮廓研究、细微表情研究、面部/头发/服装细节研究，用于后续视频生成继续锁定角色信息。
+1. 统一使用 16:9 三视图角色参考板
+2. 一张图里清晰分开正面、侧面、背面三视图
+3. 纯白或柔和米白背景，不带环境、无关道具、水印和海报排版
+4. 三视图等比例、不重叠、不裁切、不遮挡四肢
+5. 三视图统一采用中性站姿，优先锁脸型、发型、身体比例、肩线和服装轮廓
+6. 如果角色状态特殊，例如林晚的受控疲惫状态，只允许体态和神情变化，不改写身份和服装逻辑
 
-## 四、第二层：场景图怎么接到当前项目
+## 四、第二层：场景锚点图
 
-《证词之外》最容易在视频里抽卡失控的，不是角色脸，而是空间跳变。
+当前最关键的不是补 72 个镜头的所有背景，而是先锁那些一旦漂移就会让剧情失效的空间。
 
-当前项目最需要先锁的空间不是 72 个镜头，而是 6 个核心场景底板：
+当前优先空间：
 
 1. 书房：`StudyRoomWide` + `StudyDeskWide` + `StudyScreenWaveform`
 2. 307 房间：`Room307Entry` + `Room307Reverse`
-3. 电梯与 29 楼走廊：`ElevatorCabin` + `ElevatorPanel29` + `Floor29Wide`
+3. 电梯与 29 楼：`ElevatorCabin` + `ElevatorPanel29` + `Floor29Wide`
 4. 设备间：`DeviceRoomDoorCrack` + `DeviceRoomWide` + `DeviceScreenFiles`
 5. 露台：`TerraceWide` + `WhitePhoneCall` + `RailingJointClose`
-6. 地面落点 / 终场：`RecorderPenClose` + `GroundShoesClose`
+6. 地面终场：`RecorderPenClose` + `GroundShoesClose`
 
-建议执行顺序：
+当前主入口：
 
-1. 先锁书房、307、露台这 3 个最高叙事压力空间。
-2. 再锁电梯 / 29 楼走廊和设备间。
-3. 最后补地面落点这种终场回收空间。
-
-对应模板入口：
-
-1. `screenplay/scene-board-prompt-example.md`
-2. `.claude/skills/scene-board-skill/SKILL.md`
+1. `screenplay/zhengci-zhiwai-asset-prompts.md`
+2. `screenplay/scene-board-prompt-example.md`
+3. `.claude/skills/scene-board-skill/SKILL.md`
 
 执行要求：
 
-1. 书房必须先看起来正常，再允许后期暴露隐藏界面。
-2. 307 必须有“生活被中断”的空房间质感，而不是普通出租屋。
-3. 电梯和 29 楼必须先锁空间连续性，不要让 15 层卡顿和 29 楼开门像两个地方。
-4. 设备间必须可靠到足以支撑“声音工厂”概念。
-5. 露台必须先锁危险结构和退路关系，否则 053-063 会频繁穿帮。
+1. 书房必须先成立为普通夜间加班空间，不能提前剧透幕后黑产
+2. 307 必须有“生活被中断”的停摆感，而不是普通出租屋
+3. 电梯与 29 楼必须连成同一条空间链路，不能拍成两个系统
+4. 设备间必须像真实长期运行的人声采样机房，而不是赛博实验室
+5. 露台必须把退路、维修箱、白色手机和围栏薄弱点讲清，否则 053-063 会频繁穿帮
 
-## 五、第三层：黑白故事板表格怎么接到当前项目
+## 五、第三层：12 宫格电影分镜
 
-故事板表格的目标，是把“这一段怎么拍”先静态写清楚。
+这一层现在也已经升级，不再只是“单帧故事板提示”，而是 12 宫格电影分镜页。
 
-本项目不建议上来就给 72 镜全量做精修故事板，而应该先对测试包做重点锁定。
+当前测试包主入口：
 
-优先顺序直接采用当前 generation list 里的 12 镜测试包：
+1. `screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md`
+
+当前测试包仍然锁这 12 镜：
 
 1. 005：未知来电
 2. 015：找我哥语音
@@ -141,113 +144,96 @@
 11. 071：录音笔自动回放
 12. 072：黑鞋收尾
 
-对应模板入口：
+当前分镜写法要求：
 
-1. `.claude/skills/storyboard-table-skill/SKILL.md`
-2. `screenplay/zhengci-zhiwai-storyboard-prompts.md`
-3. `screenplay/zhengci-zhiwai-storyboard.config.json`
+1. 一条提示对应一整页 16:9、12 宫格分镜页，而不是一帧插画
+2. 默认按 1-3 建立、4-6 推进、7-9 转折或加压、10-12 落点与余波
+3. 黑白、粗糙铅笔线条、最小细节、强轮廓可读性、未完成草图感
+4. 重点是镜头推进、动作势能、空间关系和情绪落点，不是精修画面
 
-执行要求：
+## 六、第四层：视频生成
 
-1. 先锁这 12 镜的镜头逻辑，再扩到整片。
-2. 重点镜头只锁动作、构图、机位、灯光方向，不追求过细渲染。
-3. 黑白手绘板的作用是减少视频阶段的镜头漂移，不是替代最终成片风格。
+视频阶段现在仍然是最后一层，不负责重新定义角色、空间和镜头结构。
 
-## 六、第四层：视频生成怎么接到当前项目
-
-视频阶段不再负责重新定义角色、空间和镜头结构，只负责把已锁定内容变成运动镜头。
-
-对应模板入口：
+当前视频层入口：
 
 1. `screenplay/reference-driven-video-prompt-template.md`
+2. `screenplay/zhengci-zhiwai-test-pack-video-prompts.md`
+3. `screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md`
+4. `screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md`
+5. `screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md`
+6. `screenplay/zhengci-zhiwai-act1-video-prompts.md`
+7. `screenplay/zhengci-zhiwai-act2-video-prompts.md`
+8. `screenplay/zhengci-zhiwai-act3-video-prompts.md`
 
-输入顺序建议固定为：
+当前输入顺序建议：
 
-1. 图 1：角色身份板
-2. 图 2：故事板表格
-3. 图 3：场景图
+1. 图 1：三视图角色参考板
+2. 图 2：12 宫格电影分镜页
+3. 图 3：场景锚点图
+4. 如果某镜头强依赖关键道具，再把道具图追加在后面
 
-如果某镜头还需要关键道具参考，再把道具图追加在后面，不要把所有图一股脑塞满。
+## 七、当前真正建议执行的步骤
 
-最稳的图像绑定逻辑，继续沿用当前 reference map：
+这部分以当前 `zhengci-zhiwai-next-steps.md` 为准，不再使用旧的理想化顺序。
 
-1. 角色优先
-2. 场景其次
-3. 道具最后
+### 第一轮：先补当前缺图瓶颈
 
-## 七、按当前项目直接可执行的实际步骤
+先按缺图看板推进，而不是先从整套角色板或整套视频开跑。
 
-### 第一轮：先锁参考层，不做整片视频
+当前顺序固定为：
 
-1. 为 `LinShen`、`ZhouYan`、`LinWanConfined` 做角色身份板。
-2. 为书房、307、露台做第一批场景图。
-3. 为 12 镜测试包做黑白故事板表格。
-4. 检查身份板、故事板、场景图之间是否互相冲突。
+1. Batch A：`screenplay/zhengci-zhiwai-asset-batch-supplement-03.md`
+2. Batch B：`screenplay/zhengci-zhiwai-asset-batch-supplement-04.md`
+3. Batch C：`screenplay/zhengci-zhiwai-asset-batch-supplement-05.md`
 
-### 第二轮：只跑 12 镜测试包视频
+当前第一优先仍是 Batch A，目标是优先打通第一幕权限链与 307 停摆空间。
 
-严格按 `screenplay/zhengci-zhiwai-final-generation-list.md` 的 12 镜测试包顺序执行，不跳镜、不贪多。
+### 第二轮：每补完一批都要固定回归
 
-重点检查：
+回归顺序固定为：
 
-1. 005 是否能立住冷开场切断点
-2. 025 / 029 是否能让音箱机制可信
-3. 036 是否能把 15 层卡顿拍出压迫
-4. 053 是否把露台危险结构讲清楚
-5. 060 / 063 是否让“救人假象 -> 松手反转”成立
-6. 071 / 072 是否让录音笔和匿名收尾成立
+1. 运行 `node screenplay/build_video_prompts.js`
+2. 运行 `node screenplay/build_storyboard.js zhengci-zhiwai`
+3. 检查 `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.json`
+4. 回看 `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.html`
+5. 再看 `screenplay/zhengci-zhiwai-asset-canvas.html` 的进度是否上升
 
-### 第三轮：测试包通过后再批量扩片
+### 第三轮：缺图缓解后再跑 12 镜测试包
 
-扩片顺序继续沿用当前 generation list：
+当前判断标准：
+
+1. 如果 005、015、017、022、023、031 这些第一幕镜头还因缺图读不清，就继续补 Batch A
+2. 如果第一幕基础空间和关键道具已经站住，再转 12 镜测试包视频
+
+### 第四轮：测试包通过后再扩到整片
+
+整片扩展顺序仍然沿用 generation list：
 
 1. 批次 A：001-030
 2. 批次 B：031-052
 3. 批次 C：053-072
 
-不要在测试包没站住之前直接整片批量生成。
+不要在 12 镜测试包没站住之前直接整片批量生成。
 
-### 第四轮：按缺图批次补资产
-
-如果 storyboard 页面里 `assets` 仍然是 missing，不要随机补图，直接按缺图任务看板推进：
-
-1. Batch A：先补 `UnknownCallerPhone`、`Room307Entry`、`Room307Reverse`、`StudyPhotoSet`、`ZhouYanPhoneCaseCue`
-2. Batch B：再补 `ElevatorCabin`、`ElevatorPanel29`、`SecurityFlashlightGap`、`Floor29Wide`、`DeviceRoomDoorCrack`、`DeviceRoomWide`
-3. Batch C：最后补 `RecorderPenClose`、`GroundShoesClose`、`AudioProfitDashboard`、`LockedRoomWide`、`SecurityGuardShadow`
-
-对应执行入口：
-
-1. Batch A 直投包：`screenplay/zhengci-zhiwai-asset-batch-supplement-03.md`
-2. Batch B 直投包：`screenplay/zhengci-zhiwai-asset-batch-supplement-04.md`
-3. Batch C 直投包：`screenplay/zhengci-zhiwai-asset-batch-supplement-05.md`
-
-每补完一批，固定回归顺序：
-
-1. 运行 `node screenplay/build_video_prompts.js`
-2. 运行 `node screenplay/build_storyboard.js zhengci-zhiwai`
-3. 检查 `outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.json`
-4. 再看 `screenplay/zhengci-zhiwai-asset-canvas.html` 的进度是否上升
-
-## 八、出问题时应该回修哪一层
+## 八、出问题时回修哪一层
 
 如果结果不稳定，不要先无限重抽视频，先判断问题属于哪一层：
 
-1. 角色不稳：回修身份板
-2. 镜头乱了：回修故事板表格
-3. 背景跳变、方位错误、灯光飘：回修场景图
-4. 动作节奏不对：再回视频提示词本身
+1. 人脸、服装、身材不稳：回修三视图角色参考板
+2. 空间方位错、背景跳变、灯光飘：回修场景锚点图
+3. 动作推进不清、镜头节奏不对：回修 12 宫格电影分镜
+4. 静态都正确但动态表演仍然不成立：再回视频提示词本身
 
-这是当前项目最重要的执行纪律：
+## 九、当前最推荐的下一步
 
-视频是最后一层，不是第一层。
+如果完全按当前状态往下推进，最合理的顺序是：
 
-## 九、当前项目最推荐的下一步
+1. 先补 Batch A 缺图
+2. 立刻回归 storyboard 与 asset canvas
+3. 再决定继续 Batch B，还是先跑 12 镜测试包
+4. 等测试包通过后，再扩到整片 72 镜
 
-如果继续沿这套 SOP 往下做，最合理的顺序是：
+这就是当前《证词之外》的有效执行纪律：
 
-1. 先补齐 `LinShen`、`ZhouYan`、`LinWanConfined` 的角色身份板。
-2. 再补书房、307、露台三套场景图。
-3. 再把 12 镜测试包逐镜转成正式故事板表格。
-4. 最后用参考图驱动模板跑 12 镜测试包视频。
-
-等这 12 镜通过，再推进整片 72 镜批量生成。
+视频仍然是最后一层，不是第一层。

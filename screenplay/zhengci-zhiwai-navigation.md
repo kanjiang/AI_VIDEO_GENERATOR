@@ -14,6 +14,7 @@
 
 - 生成脚本：screenplay/build_video_prompts.js
 - Storyboard prompt 源：screenplay/zhengci-zhiwai-storyboard-prompts.md
+- 12 镜测试包 12 宫格分镜：screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md
 - 第一幕逐镜：screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
 - 第二幕逐镜：screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
 - 第三幕逐镜：screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
