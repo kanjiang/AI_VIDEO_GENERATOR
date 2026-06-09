@@ -1,4 +1,4 @@
-# 《证词之外》Seedance 参考图对照表（2026-06-01 重拆版）
+# 《证词之外》Seedance 参考图对照表（2026-06-08 15秒定长版）
 
 用途：按镜号快速确认生成时应该把哪些角色、环境、道具以 @image 形式写进提示词正文。
 
@@ -20,7 +20,7 @@
 | StudyRoomWide | study_room_wide.png | 书房全景 |
 | StudyDeskWide | study_desk_wide.png | 书房桌面组合视角 |
 | StudyScreenWaveform | study_screen_waveform.png | 书房隐藏声纹编辑界面 |
-| StudyPhotoSet | study_photo_set.png | 书桌生活照与耳机 |
+| StudyPhotoSet | study_photo_set.png | 书桌兄妹合照与耳机 |
 | UnknownCallerPhone | unknown_caller_phone.png | 未知来电与语音界面 |
 | Room307Entry | room_307_entry.png | 307入口视角 |
 | Room307Reverse | room_307_reverse.png | 307反角视角 |
@@ -50,77 +50,37 @@
 | Shot | 推荐写入的 @image |
 | --- | --- |
 | 001 | @image1 (LinShen) + @image2 (StudyRoomWide) |
-| 002 | @image1 (StudyDeskWide) + @image2 (StudyPhotoSet) |
-| 003 | @image1 (StudyDeskWide) |
-| 004 | @image1 (StudyDeskWide) |
-| 005 | @image1 (UnknownCallerPhone) |
-| 006 | @image1 (LinShen) |
-| 007 | @image1 (LinShen) + @image2 (UnknownCallerPhone) |
-| 008 | @image1 (LinShen) + @image2 (UnknownCallerPhone) |
-| 009 | @image1 (LinShen) + @image2 (StudyDeskWide) |
-| 010 | @image1 (StudyRoomWide) |
-| 011 | @image1 (Room307Entry) |
-| 012 | @image1 (Room307Reverse) |
-| 013 | @image1 (ZhouYan) + @image2 (Room307Entry) |
-| 014 | @image1 (UnknownCallerPhone) |
-| 015 | @image1 (ZhouYan) + @image2 (UnknownCallerPhone) |
-| 016 | @image1 (ZhouYanPhoneCaseCue) |
-| 017 | @image1 (SmartSpeakerIdle) + @image2 (Room307Entry) |
-| 018 | @image1 (LinShen) + @image2 (Room307Entry) |
-| 019 | @image1 (LinShen) + @image2 (ZhouYan) |
-| 020 | @image1 (ZhouYan) |
-| 021 | @image1 (LinShen) |
-| 022 | @image1 (LinShen) + @image2 (UnknownCallerPhone) |
-| 023 | @image1 (LinShen) + @image2 (UnknownCallerPhone) |
-| 024 | @image1 (LinShen) + @image2 (SmartSpeakerIdle) |
-| 025 | @image1 (SmartSpeakerRed) + @image2 (SmartSpeakerRedGreen) |
-| 026 | @image1 (SecurityFlashlightGap) |
+| 002 | @image1 (StudyScreenWaveform) + @image2 (StudyDeskWide) + @image3 (StudyPhotoSet) |
+| 003 | @image1 (LinShen) + @image2 (UnknownCallerPhone) + @image3 (StudyPhotoSet) |
+| 004 | @image1 (LinShen) + @image2 (UnknownCallerPhone) + @image3 (StudyDeskWide) |
+| 005 |  |
+| 006 | @image1 (Room307Entry) + @image2 (ZhouYan) |
+| 007 | @image1 (ZhouYan) + @image2 (LinShen) + @image3 (Room307Entry) |
+| 008 | @image1 (ZhouYan) |
+| 009 | @image1 (DeviceRoomDoorCrack) + @image2 (ZhouYan) |
+| 010 | @image1 (ZhouYan) + @image2 (UnknownCallerPhone) |
+| 011 | @image1 (LinShen) + @image2 (SmartSpeakerIdle) |
+| 012 | @image1 (SecurityFlashlightGap) |
+| 013 | @image1 (SecurityFlashlightGap) + @image2 (ZhouYan) |
+| 014 | @image1 (SmartSpeakerUnlocked) + @image2 (ZhouYan) |
+| 015 | @image1 (ElevatorCabin) + @image2 (ElevatorPanel29) |
+| 016 | @image1 (ZhouYan) + @image2 (ElevatorCabin) |
+| 017 | @image1 (LinShen) + @image2 (ElevatorCabin) |
+| 018 | @image1 (Floor29Wide) + @image2 (DeviceRoomDoorCrack) |
+| 019 | @image1 (DeviceRoomWide) + @image2 (DeviceScreenFiles) |
+| 020 | @image1 (ZhouYan) + @image2 (ElevatorPanel29) + @image3 (DeviceScreenFiles) |
+| 021 | @image1 (WallSpeakerRed) + @image2 (ZhouYan) + @image3 (LinShen) |
+| 022 | @image1 (TerraceWide) + @image2 (WhitePhoneCall) |
+| 023 | @image1 (ZhouYan) + @image2 (WhitePhoneCall) + @image3 (TerraceWide) |
+| 024 | @image1 (RailingJointClose) + @image2 (LinShen) + @image3 (ZhouYan) |
+| 025 | @image1 (LinShen) + @image2 (ZhouYan) + @image3 (TerraceWide) |
+| 026 | @image1 (LinShen) + @image2 (TerraceWide) |
 | 027 | @image1 (LinShen) + @image2 (ZhouYan) |
-| 028 | @image1 (SecurityFlashlightGap) |
-| 029 | @image1 (SmartSpeakerUnlocked) |
-| 030 | @image1 (SmartSpeakerUnlocked) + @image2 (ZhouYan) |
-| 031 | @image1 (Room307Entry) |
-| 032 | @image1 (ElevatorCabin) + @image2 (ElevatorPanel29) |
-| 033 | @image1 (ZhouYan) + @image2 (ElevatorCabin) |
-| 034 | @image1 (LinShen) + @image2 (ElevatorCabin) |
-| 035 | @image1 (ElevatorPanel29) |
-| 036 | @image1 (ElevatorCabin) + @image2 (ElevatorPanel29) |
-| 037 | @image1 (ZhouYan) + @image2 (ElevatorCabin) |
-| 038 | @image1 (LinShen) + @image2 (ElevatorCabin) |
-| 039 | @image1 (ElevatorCabin) |
-| 040 | @image1 (ZhouYan) + @image2 (ElevatorCabin) |
-| 041 | @image1 (ElevatorPanel29) + @image2 (ElevatorCabin) |
-| 042 | @image1 (Floor29Wide) |
-| 043 | @image1 (DeviceRoomDoorCrack) + @image2 (Floor29Wide) |
-| 044 | @image1 (DeviceRoomWide) |
-| 045 | @image1 (DeviceScreenFiles) |
-| 046 | @image1 (ZhouYan) + @image2 (DeviceScreenFiles) |
-| 047 | @image1 (WallSpeakerRed) |
-| 048 | @image1 (ZhouYan) + @image2 (WallSpeakerRed) |
-| 049 | @image1 (LinShen) + @image2 (ZhouYan) |
-| 050 | @image1 (DeviceRoomWide) + @image2 (TerraceWide) |
-| 051 | @image1 (TerraceWide) |
-| 052 | @image1 (WhitePhoneCall) |
-| 053 | @image1 (TerraceWide) |
-| 054 | @image1 (ZhouYan) + @image2 (WhitePhoneCall) |
-| 055 | @image1 (TerraceWide) |
-| 056 | @image1 (LinShen) + @image2 (ZhouYan) + @image3 (TerraceWide) |
-| 057 | @image1 (ZhouYan) |
-| 058 | @image1 (ZhouYan) + @image2 (WhitePhoneCall) + @image3 (TerraceWide) |
-| 059 | @image1 (RailingJointClose) |
-| 060 | @image1 (LinShen) + @image2 (ZhouYan) + @image3 (TerraceWide) |
-| 061 | @image1 (LinShen) |
-| 062 | @image1 (LinShen) |
-| 063 | @image1 (LinShen) |
-| 064 | @image1 (TerraceWide) + @image2 (ZhouYan) |
-| 065 | @image1 (LinShen) + @image2 (AudioProfitDashboard) |
-| 066 | @image1 (LinWanConfined) + @image2 (LockedRoomWide) |
-| 067 | @image1 (LinShen) + @image2 (StudyScreenWaveform) + @image3 (StudyDeskWide) |
-| 068 | @image1 (RailingJointClose) + @image2 (ElevatorPanel29) + @image3 (SecurityGuardShadow) |
-| 069 | @image1 (LinShen) + @image2 (SmartSpeakerUnlocked) + @image3 (ElevatorCabin) |
-| 070 | @image1 (LinShen) + @image2 (TerraceWide) |
-| 071 | @image1 (RecorderPenClose) |
-| 072 | @image1 (GroundShoesClose) + @image2 (RecorderPenClose) |
+| 028 | @image1 (LinShen) + @image2 (ZhouYan) |
+| 029 | @image1 (LinShen) + @image2 (AudioProfitDashboard) + @image3 (LinWanConfined) + @image4 (LockedRoomWide) |
+| 030 | @image1 (StudyScreenWaveform) + @image2 (RailingJointClose) + @image3 (SecurityGuardShadow) |
+| 031 | @image1 (LinShen) + @image2 (SmartSpeakerUnlocked) + @image3 (ElevatorCabin) |
+| 032 | @image1 (GroundShoesClose) + @image2 (RecorderPenClose) |
 
 ## 最稳的 Seedance 写法
 

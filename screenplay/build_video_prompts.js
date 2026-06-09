@@ -149,6 +149,32 @@ function normalizeGeneratedText(text) {
     .replaceAll("绑椅", "软禁");
 }
 
+function stripSentenceEnding(text) {
+  return normalizeGeneratedText(text).replace(/[。！？.!?]+$/u, "").trim();
+}
+
+function formatSentence(text) {
+  const value = normalizeGeneratedText(text).trim();
+
+  if (!value) {
+    return "";
+  }
+
+  const trailing = value.match(/[。！？.!?]+$/u)?.[0] ?? "";
+  const base = stripSentenceEnding(value);
+
+  if (!trailing) {
+    return `${base}。`;
+  }
+  if (trailing.includes("？") || trailing.includes("?")) {
+    return `${base}？`;
+  }
+  if (trailing.includes("！") || trailing.includes("!")) {
+    return `${base}！`;
+  }
+  return `${base}。`;
+}
+
 function formatImageLine(index, alias, aliasMeta) {
   const usage = normalizeGeneratedText(aliasMeta?.usage || aliasMeta?.fileName || alias);
   return `@image${index} (${alias}) — 参考${usage}。`;
@@ -156,19 +182,20 @@ function formatImageLine(index, alias, aliasMeta) {
 
 function formatSound(dialogueOrSound) {
   const value = normalizeGeneratedText(dialogueOrSound);
+  const cleanValue = stripSentenceEnding(dialogueOrSound);
 
   if (!value || value === "环境静音" || value === "室内静音") {
     return "以真实环境静音和极轻空间底噪压住画面，不额外加配乐或说明性音效。";
   }
   if (value.includes("对白") || value.includes("语音") || value.includes("系统机械音") || value.includes("回放")) {
-    return `保留关键声音或对白：${value}。`;
+    return `保留关键声音或对白：${formatSentence(dialogueOrSound)}`;
   }
-  return `声音设计以 ${value} 为主，不额外堆砌无关音效。`;
+  return `声音设计以 ${cleanValue} 为主，不额外堆砌无关音效。`;
 }
 
 function buildShotPrompt(shot) {
-  const visualAction = normalizeGeneratedText(shot.visualAction);
-  const note = normalizeGeneratedText(shot.note);
+  const visualAction = stripSentenceEnding(shot.visualAction);
+  const note = stripSentenceEnding(shot.note);
 
   return [
     `完全自包含重度版：21:9，约${shot.duration}，单镜头 one-shot，无剪辑。`,
@@ -196,9 +223,10 @@ function formatCameraLine(shot) {
 }
 
 function buildMultiShotPrompt(group) {
+  const goal = formatSentence(group.goal);
   const header = [
     `完全自包含重度版：${group.totalDuration}，21:9，multi-shot，严格只允许 ${group.shots.length} 个镜头，禁止额外镜头、禁止字幕、禁止音乐。`,
-    `段落任务：${group.goal}。`,
+    `段落任务：${goal}`,
     "整体要求：超写实实拍、真实场景光、克制表演、镜头之间只保留必要叙事推进。",
   ].join("");
 
@@ -206,9 +234,9 @@ function buildMultiShotPrompt(group) {
     return [
       `【镜头${index + 1}】`,
       formatCameraLine(shot),
-      `动作：${normalizeGeneratedText(shot.visualAction)}。`,
-      `声音：${normalizeGeneratedText(shot.dialogueOrSound)}。`,
-      `重点：${normalizeGeneratedText(shot.note)}。`,
+      `动作：${formatSentence(shot.visualAction)}`,
+      `声音：${formatSentence(shot.dialogueOrSound)}`,
+      `重点：${formatSentence(shot.note)}`,
       "",
     ].join("\n");
   });
@@ -231,9 +259,9 @@ function buildMultiShotSection(index, group, aliasMap) {
 }
 
 function buildStoryboardPromptBody(shot, summaryRecord) {
-  const visualAction = normalizeGeneratedText(shot.visualAction);
-  const goal = normalizeGeneratedText(summaryRecord?.goal || "");
-  const note = normalizeGeneratedText(summaryRecord?.note || shot.note);
+  const visualAction = stripSentenceEnding(shot.visualAction);
+  const goal = stripSentenceEnding(summaryRecord?.goal || "");
+  const note = stripSentenceEnding(summaryRecord?.note || shot.note);
 
   if (goal) {
     return `${visualAction}。重点是${goal}，执行时${note}。`;
@@ -314,50 +342,48 @@ function main() {
 
   const shots = parseShotList(fs.readFileSync(shotListPath, "utf8"));
   const { aliases, bindings } = parseReferenceMap(fs.readFileSync(referenceMapPath, "utf8"));
-  const summaryMap = parseGenerationList(fs.readFileSync(generationListPath, "utf8"));
+  let summaryMap = parseGenerationList(fs.readFileSync(generationListPath, "utf8"));
+
+  // Ignore stale generation-list summaries when the canonical shot count changes.
+  if (summaryMap.size !== shots.length) {
+    summaryMap = new Map();
+  }
 
   const actConfigs = [
     {
       slug: "act1",
       title: "第一幕",
-      rangeLabel: "001-030 镜头",
+      rangeLabel: "001-014 镜头",
       start: "001",
-      end: "030",
+      end: "014",
       groups: [
-        { start: "001", end: "005", label: "书房冷开场", goal: "先建立林深的正常人假象与未知来电打断。" },
-        { start: "006", end: "010", label: "电话卷入与赶往307", goal: "把林深被突然卷入的外层姿态立住，并切向307。" },
-        { start: "011", end: "015", label: "307停摆空间与死者语音", goal: "建立307生活中断感，并让周妍听见林晚留下的第一层线索。" },
-        { start: "016", end: "020", label: "权限人物到齐", goal: "通过手机壳导线、音箱待机和人物入场，把权限关系压实。" },
-        { start: "021", end: "025", label: "音箱输入与口令加载", goal: "把林深继续伪装协助者、走向音箱并输入口令的链条连起来。" },
-        { start: "026", end: "030", label: "门外压迫与29楼转场", goal: "在外部压迫下完成音箱解锁，并把行动目标推向29楼设备间。" },
+        { start: "001", end: "005", label: "书房来电与雨夜入局", goal: "先立住林深的普通人外壳，再把他压进307设局现场。" },
+        { start: "006", end: "010", label: "307初见与监听前史", goal: "完成周妍和林深的陌生对接，并用闪回压实监听黑产前情。" },
+        { start: "011", end: "014", label: "音箱权限与29楼转场", goal: "让权限机制、门外压迫和29楼线索在一段内连续成立。" },
       ],
     },
     {
       slug: "act2",
       title: "第二幕",
-      rangeLabel: "031-052 镜头",
-      start: "031",
-      end: "052",
+      rangeLabel: "015-024 镜头",
+      start: "015",
+      end: "024",
       groups: [
-        { start: "031", end: "035", label: "离开307与电梯上行", goal: "从307切入纵向移动，并明确路径已经改为电梯。" },
-        { start: "036", end: "040", label: "十五层停顿", goal: "把电梯卡层与门外威胁做成一次密闭惊吓。" },
-        { start: "041", end: "044", label: "29楼入口与设备间建立", goal: "先交代29楼走廊，再把设备间作为声音工厂核心中枢立起来。" },
-        { start: "045", end: "048", label: "非法采样与墙内求救", goal: "让周妍先完成取证，再被伪造求救声强行拖向露台。" },
-        { start: "049", end: "052", label: "追向露台诱饵", goal: "把设备间和露台动线打通，并由白色手机完成最终牵引。" },
+        { start: "015", end: "018", label: "电梯停层与29楼入口", goal: "把离开307、电梯卡层和29楼异常空间做成一次连续升级。" },
+        { start: "019", end: "021", label: "设备间真相与伪求救", goal: "先让黑产证据落地，再被墙内求救声强行改写目标。" },
+        { start: "022", end: "024", label: "露台诱饵与翻坠", goal: "用白色手机、危险地形和护栏崩裂把周妍逼到露台外。" },
       ],
     },
     {
       slug: "act3",
       title: "第三幕",
-      rangeLabel: "053-072 镜头",
-      start: "053",
-      end: "072",
+      rangeLabel: "025-032 镜头",
+      start: "025",
+      end: "032",
       groups: [
-        { start: "053", end: "056", label: "露台定场与退路锁死", goal: "把高空露台的危险结构立住，并保持林深表面的伪保护。" },
-        { start: "057", end: "060", label: "越线与翻坠", goal: "让周妍主动越线，随后完成带救人假象的瞬间翻坠。" },
-        { start: "061", end: "064", label: "好人脸褪净", goal: "在坠落与松手之间完成黑化揭底，并把画面推入闪回通道。" },
-        { start: "065", end: "068", label: "利益与陷阱闭环", goal: "用闪回补齐商业动机、林晚处境和物理布局。" },
-        { start: "069", end: "072", label: "假面拆穿与录音笔收尾", goal: "把全程表演重看一遍，并让录音笔留下最后的物证窗口。" },
+        { start: "025", end: "028", label: "高空摊牌与松手", goal: "在悬空状态里完成反派揭面、AI骗局回收和松手宣判。" },
+        { start: "029", end: "030", label: "闪回回收布局", goal: "用闪回补齐商业动机、林晚处境和预谋布局。" },
+        { start: "031", end: "032", label: "录音笔与匿名收尾", goal: "把全程假面重看一遍，并用录音笔和黑鞋留下最后证据窗口。" },
       ],
     },
   ];
