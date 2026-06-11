@@ -138,6 +138,284 @@ function unique(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function containsAny(text, keywords) {
+  const value = normalizeGeneratedText(text);
+  return keywords.some((keyword) => value.includes(keyword));
+}
+
+function countDialogueSegments(dialogueOrSound) {
+  return stripSentenceEnding(dialogueOrSound)
+    .split("/")
+    .map((segment) => segment.trim())
+    .filter(Boolean).length;
+}
+
+function isDialogueDriven(shot) {
+  const dialogue = normalizeGeneratedText(shot.dialogueOrSound);
+  return dialogue.includes("：") || dialogue.includes("旁白") || countDialogueSegments(dialogue) >= 2;
+}
+
+function isActionDriven(shot) {
+  return containsAny(`${shot.visualAction} ${shot.note}`, [
+    "冲",
+    "扑",
+    "追逐",
+    "追兵",
+    "抓",
+    "拽",
+    "坠",
+    "翻",
+    "逼近",
+    "崩裂",
+    "悬",
+    "松开",
+    "推门",
+    "闯",
+    "快步",
+    "急着",
+  ]);
+}
+
+function isTransitionShot(shot) {
+  return containsAny(`${shot.visualAction} ${shot.note}`, [
+    "离开",
+    "进入",
+    "入内",
+    "推门",
+    "冲进",
+    "抵达",
+    "转场",
+    "走",
+    "门口",
+    "电梯",
+    "露台",
+    "设备间",
+  ]);
+}
+
+function isRevealShot(shot) {
+  return containsAny(`${shot.visualAction} ${shot.note}`, ["发现", "亮起", "复述", "入画", "揭", "显", "真相", "线索"]);
+}
+
+function isFlashbackShot(shot) {
+  return containsAny(`${shot.visualAction} ${shot.note} ${shot.dialogueOrSound}`, ["闪回", "回到现实", "旁白"]);
+}
+
+function buildCameraIntent(shot) {
+  const move = normalizeGeneratedText(shot.cameraMove);
+  const directions = [];
+
+  if (move.includes("固定")) {
+    directions.push("固定机位时让压迫来自人物调度、光线变化和画内节奏，不靠无意义甩镜。");
+  }
+  if (move.includes("推")) {
+    directions.push(
+      move.includes("快")
+        ? "推进只在威胁或真相逼近时加速，推进终点必须落在当前戏眼。"
+        : "推进保持克制，先稳住空间与人物，再把注意力缓慢压到戏眼。"
+    );
+  }
+  if (move.includes("跟拍")) {
+    directions.push("跟拍始终挂住领位人物，行进方向保持一致，避免来回找人。");
+  }
+  if (move.includes("俯拍")) {
+    directions.push("俯拍先把地形、出口和危险点交代清楚，再压向关键入口或目标。");
+  }
+  if (move.includes("仰拍")) {
+    directions.push("仰拍把权力关系建立在视角差上，不额外夸张透视和形变。");
+  }
+  if (move.includes("主观")) {
+    directions.push("主观视角只提供角色此刻能看到的信息，画外事实不要提前泄露。");
+  }
+  if (move.includes("摇") || move.includes("横移")) {
+    directions.push("摇移只服务于揭示同一空间内已经存在的目标，不做无因由扫视。");
+  }
+
+  if (!directions.length) {
+    directions.push("镜头运动只服务当前冲突核心，目标明确，速度单一。");
+  }
+
+  directions.push("每段只保留一个主运镜意图，速度策略清楚，主体必须明确，禁止无主体漂移和无动机连续变速。");
+
+  return `镜头意图：${unique(directions).join("")}`;
+}
+
+function buildPerformanceDirection(shot) {
+  const text = `${shot.visualAction} ${shot.note} ${shot.dialogueOrSound}`;
+  const directions = [];
+
+  if (isDialogueDriven(shot)) {
+    directions.push("对白以内收微表情、肩线变化和手部小动作承载情绪，避免喊台词式输出。");
+  }
+  if (containsAny(text, ["假镇定", "稳住", "克制"])) {
+    directions.push("嘴角压住、呼吸变浅、手部动作尽量小，把真正压力留给眼神和停顿泄露。");
+  }
+  if (containsAny(text, ["不信任", "试探", "对峙"])) {
+    directions.push("视线先检查门缝、出口或道具，再回到对方脸上，身体不要完全放松。");
+  }
+  if (containsAny(text, ["钩子", "关键字", "线索", "反转"])) {
+    directions.push("前半段情绪压低，只在关键信息出现时给一次清晰视线停顿或下颌收紧。");
+  }
+  if (containsAny(text, ["高压", "倒计时", "逼近", "破门"])) {
+    directions.push("呼吸变短，动作停顿更明显，目光在出口与风险源之间来回切换。");
+  }
+  if (containsAny(text, ["裂开", "骗局", "反派", "真相"])) {
+    directions.push("去掉外显情绪，保留轻微嘴角回收、眼神变冷和稳定控制感。");
+  }
+  if (containsAny(text, ["悬", "坠", "翻", "抓住", "松开"])) {
+    directions.push("危险动作先给求生意图和受力方向，让手腕、肩背和重心变化清楚可见，不拆机械步骤。");
+  }
+
+  if (!directions.length) {
+    directions.push("表演保持克制真实，用一次清晰视线停顿或手部动作完成情绪落点。");
+  }
+
+  directions.push("按 Seedance 表演公式执行：嘴角状态、眼部状态、面部肌肉必须可见；手部动作、身体姿态、视线方向必须承载情绪。单镜最多一个主情绪和一个次级波动，强度保持轻微到中等。");
+
+  return `表演控制：${unique(directions).join("")}`;
+}
+
+function buildSpatialDirection(shot) {
+  const directions = [];
+
+  if (isTransitionShot(shot)) {
+    directions.push("前 2 到 3 秒先讲清入口、出口、人物相对位置和关键道具方位，再推进动作。");
+  }
+  if (isDialogueDriven(shot)) {
+    directions.push("人物站位和视线轴线先稳定，再进入对白，不让角色无因跳位。");
+  }
+  if (isActionDriven(shot)) {
+    directions.push("危险点、支撑点和落点都必须先被看见，动作只围绕镜内已出现的物件发生。");
+  }
+  if (isRevealShot(shot)) {
+    directions.push("揭示信息按隐藏、看到、确认的顺序展开，不一次性把全部信息摊平。");
+  }
+  if (isFlashbackShot(shot)) {
+    directions.push("闪回与现实的边界靠光线、动势或声音桥连接，不在同镜里混乱跳时空。");
+  }
+
+  if (!directions.length) {
+    directions.push("先锁住人物、主光源和关键道具位置，整个镜头沿同一轴线完成信息递进。");
+  }
+
+  return `空间连续：${unique(directions).join("")}`;
+}
+
+function buildDialogueDirection(shot) {
+  if (!isDialogueDriven(shot)) {
+    return "";
+  }
+
+  const beatCount = countDialogueSegments(shot.dialogueOrSound);
+  const rhythm = beatCount >= 4 ? "对白按压问、回应、停顿、反应四拍处理，把最后一句留作落点。" : "对白按发问、停顿、反应的顺序推进，让关键一句压住镜尾。";
+  const delivery = "对白只放在声音层，口型和呼吸服务表演；中文停顿使用逗号、句号、省略号和破折号表达可演出的呼吸、迟疑、打断或硬停，不平均朗读。";
+  return `对白节奏：${rhythm}${delivery}`;
+}
+
+function buildSeedanceGuardrail(shot) {
+  const rules = [
+    "同镜只稳定跟踪已入画的人物与关键道具，默认不超过三人",
+    isDialogueDriven(shot) ? "对白停顿服从权力变化，不把每句台词平均念完" : "动作先给意图再给结果，不拆成机械关节运动",
+    "不新增画外路人、无关监控视角、镜面反射、解释性字幕或品牌水印",
+    "不做无因由光线跳变、空间重置、身份漂移和角色出画后同镜返场",
+    "不使用抽象情绪词替代可见动作",
+    "不做3D渲染感、游戏CG感、插画感或过度锐化科技广告感",
+  ];
+
+  return `Seedance 限制：${rules.join("；")}。`;
+}
+
+function buildReferenceLockLine() {
+  return "参考图锁定：@image 只用于锁定角色身份、服装、空间结构、关键道具和界面状态；不得重新设计角色脸、发型、体态、场景布局或道具位置。";
+}
+
+function buildMountedResourceAudioLock(shot) {
+  const rules = [
+    "严格使用已挂载 @image 参考资源。",
+    "角色、服装、空间、道具、界面状态只按参考图锁定，不重新设计。",
+    "无字幕、无标题、无背景音乐，只保留环境音、动作声和真实语音混响。",
+  ];
+
+  if (isDialogueDriven(shot)) {
+    rules.push("对白保持原文，不翻译、不改写。");
+  }
+
+  return `【挂载资源与音频硬约束】${rules.join("")}`;
+}
+
+function buildShotStartFrameLine(shot) {
+  const shotNo = normalizeShotNo(shot.shotNo);
+
+  if (shotNo === "001") {
+    return "【首帧衔接】本镜头是全片第一个视频，首帧从本镜头参考图建立，锁定主角、光源、空间方向和关键道具。";
+  }
+
+  const previousShotNo = normalizeShotNo(String(Number.parseInt(shotNo, 10) - 1));
+  return `【首帧衔接】以上一视频（镜头 ${previousShotNo}）尾帧作为本视频首帧。第一帧必须延续上一尾帧的站位、视线轴、光源方向、焦点、构图、道具状态和环境明暗，再进入本镜动作。`;
+}
+
+function buildMultiShotStartFrameLine(group) {
+  const startShotNo = normalizeShotNo(group.start);
+
+  if (startShotNo === "001") {
+    return "【首帧衔接】本段是全片第一个段落视频，从本段挂载参考图和当前场景设定建立首帧；段落内部每个镜头都必须承接前一个内部镜头尾帧。";
+  }
+
+  const previousShotNo = normalizeShotNo(String(Number.parseInt(startShotNo, 10) - 1));
+  return `【首帧衔接】本段视频必须以上一个视频/上一段落的尾帧作为首帧，至少承接镜头 ${previousShotNo} 的尾帧状态。第一帧的角色站位、身体方向、视线轴线、主光源方向、焦点距离、构图比例、道具状态和环境明暗必须连续；段落内部每个镜头也必须以前一个内部镜头的尾帧作为下一镜头首帧，除非镜头文字明确要求闪回、硬切或蒙太奇。`;
+}
+
+function buildLightingDirection(shot) {
+  const text = `${shot.visualAction} ${shot.note}`;
+  const rules = [
+    "光线与质感：只使用场景内真实光源，禁止画外补光、柔光箱、霓虹乱光和无来源高光。",
+    "保持超写实实拍质感、浅景深、真实镜头呼吸和轻微胶片颗粒。",
+  ];
+
+  if (containsAny(text, ["书房", "电脑", "波形", "音频编辑", "隐藏编辑界面", "声纹编辑"])) {
+    rules.push("书房与屏幕镜头以冷蓝屏幕光和少量台灯 practical light 为主，暗部包裹稳定，屏幕 UI 必须可信、可读、不过度赛博。");
+  }
+  if (containsAny(text, ["307 半搬空", "307 房间", "半搬空", "客厅", "音箱"])) {
+    rules.push("307 空间以冷白门缝光、音箱指示灯和室内低照度为主，保持半搬空房间的停摆压迫感。");
+  }
+  if (containsAny(text, ["电梯", "15 层", "楼层"])) {
+    rules.push("电梯镜头只使用轿厢顶灯、楼层面板和故障频闪，空间不能变成另一个电梯或走廊。");
+  }
+  if (containsAny(text, ["设备间", "机柜", "服务器", "采样文件", "声音工厂", "显示器", "亮屏", "工业软件"])) {
+    rules.push("设备间以服务器指示灯、工业屏幕和门缝冷光为主，界面是工业软件感，不要霓虹赛博或普通办公文档。");
+  }
+  if (containsAny(text, ["露台", "护栏", "高空", "翻坠", "白色手机", "松开手指"])) {
+    rules.push("露台只使用城市远景冷光、手机屏幕光和门内漏光，高空边缘、护栏连接点和退路必须清楚可读。");
+  }
+
+  return unique(rules).join("");
+}
+
+function buildAudioContinuityLine(shot) {
+  if (!isDialogueDriven(shot)) {
+    return "";
+  }
+
+  return "【音画同步】说话者离画时，声音继续按原节奏播放，不静音、不跳句；镜头切到合照、手机、道具、背影或另一人物反应时，保持同一空间混响和声源方向；切回说话者脸部时，口型、下颌、呼吸和当前音节必须同步。";
+}
+
+function buildQualityGateLine(shot) {
+  const actionRule = isActionDriven(shot)
+    ? "动作质量门槛：先明确受力点、支撑点、重心方向和落点，再发生危险动作；不要用模糊甩动掩盖空间关系。"
+    : "镜头质量门槛：先明确主体、焦点、光源和运动方向，再推进信息；不要让背景随机变化或主体丢失。";
+  return `${actionRule}最后 1 秒必须落在本镜头的叙事戏眼上。`;
+}
+
+function buildShotFormLine(shot) {
+  const shotText = `${shot.cameraMove} ${shot.visualAction}`;
+
+  if (containsAny(shotText, ["快切", "硬切", "蒙太奇", "闪回", "切回", "定格", "慢动作"])) {
+    return `完全自包含重度版：21:9，约${shot.duration}，单条 prompt，镜内允许按当前描述完成明确的分段转场、快切、闪回或速度变化，但禁止扩展成额外镜头组。`;
+  }
+
+  return `完全自包含重度版：21:9，约${shot.duration}，单镜头 one-shot，无剪辑。`;
+}
+
 function normalizeGeneratedText(text) {
   return String(text ?? "")
     .replaceAll("不再走消防楼梯", "路径固定为电梯")
@@ -193,17 +471,54 @@ function formatSound(dialogueOrSound) {
   return `声音设计以 ${cleanValue} 为主，不额外堆砌无关音效。`;
 }
 
-function buildShotPrompt(shot) {
+function buildCinematicShotDescription(shot) {
   const visualAction = stripSentenceEnding(shot.visualAction);
   const note = stripSentenceEnding(shot.note);
+  const dialogueDirection = buildDialogueDirection(shot).replace(/^对白节奏：/, "");
+  const lighting = buildLightingDirection(shot)
+    .replace(/^光线与质感：/, "")
+    .replaceAll("。保持超写实实拍质感、浅景深、真实镜头呼吸和轻微胶片颗粒。", "。");
+  const cameraIntent = buildCameraIntent(shot).replace(/^镜头意图：/, "");
+  const performance = buildPerformanceDirection(shot).replace(/^表演控制：/, "");
+  const spatial = buildSpatialDirection(shot).replace(/^空间连续：/, "");
+  const sound = formatSound(shot.dialogueOrSound)
+    .replace(/^声音设计以 /, "声音以 ")
+    .replace(/^保留关键声音或对白：/, "声音与对白：");
+  const quality = buildQualityGateLine(shot)
+    .replace(/^镜头质量门槛：/, "")
+    .replace(/^动作质量门槛：/, "");
 
   return [
-    `完全自包含重度版：21:9，约${shot.duration}，单镜头 one-shot，无剪辑。`,
-    `摄影机按 ${shot.cameraMove} 执行，景别为${shot.framing}。`,
-    `画面内容：${visualAction}。`,
-    formatSound(shot.dialogueOrSound),
-    `执行重点：${note}。整体维持超写实实拍质感、真实场景光和克制表演。`,
-  ].join("");
+    `初始画面承接首帧衔接状态，摄影机按“${shot.cameraMove}”执行，景别为${shot.framing}。${cameraIntent}`,
+    `画面核心是：${visualAction}。`,
+    `${lighting}`,
+    `${performance}`,
+    `${spatial}`,
+    dialogueDirection,
+    `${sound}`,
+    `${quality}`,
+    `最后落点：${note}。`,
+  ].filter(Boolean).join("");
+}
+
+function buildNegativeLine(shot) {
+  const guardrail = buildSeedanceGuardrail(shot)
+    .replace(/^Seedance 限制：/, "")
+    .replace(/。$/u, "");
+  return `【负面约束】${guardrail}；不要让硬约束覆盖本镜头的主要动作和情绪落点。`;
+}
+
+function buildShotPrompt(shot) {
+  const audioContinuity = buildAudioContinuityLine(shot);
+
+  return [
+    buildMountedResourceAudioLock(shot),
+    buildShotStartFrameLine(shot),
+    `【规格】${buildShotFormLine(shot)}真人实拍电影质感，真实场景光，浅景深，轻微胶片颗粒。`,
+    `【电影化动态描述】${buildCinematicShotDescription(shot)}`,
+    audioContinuity,
+    buildNegativeLine(shot),
+  ].filter(Boolean).join("\n");
 }
 
 function buildShotSection(shot, aliases, aliasMap) {
@@ -225,18 +540,21 @@ function formatCameraLine(shot) {
 function buildMultiShotPrompt(group) {
   const goal = formatSentence(group.goal);
   const header = [
+    `【挂载资源与音频硬约束】本视频必须严格使用已挂载的 @image 参考资源。角色外貌、服装、发型、体态、身份感、空间结构、关键道具和界面状态只参考挂载图，不重新设计、不重新描述静态设定。对白保持 shot list 原文语言与原句，不翻译、不改写。若说话者声音持续但镜头切到道具、空间、背影、合照或另一人物反应，声音必须继续不断线，保持同一空间混响、距离感和声源方向；重新切回说话者脸部时，口型、下颌开合、呼吸停顿和当前音节必须同步。无字幕、无文字标题、无解释性屏幕文字、无背景音乐，只保留环境音、动作音效和真实语音混响。`,
+    buildMultiShotStartFrameLine(group),
     `完全自包含重度版：${group.totalDuration}，21:9，multi-shot，严格只允许 ${group.shots.length} 个镜头，禁止额外镜头、禁止字幕、禁止音乐。`,
+    buildReferenceLockLine(),
     `段落任务：${goal}`,
-    "整体要求：超写实实拍、真实场景光、克制表演、镜头之间只保留必要叙事推进。",
+    "整体要求：超写实实拍、真实场景光、克制表演、镜头之间只保留必要叙事推进；只跟踪已入画人物与关键道具，保持空间和光线连续。每个镜头必须具备嘴角/眼部/面部肌肉、手部/姿态/视线、单一运镜意图、明确速度策略和负面约束。",
   ].join("");
 
   const blocks = group.shots.map((shot, index) => {
     return [
       `【镜头${index + 1}】`,
-      formatCameraLine(shot),
-      `动作：${formatSentence(shot.visualAction)}`,
-      `声音：${formatSentence(shot.dialogueOrSound)}`,
-      `重点：${formatSentence(shot.note)}`,
+      `首帧承接上一内部镜头尾帧；${formatCameraLine(shot)}`,
+      `电影化动态描述：${buildCinematicShotDescription(shot)}`,
+      buildAudioContinuityLine(shot),
+      buildNegativeLine(shot),
       "",
     ].join("\n");
   });
