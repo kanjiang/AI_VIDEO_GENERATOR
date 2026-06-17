@@ -143,7 +143,7 @@ Per shot: keep **1 primary emotion + 1 secondary fluctuation** maximum.
 - **Wide / Extreme wide**: prioritize posture and gaze direction; do not force unreadable micro-face details.
 
 ### 5. Dialogue-scene compatibility
-Respect existing rule: Dynamic Description uses physical behavior, not emotion labels.
+Respect existing rule: `【电影化动态描述】` / Cinematic Dynamic Description uses physical behavior, not emotion labels.
 - ✅ "mouth corners press, gaze drops right, jaw tightens, then eyes return to target"
 - ❌ "she feels misunderstood and hurt"
 
@@ -195,7 +195,7 @@ Quick quality gate before output:
 - Are anti-chaos constraints present?
 
 ### 7. Reusable EN + ZH snippets
-Use these as composable fragments inside Dynamic Description.
+Use these as composable fragments inside `【电影化动态描述】` / Cinematic Dynamic Description.
 
 **Snippet A — restrained tension / 轻微紧张**
 - EN: "Mouth corners press into a thin line, blink rate rises slightly, jaw tightens. Right thumb rubs the index knuckle once. Shoulders lift and settle. Gaze moves from the door handle to the partner's eyes and locks there."
@@ -262,33 +262,38 @@ No per-shot timing in output. Rhythm implied by description density.
 
 ## OUTPUT FORMAT
 
-Output a JSON array with **two objects**: EN prompt and ZH prompt. The prompt is one continuous string with section labels inline. No text outside the JSON.
+Output a JSON array with **two objects**: EN prompt and ZH prompt. Keep the JSON wrapper, but write each prompt in the hybrid Seedance 2.0 section format below. No text outside the JSON.
 
-**Example 1 (action scene):**
+**Example (hybrid format):**
 
-User input: "Two MMA fighters in an octagon, 12 seconds"
+User input: "A phone call interrupts a late-night audio analysis, 15 seconds, previous end frame is the first frame."
 
-[{"lang":"en","prompt":"Style & Mood: High-octane athletic realism. Harsh overhead arena lighting, desaturated tones, sweat and muscle definition. Gritty handheld aesthetic. Dynamic Description: Chaotic handheld medium shot — Fighter A drives forward with dense standing combinations, forcing Fighter B backward. Hard cut to low-angle close-up: a heavy leg kick from Fighter B lands on A's lead leg, camera shuddering on impact. Cut to wide stabilized tracking — Fighter B shifts weight, shoots under A's guard, hooks both legs and drives him across the octagon into the cage wall, metal rattling from the collision. Static Description: Enclosed octagon cage, black wire mesh, padded posts. Scuffed canvas floor. Bright hazy spotlights overhead, flying sweat droplets."},{"lang":"zh","prompt":"风格与氛围：高燃竞技写实主义。严酷场馆顶光投射强烈阴影，低饱和度色彩强化汗水与肌肉线条。粗粝手持摄影美学。动态描述：混乱手持中景，搏击手A发动连续密集的站立组合，迫使搏击手B后退。硬切至低角度特写：一记沉重的腿部动作命中前支撑腿，镜头随之震颤。切至广角稳定跟拍，搏击手B迅速变换重心下潜，抱住对手双腿并发力推进，横跨擂台将搏击手A推至金属笼网上，铁网剧烈震颤。静态描述：封闭八角笼格斗场，黑色铁丝网与软垫立柱。帆布地面布满摩擦痕迹。明亮朦胧聚光灯从上方直射，照亮飞溅汗水。"}]
-
-**Example 2 (general scene):**
-
-User input: "A lone figure walks through an ancient forest at dawn. Mist rising. 12 seconds."
-
-[{"lang":"en","prompt":"Style & Mood: Pre-dawn blue light filtering through ancient canopy, volumetric mist rising from forest floor, pale gold rays breaking through gaps in the treeline. Desaturated cool tones warming gradually. Dynamic Description: Slow crane descent through upper canopy — shafts of pale gold light pierce the mist between massive moss-covered trunks, particles drifting in the beams. The camera settles into a wide stabilized tracking shot at ground level, following a cloaked figure moving left-to-right along a narrow path, ferns brushing against their legs, mist curling with each step. Hard cut to extreme close-up of a dewdrop trembling on a spider web between two branches, light refracting through it. Cut to extreme wide from low angle — the figure small against cathedral-scale trees, a single beam of warm dawn light breaking through the canopy ahead, mist glowing gold where light touches it, the rest still in cool blue shadow. Static Description: Ancient temperate forest, massive moss-covered trunks, fern-covered floor, low-hanging mist. Pre-dawn transitioning to first light. Dew on every surface. Spider webs between lower branches."},{"lang":"zh","prompt":"风格与氛围：黎明前蓝色光线穿透古老树冠，体积雾从森林地面升腾，苍白金色光束从树冠缝隙倾泻。低饱和冷色调逐渐转暖。动态描述：缓慢摇臂下降穿越上层树冠——苍白金色光柱刺穿巨大苔藓覆盖树干间薄雾，微粒在光束中漂浮。镜头稳定落至地面层，广角跟拍捕捉一个披斗篷身影从画面左侧向右移动，沿窄径前行，蕨类植物擦过腿部，薄雾随步伐卷曲。硬切至极特写：两根树枝间蛛网上露珠微微颤动，光线在水珠中折射。切至低角度极远景——身影在大教堂般巨木间显得渺小，一束温暖晨曦从正前方树冠突破，薄雾泛出金色光泽，其余森林仍沉浸冷蓝阴影中。静态描述：古老温带森林，巨大苔藓覆盖树干，蕨类覆盖地面，低垂薄雾。黎明前过渡至第一缕晨光。每个表面布满露珠。低矮枝干间悬挂蛛网。"}]
+[{"lang":"en","prompt":"【Mounted Resources & Audio Hard Lock】Use only the mounted reference images. Lock the performer, room, computer interface, phone, desk props, and voice source to the references. No subtitles, titles, background music, or redesigned objects; keep only room tone, device vibration, typing, and realistic phone voice reverb.\n【First-Frame Continuity】Start from the previous video's end frame as this video's first frame. Preserve posture, eyeline axis, light direction, focal plane, composition, phone position, and desk brightness before the new action begins.\n【Specs】15 seconds, 21:9, live-action cinematic realism, practical screen light, shallow depth of field, subtle film grain.\n【Cinematic Dynamic Description】The first image continues the prior frame. The camera holds a close shot on the performer's face, then makes a restrained slow push and rack focus toward the sibling photo as the phone voice lands. His mouth stays almost still, blink rate rises, jaw tightens once, and his fingers stop above the keyboard. Cold screen light remains the only key source, wrapping the desk edge and lenses. The final landing returns focus to his face as he asks who is speaking.\n【Audio-Visual Sync】Keep the original phone dialogue. Off-screen phone voice continues through the focus shift with slight speaker compression; room tone and phone vibration remain audible.\n【Negative Constraints】No identity drift, subtitles, extra cuts, CG/game look, distorted hands or face, floating props, uncontrolled focus drift, or overacted expression; constraints must not override the main action or emotional landing."},{"lang":"zh","prompt":"【挂载资源与音频硬约束】严格使用已挂载参考资源。角色、房间、电脑界面、手机、桌面道具和电话声源全部按参考锁定，不重新设计。无字幕、无标题、无背景音乐，只保留房间底噪、手机震动、键盘声和真实电话混响。\n【首帧衔接】以上一视频尾帧作为本视频首帧。第一帧必须延续上一尾帧的姿态、视线轴、光源方向、焦点、构图、手机位置和桌面明暗，再进入本镜动作。\n【规格】15秒，21:9，真人实拍电影质感，真实屏幕光，浅景深，轻微胶片颗粒。\n【电影化动态描述】初始画面承接上一尾帧，镜头近景锁住表演者脸部，随后克制缓慢推进，并在电话声音落下时把焦点转向桌面兄妹合照。他嘴唇几乎不动，眨眼频率略升，下颌轻绷一次，手指停在键盘上方。冷蓝屏幕光是唯一主光，包住桌沿和镜片。最后落点重新回到他脸上，他开口追问对方身份。\n【音画同步】保留原电话对白。离画电话声在转焦过程中持续存在，带轻微扬声器压缩感；房间底噪和手机震动不中断。\n【负面约束】禁身份漂移、禁字幕、禁额外切镜、禁CG/游戏质感、禁手脸畸变、禁漂浮道具、禁失控焦点漂移、禁表演过度；不要让硬约束覆盖本镜头的主要动作和情绪落点。"}]
 
 **Output rules:**
 - Output ONLY the JSON array — no explanation, no markdown fences, no text before `[` or after `]`
 - Two objects: `{"lang":"en","prompt":"..."}` then `{"lang":"zh","prompt":"..."}`
 - Chinese = native rewrite, not translation. ZH ≤ 1,800 characters.
-- If approaching ZH limit, trim in this order: Narrative Summary (first) → Static Description → Style & Mood (1 sentence min) → Dynamic Description (never cut entirely)
+- If approaching ZH limit, trim in this order: secondary environment details → secondary performance details → secondary sound details. Never cut the mounted-resource lock, first-frame continuity, main action, dialogue, or negative constraints entirely.
 - If reference images present, prepend `<<<image_n>>>` legend before first section label
 
-**Prompt sections (inline labels, continuous string):**
-1. **Style & Mood:** palette, lighting, lens, atmosphere. Never skip.
-2. **Narrative Summary:** 1-sentence scene description. (Optional — trim first if ZH budget tight.)
-3. **Dynamic Description:** Shot-by-shot in prose. Camera, movement, action. Present tense.
-4. **Static Description:** Location, props, ambient details. Establish anything referenced in Dynamic.
-5. **Audio:** (dialogue scenes only) Spoken lines + SFX/BGM. Dialogue lines in their original language — never translate.
+**Hybrid Seedance 2.0 sections (mandatory order):**
+1. **Mounted Resources & Audio Hard Lock / `【挂载资源与音频硬约束】`:** declare all attached image/audio references. Lock character identity, wardrobe, location, props, interface states, and voice source. Forbid redesign, subtitles, titles, background music, and unauthorized text.
+2. **First-Frame Continuity / `【首帧衔接】`:** if the user provides a previous end frame, state that this video's first frame starts from that tail frame. Preserve standing positions, eyeline axis, light direction, focal plane, composition, prop states, and environment brightness before entering the new action. If no previous frame exists, state that the first frame establishes from the current references.
+3. **Specs / `【规格】`:** duration, aspect ratio, live-action cinematic realism, practical scene light, shallow depth of field, subtle film grain, and any user-required fps/shutter/lens constraints.
+4. **Cinematic Dynamic Description / `【电影化动态描述】`:** one readable prose block that combines camera move, shot size, main action, lighting texture, performance micro-beats, spatial continuity, sound, and final landing frame. It should feel like a director's action paragraph, not a checklist.
+5. **Audio-Visual Sync / `【音画同步】`:** include only when there is dialogue, voiceover, off-screen speech, phone audio, or a key sound cue. Preserve original dialogue language; add mouth timing, off-screen voice continuity, breath/pause rhythm, environmental reverb, and causal SFX.
+6. **Negative Constraints / `【负面约束】`:** concise guardrails against identity drift, reference-image copying as a frame, extra cuts, subtitles, CG/game look, distorted hands/faces, floating props, focus drift, and emotion/camera overacting. End by saying constraints must not override the main action and emotional landing.
+
+**Single-shot hybrid skeleton:**
+```
+【挂载资源与音频硬约束】严格使用已挂载 @image 参考资源。角色、服装、空间、道具、界面状态只按参考图锁定，不重新设计。无字幕、无标题、无背景音乐，只保留环境音、动作声和真实语音混响。
+【首帧衔接】以上一视频尾帧作为本视频首帧。第一帧必须延续上一尾帧的站位、视线轴、光源方向、焦点、构图、道具状态和环境明暗，再进入本镜动作。
+【规格】15秒，21:9，真人实拍电影质感，真实场景光，浅景深，轻微胶片颗粒。
+【电影化动态描述】初始画面承接首帧衔接状态，摄影机按[move]执行，景别为[framing]。画面核心是：[action]。[lighting]。[performance micro-beats]。[spatial continuity]。最后落点：[final frame]。
+【音画同步】[dialogue or key sound rules, preserving original dialogue language].
+【负面约束】[Seedance guardrails]；不要让硬约束覆盖本镜头的主要动作和情绪落点。
+```
 
 ---
 
@@ -310,7 +315,7 @@ User input: "A lone figure walks through an ancient forest at dawn. Mist rising.
 Output: prepend legend before first section label. Use descriptive label with `(<<<image_n>>>)` on first mention, then label only.
 
 ### ZH length estimation
-ZH hard cap = 1,800 characters. Heuristic: 1 ZH sentence ≈ 40–60 chars. If EN Dynamic Description exceeds 10 sentences, preemptively trim before writing ZH.
+ZH hard cap = 1,800 characters. Heuristic: 1 ZH sentence ≈ 40–60 chars. If EN Cinematic Dynamic Description exceeds 10 sentences, preemptively trim before writing ZH.
 
 ---
 
@@ -328,11 +333,11 @@ ZH hard cap = 1,800 characters. Heuristic: 1 ZH sentence ≈ 40–60 chars. If E
 - Never invent characters/props unless input implies scene creation
 - Never describe exit + re-entry in same continuous shot
 - Dialogue text appears ONLY in Audio section (for dialogue scenes)
-- Dynamic Description = pure physics for dialogue. No emotion labels — describe muscle movements, body positions
+- `【电影化动态描述】` = pure physics for dialogue. No emotion labels — describe muscle movements, body positions
 
 ### Creative
 - User camera instructions MUST appear in final prompt — both EN and ZH
-- Style & Mood section: never skip, always specific
+- `【规格】` and `【电影化动态描述】` sections: never skip, always specific
 - Double contrast on every cut
 - Inserts: causally motivated, named subject
 - Default: in medias res. Scene already in progress unless user says "starts with…" or "ends with…"

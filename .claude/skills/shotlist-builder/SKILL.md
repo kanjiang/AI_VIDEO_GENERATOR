@@ -78,8 +78,8 @@ Do not start writing prompts until scope AND spatial blocking are locked.
 For each scene in scope:
 1. Break action into shot rows (script-beat granularity — one row per discrete action/camera/focal-length change)
 2. Group consecutive shot rows into 15-second prompts using the [density rules](reference/PROMPT_DENSITY.md)
-3. Write each Chinese Seedance 2.0 prompt following the [prompt patterns](reference/PROMPT_PATTERNS.md) — including the universal blocks from [STYLE_BLOCK.md](reference/STYLE_BLOCK.md), camera-emotion sync from [CAMERA_EMOTION.md](reference/CAMERA_EMOTION.md), and performance micro-beats from [MICRO_BEATS.md](reference/MICRO_BEATS.md)
-4. For multi-shot prompts, structure each internal cut as a `【镜头N】` block with its own 机位 / 背景 / 动作 / 微表演细节 sub-blocks
+3. Write each Chinese Seedance 2.0 prompt following the hybrid [prompt patterns](reference/PROMPT_PATTERNS.md) — `【挂载资源与音频硬约束】`, `【首帧衔接】`, `【规格】`, `【电影化动态描述】`, optional `【音画同步】`, and `【负面约束】` — while still applying the style rules from [STYLE_BLOCK.md](reference/STYLE_BLOCK.md), camera-emotion sync from [CAMERA_EMOTION.md](reference/CAMERA_EMOTION.md), and performance micro-beats from [MICRO_BEATS.md](reference/MICRO_BEATS.md)
+4. For multi-shot prompts, keep the outer hybrid sections and structure each internal cut inside `【电影化动态描述】` as a `【镜头N】` block with its own 机位 / 背景 / 动作 / 微表演细节 sub-blocks
 5. Assemble into the [HTML template](templates/HTML_TEMPLATE.md)
 6. Save to `/mnt/user-data/outputs/Shotlist_<scope>_EN.html`
 7. Use `present_files` to deliver
@@ -88,7 +88,7 @@ For each scene in scope:
 
 - **Handles renumber per prompt.** `@image1` in scene 21 = Roko; `@image1` in scene 14 may = a different character. Each prompt block declares its own handles.
 - **Output language:** all UI labels, scene headers, action cells, scene-text cells, asset lists → English. Chinese only inside the `提示词` blocks. Dialogue lines inside Chinese prompts are quoted in English (`"line"`).
-- **Default duration:** 15 seconds per prompt, 21:9. State this at the end of every prompt: `15秒。21:9。`
+- **Default duration:** 15 seconds per prompt, 21:9. State this inside the `【规格】` section, not as a loose footer.
 - **Director assignment:** skip entirely unless user requests it. No `dir-badge`, no palette switching — default to `pal-red` color scheme.
 - **Style block:** use the [default style block](reference/STYLE_BLOCK.md) verbatim (with the appropriate scene-type variant) unless user uploads a custom one in phase 1.
 - **Lighting is ALWAYS practicals-only.** No film fill light, no reflectors, no softboxes, no LED strips, no neon. Camera shoots from the shadow side. This is non-negotiable. See [STYLE_BLOCK.md](reference/STYLE_BLOCK.md).

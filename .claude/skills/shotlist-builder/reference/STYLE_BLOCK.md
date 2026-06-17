@@ -80,18 +80,18 @@ Layer these specific clauses into the lighting section above based on the scene:
 灯光：仅室内实际灯光——温白色台灯、吊灯、暖色practicals。摄影机始终在阴影侧。无任何外部补光。haze轻微。
 ```
 
-## Closing footer (always)
+## Specs block (always)
 
-Every prompt ends with:
+Every prompt declares duration and aspect ratio inside `【规格】`:
 ```
-15秒。21:9。
+【规格】15秒，21:9，真人实拍电影质感，真实场景光，浅景深，轻微胶片颗粒。
 ```
 
 For multi-shot prompts (one prompt with internal `【镜头1】【镜头2】【镜头3】` cuts), still 15 seconds total — divide internally per shot duration rules in CAMERA_EMOTION.md.
 
 ## Aspect ratio override
 
-If user specifies a different aspect ratio (e.g., 9:16 for shorts, 4:3 for retro), swap `21:9` in the footer.
+If user specifies a different aspect ratio (e.g., 9:16 for shorts, 4:3 for retro), swap `21:9` inside `【规格】`.
 
 ## Camera/composition rule (append for wide shots)
 

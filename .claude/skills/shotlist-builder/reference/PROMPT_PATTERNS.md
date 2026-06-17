@@ -1,21 +1,24 @@
 # Prompt Patterns
 
-Every Chinese Seedance 2.0 prompt follows the same structural order. Hit every section in sequence; don't skip; don't reorder.
+Every Chinese Seedance 2.0 prompt follows the hybrid section order. Hit every section in sequence; don't skip; don't reorder. The goal is a prompt Seedance can parse: hard locks first, continuity second, cinematic action in one readable director paragraph, then sync and negative constraints.
 
 ## Structural order
 
-1. **Handle declarations** (`@image1`, `@image2`, ...)
-2. **Universal warnings** (`⚠️空间布局`, `⚠️对白规则`, `⚠️本视频严格只有N个镜头`)
-3. **Per-shot blocks** (`【镜头1】` `【镜头2】` ...) OR a single-shot block
-4. **Style block** (`风格：...`)
-5. **Background activity** (`环境活动：...`)
-6. **Closing footer** (`15秒。21:9。`)
+1. **`【挂载资源与音频硬约束】`** — handle declarations, image/audio locks, dialogue preservation, no subtitles/title/BGM
+2. **`【首帧衔接】`** — previous tail-frame continuity, or current-reference establishment if this is the first video
+3. **`【规格】`** — duration, aspect ratio, live-action cinematic realism, practical light, shallow DOF, film grain
+4. **`【电影化动态描述】`** — camera, action, lighting, performance, spatial continuity, sound, final landing
+5. **`【音画同步】`** — only when dialogue, off-screen voice, phone audio, or key SFX needs timing control
+6. **`【负面约束】`** — concise Seedance guardrails that do not override the main action
 
-## Section 1 — Handle declarations
+For multi-shot prompts, keep this outer order and place internal `【镜头N】` blocks inside `【电影化动态描述】`.
 
-Every prompt opens by declaring its handles. Handles renumber per-prompt (not per-scene, per-prompt — sometimes scenes contain prompts with different asset subsets). Format:
+## Section 1 — `【挂载资源与音频硬约束】`
+
+Every prompt opens by declaring its handles and hard locks. Handles renumber per-prompt (not per-scene, per-prompt — sometimes scenes contain prompts with different asset subsets). Format:
 
 ```
+【挂载资源与音频硬约束】严格使用已挂载 @image 参考资源。角色、服装、空间、道具、界面状态只按参考图锁定，不重新设计。无字幕、无标题、无背景音乐，只保留环境音、动作声和真实语音混响。
 @image1 (Roko) — 混血亚裔白，深色中长湿发贴额碎刘海，发梢滴水，淡小胡，鼻梁红创可贴微潮，左颊痣，黑紧身T恤肩部和上背湿透颜色加深贴身，军绿腰带，黑工装裤大腿和裤脚湿痕，黑靴湿润，红手套微潮，腰间战术包，右腰挂红色小泰迪熊挂件，左前臂纹身，面部薄水雾。
 @image2 (Apartment) — 三视图参考：上图=客厅全景向走廊方向...
 @image3 (PolaroidPhoto) — 一张拍立得横版照片11cm×8.5cm——自拍合照...
@@ -26,28 +29,60 @@ Rules:
 - For wet/dry/blood/dust state changes between scenes, **explicitly note the state** in the handle (`湿发贴额`, `溅血渍`, `面部薄水雾`)
 - Location handles describe the reference image layout in detail (multi-view → say which view is which: `上图=`, `下图=`, `中图=`)
 - Prop handles include exact dimensions when relevant (`11cm×8.5cm`), text on props verbatim, color/material specs
+- If dialogue exists, add `对白保持原文，不翻译、不改写。`
 - For static-pose-reference handles (used for body posing only, not full image generation), use `@imageN` style with explicit warnings:
   ```
   @image7 — ❌NOT A VIDEO FRAME❌ 此图仅用于提取@imageN的身体姿势角度数据。⚠️@image7是静态姿势参考——禁止将@image7渲染/复制/再现为视频的任何一帧。
   ```
 
-## Section 2 — Universal warnings (top of prompt)
+## Section 2 — `【首帧衔接】`
 
-Always declare the shot count and dialogue rules at the top, before the shot blocks:
+Always declare how the first frame starts. If there is a previous video, the new video must start from its tail frame:
 
 ```
-⚠️空间布局 / 人物位置：[reference top-down schema, see SPATIAL_BLOCKING.md]
-⚠️对白规则：一句台词=一个镜头——每个角色的台词严格只出现在该角色的特写镜头内。
-⚠️本视频严格只有N个镜头——禁止添加额外镜头。
+【首帧衔接】以上一视频（镜头 003）尾帧作为本视频首帧。第一帧必须延续上一尾帧的站位、视线轴、光源方向、焦点、构图、道具状态和环境明暗，再进入本镜动作。
 ```
 
-The shot-count warning prevents the model from adding spurious cuts.
+For the first video in a sequence:
 
-## Section 3 — Per-shot blocks (multi-shot prompts)
+```
+【首帧衔接】本镜头是全片第一个视频，首帧从本镜头参考图建立，锁定主角、光源、空间方向和关键道具。
+```
+
+## Section 3 — `【规格】`
+
+Always include duration and aspect ratio here, not as a loose footer:
+
+```
+【规格】15秒，21:9，真人实拍电影质感，真实场景光，浅景深，轻微胶片颗粒。
+```
+
+Add user-required fps, shutter angle, lens constraints, or generator-specific quality requirements in this section.
+
+## Section 4 — `【电影化动态描述】`
+
+For a single-shot prompt, write one continuous director paragraph. It must include:
+- Initial state from `【首帧衔接】`
+- Camera move and shot size
+- Core action
+- Practical lighting and material texture
+- Performance micro-beats
+- Spatial continuity
+- Sound that belongs inside the visible action
+- Final landing frame
+
+Single-shot skeleton:
+
+```
+【电影化动态描述】初始画面承接首帧衔接状态，摄影机按[镜头运动]执行，景别为[景别]。[镜头意图]画面核心是：[画面动作]。[光线与质感]。[表演控制]。[空间连续]。[声音设计]。[质量门槛]。最后落点：[备注/最终落幅]。
+```
+
+### Multi-shot prompts
 
 When a prompt contains multiple internal cuts, each one is a `【镜头N】` block with its own internal structure:
 
 ```
+【电影化动态描述】
 【镜头1】
 机位：35mm广角，全景wide shot。⚠️持续时间⚠️严格约0.3-0.5秒（split-second flash establishing shot）。
 背景：[location detail].
@@ -75,7 +110,7 @@ Each shot block always has:
 
 For a single-shot prompt (one continuous take, no internal cuts), skip the `【镜头N】` headers and write the same structure as a single block. Prepend with `单镜头（one-shot，无剪辑）。`
 
-## Section 4 — Spatial blocking
+## Section 5 — Spatial blocking
 
 For any prompt with 2+ characters in frame, declare the spatial relationship explicitly using the approved top-down schema (see [SPATIAL_BLOCKING.md](SPATIAL_BLOCKING.md)):
 
@@ -88,7 +123,7 @@ For any prompt with 2+ characters in frame, declare the spatial relationship exp
 
 Use precise distances in meters. Use cardinal directions or "north/south/east/west" relative to the main view axis. Note who occludes whom, who faces which direction, and any heights/eyelines the model might get wrong.
 
-## Section 5 — Camera/move direction
+## Section 6 — Camera/move direction
 
 Every shot block declares lens + camera move + emotion sync. See [CAMERA_EMOTION.md](CAMERA_EMOTION.md) for the full mapping.
 
@@ -104,7 +139,7 @@ Forbidden moves are explicit:
 - `禁稳定器` (no stabilizer — handheld means handheld)
 - `禁焦点漂移` (no focus drift on locked inserts)
 
-## Section 6 — Performance direction
+## Section 7 — Performance direction
 
 This is the cinematographer's main creative output. Direct emotion as physical micro-events. See [MICRO_BEATS.md](MICRO_BEATS.md) for the full catalog by emotion.
 
@@ -119,7 +154,9 @@ Tactics:
 
 Every dialogue line gets a pre-line beat, mid-line emphasis cues, and a post-line beat (see MICRO_BEATS.md §4).
 
-## Section 7 — Dialogue rules
+## Section 8 — `【音画同步】` and dialogue rules
+
+Use `【音画同步】` whenever the prompt includes dialogue, voiceover, phone audio, off-screen speech, a cut-off line, or a key SFX cue. Preserve the original spoken language. Add mouth timing for visible speakers, off-screen continuity for unseen voices, breath/pause rhythm, room or device reverb, and causal sound effects.
 
 ### Base rule
 ```
@@ -143,7 +180,7 @@ Every line must explicitly state **whom it's directed at**:
 ### Lines from bokeh
 If a character in bokeh speaks — sound is allowed, but the silhouette must match: head angled toward the speech direction, breath before words readable even through blur.
 
-## Section 8 — Background activity
+## Section 9 — Background activity
 
 For any scene with extras or environmental movement, callout what's happening in the background. Forbid empty backgrounds:
 
@@ -157,7 +194,7 @@ For empty/quiet scenes (apartments, exteriors at night), still callout the *abse
 完全寂静——禁背景音乐、禁画外人声。仅环境SFX：远处城市低频嗡鸣、暖气管道轻响、湿靴踩在拼花地板上的回响。
 ```
 
-## Section 9 — Lighting overrides per shot
+## Section 10 — Lighting overrides per shot
 
 The default style block forbids fill light, but each scene may need additional lighting overrides specific to that location. See [STYLE_BLOCK.md](STYLE_BLOCK.md) for variants.
 
@@ -168,7 +205,13 @@ Be specific about:
 - Whether contre-jour or side-lit
 - Spill rules ("禁止蓝色色溢打在人物皮肤上")
 
-## Section 10 — Failure-mode warnings (`⚠️` markers)
+## Section 11 — `【负面约束】` and failure-mode warnings (`⚠️` markers)
+
+End every prompt with a concise negative block:
+
+```
+【负面约束】禁身份漂移、禁字幕、禁额外切镜、禁CG/游戏质感、禁手脸畸变、禁漂浮道具、禁失控焦点漂移、禁表演过度；不要让硬约束覆盖本镜头的主要动作和情绪落点。
+```
 
 Anticipate what Seedance will get wrong. Add ⚠️-marked rules to prevent it. Use single `⚠️` for important, triple `⚠️⚠️⚠️` for critical-critical.
 
@@ -219,14 +262,7 @@ If a new rule contradicts an earlier one — **the new rule replaces the old**. 
 ⚠️替换规则：原规则[X]替换为新规则[Y]——[reason if non-obvious]。
 ```
 
-## Section 11 — Closing footer
-
-Always end with:
-```
-15秒。21:9。
-```
-
-For multi-shot prompts (one prompt with internal `【镜头1】【镜头2】【镜头3】` cuts), still 15 seconds total — divide internally.
+Do not add a separate closing footer. Duration and aspect ratio belong in `【规格】`.
 
 ## Length
 
