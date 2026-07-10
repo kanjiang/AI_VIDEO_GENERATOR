@@ -3,6 +3,12 @@ const path = require("path");
 
 const PROJECT_SLUG = "zhengci-zhiwai";
 
+const FIXED_CHARACTER_VOICE_RULE = "【固定角色声音总规则】全片必须为每个角色锁定唯一基础声纹，后续所有镜头沿用同一角色声音，不逐镜重新抽样、不更换年龄感、性别感、口音或基础音色。情绪、距离、电话听筒、耳机泄漏、手机外放、隔门、风雨或设备压缩只能改变音量、气息、混响、底噪、动态范围和清晰度，不能改变角色本人的声纹。林深固定为低沉、克制、少气口、尾音短收的男声；周妍固定为压低、警觉、偏锐利、尾音不上扬的女声；林晚固定为年轻女声，柔软但紧绷，残缺语音、手机留言、伪造求救或回放都必须保留同一声纹底色；保安A/保安B各自固定为隔门发闷、带走廊混响的中年男声，不互相混淆；智能音箱与系统机械音固定为中性电子合成声，平调、无情绪、非真人嗓音。旁白、画外音、听筒音、外放音与近场对白必须按同一角色声纹连续，只改变声源方向和空间质感，禁止把同一角色在不同镜头里生成成陌生声音。";
+
+const VOICE_BIBLE_REFERENCE_LINE = "详细角色声线档案见 `screenplay/zhengci-zhiwai-character-voice-bible.md`；复制单镜或段落提示词时，必须同时遵守本文件顶部总规则与声线档案。";
+
+const VOICE_REFERENCE_AUDIO_LINE = "【参考声音MP3挂载规则】若已提供 `assets/zhengci-zhiwai/voice-references/` 下的角色参考 MP3，视频生成时必须以对应 MP3 作为该角色最高优先级声纹参考：LinShen.mp3 或 林深.mp3=林深，ZhouYan.mp3 或 周妍.mp3=周妍，LinWan.mp3 或 林晚.mp3=林晚，SecurityGuardA.mp3 或 保安A.mp3=保安A，SecurityGuardB.mp3 或 保安B.mp3=保安B，SmartSpeakerSystem.mp3 或 智能音箱系统音.mp3=智能音箱/系统机械音。文字提示只控制情绪、距离、设备压缩和空间混响，不得覆盖 MP3 的基础声纹。";
+
 function sanitizeCell(cell) {
   return String(cell ?? "").replace(/`/g, "").replace(/\*\*/g, "").trim();
 }
@@ -338,6 +344,7 @@ function buildMountedResourceAudioLock(shot) {
 
   if (isDialogueDriven(shot)) {
     rules.push("对白保持原文，不翻译、不改写。");
+    rules.push("沿用对应角色参考 MP3 或声线档案，只生成当前情绪、距离、设备压缩和空间混响。");
   }
 
   return `【挂载资源与音频硬约束】${rules.join("")}`;
@@ -541,6 +548,9 @@ function buildMultiShotPrompt(group) {
   const goal = formatSentence(group.goal);
   const header = [
     `【挂载资源与音频硬约束】本视频必须严格使用已挂载的 @image 参考资源。角色外貌、服装、发型、体态、身份感、空间结构、关键道具和界面状态只参考挂载图，不重新设计、不重新描述静态设定。对白保持 shot list 原文语言与原句，不翻译、不改写。若说话者声音持续但镜头切到道具、空间、背影、合照或另一人物反应，声音必须继续不断线，保持同一空间混响、距离感和声源方向；重新切回说话者脸部时，口型、下颌开合、呼吸停顿和当前音节必须同步。无字幕、无文字标题、无解释性屏幕文字、无背景音乐，只保留环境音、动作音效和真实语音混响。`,
+    FIXED_CHARACTER_VOICE_RULE,
+    VOICE_REFERENCE_AUDIO_LINE,
+    VOICE_BIBLE_REFERENCE_LINE,
     buildMultiShotStartFrameLine(group),
     `完全自包含重度版：${group.totalDuration}，21:9，multi-shot，严格只允许 ${group.shots.length} 个镜头，禁止额外镜头、禁止字幕、禁止音乐。`,
     buildReferenceLockLine(),
@@ -619,6 +629,10 @@ function buildShotByShotFile(actConfig, shots, bindingMap, aliasMap) {
     "",
     `说明：本文件按当前 shot list 与 Seedance reference map 自动生成，逐镜覆盖 ${actConfig.rangeLabel}。复制到视频模型时，连同 @image 行一起使用；若后续剧本再变更，请重跑 screenplay/build_video_prompts.js。`,
     "",
+    FIXED_CHARACTER_VOICE_RULE,
+    VOICE_REFERENCE_AUDIO_LINE,
+    VOICE_BIBLE_REFERENCE_LINE,
+    "",
     ...sections,
   ].join("\n");
 }
@@ -643,6 +657,10 @@ function buildMultiShotFile(actConfig, shots, bindingMap, aliasMap) {
     `范围：${actConfig.rangeLabel}`,
     "",
     `说明：本文件是 ${actConfig.title} 的段落压缩版，按当前 shot list 聚合成 ${groups.length} 条 multi-shot prompts，用于 Seedance 快速测试整段节奏。单镜执行仍以逐镜版为准。`,
+    "",
+    FIXED_CHARACTER_VOICE_RULE,
+    VOICE_REFERENCE_AUDIO_LINE,
+    VOICE_BIBLE_REFERENCE_LINE,
     "",
     ...sections,
   ].join("\n");

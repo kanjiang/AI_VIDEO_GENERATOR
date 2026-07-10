@@ -2363,12 +2363,12 @@
           "sceneNo": "S3",
           "framing": "道具近景",
           "cameraMove": "固定",
-          "visualAction": "维修箱上的白色手机剧烈震动，屏幕亮起",
+          "visualAction": "护栏外侧低位的白色手机剧烈震动，屏幕亮起",
           "dialogueOrSound": "手机震动声",
           "duration": "4秒",
           "notes": "手机先于人物完成牵引",
           "promptTitle": "诱饵亮起",
-          "promptText": "维修箱上的白色手机剧烈震动，屏幕亮起。重点是手机先牵引人物，执行时震动亮屏。",
+          "promptText": "护栏外侧低位的白色手机剧烈震动，屏幕亮起。重点是手机先牵引人物，执行时震动亮屏。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "WhitePhoneCall"
@@ -2406,12 +2406,12 @@
           "sceneNo": "S4",
           "framing": "露台广角",
           "cameraMove": "固定高位",
-          "visualAction": "高空露台、围栏、维修箱和白色手机同框，城市夜景冰冷虚焦",
+          "visualAction": "高空露台、围栏和护栏外侧白色手机同框，城市夜景冰冷虚焦",
           "dialogueOrSound": "呼啸风声",
           "duration": "6秒",
           "notes": "先建立危险空间结构",
           "promptTitle": "露台定场",
-          "promptText": "高空露台、围栏、维修箱和白色手机同框，城市夜景冰冷虚焦。重点是先讲清高空结构，执行时危险空间成立。",
+          "promptText": "高空露台、围栏和护栏外侧白色手机同框，城市夜景冰冷虚焦。重点是先讲清高空结构，执行时危险空间成立。",
           "promptSourcePath": "screenplay\\zhengci-zhiwai-storyboard-prompts.md",
           "bindingAliases": [
             "TerraceWide"
