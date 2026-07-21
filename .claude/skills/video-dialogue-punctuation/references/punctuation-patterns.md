@@ -165,6 +165,76 @@ Example:
 
 Use carefully. Some lines lose menace if they become too visibly inquisitive.
 
+## Seedance 2.0 Punctuation Controls
+
+These punctuation marks act as direct performance directives in Seedance 2.0. They control volume, speed, and delivery beyond what normal Chinese punctuation achieves.
+
+### 圆括号（内容）— Whisper / breathy / lowered volume
+
+Seedance reads content inside `（）` at reduced volume with a breathy, near-whisper quality. Use for inner monologue leaking out, muttered asides, or physically weakened speech.
+
+- `"我当然相信你。（骗子。）"` — "骗子" is almost inaudible, like a thought escaping
+- `"没事，我很好。（才怪。）"` — the parenthetical lands as a bitter whisper
+
+Rules:
+- Place parenthetical content where the speaker would naturally lower their voice
+- Works best for 1–4 characters inside the brackets
+- Do not overuse — if every line has a parenthetical aside, the effect flattens
+
+### 星号 \*内容\* — Emphasis / slowed / weighted
+
+Seedance reads content between `*` marks slower, heavier, and with slightly lowered volume. Use for the word that carries the emotional or informational weight of the sentence.
+
+- `"我说的是*现在*。"` — "现在" is delivered with deliberate force
+- `"这不是*你的*决定。"` — "你的" gets pressed harder than the surrounding words
+
+Rules:
+- One emphasis per sentence maximum
+- Pick the word that changes meaning if stressed differently
+- Star-emphasis sounds deliberate, not loud — it slows the delivery, it does not raise volume
+
+### 方括号【内容】— Silent action directive
+
+Seedance does NOT read content inside `【】` aloud. Instead it executes the instruction as a performance action. Use for pauses, breaths, sighs, or any non-verbal beat.
+
+Available directives:
+- `【停顿】` — pause (about 0.5–1 second silence)
+- `【长停顿】` — extended pause (about 1.5–2 seconds)
+- `【呼吸】` — audible breath intake
+- `【叹气】` — audible sigh
+- `【吞咽】` — swallow sound
+
+Example:
+- `"我知道。【停顿】但我还是来了。"` — clean silence between the two clauses
+- `"【呼吸】好。我说。"` — breath before speaking, creating weight
+
+Rules:
+- Place directives where a real actor would physically do the action
+- `【停顿】` is cleaner than `……` — use `……` for trailing hesitation, `【停顿】` for deliberate silence
+- Can combine: `"我不是不怕……【停顿】我是不敢停。"`
+- Do not stack multiple directives in a row
+
+### Combination patterns
+
+These four Seedance controls can layer with standard punctuation for precise delivery:
+
+| Intent | Pattern | Example |
+|--------|---------|---------|
+| Hesitate then whisper aside | `……` + `（）` | `"我觉得……（算了。）"` |
+| Deliberate pause then emphasize | `【停顿】` + `*` | `"你听好。【停顿】这是*最后*一次。"` |
+| Trail off with breath | `……` + `【呼吸】` | `"如果当时我没走……【呼吸】"` |
+| Whispered emphasis | `（*内容*）` | `"（*不可能*。）"` |
+| Calm threat with pause | `。` + `【停顿】` | `"听见了吧。【停顿】先给我。"` |
+
+## Seedance 2.0 Lip-Sync Tips
+
+When dialogue requires visible mouth movement (画内角色说话):
+
+1. **Mouth must be visible** — mid-shot (50mm) and close-up (85mm+) get the best lip-sync results. Wide shots rarely align.
+2. **Normal speaking speed** — don't write rapid-fire dialogue for lip-sync shots. Add `语速偏慢` in the prompt if the character is calm or exhausted.
+3. **Keep lines under 15 seconds** — Seedance lip-sync is most stable within a single 15-second prompt. Split longer speeches across prompts.
+4. **Speed annotations** — add `语速偏慢` or `语速较快` directly in the dialogue delivery notes when needed.
+
 ## Prompt-Level Guidance
 
 When editing AI video prompts:
@@ -174,6 +244,31 @@ When editing AI video prompts:
 - Keep delivery notes physical and playable: `压低声音`, `停半拍`, `几乎没出声`, `后半句更轻`.
 - Do not turn every line into a stage performance note.
 - If the scene mixes true and false voice sources, normalize punctuation by source as well as by speaker.
+
+### Dialogue text wrapping with `{}`
+
+In Seedance 2.0 prompts, wrap each character's spoken text in curly braces `{}` to help the model precisely identify what to read aloud:
+
+```
+角色A（清冷少女音）转过头说{你怎么来了？}【停顿 0.5s】
+角色B（浑厚男声）放下杯子回应{我刚好路过。}
+```
+
+Rules:
+- `{}` contains ONLY spoken words — action/gesture goes outside
+- Keep each `{}` block ≤15 Chinese characters
+- Add `【停顿 0.5s-1s】` between different speakers to prevent voice crossover
+- All Seedance punctuation controls (`……` `（）` `*` `【指令】`) work inside `{}`
+
+Example with combined controls:
+```
+角色A 低头看着地面说{我不是不怕……【停顿】我是*不敢*停。}【停顿 0.8s】
+角色B 走过来轻声说{（没事的。）我在这里。}
+```
+
+### Multi-speaker limit
+
+A single 15-second Seedance prompt must have **at most 2 speaking characters** with 2-4 lines total. Three or more speakers cause voice crossover. Split 3-person scenes into multiple prompts.
 
 ## Intensity Ladder
 

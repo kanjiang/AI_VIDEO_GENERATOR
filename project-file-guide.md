@@ -92,56 +92,56 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 
 | 路径 | 用途 |
 | --- | --- |
-| screenplay/zhengci-zhiwai-treatment.md | 项目 treatment / 概念整理 |
-| screenplay/zhengci-zhiwai-screenplay.md | 主剧本 Markdown 版本 |
-| screenplay/zhengci-zhiwai-storyboard-beats.md | 故事板节拍拆分 |
-| screenplay/zhengci-zhiwai-shot-list.md | 当前 72 镜唯一顺序基准 |
-| screenplay/zhengci-zhiwai-final-generation-list.md | 12 镜测试包与 72 镜批量生成顺序真源 |
-| screenplay/zhengci-zhiwai-seedance-reference-map.md | 每个镜头推荐绑定哪些参考图 alias |
-| screenplay/zhengci-zhiwai-storyboard.config.json | storyboard 配置和 fallback alias 映射 |
+| screenplay/证词之外/zhengci-zhiwai-treatment.md | 项目 treatment / 概念整理 |
+| screenplay/证词之外/zhengci-zhiwai-screenplay.md | 主剧本 Markdown 版本 |
+| screenplay/证词之外/zhengci-zhiwai-storyboard-beats.md | 故事板节拍拆分 |
+| screenplay/证词之外/zhengci-zhiwai-shot-list.md | 当前 72 镜唯一顺序基准 |
+| screenplay/证词之外/zhengci-zhiwai-final-generation-list.md | 12 镜测试包与 72 镜批量生成顺序真源 |
+| screenplay/证词之外/zhengci-zhiwai-seedance-reference-map.md | 每个镜头推荐绑定哪些参考图 alias |
+| screenplay/证词之外/zhengci-zhiwai-storyboard.config.json | storyboard 配置和 fallback alias 映射 |
 
 ### 6.3 《证词之外》Prompt 文件
 
 | 路径 | 用途 |
 | --- | --- |
-| screenplay/zhengci-zhiwai-storyboard-prompts.md | storyboard 页面与 JSON 读取的 prompt 源 |
-| screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md | 12 镜测试包用的 12 宫格电影分镜提示词 |
-| screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md | 第一幕逐镜视频提示词 |
-| screenplay/zhengci-zhiwai-act1-video-prompts.md | 第一幕 multi-shot 压缩版提示词 |
-| screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md | 第二幕逐镜视频提示词 |
-| screenplay/zhengci-zhiwai-act2-video-prompts.md | 第二幕 multi-shot 压缩版提示词 |
-| screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md | 第三幕逐镜视频提示词 |
-| screenplay/zhengci-zhiwai-act3-video-prompts.md | 第三幕 multi-shot 压缩版提示词 |
-| screenplay/zhengci-zhiwai-test-pack-video-prompts.md | 12 镜测试包视频提示词 |
-| screenplay/zhengci-zhiwai-test-pack-storyboard-prompts.md | 12 镜测试包 storyboard 提示词 |
+| screenplay/证词之外/zhengci-zhiwai-storyboard-prompts.md | storyboard 页面与 JSON 读取的 prompt 源 |
+| screenplay/证词之外/zhengci-zhiwai-test-pack-storyboard-prompts.md | 12 镜测试包用的 12 宫格电影分镜提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md | 第一幕逐镜视频提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act1-video-prompts.md | 第一幕 multi-shot 压缩版提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md | 第二幕逐镜视频提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act2-video-prompts.md | 第二幕 multi-shot 压缩版提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md | 第三幕逐镜视频提示词 |
+| screenplay/证词之外/zhengci-zhiwai-act3-video-prompts.md | 第三幕 multi-shot 压缩版提示词 |
+| screenplay/证词之外/zhengci-zhiwai-test-pack-video-prompts.md | 12 镜测试包视频提示词 |
+| screenplay/证词之外/zhengci-zhiwai-test-pack-storyboard-prompts.md | 12 镜测试包 storyboard 提示词 |
 
 ### 6.4 《证词之外》资产与补图文件
 
 | 路径 | 用途 |
 | --- | --- |
-| screenplay/zhengci-zhiwai-asset-prompts.md | 当前项目主资产提示词总表 |
-| screenplay/zhengci-zhiwai-asset-canvas.html | 资产看板，动态探测 assets 目录中哪些图已存在 |
-| screenplay/zhengci-zhiwai-asset-batch-01.md | 第一批主资产生成批次 |
-| screenplay/zhengci-zhiwai-asset-batch-02.md | 第二批主资产生成批次 |
-| screenplay/zhengci-zhiwai-asset-batch-03.md | 第三批主资产生成批次 |
-| screenplay/zhengci-zhiwai-asset-batch-supplement-01.md | 第一组补充直投包，偏开场与机制辅助 |
-| screenplay/zhengci-zhiwai-asset-batch-supplement-02.md | 第二组补充直投包，偏设备间、露台与终场辅助 |
-| screenplay/zhengci-zhiwai-asset-batch-supplement-03.md | Batch A 缺图直投包，聚焦第一幕权限链 |
-| screenplay/zhengci-zhiwai-asset-batch-supplement-04.md | Batch B 缺图直投包，聚焦电梯与29楼异常空间 |
-| screenplay/zhengci-zhiwai-asset-batch-supplement-05.md | Batch C 缺图直投包，聚焦终场物证与闪回闭环 |
+| screenplay/证词之外/zhengci-zhiwai-asset-prompts.md | 当前项目主资产提示词总表 |
+| screenplay/证词之外/zhengci-zhiwai-asset-canvas.html | 资产看板，动态探测 assets 目录中哪些图已存在 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-01.md | 第一批主资产生成批次 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-02.md | 第二批主资产生成批次 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-03.md | 第三批主资产生成批次 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-supplement-01.md | 第一组补充直投包，偏开场与机制辅助 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-supplement-02.md | 第二组补充直投包，偏设备间、露台与终场辅助 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-supplement-03.md | Batch A 缺图直投包，聚焦第一幕权限链 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-supplement-04.md | Batch B 缺图直投包，聚焦电梯与29楼异常空间 |
+| screenplay/证词之外/zhengci-zhiwai-asset-batch-supplement-05.md | Batch C 缺图直投包，聚焦终场物证与闪回闭环 |
 
 ### 6.5 《证词之外》流程与导航文件
 
 | 路径 | 用途 |
 | --- | --- |
-| screenplay/zhengci-zhiwai-reference-driven-sop.md | 当前推荐执行流程 SOP |
-| screenplay/zhengci-zhiwai-missing-assets.md | 当前 storyboard 缺失资产汇总 |
-| screenplay/zhengci-zhiwai-missing-assets-task-board.md | 缺图任务看板，按 Batch A/B/C 排序 |
-| screenplay/zhengci-zhiwai-next-steps.md | 当前最优先执行清单 |
-| screenplay/zhengci-zhiwai-navigation.md | 《证词之外》相关文件单页导航 |
-| screenplay/zhengci-zhiwai-scene-board-prompts.md | 场景板相关提示词集合 |
-| screenplay/zhengci-zhiwai-identity-board-prompts.md | 角色身份板相关提示词集合 |
-| screenplay/zhengci-zhiwai-seedance-test-batch.md | Seedance 测试批次说明 |
+| screenplay/证词之外/zhengci-zhiwai-reference-driven-sop.md | 当前推荐执行流程 SOP |
+| screenplay/证词之外/zhengci-zhiwai-missing-assets.md | 当前 storyboard 缺失资产汇总 |
+| screenplay/证词之外/zhengci-zhiwai-missing-assets-task-board.md | 缺图任务看板，按 Batch A/B/C 排序 |
+| screenplay/证词之外/zhengci-zhiwai-next-steps.md | 当前最优先执行清单 |
+| screenplay/证词之外/zhengci-zhiwai-navigation.md | 《证词之外》相关文件单页导航 |
+| screenplay/证词之外/zhengci-zhiwai-scene-board-prompts.md | 场景板相关提示词集合 |
+| screenplay/证词之外/zhengci-zhiwai-identity-board-prompts.md | 角色身份板相关提示词集合 |
+| screenplay/证词之外/zhengci-zhiwai-seedance-test-batch.md | Seedance 测试批次说明 |
 
 ## 7. 其他项目与目录
 
@@ -154,8 +154,8 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 如果你是第一次接手这个工程，建议按下面顺序看：
 
 1. README.md
-2. screenplay/zhengci-zhiwai-navigation.md
-3. screenplay/zhengci-zhiwai-next-steps.md
-4. screenplay/zhengci-zhiwai-missing-assets-task-board.md
-5. screenplay/zhengci-zhiwai-shot-list.md
+2. screenplay/证词之外/zhengci-zhiwai-navigation.md
+3. screenplay/证词之外/zhengci-zhiwai-next-steps.md
+4. screenplay/证词之外/zhengci-zhiwai-missing-assets-task-board.md
+5. screenplay/证词之外/zhengci-zhiwai-shot-list.md
 6. outputs/projects/zhengci-zhiwai/storyboard/zhengci-zhiwai.storyboard.html

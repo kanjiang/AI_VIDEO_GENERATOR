@@ -58,6 +58,8 @@ Default to the lightest pass that achieves the performance.
 
 ## Punctuation Intent Map
 
+Standard Chinese punctuation:
+
 - `，` small breath, soft turn, controlled continuation
 - `。` firm stop, emotional clamp, conclusion
 - `……` swallowed thought, hesitation, fear, grief, trailing breath
@@ -65,7 +67,40 @@ Default to the lightest pass that achieves the performance.
 - `？` challenge, disbelief, probing, unstable certainty
 - `！` burst only; use sparingly
 
-Read [references/punctuation-patterns.md](references/punctuation-patterns.md) before editing dialogue lines.
+Seedance 2.0 special controls:
+
+- `（内容）` whisper, breathy aside, lowered volume — Seedance reads this near-inaudibly
+- `*内容*` emphasis, slowed and weighted — Seedance reads this slower and heavier
+- `【指令】` silent action directive — Seedance executes but does not read aloud (e.g. `【停顿】` `【呼吸】` `【叹气】`)
+
+These three Seedance controls combine with standard punctuation. See [references/punctuation-patterns.md](references/punctuation-patterns.md) for full patterns, combination examples, and lip-sync tips.
+
+## Seedance 2.0 Multi-Speaker Rules
+
+### Hard limit: max 2 speakers per 15-second prompt
+
+Seedance 2.0 concurrently processes face-lock, multi-voice TTS, lip-sync, and timeline sequencing. With 3+ speakers in one 15s prompt, context overload causes voice crossover (串音), line misattribution, and timbre drift.
+
+- 1 speaker, 3-4 lines: safe
+- 2 speakers, 2-4 lines total: safe
+- 3+ speakers: split into multiple prompts (see shotlist-builder PROMPT_DENSITY.md)
+
+### Dialogue text wrapping with `{}`
+
+Wrap spoken text in `{}` so Seedance distinguishes speech from stage direction:
+
+```
+角色A（清冷少女音）看向窗外说{你怎么来了？}【停顿 0.5s】
+角色B（浑厚男声）放下杯子回应{我刚好路过。}
+```
+
+### Speaker-switch pauses
+
+Add `【停顿 0.5s】` to `【停顿 1s】` between different speakers. This gives Seedance a buffer to switch voice timbre and reduces crossover.
+
+### Line length limit
+
+Keep each `{}` block ≤15 Chinese characters. Longer lines increase the chance of misreading, swallowed characters, and broken pacing. Split into two shorter `{}` blocks with a `【停顿】` if needed.
 
 ## What Not To Do
 

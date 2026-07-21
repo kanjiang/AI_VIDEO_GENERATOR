@@ -15,3 +15,50 @@ pnpm-debug.log*
 
 .DS_Store
 Thumbs.db
+
+# Video files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.flv
+*.wmv
+*.webm
+*.m4v
+*.mpg
+*.mpeg
+*.3gp
+
+# Audio files
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+*.m4a
+*.aiff
+
+# Image sequences
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+
+# Project outputs and caches
+/output/
+/outputs/
+*.cache
+.cache/
+
+# Large asset folders
+assets/**/*.mp4
+assets/**/*.mov
+assets/**/*.png
+assets/**/*.jpg
+video/
+*.zip
+*.rar
+*.7z

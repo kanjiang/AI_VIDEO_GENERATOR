@@ -2,12 +2,43 @@ const fs = require("fs");
 const path = require("path");
 
 const PROJECT_SLUG = "zhengci-zhiwai";
+let VOICE_BIBLE_REFERENCE_LINE = "";
 
 const FIXED_CHARACTER_VOICE_RULE = "【固定角色声音总规则】全片必须为每个角色锁定唯一基础声纹，后续所有镜头沿用同一角色声音，不逐镜重新抽样、不更换年龄感、性别感、口音或基础音色。情绪、距离、电话听筒、耳机泄漏、手机外放、隔门、风雨或设备压缩只能改变音量、气息、混响、底噪、动态范围和清晰度，不能改变角色本人的声纹。林深固定为低沉、克制、少气口、尾音短收的男声；周妍固定为压低、警觉、偏锐利、尾音不上扬的女声；林晚固定为年轻女声，柔软但紧绷，残缺语音、手机留言、伪造求救或回放都必须保留同一声纹底色；保安A/保安B各自固定为隔门发闷、带走廊混响的中年男声，不互相混淆；智能音箱与系统机械音固定为中性电子合成声，平调、无情绪、非真人嗓音。旁白、画外音、听筒音、外放音与近场对白必须按同一角色声纹连续，只改变声源方向和空间质感，禁止把同一角色在不同镜头里生成成陌生声音。";
 
-const VOICE_BIBLE_REFERENCE_LINE = "详细角色声线档案见 `screenplay/zhengci-zhiwai-character-voice-bible.md`；复制单镜或段落提示词时，必须同时遵守本文件顶部总规则与声线档案。";
-
 const VOICE_REFERENCE_AUDIO_LINE = "【参考声音MP3挂载规则】若已提供 `assets/zhengci-zhiwai/voice-references/` 下的角色参考 MP3，视频生成时必须以对应 MP3 作为该角色最高优先级声纹参考：LinShen.mp3 或 林深.mp3=林深，ZhouYan.mp3 或 周妍.mp3=周妍，LinWan.mp3 或 林晚.mp3=林晚，SecurityGuardA.mp3 或 保安A.mp3=保安A，SecurityGuardB.mp3 或 保安B.mp3=保安B，SmartSpeakerSystem.mp3 或 智能音箱系统音.mp3=智能音箱/系统机械音。文字提示只控制情绪、距离、设备压缩和空间混响，不得覆盖 MP3 的基础声纹。";
+
+function resolveProjectDirectory(screenplayRoot, projectSlug) {
+  const directMatch = [
+    `${projectSlug}-shot-list.md`,
+    `${projectSlug}-screenplay.md`,
+    `${projectSlug}-storyboard.config.json`,
+  ].some((fileName) => fs.existsSync(path.join(screenplayRoot, fileName)));
+
+  if (directMatch) {
+    return screenplayRoot;
+  }
+
+  const candidates = fs
+    .readdirSync(screenplayRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(screenplayRoot, entry.name));
+
+  return (
+    candidates.find((candidateDir) =>
+      fs.readdirSync(candidateDir).some((fileName) => fileName.startsWith(`${projectSlug}-`)),
+    ) ?? screenplayRoot
+  );
+}
+
+function toWorkspaceRelativePath(filePath) {
+  return path.relative(path.dirname(__dirname), filePath).replace(/\\/g, "/");
+}
+
+function buildVoiceBibleReferenceLine(screenplayDir) {
+  const voiceBiblePath = path.join(screenplayDir, `${PROJECT_SLUG}-character-voice-bible.md`);
+  return `详细角色声线档案见 \`${toWorkspaceRelativePath(voiceBiblePath)}\`；复制单镜或段落提示词时，必须同时遵守本文件顶部总规则与声线档案。`;
+}
 
 function sanitizeCell(cell) {
   return String(cell ?? "").replace(/`/g, "").replace(/\*\*/g, "").trim();
@@ -671,7 +702,8 @@ function writeFile(targetPath, content) {
 }
 
 function main() {
-  const screenplayDir = __dirname;
+  const screenplayDir = resolveProjectDirectory(__dirname, PROJECT_SLUG);
+  VOICE_BIBLE_REFERENCE_LINE = buildVoiceBibleReferenceLine(screenplayDir);
   const shotListPath = path.join(screenplayDir, `${PROJECT_SLUG}-shot-list.md`);
   const referenceMapPath = path.join(screenplayDir, `${PROJECT_SLUG}-seedance-reference-map.md`);
   const generationListPath = path.join(screenplayDir, `${PROJECT_SLUG}-final-generation-list.md`);

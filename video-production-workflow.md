@@ -161,8 +161,8 @@
 
 相关文件：
 
-- `screenplay/tayang-yihou-screenplay.md`
-- `screenplay/tayang-yihou-shot-list.md`
+- `screenplay/打烊之后/tayang-yihou-screenplay.md`
+- `screenplay/打烊之后/tayang-yihou-shot-list.md`
 
 ### 如果你从零开始
 
@@ -180,7 +180,7 @@
 
 那就可以跳过第一阶段，直接进入 `shotlist-builder`。
 
-在这个仓库里，`screenplay/tayang-yihou-screenplay.md` 已经存在，因此当你要做下面这些事时，正确的下一个 skill 是 `shotlist-builder`：
+在这个仓库里，`screenplay/打烊之后/tayang-yihou-screenplay.md` 已经存在，因此当你要做下面这些事时，正确的下一个 skill 是 `shotlist-builder`：
 
 - 把现有剧本转成更正式的制作版 shotlist
 - 生成资产清单
@@ -191,7 +191,7 @@
 
 那就可以进一步用 `seedance-2` 处理选定场景或镜头段。
 
-在这个仓库里，`screenplay/tayang-yihou-shot-list.md` 也已经存在，因此你在下面这些场景下应该优先用 `seedance-2`：
+在这个仓库里，`screenplay/打烊之后/tayang-yihou-shot-list.md` 也已经存在，因此你在下面这些场景下应该优先用 `seedance-2`：
 
 - 只生成 016 到 020 这些镜头段
 - 单独细化第 3 场玩偶苏醒 montage
@@ -248,7 +248,7 @@
 
 基于当前项目里已经存在的文件，最实际的路径是：
 
-1. 把 `screenplay/tayang-yihou-screenplay.md` 当作已锁定的剧本基础版本。
+1. 把 `screenplay/打烊之后/tayang-yihou-screenplay.md` 当作已锁定的剧本基础版本。
 2. 用 `shotlist-builder` 去补齐正式 production HTML 和资产收集流程。
 3. 再用 `seedance-2` 对选中的场次或镜头组生成最终 prompt。
 
@@ -392,4 +392,4 @@
 
 如果要看已经接到具体项目的实战版 SOP，直接参考：
 
-- `screenplay/zhengci-zhiwai-reference-driven-sop.md`
+- `screenplay/证词之外/zhengci-zhiwai-reference-driven-sop.md`

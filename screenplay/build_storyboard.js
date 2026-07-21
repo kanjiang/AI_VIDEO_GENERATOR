@@ -3,6 +3,30 @@ const path = require("path");
 
 const DEFAULT_SLUG = "zhengci-zhiwai";
 
+function resolveProjectDirectory(rootDir, projectSlug) {
+  const screenplayRoot = path.join(rootDir, "screenplay");
+  const directMatch = [
+    `${projectSlug}-shot-list.md`,
+    `${projectSlug}-screenplay.md`,
+    `${projectSlug}-storyboard.config.json`,
+  ].some((fileName) => fs.existsSync(path.join(screenplayRoot, fileName)));
+
+  if (directMatch) {
+    return screenplayRoot;
+  }
+
+  const candidates = fs
+    .readdirSync(screenplayRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(screenplayRoot, entry.name));
+
+  return (
+    candidates.find((candidateDir) =>
+      fs.readdirSync(candidateDir).some((fileName) => fileName.startsWith(`${projectSlug}-`)),
+    ) ?? screenplayRoot
+  );
+}
+
 function sanitizeCell(cell) {
   return String(cell ?? "").replace(/`/g, "").replace(/\*\*/g, "").trim();
 }
@@ -262,7 +286,7 @@ function unique(values) {
 
 function buildData(projectSlug) {
   const rootDir = process.cwd();
-  const screenplayDir = path.join(rootDir, "screenplay");
+  const screenplayDir = resolveProjectDirectory(rootDir, projectSlug);
   const projectConfig = loadProjectConfig(screenplayDir, projectSlug);
   const outputDir = path.join(rootDir, "outputs", "projects", projectSlug, "storyboard");
   const assetsDir = path.join(rootDir, "assets", projectSlug);
@@ -809,13 +833,13 @@ function writeOutputs(data) {
 function printUsage() {
   console.log("用法: node screenplay/build_storyboard.js [project-slug]");
   console.log(`默认 slug: ${DEFAULT_SLUG}`);
-  console.log("默认命名规则:");
-  console.log("  screenplay/<slug>-shot-list.md");
-  console.log("  screenplay/<slug>-seedance-reference-map.md");
-  console.log("  screenplay/<slug>-final-generation-list.md");
-  console.log("  screenplay/<slug>-*-video-prompts-shot-by-shot.md");
+  console.log("默认会在 screenplay/ 或其一级项目子目录下自动发现:");
+  console.log("  <project-dir>/<slug>-shot-list.md");
+  console.log("  <project-dir>/<slug>-seedance-reference-map.md");
+  console.log("  <project-dir>/<slug>-final-generation-list.md");
+  console.log("  <project-dir>/<slug>-*-video-prompts-shot-by-shot.md");
   console.log("可选配置:");
-  console.log("  screenplay/<slug>-storyboard.config.json");
+  console.log("  <project-dir>/<slug>-storyboard.config.json");
 }
 
 function main() {

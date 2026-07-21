@@ -86,7 +86,7 @@ For each scene in scope:
 
 ## Hard rules
 
-- **Handles renumber per prompt.** `@image1` in scene 21 = Roko; `@image1` in scene 14 may = a different character. Each prompt block declares its own handles.
+- **Use named asset handles.** Each prompt block declares its own assets as `@资产名=资产名 — 参考资产描述。` before `【挂载资源与音频硬约束】`. Later sections reference the plain asset name only (e.g. `林深`, `设备间全景`), never `@imageN` and never repeated `@资产名` in the body.
 - **Output language:** all UI labels, scene headers, action cells, scene-text cells, asset lists → English. Chinese only inside the `提示词` blocks. Dialogue lines inside Chinese prompts are quoted in English (`"line"`).
 - **Default duration:** 15 seconds per prompt, 21:9. State this inside the `【规格】` section, not as a loose footer.
 - **Director assignment:** skip entirely unless user requests it. No `dir-badge`, no palette switching — default to `pal-red` color scheme.
@@ -97,6 +97,7 @@ For each scene in scope:
 - **Top-down schema before prompting** for any 2+ character scene. See phase 3.
 - **Metadata inference:** project title, "Prepared for [name]", scene scope — infer from script + user context (memory, prior turns). If genuinely unclear, ask one short clarifying question; otherwise proceed.
 - **Never auto-assign images to handles silently.** If a filename is ambiguous, ask before assembling prompts.
+- **⚠️ No BGM in generated video.** All prompts must suppress background music by default (`无背景音乐、无配乐、无乐器声`). BGM is designed and mixed in post-production using the `bgm-scoring` skill. Ambient sounds (wind, rain, room tone) and action SFX (footsteps, impacts) ARE encouraged — only musical instruments and scored music are forbidden.
 - **Iteration = HTML edits, not chat dumps.** When the user requests changes after delivery, edit the HTML file directly and re-present it. Do not paste new prompt text in chat.
 
 ## Cinematography mandate

@@ -24,6 +24,12 @@ npm run build:storyboard
 
 默认会读取 zhengci-zhiwai。
 
+当前 `zhengci-zhiwai` 的资料文件已整理到：
+
+```text
+screenplay/证词之外/
+```
+
 ### 指定项目 slug
 
 ```bash
@@ -67,7 +73,7 @@ outputs/projects/<project-slug>/storyboard/
 
 ### slug 约定
 
-默认情况下，CLI 会按下面的命名规则读取输入文件：
+默认情况下，CLI 会在 `screenplay/` 根目录或其一级项目子目录里自动发现输入文件。当前 `zhengci-zhiwai` 会从 `screenplay/证词之外/` 读取；通用命名规则仍然是：
 
 ```text
 screenplay/<slug>-shot-list.md
@@ -101,13 +107,13 @@ node screenplay/build_video_prompts.js
 ### 当前会重写的文件
 
 ```text
-screenplay/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
-screenplay/zhengci-zhiwai-act1-video-prompts.md
-screenplay/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
-screenplay/zhengci-zhiwai-act2-video-prompts.md
-screenplay/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-screenplay/zhengci-zhiwai-act3-video-prompts.md
-screenplay/zhengci-zhiwai-storyboard-prompts.md
+screenplay/证词之外/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
+screenplay/证词之外/zhengci-zhiwai-act1-video-prompts.md
+screenplay/证词之外/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
+screenplay/证词之外/zhengci-zhiwai-act2-video-prompts.md
+screenplay/证词之外/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
+screenplay/证词之外/zhengci-zhiwai-act3-video-prompts.md
+screenplay/证词之外/zhengci-zhiwai-storyboard-prompts.md
 ```
 
 ### 推荐回归顺序
@@ -120,7 +126,7 @@ node screenplay/build_storyboard.js zhengci-zhiwai
 如果还在补图，再检查：
 
 ```text
-screenplay/zhengci-zhiwai-missing-assets.md
-screenplay/zhengci-zhiwai-missing-assets-task-board.md
+screenplay/证词之外/zhengci-zhiwai-missing-assets.md
+screenplay/证词之外/zhengci-zhiwai-missing-assets-task-board.md
 project-file-guide.md
 ```

@@ -1,0 +1,611 @@
+{
+  "captureMode": "captured-tree",
+  "slideCount": 11,
+  "textObjects": 200,
+  "shapeObjects": 61,
+  "imageObjects": 43,
+  "slideSummaries": [
+    {
+      "index": 1,
+      "key": "theme02_page004-1",
+      "capturedNodes": 44,
+      "maxDepth": 9,
+      "textNodes": 11,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 1,
+      "shapeCandidates": 11,
+      "renderedTextObjects": 11,
+      "renderedShapeObjects": 7,
+      "renderedImageObjects": 3
+    },
+    {
+      "index": 2,
+      "key": "theme02_page007-2",
+      "capturedNodes": 55,
+      "maxDepth": 10,
+      "textNodes": 27,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 12,
+      "renderedTextObjects": 27,
+      "renderedShapeObjects": 3,
+      "renderedImageObjects": 6
+    },
+    {
+      "index": 3,
+      "key": "theme02_page024-3",
+      "capturedNodes": 54,
+      "maxDepth": 12,
+      "textNodes": 19,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 6,
+      "renderedTextObjects": 19,
+      "renderedShapeObjects": 3,
+      "renderedImageObjects": 2
+    },
+    {
+      "index": 4,
+      "key": "theme02_page051-4",
+      "capturedNodes": 69,
+      "maxDepth": 10,
+      "textNodes": 21,
+      "backgroundImages": 4,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 19,
+      "renderedTextObjects": 21,
+      "renderedShapeObjects": 14,
+      "renderedImageObjects": 4
+    },
+    {
+      "index": 5,
+      "key": "theme02_page020-5",
+      "capturedNodes": 37,
+      "maxDepth": 8,
+      "textNodes": 19,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 15,
+      "renderedTextObjects": 19,
+      "renderedShapeObjects": 3,
+      "renderedImageObjects": 5
+    },
+    {
+      "index": 6,
+      "key": "theme02_page044-6",
+      "capturedNodes": 60,
+      "maxDepth": 9,
+      "textNodes": 23,
+      "backgroundImages": 5,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 10,
+      "renderedTextObjects": 23,
+      "renderedShapeObjects": 7,
+      "renderedImageObjects": 5
+    },
+    {
+      "index": 7,
+      "key": "theme02_page058-7",
+      "capturedNodes": 45,
+      "maxDepth": 8,
+      "textNodes": 24,
+      "backgroundImages": 1,
+      "svgImages": 1,
+      "canvasImages": 0,
+      "imageNodes": 1,
+      "shapeCandidates": 12,
+      "renderedTextObjects": 24,
+      "renderedShapeObjects": 3,
+      "renderedImageObjects": 5
+    },
+    {
+      "index": 8,
+      "key": "theme02_page053-8",
+      "capturedNodes": 39,
+      "maxDepth": 8,
+      "textNodes": 19,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 10,
+      "renderedTextObjects": 19,
+      "renderedShapeObjects": 3,
+      "renderedImageObjects": 5
+    },
+    {
+      "index": 9,
+      "key": "theme02_page029-9",
+      "capturedNodes": 25,
+      "maxDepth": 9,
+      "textNodes": 6,
+      "backgroundImages": 2,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 7,
+      "renderedTextObjects": 6,
+      "renderedShapeObjects": 4,
+      "renderedImageObjects": 2
+    },
+    {
+      "index": 10,
+      "key": "theme02_page056-10",
+      "capturedNodes": 45,
+      "maxDepth": 9,
+      "textNodes": 17,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 13,
+      "renderedTextObjects": 17,
+      "renderedShapeObjects": 7,
+      "renderedImageObjects": 4
+    },
+    {
+      "index": 11,
+      "key": "theme02_page059-11",
+      "capturedNodes": 40,
+      "maxDepth": 11,
+      "textNodes": 15,
+      "backgroundImages": 1,
+      "svgImages": 0,
+      "canvasImages": 0,
+      "imageNodes": 0,
+      "shapeCandidates": 15,
+      "renderedTextObjects": 14,
+      "renderedShapeObjects": 7,
+      "renderedImageObjects": 2
+    }
+  ],
+  "warnings": [
+    {
+      "slide": 1,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 1,
+      "type": "node-image-fallback-text-extracted",
+      "node": "effect-background",
+      "textCount": 11,
+      "sample": "AI原生悬疑短剧 证词之外 Beyond Testimony 听见的，未必是真相。 8min+ 成片时长 72 镜头设计 100% AI生成 主视觉 · 替换为产业大图"
+    },
+    {
+      "slide": 1,
+      "type": "node-image-fallback",
+      "node": "effect-background",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 25,
+      "sample": "路演提纲 06 / 73 五分钟 看懂全链路 SECTIONS · 章节 05 章 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 01 故"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 7,
+      "sample": "06 / 73 02 行业痛点 为什么AI视频总是塑料感 04 四层工作流 锁定角色/空间/节奏/视频"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 19,
+      "sample": "章 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 01 故事内核 证词之外的叙事定位与类型 02 行业痛点 为什么AI视频总是塑料感 03"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 6,
+      "sample": "02 行业痛点 为什么AI视频总是塑料感 04 四层工作流 锁定角色/空间/节奏/视频"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 12,
+      "sample": "从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 从故事到Skill工具链，从对比数据到多项目验证——AI短剧的新生产范式。 03 Skill对比 手写vs工具链的质量鸿沟 04 四层工作流 锁定角色/空间/节奏/视频"
+    },
+    {
+      "slide": 2,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 3,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 3,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 15,
+      "sample": "周妍被林晚的遗留语音引回旧公寓，却一步步走进技术与空间精准设计的无痕陷阱。一部8分钟以AI语音合成犯罪为核心的冷调悬疑短剧。 周妍被林晚的遗留语音引回旧公寓，却一步步走进技术与空间精准设计的无痕陷阱。一部8分钟以AI语音合成犯罪为核心的冷调悬疑短剧。 周妍被林晚的遗留语音引回旧公寓，却一步步走进技术与空间精准设计的无痕"
+    },
+    {
+      "slide": 3,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 4,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 4,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 4,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 4,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 19,
+      "sample": "效率对比 19 / 73 量化差距 HARD DATA 创历史新高 120→5 分钟/镜 生成速度提升24倍 占全美 VC 近 1/3 95% 角色一致率 vs手写仅30% 头部高度追捧 100% 首帧衔接率 vs手写0%断裂 地理护城河 6 三个项目100%复用"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 15,
+      "sample": "19 / 73 HARD DATA 120→5 分钟/镜 占全美 VC 近 1/3 95% 角色一致率 vs手写仅30% 头部高度追捧 100% 首帧衔接率 vs手写0%断裂 地理护城河 6 三个项目100%复用"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 9,
+      "sample": "19 / 73 角色一致率 头部高度追捧 100% 首帧衔接率 vs手写0%断裂 地理护城河 6 三个项目100%复用"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 5,
+      "sample": "19 / 73 首帧衔接率 地理护城河 6 三个项目100%复用"
+    },
+    {
+      "slide": 5,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 6,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 6,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 6,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 6,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 6,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback-text-extracted",
+      "node": "svg",
+      "textCount": 6,
+      "sample": "01 视频生成 02 分镜与资产 03 编剧 Skill"
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback",
+      "node": "svg",
+      "count": 1
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 13,
+      "sample": "六套可复用Agent Skill，覆盖从剧本创作到视频交付的完整链路，每启动新项目直接调用。 03 编剧 Skill 创作层 剧本/Treatment/角色圣经/分镜表自动生成 02 分镜与资产 视觉层 Shotlist Builder + Scene Board + Asset Canvas 01 视频生成 交付层 "
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 12,
+      "sample": "03 编剧 Skill 创作层 剧本/Treatment/角色圣经/分镜表自动生成 02 分镜与资产 视觉层 Shotlist Builder + Scene Board + Asset Canvas 01 视频生成 交付层 Seedance 2.0提示词模板 + 对白节奏优化"
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 8,
+      "sample": "02 分镜与资产 视觉层 Shotlist Builder + Scene Board + Asset Canvas 01 视频生成 交付层 Seedance 2.0提示词模板 + 对白节奏优化"
+    },
+    {
+      "slide": 7,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 17,
+      "sample": "一套工具 三种风格 同一套Skill工具链产出完全不同类型的作品，验证可复用性。后续可替换为实际视频片段。 同一套Skill工具链产出完全不同类型的作品，验证可复用性。后续可替换为实际视频片段。 01 悬疑 证词之外 · 72镜 02 动画 身体小队 · 26镜 03 萌宠 换了个毛 · 8段 04 宣传 哈兰德AI宣"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 13,
+      "sample": "三种风格 同一套Skill工具链产出完全不同类型的作品，验证可复用性。后续可替换为实际视频片段。 证词之外 · 72镜 02 动画 身体小队 · 26镜 03 萌宠 换了个毛 · 8段 04 宣传 哈兰德AI宣传片 ·"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 9,
+      "sample": "同一套Skill工具链产出完全不同类型的作品，验证可复用性。后续可替换为实际视频片段。 身体小队 · 26镜 03 萌宠 换了个毛 · 8段 04 宣传 哈兰德AI宣传片 ·"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 6,
+      "sample": "同一套Skill工具链产出完全不同类型的作品，验证可复用性。后续可替换为实际视频片段。 换了个毛 · 8段 04 宣传 哈兰德AI宣传片 ·"
+    },
+    {
+      "slide": 8,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 9,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 9,
+      "type": "node-image-fallback",
+      "node": "css-pattern-background",
+      "count": 1
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 15,
+      "sample": "规模化路线 ROADMAP 证词之外验证闭环后，Skill工具链直接迁移到更多项目，实现规模化AI内容生产。 当前 01 证词之外交付 72镜全片完成、工作流验证闭环 Q3 02 多项目复用 身体小队/换了个毛直接调用Skill链 Q4 03 规模化生产 标准化AI短剧工厂、周更节奏"
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 12,
+      "sample": "ROADMAP 证词之外验证闭环后，Skill工具链直接迁移到更多项目，实现规模化AI内容生产。 01 72镜全片完成、工作流验证闭环 Q3 02 多项目复用 身体小队/换了个毛直接调用Skill链 Q4 03 规模化生产 标准化AI短剧工厂、周更节奏"
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 7,
+      "sample": "证词之外验证闭环后，Skill工具链直接迁移到更多项目，实现规模化AI内容生产。 02 身体小队/换了个毛直接调用Skill链 Q4 03 规模化生产 标准化AI短剧工厂、周更节奏"
+    },
+    {
+      "slide": 10,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    },
+    {
+      "slide": 11,
+      "type": "node-image-fallback",
+      "node": "css-gradient-background",
+      "count": 1
+    },
+    {
+      "slide": 11,
+      "type": "node-image-fallback-text-extracted",
+      "node": "masked-element",
+      "textCount": 13,
+      "sample": "05 BEYOND 一起创造 JOIN US AI短剧不是未来，是现在。我们正在用工具链证明：一个人加一套Skill，就能持续产出院线级短片。 AI短剧不是未来，是现在。我们正在用工具链证明：一个人加一套Skill，就能持续产出院线级短片。 AI短剧不是未来，是现在。我们正在用工具链证明：一个人加一套Skill，就能持"
+    },
+    {
+      "slide": 11,
+      "type": "node-image-fallback",
+      "node": "masked-element",
+      "count": 1,
+      "source": "browser-visual-effect"
+    }
+  ]
+}

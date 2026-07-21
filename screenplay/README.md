@@ -2,15 +2,17 @@
 
 这个目录是当前仓库的生产资料中枢。和运行时代码相比，这里更接近“项目内容系统”：剧本、分镜、参考图绑定、资产提示词、视频 prompt、补图批次、流程 SOP 和生成脚本都集中在这里。
 
+现在的整理规则是：`screenplay/` 根目录主要放构建脚本、模板和总说明；具体项目资料分别放在各自的子文件夹里，例如 `证词之外/`、`打烊之后/`。
+
 ## 1. 先看哪几类文件
 
 如果你的目标是理解《证词之外》当前状态，建议按下面顺序看：
 
-1. zhengci-zhiwai-navigation.md
-2. zhengci-zhiwai-next-steps.md
-3. zhengci-zhiwai-shot-list.md
-4. zhengci-zhiwai-final-generation-list.md
-5. zhengci-zhiwai-seedance-reference-map.md
+1. 证词之外/zhengci-zhiwai-navigation.md
+2. 证词之外/zhengci-zhiwai-next-steps.md
+3. 证词之外/zhengci-zhiwai-shot-list.md
+4. 证词之外/zhengci-zhiwai-final-generation-list.md
+5. 证词之外/zhengci-zhiwai-seedance-reference-map.md
 
 这 5 份文件分别回答：
 
@@ -24,35 +26,35 @@
 
 ### 真源
 
-- zhengci-zhiwai-screenplay.md
-- zhengci-zhiwai-shot-list.md
-- zhengci-zhiwai-final-generation-list.md
-- zhengci-zhiwai-seedance-reference-map.md
-- zhengci-zhiwai-asset-prompts.md
+- 证词之外/zhengci-zhiwai-screenplay.md
+- 证词之外/zhengci-zhiwai-shot-list.md
+- 证词之外/zhengci-zhiwai-final-generation-list.md
+- 证词之外/zhengci-zhiwai-seedance-reference-map.md
+- 证词之外/zhengci-zhiwai-asset-prompts.md
 
 这些文件描述的是“应该拍什么、先拍什么、用什么图、该补什么资产”。如果剧情或镜头结构变了，优先改这里。
 
 ### 派生物
 
-- zhengci-zhiwai-storyboard-prompts.md
-- zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
-- zhengci-zhiwai-act1-video-prompts.md
-- zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
-- zhengci-zhiwai-act2-video-prompts.md
-- zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
-- zhengci-zhiwai-act3-video-prompts.md
+- 证词之外/zhengci-zhiwai-storyboard-prompts.md
+- 证词之外/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md
+- 证词之外/zhengci-zhiwai-act1-video-prompts.md
+- 证词之外/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md
+- 证词之外/zhengci-zhiwai-act2-video-prompts.md
+- 证词之外/zhengci-zhiwai-act3-video-prompts-shot-by-shot.md
+- 证词之外/zhengci-zhiwai-act3-video-prompts.md
 
 这些文件现在都可以通过 build_video_prompts.js 从真源重生成，不应该再长期手工维护。
 
 ### 执行辅助文件
 
-- zhengci-zhiwai-asset-canvas.html
-- zhengci-zhiwai-missing-assets.md
-- zhengci-zhiwai-missing-assets-task-board.md
-- zhengci-zhiwai-asset-batch-supplement-03.md
-- zhengci-zhiwai-asset-batch-supplement-04.md
-- zhengci-zhiwai-asset-batch-supplement-05.md
-- zhengci-zhiwai-reference-driven-sop.md
+- 证词之外/zhengci-zhiwai-asset-canvas.html
+- 证词之外/zhengci-zhiwai-missing-assets.md
+- 证词之外/zhengci-zhiwai-missing-assets-task-board.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-03.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-04.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-05.md
+- 证词之外/zhengci-zhiwai-reference-driven-sop.md
 
 这些文件不是剧情真源，而是为了让你更快执行、补图、回归和排优先级。
 
@@ -88,7 +90,7 @@
 - 补图以后
 - 想看当前整片状态时
 
-### zhengci-zhiwai-storyboard.config.json
+### 证词之外/zhengci-zhiwai-storyboard.config.json
 
 作用：
 
@@ -97,9 +99,9 @@
 
 当前关键点：
 
-- 现在 storyboard 页面吃的是 zhengci-zhiwai-storyboard-prompts.md
+- 现在 storyboard 页面吃的是 证词之外/zhengci-zhiwai-storyboard-prompts.md
 
-### zhengci-zhiwai-final-generation-list.md
+### 证词之外/zhengci-zhiwai-final-generation-list.md
 
 作用：
 
@@ -111,21 +113,21 @@
 
 如果你只想知道“现在还缺什么图”，看：
 
-- zhengci-zhiwai-missing-assets.md
+- 证词之外/zhengci-zhiwai-missing-assets.md
 
 如果你想知道“缺图应该先补哪一批”，看：
 
-- zhengci-zhiwai-missing-assets-task-board.md
+- 证词之外/zhengci-zhiwai-missing-assets-task-board.md
 
 如果你想直接拿去补某一批图，分别看：
 
-- zhengci-zhiwai-asset-batch-supplement-03.md
-- zhengci-zhiwai-asset-batch-supplement-04.md
-- zhengci-zhiwai-asset-batch-supplement-05.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-03.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-04.md
+- 证词之外/zhengci-zhiwai-asset-batch-supplement-05.md
 
 如果你想看当前所有资产节点和文件存在状态，开：
 
-- zhengci-zhiwai-asset-canvas.html
+- 证词之外/zhengci-zhiwai-asset-canvas.html
 
 ## 5. 当前最稳的工作节奏
 

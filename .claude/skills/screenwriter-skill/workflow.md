@@ -84,6 +84,50 @@ A binary question is the best question. Once the user answers, you have directio
 
 ---
 
+## WHEN THE USER WANTS TO ADAPT AN EXISTING STORY (改编模式)
+
+Adaptation is not copying. It is extracting the **structural engine** (core conflict, value shift, dramatic question) and rebuilding everything else around it.
+
+### The adaptation formula
+
+```
+Original core conflict + New characters + New setting/era = New work
+```
+
+### Step-by-step
+
+1. **Extract the core conflict** — reduce the source material to one sentence: "[Character] wants [X] but [Y] stands in the way." This is the only thing you keep.
+2. **Verify the conflict is universal** — if the conflict only works in the original's specific world (e.g., "a wizard must destroy a ring"), abstract it one level ("a reluctant hero must destroy the thing that gives power to evil"). If it's still too specific, abstract again.
+3. **Swap the characters** — new names, new appearances, new backstories, new voices. The character TYPES (mentor, trickster, threshold guardian) can remain if they serve the conflict, but every surface detail must change.
+4. **Swap the setting** — different era, different location, different culture, different genre. The more different, the safer and more original.
+5. **Rebuild the beats** — using the same McKee/Campbell methodology as original work, but let the new characters and setting generate their own specific scenes. Do NOT replicate the original's scene-by-scene structure.
+6. **Audit for leakage** — check every scene against the source. If a reader familiar with the original would say "this is the same scene," rewrite it.
+
+### Adaptation vs. plagiarism self-check
+
+| Check | Pass? |
+|---|---|
+| Could someone read this without recognizing the source? | |
+| Are ALL character names, appearances, and backstories new? | |
+| Is the setting/era/world different from the source? | |
+| Do the specific scenes differ, even if the arc is similar? | |
+| Could this story exist independently without knowing the source? | |
+
+If any check fails, the adaptation needs more distance from the source.
+
+### Common adaptation patterns
+
+| Source conflict | Adaptation example |
+|---|---|
+| 同事天价聚餐蹭主角买单 | → 相亲对象全家来蹭饭 |
+| 科举考试被诬告作弊 | → 职场项目被同事抢功 |
+| 穿越古代靠现代知识逆袭 | → 退休专家到乡村靠经验解决问题 |
+| 孤儿院天才被贵族收养 | → 小镇学生被大城市学校录取 |
+
+The pattern: keep the **power dynamic** and **stakes**, replace everything visible.
+
+---
+
 ## ITERATION
 
 A scene is rarely born perfect on the first pass. A normal iteration looks like this:
