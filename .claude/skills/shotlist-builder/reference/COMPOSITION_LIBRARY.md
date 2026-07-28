@@ -6,6 +6,164 @@ Works with `BATCH_MODE.md`: each entry here can be used as a composition shortha
 
 ---
 
+## Composition Pressure System (构图压力系统)
+
+**Before picking a composition pattern from the categories below, first answer this question: what is the spatial/relational PRESSURE in this scene?**
+
+Traditional composition libraries organize by technique (symmetry, rule-of-thirds, diagonal...). This section organizes by the **narrative pressure** between characters and their space. The pressure determines the technique — not the other way around.
+
+### Step 1 — Identify the pressure type
+
+| Pressure type | When it applies | Core question |
+|---|---|---|
+| **CP-A 被观察** | Secrets, surveillance, late arrival, identity mismatch | 谁在偷看谁？观众拥有多少信息？ |
+| **CP-B 被困住** | Institutions, fate, psychological closure, ritual | 什么空间结构在限制人物？ |
+| **CP-C 关系疏离** | Family, intimacy, negotiation, farewell | 两人之间的空间在说什么？ |
+| **CP-D 权力不对等** | Trial, ceremony, war, political/religious space | 谁/什么比人物更有权力？ |
+| **CP-E 心理失衡** | Discovery, illusion, fear, memory fracture | 人物的位置是否"不对劲"？ |
+| **CP-F 事后状态** | Event just ended, someone left, secret happened | 谁不在了？留下了什么？ |
+| **CP-G 感官插入** | Decision, hesitation, danger threshold | 哪个身体局部最能传递此刻？ |
+
+### Step 2 — Apply the pressure's composition methods
+
+#### CP-A 被观察 (Being Watched)
+
+场景：秘密、监视、迟到、身份错位。
+
+```
+构图方法：
+- 隔着玻璃、门缝、帘幕或人群拍摄——观众不拥有完整信息
+- 前景观察者只出现肩部/头部/模糊轮廓（参考 CAMERA_EMOTION §8.4 OTS）
+- 关键动作在中远景发生
+- ⚠️摄影机位置必须有理由——"为什么从这里偷看？"
+
+中文 prompt 句式：
+隔着[玻璃/门缝/人群]观察，前景[观察者肩部/帘幕边缘]虚化遮挡，焦点落在中景[主体动作]上，观众视角受限。
+```
+
+#### CP-B 被困住 (Trapped / Confined)
+
+场景：制度、命运、心理封闭、仪式压力。
+
+```
+构图方法：
+- 几何边界（桌面、走廊、门洞、座椅）将人物压在画面局部
+- 极端俯拍或高位观察
+- 人物尺度明显小于空间
+- 空间秩序完整，但人物位置出现一处偏差
+
+中文 prompt 句式：
+[空间结构]将人物限制在画面[位置]，[建筑/家具/制度空间]的几何线条包围人物，人物占画面≤1/4。
+```
+
+#### CP-C 关系疏离 (Relational Distance)
+
+场景：家庭、亲密关系、谈判、诀别。
+
+```
+构图方法：
+- 两人之间保留大面积空桌、床、走廊、地面或玻璃
+- 视线不相遇
+- 一人在亮区，一人在暗区（但不要戏剧化打光）
+- 让空间物件成为"第三方"
+
+中文 prompt 句式：
+[角色A]在画面[左/右]侧，[角色B]在画面[另一侧]，两人之间隔着[空桌/长廊/玻璃]，视线不交汇，中间的[物件]成为无声的第三方。
+```
+
+#### CP-D 权力不对等 (Power Imbalance)
+
+场景：审判、仪式、战争、组织、政治与宗教空间。
+
+```
+构图方法：
+- 低机位仰拍或高位俯视（必须有现实摄影机位置）
+- 巨大墙面、台阶、门、屏幕或人群控制人物视觉比例
+- 权力者不一定最大——空间可以为其背书
+
+中文 prompt 句式：
+低角度仰拍，[权力象征物——巨墙/台阶/旗帜/门]占据画面上方2/3，人物在下方被空间尺度压制。
+```
+
+#### CP-E 心理失衡 (Psychological Imbalance)
+
+场景：发现、错觉、恐惧、记忆断裂。
+
+```
+构图方法：
+- 人物贴画面边缘（不居中）
+- 头顶空间过多（headroom失衡）
+- 轻微画面倾斜（Dutch angle 5-15°，不超过15°）
+- ⚠️焦点落在背景而非人物——人物失焦，背景清晰
+
+中文 prompt 句式：
+人物偏置画面[极边缘]，头顶留有异常大的空间，画面轻微[倾斜/不稳]，⚠️焦点落在[背景元素]上而非人物面部——人物处于轻微失焦状态。
+```
+
+#### CP-F 事后状态 (Aftermath)
+
+场景：事件刚结束、某人已经离开、秘密已发生。
+
+```
+构图方法：
+- 人物缺席——空椅、湿地、开着的门、未熄灭的灯、遗留衣物或错位物件
+- 镜头保持克制，不拍"解释性证据墙"
+- ⚠️画面中最重要的是"不在的东西"
+
+中文 prompt 句式：
+[空间]中人物已经离开——[空椅/开着的门/未熄灭的灯/遗留的物品]暗示刚刚发生的事件。镜头静止，不解释，只展示。
+```
+
+#### CP-G 感官插入 (Sensory Insert)
+
+场景：决定、犹豫、危险临界点。
+
+```
+构图方法：
+- 嘴、手、后颈、鞋、湿发、衣料、钥匙、纸张等局部
+- 隐藏人物身份与空间全貌
+- ⚠️动作停在完成之前（与 CAMERA_EMOTION §0.1 前一秒美学配合）
+
+中文 prompt 句式：
+极近特写，只展示[手指/后颈/鞋尖/衣料边缘]——隐藏人物身份和空间全貌。动作停在完成之前：[手指即将触碰/嘴唇即将说出/钥匙即将转动]。
+```
+
+### Step 3 — Define Visual Traffic (视线流量)
+
+**After selecting a pressure type and composition method, write a one-sentence "visual traffic" path before finalizing the shot.**
+
+Visual traffic = the path the audience's eye travels through the frame. If you can't describe this path in one sentence, the composition is just element stacking.
+
+Format:
+```
+视线从[A入口]进入 → 被[B减速/遮挡]放慢 → 落到[C决定性信息] → 被[D余韵]带走。
+```
+
+Examples:
+```
+视线从左侧明亮窗光进入 → 被前景虚化的椅背放慢 → 落到中景女人低垂的手 → 被右侧暗处未关的门带走。
+
+视线从上方巨大的法院天花板进入 → 被中景的法官席横线阻断 → 落到下方被告席中唯一站着的人 → 被她手中攥紧的纸带走。
+
+视线从前景快速划过的竹叶进入 → 被中景静止的剑客身影减速 → 落到剑刃上一条细窄的月光 → 被远景竹林深处的黑暗带走。
+```
+
+**Rules:**
+- A (入口): Usually the brightest, largest, or most contrasty element
+- B (减速): A foreground/midground element that forces the eye to slow down — this creates the "cinematic breath"
+- C (落点): The narrative payload — what the audience is supposed to read/feel
+- D (余韵): Where the eye exits, leaving an unanswered question or lingering mood
+
+**In the prompt, translate the traffic into spatial language:**
+```
+⚠️视线流量：观众第一眼看[A]→ 视线被[B]放慢 → 落到[C] → 最终被[D]引向画外。
+构图服务于此流量——[A]必须是画面中最亮/最大的元素，[C]必须是叙事锚点。
+```
+
+**Anti-pattern:** If three consecutive shots in a sequence all have the same traffic pattern (e.g., all enter from top-left and exit bottom-right), the sequence feels mechanical. Vary the entry/exit points across shots.
+
+---
+
 ## Universal prompt formula
 
 ```

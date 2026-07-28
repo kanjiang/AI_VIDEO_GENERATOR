@@ -34,6 +34,10 @@ Do **not** use this skill for:
 
 If the user explicitly asks for a **角色身份板 / character identity board**, switch to the identity-board mode below instead of forcing a 12-panel storyboard layout.
 
+## Reference files
+
+- [reference/storyboard-types.md](reference/storyboard-types.md) — 10 storyboard types with quick selector table, prompt templates, and combination guide. Consult this file to choose the optimal storyboard type based on scene content before defaulting to the 12-panel layout.
+
 ## Core output goal
 
 Produce one **detail-rich, model-ready storyboard page prompt** that describes:

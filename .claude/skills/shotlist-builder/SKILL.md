@@ -56,9 +56,13 @@ Format:
 **Style references (optional)**
 - Base Staff: 3-class wardrobe sheet (security / analyst / scientist)
 - ...
+
+**Color card (色卡) — recommended for ≥ 3 video prompts**
+- Color card: abstract color reference image locking the project's 60:30:10 palette — generate via the prompt template in [STYLE_BLOCK.md](reference/STYLE_BLOCK.md) → "Color card generation prompt"
+- File naming: `色卡_[项目名].png`, stored in the project's `assets/` directory
 ```
 
-End phase 2 with: *"Generate these in Nano Banana / Soul / your tool of choice and upload them back. Name files so I can map them — e.g., `roko.png`, `apartment.png`, `polaroid_nov14.png`. Then tell me which scenes to build prompts for."*
+End phase 2 with: *"Generate these in Nano Banana / Soul / your tool of choice and upload them back. Name files so I can map them — e.g., `roko.png`, `apartment.png`, `polaroid_nov14.png`. For projects with 3+ video prompts, also generate a color card image to lock the palette across all segments (see the color card template below). Then tell me which scenes to build prompts for."*
 
 **Stop. Do not continue to phase 3 in the same turn.** Wait for the user's next message with images.
 
@@ -87,6 +91,7 @@ For each scene in scope:
 ## Hard rules
 
 - **Use named asset handles.** Each prompt block declares its own assets as `@资产名=资产名 — 参考资产描述。` before `【挂载资源与音频硬约束】`. Later sections reference the plain asset name only (e.g. `林深`, `设备间全景`), never `@imageN` and never repeated `@资产名` in the body.
+- **Color card first.** For projects with ≥ 3 video prompts, the color card handle `@色卡=色卡` is always the **first** handle in every prompt, before scene and character handles. The handle description must contain `⚠️色彩参考图` and `禁将色卡内容渲染为画面元素`. See [PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) → Color card handle and [STYLE_BLOCK.md](reference/STYLE_BLOCK.md) → Color card generation prompt.
 - **Output language:** all UI labels, scene headers, action cells, scene-text cells, asset lists → English. Chinese only inside the `提示词` blocks. Dialogue lines inside Chinese prompts are quoted in English (`"line"`).
 - **Default duration:** 15 seconds per prompt, 21:9. State this inside the `【规格】` section, not as a loose footer.
 - **Director assignment:** skip entirely unless user requests it. No `dir-badge`, no palette switching — default to `pal-red` color scheme.

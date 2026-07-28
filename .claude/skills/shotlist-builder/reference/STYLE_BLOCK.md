@@ -49,9 +49,74 @@ For multi-scene projects (≥ 3 video prompts), use **both** the text `调色：
 | `调色：60:30:10——...` (text) | Exact color names and proportions | Precise ratio control within a single segment |
 | `@色卡=色卡` (image) | Overall tone/feel as visual anchor | Prevents color drift across 5-15+ segments |
 
-Generate the color card via `style-extractor` skill → Step 1.5. Attach it as the first named handle in every prompt (see `PROMPT_PATTERNS.md` → Color card handle).
-
 For single-shot projects or projects with intentionally varying palettes per scene, the text `调色：` line alone is sufficient.
+
+#### Color card generation prompt (色卡生成模板)
+
+Use this text-to-image prompt to generate the color card. Replace the bracketed values with the project's actual palette:
+
+```
+生成一张 16:9 色卡参考图。
+
+画面内容：纯抽象色彩构成——无人物、无物体、无文字、无场景。
+
+色彩构成：
+- 主色（占画面 60%）：[精准色名，如"暖琥珀金"] HEX:[#XXXXXX]
+- 辅色（占画面 30%）：[精准色名，如"浅灰绿"] HEX:[#XXXXXX]
+- 点缀色（占画面 10%）：[精准色名，如"奶白高光"] HEX:[#XXXXXX]
+- 阴影色调：[精准色名，如"青蓝暗部"] HEX:[#XXXXXX]
+- 整体饱和度：[低饱和/中等饱和/高饱和]
+- 整体对比度：[低对比/中等对比/高对比]
+
+色彩分布方式：柔和渐变色块，从左到右按主色→辅色→点缀色过渡，下方 20% 区域为阴影色调。
+质感：轻微胶片颗粒质感。
+
+⚠️禁止任何具象内容——纯色彩参考。
+```
+
+**From the `调色：` line:** extract color card values directly from your project's 60:30:10 declaration:
+
+```
+调色：60:30:10——隧道深黑60%/钠灯暖橙25%/车灯冷白15%
+→ 主色=隧道深黑 #1A1A1A，辅色=钠灯暖橙 #C4963A，点缀色=车灯冷白 #E8E0D0
+```
+
+#### Color card file naming and usage
+
+```
+文件名：色卡_[项目名].png
+存放位置：与其他资产在同一 assets/ 目录
+```
+
+Attach the color card as the **first** named handle in every prompt — before scene and character handles. See `PROMPT_PATTERNS.md` → Color card handle for the exact format.
+
+For advanced multi-zone color control (e.g., extracting from a film with different visual zones), use `style-extractor` skill → Step 1.5 (basic 3-color) or Style Pack Mode (enhanced 10-color).
+
+### Color narration strategies (色彩叙事策略)
+
+The `60:30:10` ratio controls color proportions. The **narration strategy** controls how colors participate in the story. Choose one strategy per project/scene:
+
+| Strategy | Description | Best for | 中文 prompt 参考句式 |
+|---|---|---|---|
+| **大色块叙事** | Large blocks of color from costumes, walls, flags, floors | Ceremony, power, historical, group scenes | `调色以大色块叙事——[服装/墙体/旗帜]形成主色块` |
+| **限定色谱** | Entire scene uses only 3-4 adjacent colors (e.g., cream + tobacco brown + olive green) | Modern life, family, urban, low-key suspense | `调色：限定色谱——全场仅围绕[色A/色B/色C]` |
+| **互补色冲突** | Low-saturation complementary pair creates relational tension (old red vs sickly green, ochre vs dark blue) | Conflict, opposition, moral struggle | `调色：互补色冲突——[旧红与病态绿]低饱和对抗` |
+| **光色分离** | Daylight and interior light have different temperatures; character stands at the boundary | Departure, waiting, memory, identity shift | `调色：光色分离——[冷日光]与[暖室内灯]交界，人物处于两种色温之间` |
+| **空气综合色** | Color comes from fog, rain, sea wind, dust, glass, or water reflection — not from objects themselves | Ocean, historical, city, mythology, nature | `调色：空气综合色——色彩来自[雾气/海风/灰尘/玻璃反射]，非物体本身` |
+| **高明度色彩** | High brightness ≠ sweet/advertising. Warm white, pale gray, soft blue, faded pink with real shadows | Daytime, future, hospital, airport, modern architecture | `调色：高明度——[暖白/浅灰/淡蓝]高明度，但保留真实阴影和人物状态` |
+| **光学混色** | Subtle color shifts from natural light, sky, water, glass, leaves, skin interactions | Afternoon, garden, coast, summer, memory, intimate portraits | `调色：光学混色——色彩来自自然光与[水面/玻璃/树叶/皮肤]之间的微妙交互` |
+
+**Rule:** every color in the frame must have a physical source (costume, wall, weather, practical light, reflected surface, period material). Never apply a uniform post-grading that turns all objects the same color.
+
+**Color thesis (色彩命题):** For projects with strong narrative intent, write a one-sentence "color thesis" before choosing the 60:30:10 values:
+
+```
+色彩命题：一块褪色朱红在大面积潮湿青灰中持续存在。
+→ 调色：60:30:10——潮湿青灰60%/暗灰绿30%/褪色朱红10%
+→ 策略：空气综合色（整体色来自雨雾）+ 大色块叙事（朱红来自角色服装）
+```
+
+The thesis forces intentional color choices instead of defaulting to "cinematic blue-gray."
 
 **Default forbidden:**
 ```

@@ -278,3 +278,210 @@ In handle declarations, reflect this order:
 @角色A=角色A — [角色描述]
 @角色B=角色B — [角色描述]
 ```
+
+---
+
+## 10. Combat / physical contact scenes (格斗/肢体接触场景)
+
+Sections 1–9 handle spatial positioning and movement. This section handles the specific problem of **two characters physically interacting at close range** — fighting, grappling, pushing, dancing — where the AI's most common failure is body interpenetration (肢体穿模).
+
+### Why combat scenes fail
+
+AI models cannot reliably maintain two independent body volumes when characters are close. Without explicit constraints:
+- Limbs pass through each other's bodies
+- Characters merge into a single mass
+- Left/right positions randomly swap mid-shot
+- Actions become an undefined "fighting blob" instead of clear attack/defense
+- The second half of a 15-second clip degrades as the model loses track of who is who
+
+### Core solution: 3-layer combat constraint
+
+Every combat prompt must include these three layers:
+
+| Layer | Purpose | Prompt pattern |
+|---|---|---|
+| **Position lock (站位锁定)** | Fix left/right assignment | `左侧角色：[A]；右侧角色：[B]。严格固定左右站位，位置不交换。` |
+| **Skeleton isolation (骨骼隔离)** | Prevent body interpenetration | `两套独立人体骨骼，身体禁止互相穿透穿插。` |
+| **Attack-defense sequence (攻防时序)** | Decompose "fight" into ordered beats | `左侧[A]蓄力挥拳→右侧[B]抬臂格挡→[B]受冲击后仰→衣物惯性摆动` |
+
+### Combat prompt template
+
+```
+⚠️空间布局：
+左侧角色：[角色A描述]，站位画面左侧。
+右侧角色：[角色B描述]，站位画面右侧。
+⚠️严格固定左右站位，位置不交换。两套独立人体骨骼，身体⚠️禁止互相穿透穿插。
+
+⚠️动作时序（攻防拆分）：
+①[攻击者]：[具体攻击动作——蓄力方式+出击方向+接触部位]
+②[防御者]：[具体防御/闪避动作——格挡方式+受力方向]
+③受力反馈：[防御者身体反应——后仰/后撤/衣物摆动/表情变化]
+④[可选]反击：[防御者转攻——反击动作]
+
+动作流畅连贯，受力反应真实，布料随惯性自然摆动。
+```
+
+### Attack-defense decomposition guide
+
+Never write vague combat descriptions. Always decompose into these 4 beats:
+
+| Beat | Content | Bad example | Good example |
+|---|---|---|---|
+| ① 蓄力 | How the attacker prepares | "开始打斗" | "左侧男子右拳后拉至肩侧蓄力" |
+| ② 出击 | The attack motion + direction | "攻击对方" | "右直拳向前击出，瞄准对方面部" |
+| ③ 防御/闪避 | Defender's response | "另一个人躲开" | "右侧男子迅速抬左臂格挡，肩膀承受冲击力" |
+| ④ 受力反馈 | Physical consequence | — | "上半身向后晃动0.3秒，表情紧绷，衣料因惯性向前摆动" |
+
+### Combat-specific negative constraints
+
+Add these to `【负面约束】` for all combat scenes:
+
+```
+禁肢体互相穿插融合、禁身体穿模、禁人物左右位置互换、禁动作卡顿跳变、禁多余肢体、禁肢体扭曲变形、禁角色融合成一团
+```
+
+### Duration rules for combat
+
+| Duration | Recommendation |
+|---|---|
+| ≤ 7 sec | Single attack-defense exchange — safe for one prompt |
+| 8–15 sec | Maximum 2 exchanges in one prompt — the second exchange should be simpler |
+| > 15 sec | ⚠️ Split into 2 separate prompts — the model loses spatial tracking in the second half of long combat shots |
+
+**15-second split rule:** For extended fight sequences, generate as two 7–8 second clips. The second clip's `【首帧衔接】` locks the end positions of clip 1 as start positions for clip 2.
+
+### Physical gap rule
+
+For close-range combat (especially grappling), maintain a visible gap between bodies in the prompt description:
+
+```
+⚠️两人之间保持可见间隙——即使近身格斗，躯干之间也需有约10-20厘米的空间，降低穿模概率。
+```
+
+Exception: deliberate contact (pushing against wall, grabbing collar) — describe the specific contact point and keep the rest of the bodies separated:
+```
+左侧男子右手抓住右侧男子衣领，将其推向墙面压制——⚠️仅右手与衣领接触，两人躯干之间仍有间隙，其余肢体不接触。
+```
+
+### Bullet time insert (子弹时间)
+
+For combat climax moments, insert a slow-motion beat at the impact point:
+
+```
+⚠️[击打/碰撞]瞬间进入短暂子弹时间慢动作（约1-2秒），其余时段正常速度。慢动作过渡自然，无画面撕裂。
+```
+
+Place this instruction immediately after the impact beat (③ 受力反馈), not at the beginning of the action sequence.
+
+### Integration with other sections
+
+| Section | How combat integrates |
+|---|---|
+| §6 Dynamic trajectories | For chase→fight transitions: chase phase in one diagram, fight phase in another (§7 decomposition rule) |
+| §8 Scheduling diagrams | Generate a fight-specific diagram showing left/right positions + attack lines |
+| `CAMERA_EMOTION.md` §8.3 Lateral tracking | Best camera for fight scenes — stable side tracking maintains spatial clarity |
+| `CAMERA_EMOTION.md` §10.5 Turning-point close-up | Cut to close-up at the impact moment for maximum effect |
+| Video reference (`PROMPT_PATTERNS.md`) | Use `@运镜参考` Mode 1 to copy film fight camera work; Mode 2 for full choreography |
+
+---
+
+## 11. Eye-line Protocol (视线锁定协议)
+
+AI video models frequently produce characters who look in wrong directions during dialogue — staring at the camera instead of their conversation partner, looking past someone while speaking, or having mismatched gaze angles for their height difference. This section provides a systematic method to lock eye-lines.
+
+### Why eye-lines fail
+
+Three root causes:
+1. **No height-angle declaration.** Two characters at different heights (standing vs sitting, tall vs short) need explicit 俯视/仰视 tags — without them the model defaults to level eye contact regardless of physical position.
+2. **No gaze-target per beat.** When a character's attention shifts between objects, people, and locations within one shot, the model picks randomly unless each shift is explicitly sequenced.
+3. **No gaze-dialogue sync.** Speakers should look at their listener; listeners should look at the speaker. Without explicit linking, characters may speak while looking at unrelated objects.
+
+### Core rule: every action beat declares a gaze target
+
+For every numbered action beat (①②③④) in `【电影化动态描述】`, if a character is visible and active, specify their gaze target inline:
+
+```
+⚠️视线方向：[角色名]看向[目标]
+```
+
+Target types:
+| Gaze target | Example |
+|---|---|
+| Another character's face | `⚠️视线方向：墨渊俯视苏小鱼面部` |
+| A specific object | `⚠️视线方向：苏小鱼盯着粥碗观察温度` |
+| A direction/distance | `⚠️视线方向：苏小鱼平视前方走廊（不看任何人）` |
+| Following an object trajectory | `⚠️视线方向：墨渊视线从她脸移向纸面` |
+| Avoidance (deliberately not looking) | `⚠️视线方向：墨渊别过脸去避开视线（眼神飘向右下方）` |
+
+### Height-angle rules
+
+When two characters have different physical heights or positions:
+
+| Position relationship | Gaze angle tag |
+|---|---|
+| Taller/standing → shorter/sitting | `俯视` (looking down) |
+| Shorter/sitting → taller/standing | `仰视` (looking up) |
+| Same height, same level | `平视` (level gaze) |
+| Behind someone | `看向[人物]背影/后脑` |
+| Across distance >5m | `远眺/遥望[人物]方向` |
+
+Include the angle in the gaze declaration:
+
+```
+⚠️视线方向：墨渊俯视苏小鱼（190cm站立 vs 160cm坐姿，俯角约30°）
+⚠️视线方向：苏小鱼仰头看墨渊面部（仰角大，他站她坐高度差70cm）
+```
+
+### Dialogue gaze synchronization
+
+In `【音画同步】` section, after declaring speaker positions, add a gaze protocol:
+
+```
+⚠️对话视线规则：
+- [说话者A]说话时看向[听者B]面部
+- [听者B]听话时看向[说话者A]面部
+- 如有视线转移（如看向道具后再说话），标注转移时机
+```
+
+For dialogue where one character deliberately avoids eye contact (character trait):
+```
+⚠️对话视线规则：
+- 墨渊说话时俯视苏小鱼面部
+- 苏小鱼回应时⚠️不看他脸——视线停留在手中物品上（人设：对人无感，只关注食物）
+```
+
+### Over-shoulder shot gaze
+
+For 过肩镜头 (over-shoulder shots), specify both characters' gaze:
+
+```
+机位：50mm中景，过肩镜头——过[角色A]肩拍[角色B]（仰角/俯角X°）。
+⚠️视线方向：[角色B]看向镜头前方的[角色A]面部方向（不看镜头）；[角色A]后脑勺对镜头。
+```
+
+### Gaze transition notation
+
+When gaze shifts within a single beat, use `→` to chain:
+
+```
+⚠️视线方向：苏小鱼视线从粥碗→移向墨渊手中的纸→回到粥碗
+⚠️视线方向：墨渊视线从她脸→下移到纸面→瞳孔放大→回到她脸
+```
+
+### Negative constraint addition
+
+For ANY prompt with dialogue (2+ characters speaking), add to `【负面约束】`:
+
+```
+⚠️禁对话时视线对不上（俯仰关系必须正确、说话时必须看向对方或指定目标）
+```
+
+### Quick checklist before writing any prompt
+
+Before finalizing a multi-character prompt, verify:
+- [ ] Every speaking character has a declared gaze target during their line
+- [ ] Height/position differences are reflected in 俯视/仰视 angles
+- [ ] Gaze shifts are sequenced (character doesn't look at two things simultaneously)
+- [ ] Over-shoulder shots specify both characters' facing direction
+- [ ] Characters who deliberately avoid eye contact have this explicitly noted (with reason)
+- [ ] `【负面约束】` includes `禁对话时视线对不上` for dialogue prompts

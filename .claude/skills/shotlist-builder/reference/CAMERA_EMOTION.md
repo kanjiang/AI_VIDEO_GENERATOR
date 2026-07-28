@@ -2,6 +2,72 @@
 
 **The camera is the emotional double of the focal character.** Camera movement, lens, and duration must be chosen by the character's emotional state — not by what looks "cinematic." Anger gets nervous handheld. Calm gets smooth handheld breathing. Shock freezes. This is the most-violated rule in AI video; correct it explicitly in every prompt.
 
+## 0. Cinematographic philosophy (摄影哲学——所有镜头设计之前)
+
+These three principles override technical rules when they conflict. They are the difference between "technically correct video" and "video that makes people feel something."
+
+### 0.1 Anticipation > Action (前一秒美学)
+
+**Shoot the moment BEFORE the action, not the action itself.**
+
+The arrow at full draw before release. The swords about to clash but this frame everything is frozen. The character who just stopped walking but hasn't turned around yet. The breath before the first word.
+
+The "moment before" is always more emotionally powerful than the moment itself, because it forces the audience to anticipate — and anticipation is stronger than payoff.
+
+Implementation in prompts:
+```
+⚠️本镜头捕捉的是[动作]发生前的最后一瞬——[主体]已经[蓄势描述]，但[动作]尚未发生。
+整个画面处于张力最大的静止点。
+
+例：⚠️本镜头捕捉的是出剑前的最后一瞬——剑客的手已经握紧剑柄，手背青筋微凸，但剑尚未出鞘。竹叶在风中弯到极限即将回弹。整个画面处于张力最大的静止点。
+```
+
+**When to use:** Climactic moments, confrontations, emotional revelations, scene endings. NOT for establishing shots or transitional scenes.
+
+### 0.2 Attention as narrative (注意力即叙事)
+
+**Where the character LOOKS defines the story.** Not their action, not the environment — their gaze.
+
+| Character looks at... | Story it tells | Mood |
+|---|---|---|
+| 远方 / 地平线 | 等待、向往、不可到达 | Longing |
+| 手中之物 | 回忆、犹豫、决定 | Contemplation |
+| 另一个角色 | 关系、权力、爱 | Connection |
+| 脚下 / 地面 | 羞愧、疲惫、放弃 | Defeat |
+| 天空 | 祈求、自由、超越 | Transcendence |
+| 镜头外（画外空间） | 未知、威胁、期待 | Suspense |
+
+**Hard rule:** The character **never looks at the camera** unless the scene explicitly requires breaking the fourth wall. When a character's gaze is not consciously designed, the image loses its story.
+
+Implementation in prompts:
+```
+⚠️注意力锁定：[角色]的视线始终看向[注意力对象]——[注意力对象]是本镜头的叙事锚点。
+[角色]不看镜头、不看观众、不看无关方向。
+光线优先照亮[注意力对象]，而非角色面部。
+```
+
+**Integration with lighting:** The brightest point in the frame should be the attention object, not the character's face. "Light follows attention, not identity."
+
+### 0.3 Discover, not Present (让观众发现，而非展示)
+
+**Don't center the subject. Don't spotlight the subject. Let the audience's eye find it.**
+
+"Present" = character fills the frame, center-composed, perfectly lit, staring at camera. This is a poster.
+"Discover" = character occupies 1/3 or less of the frame, off-center, partially in shadow or environment. The eye lands on the environment first, then discovers the character. This is cinema.
+
+Implementation in prompts:
+```
+⚠️构图：[主体]不居中——偏置于画面[左/右]三分线，占画面面积不超过[1/3]。
+环境占据画面主导，[主体]是环境中被发现的存在，不是被展示的中心。
+观众的视线路径：第一眼看[环境中最亮/最大的元素]→第二眼发现[主体]→第三眼注意[主体的注意力对象]。
+```
+
+**When to use:** Establishing shots, environmental portraits, loneliness/isolation scenes, landscape-dominant scenes. NOT for dialogue close-ups or action beats where the character IS the focus.
+
+**When NOT to use:** 特写、对话、动作高潮——这些场景角色就应该是画面中心。这条原则适用于"人在环境中"的场景，不适用于"人就是全部"的场景。
+
+---
+
 ## 1. Movement-to-emotion map
 
 | Focal character emotion | Camera type | How to write it in Chinese |
@@ -383,5 +449,269 @@ Quick decision guide — match scene intent to camera pattern:
 | Hero moment / spectacle emphasis | 360° orbit | §8.5 |
 | Psychological unease / revelation | Dolly zoom vertigo | §8.6 |
 | Time-stop verdict | Top-shot freeze | §6.4 |
+| Opening suspense / audience hook | Opening hook close-up | §10.1 |
+| Time passage without time-lapse | Time-compression close-up | §10.2 |
+| Inner psychology externalized | Psychological projection close-up | §10.3 |
+| Poetic scene bridging | Close-up transition chain | §10.4 |
+| Emotional turning point | Turning-point close-up | §10.5 |
+| Symbolic emotional statement | Symbolic intrusion shot | §11 |
 
 These patterns can combine: an aerial dive (§8.2) can end with a lateral track (§8.3) if the camera descends then transitions to a ground-level follow. Declare the transition point explicitly with phase labels.
+
+---
+
+## 10. Close-up strategy (特写策略)
+
+Close-ups are not simply "zoomed-in shots." They are **forced visual focus** — the director's most powerful tool for controlling where the audience looks, what they feel, and how much time they perceive has passed. A well-placed close-up creates suspense, compresses time, projects inner psychology, and bridges scenes. A poorly placed one wastes the frame.
+
+### 10.1 Opening hook close-up (前3秒特写钩子)
+
+**Rule:** The first 3 seconds of a video segment should default to a **detail close-up**, not a wide establishing shot. Wide shots tell the audience "here's everything" — close-ups make them ask "what's going on?"
+
+**When to use:** Every segment opening, unless the script explicitly requires spatial orientation first (e.g., aerial establishing → then close-up).
+
+Template:
+```
+【镜头1】[钩子]（0-3秒）
+机位：⚠️85mm/100mm，F1.4极浅景深，严格特写（extreme close-up）。
+构图：画面只展示[关键细节物件/身体局部/道具状态]——⚠️不交代人物全貌、不交代空间关系。
+动作：[细节的微小变化——手指动作、物件旋转、液体流动、开关拨动等]。
+⚠️目的是制造悬念——观众只看到局部，被迫好奇"这是什么？谁在做这件事？"
+⚠️3秒后硬切到镜头2揭示空间和人物。
+```
+
+Example — interrogation scene:
+```
+【镜头1】[钩子]（0-3秒）
+机位：⚠️85mm，F1.4极浅景深，严格特写。
+构图：画面只展示一只手缓缓打开雪茄剪——金属刃面反射冷白光，背景完全散焦为暗色块。
+动作：手指缓慢合拢雪茄剪，⚠️"咔嚓"一声——金属闭合。不露脸，不交代空间。
+```
+
+**Anti-pattern:** `禁止以全景/远景开场——全景会提前剧透空间关系，杀死观众好奇心。`（Exception: scenes requiring aerial establishing per §8.2, or scripts explicitly calling for "先全景后特写" structure.）
+
+### 10.2 Time-compression close-up (时间折叠特写)
+
+Use close-ups of an **object's state change** to compress hours/days into seconds. This replaces literal time-lapse or day-night transitions.
+
+**When to use:** Montage sequences showing passage of time, character effort/exhaustion, process completion.
+
+Template:
+```
+【蒙太奇特写序列】（X-Y秒）
+机位：50mm/85mm，F2.0浅景深，固定机位或极缓dolly。
+
+特写A（状态1）：[物品初始干净/完整/空的状态]——⚠️时间起点。
+⚠️硬切
+特写B（状态2）：⚠️相同物品、相同构图角度——[物品变得脏/旧/满/损耗的状态]——⚠️时间终点。
+
+两个特写之间的构图和机位⚠️尽量一致，只有物品状态发生变化——靠物品状态差异暗示时间流逝。
+```
+
+Example — overnight coding:
+```
+特写A：一张干净的办公桌——键盘、空杯子、整齐的文件。柔和日光。
+⚠️硬切
+特写B：⚠️相同桌面角度——键盘旁堆满空咖啡杯和零食包装，文件散落，屏幕蓝光打亮桌面。暗夜氛围。
+```
+
+Key parameters:
+- **构图一致性**: 两个特写的机位和角度必须几乎相同，让对比清晰可读
+- **状态差异**: 物品变化必须一目了然（干净→脏，空→满，新→旧，完整→破损）
+- **禁止文字说明**: 不靠字幕解释"12小时后"，靠视觉状态差异自行传达
+
+### 10.3 Psychological projection close-up (心理投射特写)
+
+Use an **abstract object close-up** to externalize a character's inner state. The object itself is not plot-relevant — it's a visual metaphor projected onto the screen.
+
+**When to use:** Character experiences internal conflict, realization, dread, or emotional collapse that cannot be shown through facial expression alone.
+
+Template:
+```
+【心理投射特写】（X-Y秒）
+机位：45mm微距/85mm特写，F1.4-F2.8。
+
+特写内容：[抽象物体的视觉行为]——⚠️这不是剧情道具，而是角色内心状态的视觉隐喻。
+  例：墨水滴入水中缓慢扩散 = 局势失控蔓延
+  例：玻璃杯表面凝结水珠缓缓滑落 = 压抑情绪即将崩溃
+  例：火柴燃尽、火焰抵达指尖 = 时间/耐心耗尽
+  例：水波纹从中心向外震荡 = 内心冲击波
+
+⚠️镜头节奏与角色情绪同步——物体运动速度=角色内心节奏。
+⚠️此特写前后必须衔接角色的表情特写，形成"表情→抽象→表情"的三明治结构。
+```
+
+Example — betrayal realization:
+```
+特写A：角色面部微笑（还不知道被背叛）——85mm特写。
+⚠️硬切
+心理投射特写：⚠️45mm微距——一滴黑色墨水从画面上方滴入清水杯中，墨水在水中缓慢、不可逆地扩散成黑色丝状纹理。全程3秒，慢动作。
+⚠️硬切
+特写B：角色面部——微笑消失，眼神凝固，瞳孔微微收缩。
+```
+
+Key parameters:
+- **隐喻对应**: 必须明确什么物体行为映射什么情绪（不要让 AI 猜）
+- **三明治结构**: 投射特写必须被角色面部特写包裹——`表情→抽象→表情`
+- **节奏同步**: 物体运动速度等于角色情绪的节奏——焦虑时快，绝望时慢
+
+### 10.4 Close-up transition chain (特写转场链)
+
+Use **visually similar close-ups** to bridge different scenes. The audience's eye stays in the same frame region, making the cut feel smooth even across large spatial/temporal jumps.
+
+**When to use:** Scene transitions where match cut feels too rigid, whip pan too aggressive, and dissolve too soft. Best for poetic or lyrical editing rhythm.
+
+Template:
+```
+【特写转场链】
+
+场景A 尾帧特写：[物体A的特写]——构图、色调、形状为[描述]。
+⚠️硬切（或0.2秒叠化）
+场景B 首帧特写：[物体B的特写]——与物体A在[形状/色调/质地/运动方向]上相似，但属于完全不同的场景空间。
+
+匹配维度（至少满足一项）：
+- 形状匹配：圆→圆（如咖啡杯口→隧道口→月亮）
+- 色调匹配：暖金→暖金（如烛光→夕阳→琥珀酒液）
+- 质地匹配：液体→液体（如水滴→眼泪→雨滴）
+- 运动匹配：下落→下落（如雪花→花瓣→纸片）
+```
+
+Example — three-scene chain:
+```
+场景A尾帧：85mm特写——一滴水从叶尖缓缓落下，画面中央圆形水滴。
+⚠️硬切
+场景B首帧：85mm特写——⚠️一滴眼泪从眼角滑出，画面中央圆形泪珠。同样的下落轨迹。
+⚠️硬切
+场景C首帧：35mm中景——窗外雨滴沿玻璃滑下，角色的模糊倒影在雨滴后方。
+```
+
+Key parameters:
+- **匹配维度**: 至少一个维度匹配（形状、色调、质地、运动方向），两个以上更流畅
+- **构图位置**: 匹配物在两个特写中的画面位置尽量一致——观众的视线不需要跳跃
+- **硬切 vs 叠化**: 纯形状匹配用硬切更干净，色调/氛围匹配可用0.1–0.3秒短叠化
+
+### 10.5 Turning-point close-up rule (转折点必须切特写)
+
+**Hard rule:** Whenever a character's emotion shifts (calm→shocked, happy→angry, trusting→betrayed), the turning point **must** cut to a close-up. Mid-shots and wide-shots at turning points dilute the emotional impact.
+
+Implementation:
+```
+在剧本中标记所有情绪转折点。
+每个转折点的提示词中必须包含至少一个⚠️特写镜头（85mm以上，F1.4-F2.0），
+构图为面部特写或关键道具/手部特写。
+
+转折瞬间的特写至少持续1.5-3秒——给观众时间"读"到情绪变化。
+禁止用中景或全景一笔带过转折——转折是故事的高光，必须用特写放大。
+```
+
+Decision rule — integrate with §9 pattern selection:
+
+| Scene intent | Primary pattern | Section |
+|---|---|---|
+| Opening suspense / audience hook | Opening hook close-up | §10.1 |
+| Time passage without time-lapse | Time-compression close-up | §10.2 |
+| Inner psychology externalized | Psychological projection close-up | §10.3 |
+| Poetic scene bridging | Close-up transition chain | §10.4 |
+| Emotional turning point | Turning-point close-up | §10.5 |
+
+---
+
+## 11. Symbolic intrusion shot (意象闯入镜头)
+
+A camera movement **deliberately creates negative space**, then a symbolic element enters that space to express an abstract emotion the scene cannot say directly. The technique layers three things: scene context (蓄势), camera movement (运镜), and symbolic object (意象).
+
+**When to use:** Scene endings, emotional peaks, thematic statements — moments where the mood needs to be "felt" rather than "told." Especially effective as the final shot of a sequence.
+
+### 11.1 The three-layer structure
+
+| Layer | Function | What it does in the prompt |
+|---|---|---|
+| **Layer 1: Scene context (蓄势)** | Establish the emotional meaning of the environment | Describe the setting with its thematic weight — not just "cliff" but "cliff at sunset = story's ending" |
+| **Layer 2: Camera movement (运镜)** | Create empty space for the intrusion | Camera pulls back / cranes up / tracks sideways to open negative space in the foreground, sky, or frame edge |
+| **Layer 3: Symbolic element (意象)** | Concrete object enters frame to embody abstract feeling | A seagull (freedom), falling leaf (loss), rising lantern (hope), black bird (omen), butterfly (transformation) |
+
+### 11.2 Prompt template
+
+```
+【镜头N】[意象闯入]（X-Y秒）
+机位：[35mm/50mm]镜头，起始[中景/全景]。
+
+阶段1·蓄势（0-[A]秒）：
+[场景建立——环境的情绪含义，如"悬崖别墅在夕光中静默——故事在这里落幕"]。
+主体：[角色/场景状态描述]。机位静止或极缓运动。
+
+阶段2·运镜留白（[A]-[B]秒）：
+摄影机⚠️[向后拉远/向上crane/向侧横移]——画面从[中景]逐渐变为[全景/远景]。
+⚠️运镜过程中，画面[上方/前景/左侧/右侧]出现大面积⚠️负空间（留白区域）——这是为意象预留的入场区域。
+运镜速度：[缓慢匀速/渐慢]，用时约[N]秒。
+
+阶段3·意象闯入（[B]-[END]秒）：
+⚠️[意象元素]从画面[上方/左侧/右侧/前景]⚠️自然闯入负空间——[运动描述，如"一只海鸥从画面左上角滑入，低空掠过前景"]。
+意象元素与场景的视觉关系：[大小、速度、轨迹——如"海鸥从画面左上角滑入，翅膀展开占据前景约1/4面积，飞向画面右侧远方消失"]。
+⚠️意象闯入必须感觉"偶然"而非"安排"——运动轨迹自然、不对称、不居中。
+
+⚠️三层融合要求：场景情绪(蓄势) + 镜头运动(运镜) + 意象闯入 三者在时间上⚠️重叠——运镜还没完全停下时意象就已经开始进入画面，不要等运镜结束再让意象出现。
+```
+
+### 11.3 Symbolic element library (意象速查表)
+
+| Abstract emotion | Symbolic element (意象) | Entry direction | Visual behavior |
+|---|---|---|---|
+| **自由 / 释放** | 海鸥、白鸽、蒲公英种子 | From frame edge, flying outward | 舒展、上升、远离 |
+| **离别 / 消逝** | 落叶、花瓣、飘散的纸页 | From top, falling downward | 缓慢下落、旋转、渐远 |
+| **希望 / 新生** | 萤火虫、孔明灯、阳光穿云 | From bottom or background, rising upward | 上升、发光、聚集 |
+| **不祥 / 威胁** | 乌鸦、黑蝶、浓烟 | From top or side, crossing frame | 快速、直线、遮挡 |
+| **孤独 / 宁静** | 单只飞鸟剪影、远处船只 | From frame edge, slow crossing | 匀速、独行、不回头 |
+| **转变 / 蜕变** | 蝴蝶、冰裂、花苞绽放 | From foreground or center | 变形、展开、色彩变化 |
+| **命运 / 不可逆** | 流水、沙漏沙粒、钟摆 | From top, falling/flowing | 持续、不可逆、渐快 |
+| **温暖 / 牵绊** | 飘落的围巾、断线风筝、旧照片 | From top or side, floating | 缓慢飘落、轻盈、接近主体 |
+
+### 11.4 Key parameters
+
+| Parameter | Value | Notes |
+|---|---|---|
+| 蓄势阶段时长 | 2–5 sec | 足够建立环境情绪，不要急着运镜 |
+| 运镜留白时长 | 2–4 sec | 负空间必须在意象闯入前可见至少1秒 |
+| 意象闯入时长 | 2–5 sec | 闯入后需要停留足够久让观众"读到"象征意义 |
+| 负空间占比 | 画面的 1/3–1/2 | 太小则意象无处可入，太大则场景信息丢失 |
+| 意象元素画面占比 | 前景的 1/5–1/3 | 太大则喧宾夺主，太小则观众注意不到 |
+| 三层重叠时间 | 运镜末尾 1–2 sec 与意象闯入重叠 | 运镜和闯入同时发生才有"偶遇感" |
+
+### 11.5 Failure modes
+
+```
+⚠️禁止意象元素从画面正中央出现——必须从边缘或角落闯入，保持"偶然感"
+⚠️禁止运镜结束后等待再闯入——运镜和闯入必须在时间上重叠
+⚠️禁止意象元素停在画面中心——它应该穿过画面或停在非中心位置
+⚠️禁止意象元素与场景无关——海鸥只出现在海边/天空场景，落叶只出现在秋季/树边场景
+⚠️禁止同一视频中使用两种以上意象——一个意象传递一个情绪，多个意象互相稀释
+```
+
+### 11.6 Example — cliff farewell
+
+```
+【镜头3】[意象闯入]（0-12秒）
+机位：35mm广角镜头，起始中景。
+
+阶段1·蓄势（0-4秒）：
+悬崖边的石屋在夕光中投下长影。女生站在崖边栏杆前，背对镜头，风吹起裙摆和发丝。远处海面金光粼粼。机位静止。
+环境氛围：故事的最后一个场景——一切将在这里结束。
+
+阶段2·运镜留白（4-8秒）：
+摄影机⚠️缓慢向后拉远+微微crane up——画面从中景变为全景，女生的身影在画面中缩小。
+⚠️画面上方1/3出现大面积天空负空间——金橙色夕阳云层，无遮挡。
+运镜速度：匀速渐慢，用时4秒。
+
+阶段3·意象闯入（7-12秒）：
+⚠️一只白色海鸥从画面左上角⚠️自然滑入天空负空间——翅膀舒展，低空掠过前景约1/4画面面积，从左向右缓慢飞向远方海面。
+海鸥的飞行轨迹微微向上弧形——渐飞渐远渐小，最终融入夕阳余晖。
+⚠️闯入在运镜尚未完全停止时开始（7秒处运镜还在微微后拉）——三层同时在画面中共存。
+
+⚠️三层融合：夕阳悬崖的离别蓄势 + 后拉远景的空间释放 + 海鸥远飞的自由意象 = "放下、远去、自由"。
+```
+
+Decision rule — integrate with §9 pattern selection:
+
+| Scene intent | Primary pattern | Section |
+|---|---|---|
+| Symbolic emotional statement | Symbolic intrusion shot | §11 |

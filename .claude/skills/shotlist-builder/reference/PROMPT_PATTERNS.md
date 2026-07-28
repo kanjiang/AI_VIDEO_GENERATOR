@@ -49,15 +49,18 @@ Use the **named handle format** `@资产名=资产名 — 参考描述。` — o
 | UI/Interface | `@界面名=界面名 — 参考界面名界面。` | `@采样文件列表=采样文件列表 — 参考采样文件列表界面。` |
 | Color card | `@色卡=色卡 — ⚠️色彩参考图，仅用于锁定全片色调，非场景内容。` | (see Color card section below) |
 | Pose reference | `@姿势参考=姿势参考 — ❌NOT A VIDEO FRAME❌ 仅用于提取身体姿势角度。` | (see Pose reference section below) |
+| Video ref (camera only) | `@运镜参考=运镜参考 — ⚠️仅参考运镜轨迹，不参考画面人物、场景、动作。` | (see Video reference section below) |
+| Video ref (camera + action) | `@动作参考=动作参考 — 参考运镜与人物动作轨迹。` | (see Video reference section below) |
 
 ### Handle ordering
 
 Handles are listed by asset type, in this priority order:
 
 1. **色卡** (if project uses color card — always first)
-2. **场景/空间** — environment establishes context first
-3. **界面/道具** — objects within the scene
-4. **角色** — characters placed into the scene
+2. **运镜参考/动作参考** (if using video reference — before scene, so AI prioritizes trajectory)
+3. **场景/空间** — environment establishes context first
+4. **界面/道具** — objects within the scene
+5. **角色** — characters placed into the scene
 
 Each prompt only lists the handles it actually uses — different prompts within the same scene may have different handle subsets.
 
@@ -65,9 +68,17 @@ Each prompt only lists the handles it actually uses — different prompts within
 
 After the handles, write the `【挂载资源与音频硬约束】` block. This paragraph references handles **by name** (not by number) and declares all hard locks:
 
+**Without color card (single-shot or intentionally varying palettes):**
 ```
 【挂载资源与音频硬约束】本视频必须严格使用已挂载的[列出所有资产名]参考；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用中文原文，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
 ```
+
+**With color card (≥ 3 video prompts — recommended):**
+```
+【挂载资源与音频硬约束】本视频必须严格使用已挂载的色卡色调参考、[列出其他资产名]参考；全片色温与饱和度严格参考色卡；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用中文原文，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
+```
+
+The key additions when using a color card: `色卡色调参考` in the asset list, and `全片色温与饱和度严格参考色卡` as an explicit lock.
 
 **⚠️ Audio rule: BGM is ALWAYS excluded at generation time.** Background music is produced separately by the `bgm-scoring` skill and mixed in post-production. However, **ambient sounds and action SFX are encouraged** — they add texture that's difficult to recreate in post. Examples of sounds to KEEP:
 
@@ -125,6 +136,118 @@ For static-pose-reference handles (used for body posing only, not full image gen
 ```
 @姿势参考=姿势参考 — ❌NOT A VIDEO FRAME❌ 此图仅用于提取身体姿势角度数据。⚠️静态姿势参考——禁止将此图渲染/复制/再现为视频的任何一帧。
 ```
+
+### Video reference for camera movement (运镜参考视频)
+
+Instead of describing complex camera movement entirely in text, upload a **reference video clip** and let Seedance copy its camera trajectory. Text prompt then only handles content (characters, scene, lighting) — not camera choreography.
+
+**When to use video reference:**
+- Complex movements that are hard to describe in text (multi-axis crane + dolly, one-shot long takes, intricate orbit paths)
+- When text-described movements keep producing distorted/shaky results
+- When a specific film's camera work is the target and you have the clip
+- Batch production where you want uniform camera language across all segments
+
+**When to stay with text-only:**
+- Simple movements (static, push-in, pull-out, basic lateral track)
+- When the movement is tied to character emotion and needs phase labels (§1–§2 in `CAMERA_EMOTION.md`)
+- When no suitable reference clip exists
+
+#### Two reference modes
+
+**Mode 1: Camera trajectory only (最常用)**
+
+```
+@运镜参考=运镜参考 — ⚠️仅参考运镜轨迹，不参考画面人物、场景、动作。优先保证镜头运动丝滑不变形。
+@场景A=场景A — 参考场景。
+@角色A=角色A — 参考角色定妆。
+
+【挂载资源与音频硬约束】本视频运镜轨迹严格跟随运镜参考视频；画面内容、人物、场景、动作以本提示词文字描述和图片参考为准，⚠️不复制参考视频中的任何画面内容。...
+```
+
+Use this for: most scenes. Camera movement comes from the reference video; everything else comes from your text + image assets.
+
+**Mode 2: Camera + character action**
+
+```
+@动作参考=动作参考 — 参考运镜与人物动作轨迹。
+@角色A=角色A — 参考角色定妆。
+
+【挂载资源与音频硬约束】本视频运镜轨迹与人物动作节奏参考动作参考视频；人物外观以角色A参考图为准，⚠️不复制参考视频中的人物形象。...
+```
+
+Use this for: martial arts, dance, synchronized movement — scenes where the body choreography is as important as the camera path. **Caution:** character appearance may drift toward the reference video's actors; strengthen identity locks in `【负面约束】`.
+
+#### Reference video preparation rules
+
+| Rule | Value | Why |
+|---|---|---|
+| Duration | 5–15 sec, matching target generation length | Duration mismatch causes trajectory distortion |
+| Stability | Use stabilized / gimbal footage | Handheld shake transfers to the generated video |
+| Head/tail trim | Remove first and last 0.5–1 sec | Reference clips often have unstable start/end frames |
+| Content | Irrelevant if using Mode 1 | AI copies trajectory, not content |
+| Complexity | One movement type per clip | Don't combine orbit + push-in + crane in one reference |
+
+#### Weight balancing
+
+The text prompt and video reference can conflict. Follow these rules:
+
+| Goal | Strategy |
+|---|---|
+| High trajectory fidelity | Add `运镜轨迹严格跟随参考视频` + `优先保证镜头运动丝滑不变形` |
+| Creative freedom on content | Add `仅复用镜头运动，不参考画面构图、色调、人物` |
+| ⚠️ Avoid conflicts | Do NOT describe camera movement in text when using a video reference — text says "环绕" but reference does "推入" = chaos |
+
+**Critical rule:** When using video reference, **remove all text-based camera movement descriptions** from `【电影化动态描述】`. The `机位` line should only specify focal length and shot size, not movement:
+
+```
+❌ 错误：机位：35mm广角，⚠️极速推进（rush dolly-in）——从入口冲向角色...
+           （文字运镜与参考视频运镜冲突）
+
+✅ 正确：机位：35mm广角，中景。⚠️运镜轨迹严格跟随运镜参考视频。
+```
+
+#### Reference video library convention (运镜素材库)
+
+For series production, maintain a categorized library of camera movement reference clips:
+
+```
+assets/camera-refs/
+├── push-in/          # 推入镜头
+├── pull-out/         # 拉远镜头
+├── orbit/            # 环绕镜头
+├── lateral-track/    # 水平横移
+├── aerial-dive/      # 航拍俯冲
+├── crane/            # 摇臂升降
+├── dolly-zoom/       # 希区柯克推拉变焦
+├── intrusion/        # 闯入镜头
+├── long-take/        # 一镜到底
+└── static/           # 固定机位（对话场景用）
+```
+
+At shotlist phase, match each shot to a reference clip from the library instead of writing movement text from scratch.
+
+#### Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| 运镜扭曲、轨迹跑偏 | 缩短参考视频时长；加 `镜头运动匀速丝滑，无加速突变` |
+| 人物跟着参考视频里的人动 | 改用 Mode 1（仅运镜）；加 `不参考人物动作` |
+| 画面持续抖动 | 换用稳定器拍摄的参考素材；加 `画面稳定，无多余抖动` |
+| 多角色对话运镜混乱 | 对话镜头优先用固定机位参考视频 |
+| 人物形象漂移（Mode 2） | 强化 `角色外观严格参考角色定妆图，禁止参考视频人物形象侵入` |
+
+#### Integration with CAMERA_EMOTION.md
+
+Video reference and text-based camera patterns are **two alternative methods** for the same goal:
+
+| Method | Best for | Defined in |
+|---|---|---|
+| Text patterns (§1–§11) | Simple-to-moderate movements, emotion-synced camera, symbolic shots | `CAMERA_EMOTION.md` |
+| Video reference | Complex trajectories, film-specific reproduction, batch consistency | This section |
+
+You can combine them: use video reference for the base trajectory, then add text-based **emotion phases** (§2) on top — e.g., "运镜轨迹跟随参考视频，但前半段手持呼吸感强（角色紧张），后半段逐渐稳定（角色平静）."
+
+---
 
 ## Section 2 — `【首帧衔接】`
 
@@ -1233,6 +1356,27 @@ When a scheduling diagram is used as reference input, also append:
 禁止调度图标注线条、圆圈标记、箭头、文字标签出现在成片画面中——调度图仅作空间参考。
 ```
 
+### CG-look banned words (禁用词——避免AI塑料感)
+
+These words/phrases push AI models toward CG poster aesthetics instead of cinematic photography. **Never use them in positive prompt text.** If they appear in user requests, translate them into specific cinematic parameters instead.
+
+| 禁用词 | 为什么禁 | 替代写法 |
+|---|---|---|
+| `8K`, `4K`, `ultra HD` | 推向锐化过度的数码感 | 具体写分辨率在 `【规格】` 中，不重复 |
+| `masterpiece`, `best quality` | MJ/SD 遗留咒语，对视频模型无意义 | 删除——质量由具体参数控制 |
+| `ultra detailed`, `hyper detailed`, `insane detail` | 让 AI 在每个表面堆砌纹理，失去主次 | 只在需要细节的局部写 `材质清晰可见` |
+| `HDR` | 推向高对比/高饱和的游戏截图风格 | 用 `动态范围` 行精确声明高光/暗部策略 |
+| `epic`, `stunning`, `breathtaking`, `amazing` | 情绪形容词，模型无法执行 | 用具体的构图/灯光/运镜实现"史诗感" |
+| `award winning`, `trending on artstation` | 推向概念艺术/CG插画风格 | 删除——用 `摄影` 行声明摄影师血统 |
+| `sharp focus` | 全局锐化，消灭景深和空气感 | 用 `焦平面锁定在[X]上` 精确控制 |
+| `perfect face`, `flawless skin` | 推向美颜/滤镜/塑料人感 | 用 `完美度` 声明（见 `style-extractor`） |
+| `cinematic lighting` | 太笼统，模型解读为"布光台灯" | 用4维度灯光公式（方向+软硬+色温+氛围） |
+
+在 `【负面约束】` 中，可选追加这条总括禁令：
+```
+禁塑料廉价AI质感、禁CG渲染感、禁游戏概念艺术风格、禁美颜滤镜、禁全局过度锐化。
+```
+
 ### Common failure modes to counter
 
 - **Handle contamination** — model uses one character's wardrobe on another. Counter: re-state each character's exact wardrobe in the handle.
@@ -1352,6 +1496,29 @@ Don't be precious about prompt length. Prompts in production range from ~150 Chi
 ## Tone
 
 You are a cinematographer who has worked with Lubezki and Deakins. You think in shadows, lenses, and controlled physical reality. You direct actors with the precision of a stage director and write camera direction with the muscularity of someone who has actually held a steadicam. Don't write generic AI-video prose ("a beautiful shot of..."). Write blocking notes ("Roko 2m from the fridge, back to camera, weight on left foot, right hand still holding the polaroid at thigh height").
+
+## Pre-prompt judgment order (写 prompt 前的判断顺序)
+
+Before writing any prompt, consciously evaluate the shot along **5 dimensions in strict order**. Skipping ahead to lens or texture before deciding WHO is doing WHAT produces "technically pretty but lifeless" video — the most common failure mode in AI generation.
+
+```
+① 人物 → ② 事件 → ③ 镜头 → ④ 光线 → ⑤ 质感
+```
+
+| 顺序 | 判断维度 | 问自己的问题 | 对应 prompt 区域 |
+|---|---|---|---|
+| ① | **人物** | 是谁？多大年龄？什么身份？此刻什么状态（疲惫/兴奋/紧张）？ | 角色描述 + `@资产名` 身份板 |
+| ② | **事件** | 此刻发生了什么？是"客观记录事件"还是"编造一个动作"？ | `【电影化动态描述】` 动作设计 |
+| ③ | **镜头** | 基于这个人物+事件，应该从多远/什么角度/什么焦距看？ | `机位` + `CAMERA_EMOTION` 选择 |
+| ④ | **光线** | 光从哪里来？什么颜色？软还是硬？ | `STYLE_BLOCK` 灯光4维度 |
+| ⑤ | **质感** | 最后才考虑：胶片感、颗粒、色散、调色、动态范围 | `STYLE_BLOCK` + `video-render-quality` |
+
+**关键规则：**
+- ⚠️ **禁止跳过前面的步骤直接写质感** — 先确定人物和事件，再选镜头，最后才碰质感。直接从"好看的色调"开始写 prompt 是最常见的错误。
+- **每个 prompt 只重点调整 1–2 个维度** — 试图在一个 prompt 里同时极致化所有维度会让画面过度修饰、失去自然感。
+- **保留"缺点"** — 轻微的不完美（微微过曝、不完美对称、自然的肤色不均）比"没有情绪的完美"更有生命感。这条与 `style-extractor` 的"完美度光谱"一致——当风格偏写实/纪实时，不要用渲染指令把画面磨平。
+
+---
 
 ## Iteration maintenance (迭代维护)
 

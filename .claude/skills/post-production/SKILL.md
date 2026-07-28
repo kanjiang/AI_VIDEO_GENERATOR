@@ -16,6 +16,8 @@ Trigger when the user asks about:
 - Editing transitions between AI video clips (dissolve, wipe, flash — things NOT handled at the prompt level)
 - Fixing subtitles after homophone substitution (see polyphonic character workflow in `PROMPT_PATTERNS.md`)
 - Color grading or color correction on generated footage
+- Sound design — SFX placement, music entrance/exit, beat sync, audio transitions (J-Cut, SFX match splice), stem editing, music extension
+- QA / troubleshooting — fixing axis crossing (越轴), unintentional jump cuts, SFX rhythm mismatch in AI-generated footage
 - Audio repair — replacing misread dialogue, syncing replacement audio
 - Export settings for different platforms (Douyin, Bilibili, YouTube, etc.)
 - Any "how do I do X in CapCut/剪映" question related to AI video post-processing
@@ -40,6 +42,8 @@ Do NOT use when:
 
 - [reference/text-effects.md](reference/text-effects.md) — 5 text effect recipes (scan glow, gradient color, glitch, staggered layout, flash transition)
 - [reference/editing-techniques.md](reference/editing-techniques.md) — 7 core editing techniques (jump cut, quick cut, flash cut, superimposition, interrupted cut, parallel montage, cross-cutting) with CapCut操作 and parameter tables
+- [reference/sound-design.md](reference/sound-design.md) — 9 sound design & music editing techniques (strong beat cut-off, physical trigger, SFX beat sync, SFX match splice, environment replace / J-Cut, beat-aligned trim, transition SFX stack, stem editing, music extension) + recording best practices and combination guide
+- [reference/ai-footage-qa.md](reference/ai-footage-qa.md) — AI footage QA checklist: 3-step mandatory check (axis crossing, jump cut, SFX mismatch) with diagnosis methods, post-fix recipes, and prompt-level prevention rules
 - Future: `reference/editing-transitions.md` — editor transition catalog
 - Future: `reference/color-grading.md` — color grading workflows for AI footage
 - Future: `reference/audio-repair.md` — dialogue replacement, audio sync, SFX layering

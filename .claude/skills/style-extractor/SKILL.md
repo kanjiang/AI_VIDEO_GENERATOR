@@ -15,12 +15,19 @@ Trigger when:
 - The user asks to "extract", "analyze", or "describe" the style/look/aesthetic of an image
 - The user wants to transfer one image's style to another image while preserving the target's content
 - The user is starting a new project and wants to define the visual identity from a reference
+- The user wants to create a **style pack (风格包)** from a movie or a folder of reference images — see "Style Pack Mode" below
+- The user says "拆解电影风格", "制作风格包", "提取电影视觉DNA", or names a specific film and asks for its visual style
+- The user wants to use a **preset style** like "Vox 拼贴风格", "复古报纸风" — see [preset-styles.md](reference/preset-styles.md) for ready-to-use recipes
 
 Do NOT use when:
 - The user wants to describe what's IN the image (content, characters, props) — that's asset description
 - The user wants a scene board — use `scene-board-skill` instead
 - The user wants to fix render quality on existing prompts — use `video-render-quality` instead
 - The user wants to write video prompts — use `shotlist-builder` instead
+
+## Reference files
+
+- [reference/preset-styles.md](reference/preset-styles.md) — Pre-extracted style recipes ready to apply without running Step 1 (Vox Collage, etc.)
 
 ## Core rule: style ≠ content
 
@@ -241,6 +248,204 @@ Color card does NOT replace the text-based `调色：` line in the style block. 
 
 Text handles the numbers. Image handles the feel. Together they produce consistent color across 10+ video segments.
 
+---
+
+## Style Pack Mode (风格包模式)
+
+Single-image extraction (Steps 1–1.5 above) works for projects with a uniform look. **Style Pack Mode** handles movies and multi-reference projects where different scenes have different visual treatments.
+
+### Problem it solves
+
+Single-screenshot extraction is unreliable for movies because:
+- One screenshot may capture a unique lighting setup that doesn't represent the film's overall style
+- A movie often has 3–6 distinct visual zones (interior warm / exterior cold / flashback desaturated / climax high-contrast)
+- Using a single style spec for the whole project creates false uniformity
+
+### When to use Style Pack Mode
+
+- The user names a specific movie and wants its visual system
+- The user provides a folder of 10+ reference images from the same source
+- The project has multiple visual zones that need independent color/lighting specs
+
+### Style Pack workflow
+
+#### Phase 1 — Source collection (素材采集)
+
+Gather reference screenshots that cover the film's visual range:
+
+| Coverage dimension | Minimum variety | Why |
+|---|---|---|
+| Spaces/locations | ≥ 3 distinct locations | Different spaces have different palettes |
+| Shot sizes | Wide + medium + close-up | Lighting behaves differently at each scale |
+| Lighting conditions | Day + night + practical/mixed | Avoids locking to one lighting setup |
+| Character groupings | Solo + duo + group | Framing and color balance shift with character count |
+
+**Rule:** ≥ 12 screenshots per movie, covering the 4 dimensions above. Fewer screenshots risk the "single-frame fallacy."
+
+#### Phase 2 — Visual grouping (视觉分组)
+
+Group the collected screenshots by **scene function**, not by chronological order:
+
+```
+示例（以《穿越大吉岭》为例）：
+
+Group A: 火车车厢内景 — 暖黄主调、窄空间、窗光为主
+Group B: 沙漠/外景 — 高饱和暖色、强日光、开阔空间
+Group C: 室内旅馆/建筑 — 中性色调、混合光源、规整构图
+Group D: 闪回/记忆段落 — 去饱和、柔焦、冷偏移
+```
+
+**Grouping criteria:** Same group = same dominant color temperature + same lighting logic + same spatial scale. If two screenshots have the same location but different lighting (day vs. night), they belong to different groups.
+
+#### Phase 3 — Per-group extraction (分组提取)
+
+Run Step 1 (structured extraction) **independently for each group**. Each group gets:
+
+1. **Per-group style spec sheet (分组画风说明书)** — same format as Step 1 output
+2. **Per-group color card (分组色卡)** — using the enhanced 10-color format below
+3. **Per-group copyright avoidance list (分组版权规避清单)** — see below
+4. **Per-group drift check list (分组跑偏自检清单)** — see below
+
+#### Phase 4 — Global rules (全局规则)
+
+After all groups are extracted, synthesize a **global visual rules document** that captures what's shared across ALL groups:
+
+```
+## 全局视觉规则：[电影名]
+
+### 跨组共性（所有分组共享）
+- 胶片质感：[e.g., "全片一致的 Fuji Pro 400H 颗粒感"]
+- 锐化策略：[e.g., "中等锐化，边缘始终柔和"]
+- 构图倾向：[e.g., "对称构图为主，人物居中偏多"]
+- 完美度：[e.g., "高——精修大片感"]
+
+### 分组差异索引
+| 分组 | 主色调 | 灯光 | 适用场景 |
+|---|---|---|---|
+| A: 火车车厢 | 暖黄 | 窗光侧照 | 密闭空间、对话 |
+| B: 沙漠外景 | 高饱和暖 | 强顶光 | 户外、旅行、转场 |
+| C: 室内建筑 | 中性 | 混合光源 | 室内日常、剧情推进 |
+| D: 闪回记忆 | 去饱和冷 | 柔光 | 回忆、梦境、情感 |
+
+### 版权规避总清单
+[合并所有分组的规避清单——原片的角色、标志性场景、特殊道具]
+```
+
+### Enhanced 10-color card format (增强10色色卡)
+
+For Style Pack Mode, use the enhanced 10-color structure instead of the basic 3-color card:
+
+```
+生成一张 1920×1080 色卡参考图。
+
+画面内容：纯抽象色彩构成——无人物、无物体、无文字、无场景。
+
+色彩结构（固定10色）：
+主色（3色，占画面60%）：
+  ① [精准色名] HEX:[#XXXXXX] — [占比，如25%]
+  ② [精准色名] HEX:[#XXXXXX] — [占比，如20%]
+  ③ [精准色名] HEX:[#XXXXXX] — [占比，如15%]
+
+辅助色（5色，占画面30%）：
+  ④ [精准色名] HEX:[#XXXXXX] — [占比]
+  ⑤ [精准色名] HEX:[#XXXXXX] — [占比]
+  ⑥ [精准色名] HEX:[#XXXXXX] — [占比]
+  ⑦ [精准色名] HEX:[#XXXXXX] — [占比]
+  ⑧ [精准色名] HEX:[#XXXXXX] — [占比]
+
+点缀色（2色，占画面10%）：
+  ⑨ [精准色名] HEX:[#XXXXXX] — [占比]
+  ⑩ [精准色名] HEX:[#XXXXXX] — [占比]
+
+布局：从左到右按色号 ①→⑩ 排列为色块条带，每个色块下方标注中文色名和HEX值。
+质感：轻微胶片颗粒。
+
+⚠️禁止任何具象内容——纯色彩参考。
+```
+
+**When to use 10-color vs. 3-color:**
+- **3-color (Step 1.5):** Single-image extraction, simple projects, quick color anchoring
+- **10-color (Style Pack):** Movie-level extraction, complex projects with nuanced palette, per-group differentiation
+
+### Copyright avoidance checklist (版权规避清单)
+
+Every style pack group MUST output a formal avoidance list. This turns the general "style ≠ content" principle into an executable checklist:
+
+```
+### 版权规避清单：[电影名] — [分组名]
+
+以下元素属于原片内容，⚠️严格禁止出现在任何生成结果中：
+
+**禁止复制的角色特征：**
+- [角色名] 的 [标志性外观特征，如"Owen Wilson的金发碎发+弯鼻梁"]
+- [角色名] 的 [标志性服装，如"Louis Vuitton定制行李箱套装"]
+- ...
+
+**禁止复制的场景元素：**
+- [标志性场景，如"橙黄色印度火车车厢内部——Wes Anderson标志性对称构图+特定壁纸花纹"]
+- [标志性道具，如"Prada太阳镜、特定品牌行李箱"]
+- ...
+
+**禁止复制的构图/镜头标记：**
+- [导演标志性手法，如"Wes Anderson正面居中+90度转头" — 如果这已成为该导演的版权标记]
+- ...
+
+**✅ 可迁移的视觉语法：**
+- 色温逻辑（暖黄主调+冷蓝点缀的对比关系）
+- 灯光策略（窗光侧照+暖色实际光源补光）
+- 质感选择（胶片颗粒感+轻微过曝高光）
+- 景深使用模式（浅景深人物特写+深景深环境建立）
+```
+
+### Drift check list (跑偏自检清单)
+
+每组附带一个自检清单，用于生成后验证画面是否匹配目标风格：
+
+```
+### 跑偏自检清单：[分组名]
+
+生成图片/视频后，逐项检查：
+
+| # | 检查项 | 通过标准 | ⚠️常见跑偏 |
+|---|---|---|---|
+| 1 | 主色调 | 画面60%面积为[主色名] | AI偏向高饱和/中性灰 |
+| 2 | 色温 | 整体偏[暖/冷/中性] | AI默认偏冷蓝 |
+| 3 | 灯光方向 | 主光从[方向]照射 | AI随机打光 |
+| 4 | 灯光软硬 | [硬光清晰阴影/柔光渐变] | AI默认柔光 |
+| 5 | 颗粒感 | [有明显胶片颗粒/干净无噪] | AI默认无颗粒 |
+| 6 | 饱和度 | [低/中/高]饱和 | AI偏向中高饱和 |
+| 7 | 对比度 | [暗部是否保留细节] | AI容易暗部死黑或全亮 |
+| 8 | 版权元素 | 无原片角色/道具/标志性场景 | 风格关键词意外触发原片内容 |
+| 9 | 完美度 | 符合[精修/拙趣]意图 | AI默认精修化 |
+
+不通过的项目 → 修改对应维度的提示词约束或加强 `禁止` 声明。
+```
+
+### Style Pack output directory convention (风格包文件结构)
+
+```
+[项目名]/style-pack/
+├── README.md                          # 整体风格总览 + 使用规范
+├── global-visual-rules.md             # 全局视觉规则（跨组共性+分组索引+版权总清单）
+├── group-A-[场景类型]/
+│   ├── style-spec.md                  # 分组画风说明书
+│   ├── color-card.png                 # 分组10色色卡
+│   ├── avoidance-list.md              # 分组版权规避清单
+│   ├── drift-check.md                 # 分组跑偏自检清单
+│   └── references/                    # 分组参考截图（仅用于提取，不随风格包分发）
+│       ├── ref-01.jpg
+│       └── ref-02.jpg
+├── group-B-[场景类型]/
+│   └── ...
+└── prompts/
+    ├── image-prompt-templates.md       # 文生图提示词模板（已嵌入风格声明）
+    └── video-prompt-templates.md       # 视频提示词模板（已嵌入风格声明）
+```
+
+**Rule:** The `references/` folder contains source screenshots and should NOT be distributed with the style pack if copyright is a concern. The rest of the pack (text specs + color cards) is copyright-safe.
+
+---
+
 ### Step 2 — Apply (风格迁移)
 
 When the user wants to apply the extracted style to a target image or to video prompts:
@@ -273,6 +478,23 @@ The style spec overrides the default Lubezki × Deakins style block when the use
 
 ```
 ⚠️本项目使用自定义画风说明书，覆盖默认风格块。画风提取自[reference]。
+```
+
+#### For Style Pack application (风格包复用模式)
+
+When applying a Style Pack to a new original script:
+
+1. Read the script and identify which scenes map to which visual group (e.g., "indoor dialogue" → Group A, "outdoor chase" → Group B).
+2. For each scene, load the corresponding group's style spec + color card.
+3. Generate prompts using the group-specific style block, NOT the global default.
+4. Attach the group-specific color card as `@色卡=色卡` (changes per group).
+5. Run the drift check list after generation.
+6. At all times, verify against the copyright avoidance checklist — the style pack transfers **visual grammar** (color logic, light behavior, texture feel), never content (characters, branded props, signature compositions).
+
+```
+⚠️ 本场景使用风格包 [电影名] — 分组[X] 的视觉语法。
+仅迁移色温/灯光/质感/颗粒/动态范围。
+禁止出现原片任何角色、场景、道具元素。
 ```
 
 ## Integration with other skills
