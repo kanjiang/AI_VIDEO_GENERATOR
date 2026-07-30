@@ -142,7 +142,7 @@ function slugToDisplayName(slug: string): string {
     "my-cloud-buddy": "我的专属云朵",
     "supercar-explode-reassemble": "超跑重生",
     "the-deep-crown": "The Deep Crown 深海王冠",
-    "zhengci-zhiwai-promo": "Q版哈兰德主讲",
+    "zhengci-zhiwai-promo": "证词之外宣传片",
   };
 
   if (slug.startsWith("screenplay/")) {
