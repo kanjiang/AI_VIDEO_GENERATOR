@@ -17,6 +17,41 @@ Script → Storyboard → Video Prompts → AI Generation → BGM SCORING → Po
 Input: the video's shot list with timing, emotional beats, and scene descriptions.
 Output: a `bgm-composition.md` plan + AI music prompts + SFX timeline + optional ffmpeg mixing script.
 
+## Hard rules
+
+- **Never rewrite video prompts to make Seedance emit BGM.** Generation-stage prompts must keep `无背景音乐、无配乐、无乐器声`. This skill only consumes clean dialogue/ambient footage and builds music/SFX in post.
+- **Strings-first** for underscoring beds; piano/guitar are highlight accents, not default beds (see Step 0).
+- Deliver stems/mix plans that `post-production` can assemble — do not invent a parallel CapCut workflow that duplicates post-production recipes.
+
+## Step 0 — Foundational mindset: scoring ≠ songwriting
+
+Before any compositional work, internalize this principle:
+
+> **好配乐脱离画面单独听不是完整歌曲。** 如果音乐独立播放时旋律完整、结构自洽、听感饱满——它大概率不适合对白密集的镜头。配乐的核心职责是**为画面情绪留出表达空间**，而非替角色直白抒情。
+
+### Pre-composition 4-question check (4 问先行法)
+
+Before writing any prompt or notation, answer these 4 questions for each scoring segment:
+
+| # | Question | Bad answer | Good answer |
+|---|----------|-----------|-------------|
+| 1 | **戏剧功能** — 这段音乐在叙事中的任务是什么？ | "悲伤" | "压抑→爆发前的克制，为下一镜头的情绪释放蓄力" |
+| 2 | **旋律显露度** — 旋律应该在多大程度上被听到？ | "好听的旋律" | "旋律隐藏在弦乐织体中，仅在转折时完整出现2秒" |
+| 3 | **主次配器** — 哪些乐器做底层氛围，哪些做高光点缀？ | "钢琴+吉他+弦乐" | "低音弦乐铺底(80%)，双簧管在关键转折处出现(20%)" |
+| 4 | **对白留白** — 这段有无对白？音乐需要让出多少频率空间？ | 不考虑对白 | "密集对白段，音乐退至低频弦乐pad，中高频完全让出" |
+
+### Strings-first rule (弦乐优先原则)
+
+**新手配器建议：** 默认用弦乐（strings）构建底层氛围，避免钢琴、吉他作为基础织体。
+
+| 乐器 | 起音特征 | 配乐风险 |
+|------|---------|---------|
+| 钢琴 | 起音清晰、每个音符独立可辨 | 极易抢戏，盖过人声对白，提前剧透镜头情绪 |
+| 吉他 | 起音明确、和弦轮廓突出 | 与钢琴同理，且和弦进行容易暗示"歌曲"而非"配乐" |
+| 弦乐 | 起音柔和、可无限延音、音色可从极弱到极强 | **最适合配乐底层**——能融入画面不抢戏，需要时可瞬间爆发 |
+
+钢琴/吉他不是禁止使用，而是**不应作为基础织体**。它们适合作为高光点缀——在关键转折处出现 2-4 秒，然后退出。
+
 ## Core workflow
 
 ### 1. Read the shot list and extract the emotional arc
@@ -37,7 +72,7 @@ Decide these parameters based on the video's genre and mood:
 |---|---|
 | **Key** | Major = bright/warm; minor = emotional/tense. Plan modulations at emotional turning points |
 | **Base BPM** | Match the animation style (stop-motion ~80-100; smooth 2D ~110-130; action ~140+) |
-| **Core instrument** | One signature timbre that runs through the entire piece (music box, piano, marimba, erhu…) |
+| **Core instrument** | Default bed = **strings** (see strings-first). Piano/guitar/music box = highlight accents only unless the project identity requires them as signature color |
 | **Supporting palette** | 3-5 instruments for layering; specify which sections they enter/exit |
 | **Forbidden sounds** | Instruments/styles that break the aesthetic (critical for AI music prompts) |
 

@@ -93,11 +93,13 @@ Each recipe in the reference files follows this structure:
 The full pipeline from script to final video:
 
 ```
-Script → Storyboard → Scene Board → Video Prompts → AI Generation → POST-PRODUCTION → Final Delivery
-         ↑ screenwriter   ↑ scene-board    ↑ shotlist-builder         ↑ THIS SKILL
+Script → Storyboard → Scene Board → Video Prompts → AI Generation → BGM SCORING → POST-PRODUCTION → Final Delivery
+         ↑ screenwriter   ↑ scene-board    ↑ shotlist-builder         ↑ bgm-scoring   ↑ THIS SKILL
            skill            skill             + video-render-quality
                                               + style-extractor
 ```
+
+**Audio handoff rule:** Video prompts from `shotlist-builder` already forbid BGM at generation (`无背景音乐`). Post receives **clean clips** (dialogue + ambient/SFX only). Scored music and designed SFX stems come from `bgm-scoring` — do not ask Seedance to regenerate music, and do not treat missing BGM in the raw clip as a defect.
 
 Post-production receives:
 - Raw AI-generated video clips (15s segments from Seedance)

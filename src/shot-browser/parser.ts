@@ -28,7 +28,7 @@ export type ParsedVideoPrompts = {
 };
 
 const SHOT_HEADER_RE =
-  /^#{1,2}\s+(?:Prompt|Shot|P|分镜|镜头)\s*[-_]?\s*(\d+[A-Za-z]?)\s*(?:[—–\-:：｜|]\s*(.+?))?$/i;
+  /^#{1,2}\s+(?:Prompt|Shot|P|分镜|镜头)\s*[-_]?\s*(\d+[A-Za-z]?)\s*(?:[—–\-:：｜|\[]\s*(.+?)[\]]?)?$/i;
 
 const TIMECODE_RE = /\((\d+:\d{2}[–\-]\d+:\d{2})\)/;
 

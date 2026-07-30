@@ -28,7 +28,7 @@ Use the **named handle format** `@资产名=资产名 — 参考描述。` — o
 @林深=林深 — 参考林深角色定妆。
 @周妍=周妍 — 参考周妍角色定妆。
 
-【挂载资源与音频硬约束】本视频必须严格使用已挂载的设备间全景、采样文件列表界面、林深形象与周妍形象参考；...对白必须使用中文原文，不翻译、不改写...无字幕，无文字标题，无屏幕文字，无背景音乐；只保留环境音与动作声，以及真实语音混响。
+【挂载资源与音频硬约束】本视频必须严格使用已挂载的设备间全景、采样文件列表界面、林深形象与周妍形象参考；...对白必须使用剧本原文语言，不翻译、不改写...无字幕，无文字标题，无屏幕文字，无背景音乐；只保留环境音与动作声，以及真实语音混响。
 ```
 
 **Handle syntax:** `@[asset_name]=[asset_name] — 参考[description]。`
@@ -70,12 +70,12 @@ After the handles, write the `【挂载资源与音频硬约束】` block. This 
 
 **Without color card (single-shot or intentionally varying palettes):**
 ```
-【挂载资源与音频硬约束】本视频必须严格使用已挂载的[列出所有资产名]参考；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用中文原文，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
+【挂载资源与音频硬约束】本视频必须严格使用已挂载的[列出所有资产名]参考；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用剧本原文语言，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
 ```
 
 **With color card (≥ 3 video prompts — recommended):**
 ```
-【挂载资源与音频硬约束】本视频必须严格使用已挂载的色卡色调参考、[列出其他资产名]参考；全片色温与饱和度严格参考色卡；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用中文原文，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
+【挂载资源与音频硬约束】本视频必须严格使用已挂载的色卡色调参考、[列出其他资产名]参考；全片色温与饱和度严格参考色卡；[角色/空间/道具]外貌、服装、发型、气质与身份感严格参考挂载图，不重新设计、不重新描述，只表现口型、眼神、呼吸、手指、重心、衣料受力与微表情。对白必须使用剧本原文语言，不翻译、不改写。无字幕，无文字标题，⚠️无背景音乐、无配乐、无乐器声；保留并丰富环境音（风声、雨声、虫鸣、城市底噪等）、动作音效（脚步、碰撞、衣物摩擦等）和真实语音混响。
 ```
 
 The key additions when using a color card: `色卡色调参考` in the asset list, and `全片色温与饱和度严格参考色卡` as an explicit lock.
@@ -91,7 +91,7 @@ Rules:
 - Character handles — reference by name in the constraint block, no need to repeat full wardrobe description (that's in the asset image itself)
 - Location handles — reference by name, spatial layout is in the asset image
 - Prop handles — reference by name, visual details are in the asset image
-- If dialogue exists, add `对白必须使用中文原文，不翻译、不改写。`
+- If dialogue exists, add `对白必须使用剧本原文语言，不翻译、不改写。` — Chinese-dialogue projects use Chinese lines; English-dialogue projects (e.g. US theatrical scripts) use English lines inside the Chinese prompt body. Never invent a third language.
 - For wet/dry/blood/dust state changes between scenes, note the state in the constraint block (`湿发贴额`, `溅血渍`)
 - The constraint block references assets **by Chinese name**, not by numbered index
 
@@ -468,13 +468,22 @@ The time code is the absolute second range from video start, matching the time a
 
 ### Shot block required fields
 
-Each shot block always has:
-- **机位** — lens + aperture + shot type (wide / mid / close / ECU) + handheld/static/dolly modifier
-- **摄影机运动** (when relevant) — camera move synchronized to emotion
+Each shot block always has, **in this order**:
+
+```
+【镜头N】[label]（Xs-Ys）
+机位：[焦距] [景别] [static/handheld/dolly…]
+动作：…
+```
+
+- **机位** — **mandatory next line after `【镜头N】`.** Lens (35/50/85mm…) + shot type (wide / mid / close / ECU) + handheld/static/dolly. Incomplete without it.
+- **摄影机运动** (when relevant) — camera move synchronized to emotion (can live on the `机位` line)
 - **摄影机位置** (when relevant) — east/west/south/north of the character
-- **背景** — what's in the background (or "blurred to soft color blocks" for tight close-ups)
-- **动作** — step-by-step action with numbered beats (① ② ③ ...) when there's an arc
-- **微表演细节** — performance micro-beats, see MICRO_BEATS.md
+- **背景** — what's in the background (or "blurred to soft color blocks" for tight close-ups); population still mount-gated
+- **动作** — step-by-step action with numbered beats (① ② ③ ...) when there's an arc; lock **≤3 timed action beats** per 15s fight/escape prompt
+- **微表演细节** — performance micro-beats, see MICRO_BEATS.md (optional if action+dialogue already dense)
+
+**Reject before delivery:** any `【镜头N】` whose next non-empty line is `动作：` with no `机位：` above it.
 
 For a single-shot prompt (one continuous take, no internal cuts), skip the `【镜头N】` headers and write the same structure as a single block. Prepend with `单镜头（one-shot，无剪辑）。`
 
@@ -918,24 +927,24 @@ Every `【音画同步】` section with dialogue MUST open with a **说话者锁
 
 Format:
 ```
-说话者锁定：[角色名]=[画内/画外][远场/近场][男声/女声]，[空间位置与说话时的动作描述]；[角色名]=[画内/画外][远场/近场][男声/女声]，[空间位置与说话时的动作描述]。对白中文原文、不翻译不改写，与口型严格同步。
+说话者锁定：[角色名]=[画内/画外][远场/近场][男声/女声]，[空间位置与说话时的动作描述]；[角色名]=[画内/画外][远场/近场][男声/女声]，[空间位置与说话时的动作描述]。对白使用剧本原文语言、不翻译不改写，与口型严格同步。
 ```
 
 Examples:
 
 Live-action film (2 visible speakers with spatial anchoring):
 ```
-说话者锁定：林深=画内近场男声，从A点进入后压低声音指向C点操作台亮屏；周妍=画内近场女声，走到C点操作台后震惊低声说话。对白中文原文、不翻译不改写，与口型严格同步。
+说话者锁定：林深=画内近场男声，从A点进入后压低声音指向C点操作台亮屏；周妍=画内近场女声，走到C点操作台后震惊低声说话。对白使用剧本原文语言、不翻译不改写，与口型严格同步。
 ```
 
 Animation (2 visible speakers + 1 arriving):
 ```
-说话者锁定：白小锋=画内近场男声，站在凝血网前方短促下达命令；红小达=画内近场男声，从画面后方冲入时急促汇报。对白中文原文、不翻译不改写，与口型严格同步。
+说话者锁定：白小锋=画内近场男声，站在凝血网前方短促下达命令；红小达=画内近场男声，从画面后方冲入时急促汇报。对白使用剧本原文语言、不翻译不改写，与口型严格同步。
 ```
 
 Animal film with inner monologue (visible animal + off-screen voiceover):
 ```
-说话者锁定：年糕=画外近场男声（内心独白），猫身体低头看爪子时冷淡画外音；苏敏=画内近场女声，蹲下靠近猫时轻声说话。对白中文原文、不翻译不改写，与口型严格同步。
+说话者锁定：年糕=画外近场男声（内心独白），猫身体低头看爪子时冷淡画外音；苏敏=画内近场女声，蹲下靠近猫时轻声说话。对白使用剧本原文语言、不翻译不改写，与口型严格同步。
 ```
 
 Rules:
@@ -993,6 +1002,12 @@ Rules:
 ### Multi-speaker hard limit (Seedance 2.0)
 
 **A single 15-second prompt must have at most 2 speaking characters and 2-4 lines of dialogue total.** Three or more speakers in one prompt causes voice crossover (串音), line misattribution, and timbre drift. See [PROMPT_DENSITY.md](PROMPT_DENSITY.md) for splitting rules.
+
+**Tighten further when the prompt also has action, fight, chase, or multi-location cross-cut:**
+- Prefer **≤3 spoken lines** (or one gold sentence + reactions)
+- **Action + V.O./PA:** keep **one** broadcast/voiceover line max; let motion cover the rest
+- Cut TED / briefing / resume Q&A to **key lines**; put the rest on screens, props, gestures, or silence
+- English dialogue burns lip-sync budget faster — count spoken seconds, not just line count
 
 When dialogue is the primary content of a prompt, reduce competing processing load:
 - Simplify camera moves (static or slow push)
@@ -1086,15 +1101,110 @@ Quick reference — these are the most common mispronunciations in AI-generated 
 
 When writing dialogue for a scene, scan for these characters and annotate any whose reading is ambiguous in context.
 
-## Section 9 — Background activity
+## Section 8.5 — Causality & resistance gate（因果/阻力门）
 
-For any scene with extras or environmental movement, callout what's happening in the background. Forbid empty backgrounds:
+Seedance and rushed prompting both favor **instant success**: net pops → catch; elbow → both guards down; hero appears at the door; "Sure" with no pause. That reads fake. Every high-stakes beat needs **prior cause** and **visible resistance**.
+
+### Ban list (write into `【负面约束】` when relevant)
+
+| Failure mode | Instead write |
+|---|---|
+| Instant catch / one-frame snare | Scan lock → deploy → wrap → cinch / second pass → hatch close |
+| One-hit KO / clean dual take-down | Missed arc, stumble, recharge chirp, half-beat trip, then escape |
+| Teleport rescue / coincidence open door | Prefixed **rendezvous** ("if alarms → wait at X"); arrival via that path |
+| Instant consent ("Sure" / "OK" with no beat) | Delay: look down, silence 1–2s, then reluctant agree |
+| Badge / key from nowhere | Establish steal / borrow / process hole in an earlier prompt; remount that prop |
+| Alert / villain arrives from nowhere | Phone alert, PA, unauthorized terminal flag — show the trigger |
+| Unlocked terminal by luck | Duty tablet left logged in / shift hole / stolen badge — **process vulnerability** |
+| Confirm off-screen success | Inference only ("should make the ocean") unless the camera sees it |
+
+### Prefixed chain rule
+
+If Prompt N needs a person, card, door, or alert to exist, Prompt **N−k** must have already stated:
+
+1. **Who agreed / stole / triggered it**
+2. **Where they wait / go**
+3. **What object changes hands**
+
+Then Prompt N's `【首帧衔接】` restates that chain in one line (not a new invention).
+
+### Action beat budget
+
+Inside one 15s fight/escape prompt: lock **3 timed beats** max (e.g. rush door → graze + stumble → badge + exit). Extra flourishes belong in the next prompt or get cut.
+
+### Process vulnerability > coincidence
+
+Prefer institutional failure over luck:
+
+- ✅ maintenance tablet still unlocked on shift change  
+- ❌ "she happens to find an unlocked PC"  
+- ✅ stolen guard badge from Prompt 22  
+- ❌ "uses Jonas's badge" with no handoff  
+
+## Section 9 — Background activity（挂载门控）
+
+Background population is **not automatic**. Seedance will invent armored soldiers, palace guards, and ritual crowds to "fill" grand locations unless the prompt forbids it. Treat extras like characters: **no mount → no on-screen body**.
+
+### Gate before writing background people
+
+Ask, in order:
+
+1. Does this prompt declare a crowd/extra handle (e.g. `@议事人群=…`, `@会议观众=…`, `@保安=…`)?
+2. Does the **location reference image itself** already show that exact population, and does the prompt say to preserve it?
+3. Does the screenplay beat actually need background bodies right now?
+4. Is this prompt a **same-scene continuation** of a previous prompt that already established population? If yes → remount that crowd/location handle; do not drop it.
+
+If answers 1–3 are all no, and answer 4 is also no → write **absence**, not atmosphere people.
+
+Also cover intentional empty-after-evac: if Prompt N clears a space (guards leave, crowd exits), Prompt N+1 must remount the location and write `已清空/无人`, not silently omit the previous crowd mount without stating the world state.
+### Same-scene continuation（同场分段）
+
+When the script is one continuous scene split into two 15s prompts (council → Maren watches and leaves; meeting → reaction cutaway):
 
 ```
-环境活动（匹配实验室背景）：⚠️背景必须充满大量活动的工作人员——禁止空旷背景。多名白衬衫分析员在工作站旁快速打字、站起交接文件、弯腰核对屏幕数据、两人并排讨论。多名白大褂科研人员透过显微镜观察古代文物。银色铰接机械臂全程持续运动。多人在通道和工作台之间来回走动。
+【首帧衔接】接上一视频同场：[事件]仍在进行。首帧切到[新焦点角色]；景深后方保留已挂载[人群/环境]虚化延续——人口构成与上一视频一致，不消失、不换装成士兵。
 ```
 
-For empty/quiet scenes (apartments, exteriors at night), still callout the *absence* — what isn't moving, what kind of silence:
+```
+@议事人群=议事人群 — ⚠️同场延续：与上一视频同一批人群仍在；焦点切换时退为景深虚化，但不抹掉。
+```
+
+Focus change ≠ emptying the world. Dropping the crowd mount is what causes Seedance to invent wrong soldiers or wipe the hall.
+
+### When extras ARE required (and mounted)
+
+Call out what they are doing — species, wardrobe, density, and what they are **not**:
+
+```
+环境活动（已挂载议事人群）：⚠️背景仅允许已挂载的同族人鱼议员虚化剪影——稀疏、低声、无队形。禁人类甲胄士兵、禁宫廷卫队列队、禁满殿站立武装人群。
+```
+
+```
+环境活动（匹配实验室背景，已挂载职员群）：⚠️背景使用已挂载职员形象——多名白衬衫分析员在工作站旁快速打字、站起交接文件。禁额外军装、禁无挂载路人填满画面。
+```
+
+### When the beat is alone / exit / empty（必须显式空场）
+
+Write emptiness into both the shot action and `【负面约束】` (dual-insurance):
+
+```
+背景：空荡通道 / 大殿后部虚化空间。⚠️画面内除已挂载角色外无其他人——无列队、无卫兵、无剪影人群。
+```
+
+```
+【负面约束】…禁甲胄士兵、禁宫廷守卫列队、禁满殿人群、禁把空场脑补成阅兵/仪式阵列…
+```
+
+### Anti-patterns（禁止）
+
+- ❌ `禁止空旷背景` as a default for every grand hall / throne room / lobby
+- ❌ Inventing "atmosphere soldiers" because the location looks ceremonial
+- ❌ **Dropping** a crowd mount on Prompt N+1 when the scene is still the same ongoing event (focus shifted, world should not reset)
+- ❌ Assuming `【首帧衔接】` alone will carry population without remounting the crowd/location assets
+- ❌ Describing `拥挤议事人群` without either a crowd mount or an explicit non-military merfolk description + soldier ban
+- ❌ Treating "character leaves the room" as "the room was always empty" — leave-through-crowd vs arrive-into-empty-corridor are different beats; write both explicitly
+
+Quiet/empty scenes still call out the *absence* for sound:
 
 ```
 完全寂静——禁背景音乐、禁画外人声。仅环境SFX：远处城市低频嗡鸣、暖气管道轻响、湿靴踩在拼花地板上的回响。
@@ -1203,7 +1313,7 @@ A foreground object (person walking past, door closing, hand covering lens) cros
 Example — character walking past camera:
 ```
 【尾帧转场】物体遮挡转场。
-尾帧设计：路人从画面右侧走过摄影机前方，黑色外套在最后0.5秒完全遮挡画面——最终帧为黑色布料纹理填满整个画面。
+尾帧设计：已挂载角色（或非人物遮挡物：门扇/车辆/黑布）从画面右侧走过摄影机前方，在最后0.5秒完全遮挡画面——最终帧为布料/门板纹理填满整个画面。⚠️禁未挂载路人脑补遮挡。
 ⚠️下一视频首帧：黑色布料纹理向左移出，揭示新场景——地铁站台。
 ```
 
@@ -1298,6 +1408,12 @@ End every prompt with a concise negative block:
 【负面约束】禁身份漂移、禁字幕、禁额外切镜、禁CG/游戏质感、禁手脸畸变、禁漂浮道具、禁失控焦点漂移、禁表演过度；不要让硬约束覆盖本镜头的主要动作和情绪落点。
 ```
 
+Always add mount-gated population bans when the shot is alone/exit/empty, or when a grand location would tempt Seedance to invent armies:
+
+```
+【负面约束】…禁未挂载角色出镜、禁甲胄士兵、禁宫廷守卫列队、禁满殿人群、禁把空场脑补成阅兵阵列…
+```
+
 Anticipate what Seedance will get wrong. Add ⚠️-marked rules to prevent it. Use single `⚠️` for important, triple `⚠️⚠️⚠️` for critical-critical.
 
 What to mark with `⚠️`:
@@ -1362,7 +1478,7 @@ These words/phrases push AI models toward CG poster aesthetics instead of cinema
 
 | 禁用词 | 为什么禁 | 替代写法 |
 |---|---|---|
-| `8K`, `4K`, `ultra HD` | 推向锐化过度的数码感 | 具体写分辨率在 `【规格】` 中，不重复 |
+| `8K`, `4K`, `ultra HD` as body-text spells | 推向锐化过度的数码感 | **允许**只在 `【规格】` 写一次分辨率（如 `画质：8K`）；正文风格段落禁止重复堆砌 `8K/4K/ultra HD` |
 | `masterpiece`, `best quality` | MJ/SD 遗留咒语，对视频模型无意义 | 删除——质量由具体参数控制 |
 | `ultra detailed`, `hyper detailed`, `insane detail` | 让 AI 在每个表面堆砌纹理，失去主次 | 只在需要细节的局部写 `材质清晰可见` |
 | `HDR` | 推向高对比/高饱和的游戏截图风格 | 用 `动态范围` 行精确声明高光/暗部策略 |
@@ -1386,7 +1502,7 @@ These words/phrases push AI models toward CG poster aesthetics instead of cinema
 - **Wide-angle distortion** — counter: `禁光学畸变——禁桶形畸变、禁枕形畸变、禁鱼眼效果、禁广角变形`
 - **Floating props** — counter: `禁漂浮道具`
 - **God rays / volumetric beams** — counter: `禁止可见光束（god rays）`
-- **Empty background** — counter: explicit background activity callouts (Section 8)
+- **Empty / grand-hall background** — counter: follow Section 9 mount gate. If the beat is empty/evac → write absence in both action + `【负面约束】` (`禁甲胄士兵、禁守卫列队、禁脑补人群`). If population is required → mount a crowd asset first, then describe activity. Never "fill empty backgrounds" by inventing extras.
 - **Hand chaos** — for shots with hand close-ups, specify finger count and exact action
 - **Scale mismatch** — for shots with multiple characters, restate heights
 - **Camera pass-through** — for handheld, note "禁稳定器" but also "画面带有机呼吸感微晃" so it doesn't go wild
@@ -1439,6 +1555,8 @@ Tell the model what you WANT, not what you DON'T want. Negation in the main body
 | 背景不要太亮 | 背景处于阴影中，仅有一束侧光 |
 
 **Exception:** the `【负面约束】` section exists specifically for negative constraints. Use positive language in all other sections; save negations for `【负面约束】`.
+
+**Exception to the exception (dual-insurance):** empty halls, post-evacuation corridors, and bans on invented armored soldiers / unmounted crowds **must** appear both inline in `【电影化动态描述】` and again in `【负面约束】` — see Section 9. These failure modes ignore single-location bans.
 
 ### 4. Avoid over-specification principle (避免过度指定原则)
 
@@ -1533,6 +1651,8 @@ After every generation batch, scan results for **recurring** issues (appearing i
 | Issue pattern | Update target | Example |
 |---|---|---|
 | AI adds unwanted elements across multiple shots | `【负面约束】` in the project's fixed modules | "AI keeps adding earrings" → add `禁额外配饰` to project-level bans |
+| AI invents unmounted crowds / armored soldiers in grand halls | Mount-only casting + dual-insurance bans (Section 9) | "Throne hall fills with armor guards" → mount `@议事人群` with non-military merfolk look + `禁甲胄士兵、禁守卫列队` |
+| Same-scene split drops population / resets the hall | Same-scene continuation remount (Section 9) | "02B empties the council that 02A established" → remount `@议事人群` + `@王座大殿` on 02B; write `同场延续：议事仍在进行` |
 | A composition type consistently fails | Composition shorthand in `BATCH_MODE.md` | "OTS shots always distort the foreground shoulder" → add `前景肩膀禁畸变` to OTS template |
 | Style drifts between shots | `STYLE_BLOCK` global declaration | "Later shots keep shifting warmer" → add explicit color temperature lock |
 | Specific `⚠️` constraint is being ignored | Escalate: duplicate constraint in both `【电影化动态描述】` AND `【负面约束】` | Dual-insurance pattern from §6 |

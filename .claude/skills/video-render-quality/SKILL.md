@@ -23,11 +23,26 @@ The plastic look in AI video is rarely the model's fault. It is almost always a 
 
 The plastic look has three root causes. Fix them in this order:
 
-1. **No rendering engine anchor.** The model has no frame of reference for what "realistic" means. Fix: add one engine-level directive that tells the model which rendering pipeline to simulate.
-2. **No light physics.** Reflections, shadows, and global illumination are missing or faked. Fix: add ray tracing or path tracing directives.
+1. **No photographic / lighting anchor.** The model has no frame of reference for what "realistic" means. Fix: add camera/film-stock/lighting physics that match the project's style block.
+2. **No light physics.** Reflections, shadows, and global illumination are missing or faked. Fix: add ray tracing or path tracing directives **only when compatible** with the project style.
 3. **No surface truth.** Materials look like uniform colored surfaces instead of physical substances. Fix: add material physics and optical effect directives.
 
 Do not stack every directive into one prompt. Pick the combination that matches the scene's needs.
+
+### ⚠️ Conflict gate with cinematic live-action pipeline
+
+When the project uses `shotlist-builder` / `STYLE_BLOCK.md` (Lubezki × Deakins, practicals-only, live-action):
+
+| STYLE_BLOCK forbids | Do NOT inject from this skill |
+|---|---|
+| 禁游戏引擎 / 禁CG过场 | Unreal Engine, Nanite, Octane, Redshift, V-Ray **as default** |
+| 禁止可见光束（god rays） | Tyndall / god rays / volumetric beams |
+| 禁HDR感 | Bare `HDR` spell words — describe dynamic range in Chinese specs instead |
+| practicals-only | Studio fill, softboxes, LED strips as invented lights |
+
+**Default for live-action Seedance projects:** use **Camera + Film Stock** profile only (ARRI Alexa, film grain, practical light physics, material truth). Do **not** auto-inject Unreal/Octane.
+
+**Engine profiles** (Unreal / Octane / etc.) are allowed only when the user **explicitly** asks for a game-engine / CG look, or the project's style pack already permits them. If unsure, ask before injecting engine names.
 
 ## Workflow
 
@@ -42,9 +57,20 @@ Do not stack every directive into one prompt. Pick the combination that matches 
 
 Each profile is a pre-built combination of directives optimized for a specific visual goal. Use one profile as a starting point, then adjust.
 
-### Profile: Cinematic Realism (default for live-action style)
+### Profile: Camera Realism (default for live-action / Seedance STYLE_BLOCK projects)
 
-Best for: realistic human/animal subjects, indoor/outdoor drama, documentary feel.
+Best for: realistic human subjects, drama, documentary feel, projects using shotlist-builder STYLE_BLOCK.
+
+- Camera: ARRI Alexa / film-stock color science (not game engine)
+- Light: practicals-only language; soft bounce described as in-scene sources; **no god rays**
+- Materials: skin pores, fabric weave, wet/metal micro-reflections
+- Dynamic range: describe highlight/shadow strategy in words; avoid `HDR` spell in body text
+- Grain: subtle 35mm film grain
+- Sharpening: moderate; protect shallow DOF
+
+### Profile: Cinematic Realism — Engine Cosplay (only when user explicitly wants CG/engine look)
+
+Best for: stylized CGI, game-cinematic, product CGI — **not** default for live-action Seedance.
 
 - Engine: Unreal Engine 5.3 Lumen global illumination
 - Geometry: Nanite virtual geometry, film-grade assets
@@ -54,36 +80,36 @@ Best for: realistic human/animal subjects, indoor/outdoor drama, documentary fee
 - Dynamic range: HDR, 10-bit color depth
 - Sharpening: high sharpness, edge enhancement
 
-### Profile: Hyperreal Materials
+### Profile: Hyperreal Materials (engine cosplay — ask first on live-action)
 
-Best for: close-up product shots, armor/weapon detail, architectural interiors.
+Best for: close-up product shots, armor/weapon detail, architectural interiors. **On STYLE_BLOCK live-action projects:** strip Engine/Octane names; keep only material/subsurface language under Camera Realism.
 
-- Engine: Octane X render, spectral lighting
-- Ray tracing: path tracing (full physical accuracy)
+- Engine: Octane X render, spectral lighting *(omit when Conflict gate applies)*
+- Ray tracing: path tracing (full physical accuracy) *(omit when Conflict gate applies)*
 - Materials: subsurface scattering for skin, caustic light for glass/water
 - Surfaces: pore-level detail, micro-displacement
 - Sharpening: ultra-high sharpness
 - Noise: clean, no noise
 
-### Profile: Atmospheric Interiors
+### Profile: Atmospheric Interiors (engine cosplay — ask first on live-action)
 
-Best for: indoor scenes with mixed natural/artificial light, moody interiors.
+Best for: indoor scenes with mixed natural/artificial light, moody interiors. **On STYLE_BLOCK projects:** use Camera Realism + practical interior language; omit V-Ray/HDR spell words.
 
-- Engine: V-Ray 6 global illumination, physical camera
-- Ray tracing: ray-traced reflections + path-traced ambient occlusion
+- Engine: V-Ray 6 global illumination, physical camera *(omit when Conflict gate applies)*
+- Ray tracing: ray-traced reflections + path-traced ambient occlusion *(omit when Conflict gate applies)*
 - Film stock: Fuji Reala 500D or Sony Venice filter
-- Dynamic range: HDR, 12-bit RAW
+- Dynamic range: describe highlight/shadow strategy in words; avoid bare `HDR` on live-action
 - Noise: light film grain
 - Sharpening: medium, no edge harshness
 
-### Profile: Game Engine Cinematic
+### Profile: Game Engine Cinematic (only when user wants game-cinematic / CG)
 
-Best for: fantasy, sci-fi, action sequences, open-world environments.
+Best for: fantasy, sci-fi, action sequences, open-world environments — **never default for Seedance live-action**.
 
 - Engine: Unreal Engine 5.3 Lumen + Nanite
 - Style variant: Red Dead Redemption 2 style / Cyberpunk 2077 cutscene
 - Ray tracing: ray-traced reflections + ray-traced shadows
-- Dynamic range: HDR
+- Dynamic range: HDR *(engine look only)*
 - Sharpening: high
 - Noise: clean
 
@@ -97,14 +123,14 @@ Best for: 2D hand-drawn, 3D toon-shaded, Ghibli/Pixar style.
 - Sharpening: soft, no sharpening
 - Dynamic range: SDR standard
 
-### Profile: Subsurface Realism (skin/organic)
+### Profile: Subsurface Realism (skin/organic — materials only on live-action)
 
-Best for: character close-ups, creature detail, organic materials.
+Best for: character close-ups, creature detail, organic materials. **On STYLE_BLOCK projects:** keep SSS/pore language; omit Redshift engine name unless user asks.
 
-- Engine: Redshift RT, microsurface scattering
-- Ray tracing: path tracing
+- Engine: Redshift RT, microsurface scattering *(omit when Conflict gate applies)*
+- Ray tracing: path tracing *(omit when Conflict gate applies)*
 - Materials: subsurface scattering, translucency, pore-level microgeometry
-- Film stock: RED Komodo skin tone
+- Film stock: RED Komodo skin tone / ARRI Alexa skin
 - Sharpening: medium-high
 - Noise: light grain
 
@@ -128,6 +154,7 @@ This skill adds a **rendering quality layer** on top of prompts generated by oth
 
 - Do not stack every directive into one prompt. Pick 3–5 directives that address the actual problem.
 - Do not add game engine directives to a hand-drawn animation prompt.
+- Do not add game engine / Octane / Unreal / god-ray / bare-HDR directives to STYLE_BLOCK live-action Seedance projects (see Conflict gate).
 - Do not add film grain to a scene that needs clinical cleanness.
 - Do not override the user's existing style choices without asking.
 - Do not place render directives inside dialogue or action beats.

@@ -82,6 +82,16 @@ Exclude these unless the user explicitly asks otherwise:
 - random multi-directional lighting
 - clutter that obscures pathways
 - purely painterly mood image with no production utility
+- **invented population** — armored soldiers, palace guards, ritual crowds, lobby extras
+
+## Population rule（默认空场底板）
+
+**Default: empty of identifiable people.** Scene boards lock space and light for later video mounts. If the location plate includes people, Seedance will treat them as ground truth forever (mount-only path b).
+
+- Default output: architecture + props + light only; no soldiers, no crowd ranks, no hero characters
+- If the script needs population later: say so in annotations, and generate a **separate Crowd asset** (`议事人群` / `会议观众` / etc.) — do not bake the crowd into the empty location plate
+- If the user explicitly wants a populated plate: label it clearly as a population-bearing location and list which crowd types are locked
+- Lighting wording: use **场景内次级 practical（窗/灯/屏）**, not film fill / softbox / LED strip language
 
 ## Prompt construction pattern
 
@@ -107,7 +117,7 @@ When the user asks for a scene board, prefer this format shape:
 
 [明确前景、中景、后景关系，入口出口、主要通道、关键道具、墙面、窗户、地面和视觉锚点的位置。]
 
-[说明主光方向、辅光来源、亮部与暗部关系、色温倾向、空气感和环境情绪。]
+[说明主光方向、场景内次级 practical 辅光（窗/灯/屏，非电影补光）、亮部与暗部关系、色温倾向、空气感和环境情绪。⚠️默认无人；若需人口须在标注中声明并另出人群资产。]
 
 [说明这张图如何支持后续故事板和视频镜头，例如稳定透视、保留摄影机朝向依据、确保角色有明确运动路径。]
 

@@ -173,6 +173,7 @@ Core requirements for this mode:
 - strict identity lock across all views: same face, hair, costume, body proportions, pose language, and visual personality
 - include a hero full-body anchor plus smaller clean supporting studies and detail zones
 - allow a more polished presentation than the rough storyboard mode unless the user asks for sketch treatment
+- **⚠️ ALL figure views must be full-body (全身图)** — every pose (hero, supporting, back, side, sitting, crouching) must show the complete figure from head to toe. No bust shots, no waist-up crops, no knee-up cuts. The identity board's primary production purpose is to lock full-body appearance (face + hair + costume + shoes + body proportions) for downstream video generation. Half-body references cause lower-body drift in AI-generated video.
 
 Preferred Chinese output shape:
 
@@ -187,9 +188,9 @@ Preferred Chinese output shape:
 
 [设计方向]：不要创建标准的角色参考表。创建一张电影般的身份板，感觉像是高端动画工作室的角色研究与艺术书布局的结合。布局应不对称、优雅且视觉上令人难忘，使用大片留白、多样化的图像比例和有意的不平衡。避免网格、蓝图设计、目录布局和重复的转场展示。
 
-[重要布局规则]：不要重叠任何角色图像。每个视角必须有清晰的分离和呼吸空间。保持所有身体、肖像、轮廓和细节研究的视觉区分。无裁剪面部、无隐藏肢体、无堆叠人物、无合并姿势。
+[重要布局规则]：不要重叠任何角色图像。每个视角必须有清晰的分离和呼吸空间。保持所有全身研究、轮廓和细节区的视觉区分。无裁剪面部、无隐藏肢体、无堆叠人物、无合并姿势。禁止以独立半身肖像替代全身视角。
 
-[主要构图]：放置一个大型英雄全身视角，略微偏离中心作为视觉锚点。围绕它，以干净的间距排列较小的辅助研究：中性全身视角、背面视角、侧面视角、坐姿、倾斜姿势、蹲姿、俯视身体角度、仰视身体角度、富有表现力的肖像研究。每个视角都应像一个独立、干净的角色研究，而不是来自一个场景的帧。
+[主要构图]：放置一个大型英雄全身视角，略微偏离中心作为视觉锚点。围绕它，以干净的间距排列较小的辅助研究：中性全身视角、背面全身视角、侧面全身视角、坐姿全身、倾斜姿势全身、蹲姿全身。⚠️所有人物视角必须为全身图（从头顶到脚底完整可见），禁止半身、膝盖以上或胸部以上的裁切。表情可读性通过全身景别下的脸部清晰度解决——可选 inset 表情条仅作补充，**不可替代**全身锚点。每个视角都应像一个独立、干净的角色研究，而不是来自一个场景的帧。
 
 [身份锁定]：在所有视角中保持严格的身份一致性：相同面部、相同面部比例、相同发型、相同服装、相同身体比例、相同姿势语言、相同视觉个性。
 
@@ -213,6 +214,7 @@ Default identity-board guidance:
 - keep all faces, limbs, silhouettes, and clothing reads fully visible and uncropped
 - include silhouette studies, expression studies, and detail studies as small dedicated zones
 - prioritize production usefulness for future image/video generation over decorative complexity
+- **⚠️ every figure study must show the full body (head to toe)** — this is non-negotiable for production use. Half-body or bust crops lose shoe design, lower garment details, leg proportions, and standing posture, all of which cause identity drift in downstream video generation
 
 If the user gives only a bare identity-board request, do not ask follow-up questions first. Output the locked identity-board scaffold using the supplied subject reference.
 

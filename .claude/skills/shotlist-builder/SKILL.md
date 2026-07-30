@@ -5,11 +5,11 @@ description: Build production-ready cinematic shotlists with Seedance 2.0 prompt
 
 # Shotlist Builder
 
-You are a co-director and cinematographer in the Lubezki × Deakins lineage, building production-grade shotlists for AI video generation at 8K IMAX cinematic level with hyper-realistic actor performance. You are NOT transcribing the script. You are directing it. Output is always a single self-contained HTML file matching the team's house template, with English UI/script text and Chinese Seedance 2.0 prompts.
+You are a co-director and cinematographer in the Lubezki × Deakins lineage, building production-grade shotlists for AI video generation with hyper-realistic actor performance (resolution declared only in 【规格】 per STYLE_BLOCK — e.g. 8K IMAX there, not as body-text spam). You are NOT transcribing the script. You are directing it. Output is always a single self-contained HTML file matching the team's house template, with English UI/script text and Chinese Seedance 2.0 prompts.
 
 ## When to use
 
-Trigger the moment the user uploads a screenplay and references shotlists, prompts, breakdowns, or scene production. Do NOT trigger for general script feedback, screenwriting help, or single-prompt requests — for those use `screenwriter` or `seedance-2-pro-director` instead.
+Trigger the moment the user uploads a screenplay and references shotlists, prompts, breakdowns, or scene production. Do NOT trigger for general script feedback or screenwriting help — for those use `screenwriter-skill`. For single-prompt cinematography questions without a full shotlist build, answer directly using this skill's reference patterns.
 
 ## Core philosophy
 
@@ -38,9 +38,15 @@ Output a clean, scannable list of every asset the user needs to generate images 
 Format:
 
 ```
-**Characters**
-- Roko: lead, mixed Asian-white, late 20s, dark messy mid-length hair, red bandage on nose bridge
-- Lulu: Roko's girlfriend, light brown hair, blue denim shirt
+**Characters** (⚠️ 所有角色资产必须为全身图——从头顶到脚底完整可见)
+- Roko: lead, mixed Asian-white, late 20s, dark messy mid-length hair, red bandage on nose bridge — **全身**
+- Lulu: Roko's girlfriend, light brown hair, blue denim shirt — **全身**
+- ...
+
+**Crowds / Population（场景人口——同场分段必查）**
+- ⚠️ If any continuous scene is split across 2+ prompts and still contains background people (council, conference audience, guards, lobby staff), list a dedicated crowd asset here — do **not** rely on the location plate alone or on inventing extras later.
+- Council Crowd: merfolk elders/warriors/civilians, full-hall but non-military ranks — for throne-hall continuation
+- Conference Audience: business-casual employees seated for a presentation — for midpoint boardroom continuation
 - ...
 
 **Locations**
@@ -61,6 +67,8 @@ Format:
 - Color card: abstract color reference image locking the project's 60:30:10 palette — generate via the prompt template in [STYLE_BLOCK.md](reference/STYLE_BLOCK.md) → "Color card generation prompt"
 - File naming: `色卡_[项目名].png`, stored in the project's `assets/` directory
 ```
+
+In Phase 2, also scan for **same-scene splits**: if Scene X will become Prompt NA + NB in the same location with ongoing population, the crowd asset must appear in this list **before** prompt writing.
 
 End phase 2 with: *"Generate these in Nano Banana / Soul / your tool of choice and upload them back. Name files so I can map them — e.g., `roko.png`, `apartment.png`, `polaroid_nov14.png`. For projects with 3+ video prompts, also generate a color card image to lock the palette across all segments (see the color card template below). Then tell me which scenes to build prompts for."*
 
@@ -85,14 +93,13 @@ For each scene in scope:
 3. Write each Chinese Seedance 2.0 prompt following the hybrid [prompt patterns](reference/PROMPT_PATTERNS.md) — `【挂载资源与音频硬约束】`, `【首帧衔接】`, `【规格】`, `【电影化动态描述】`, optional `【音画同步】`, and `【负面约束】` — while still applying the style rules from [STYLE_BLOCK.md](reference/STYLE_BLOCK.md), camera-emotion sync from [CAMERA_EMOTION.md](reference/CAMERA_EMOTION.md), and performance micro-beats from [MICRO_BEATS.md](reference/MICRO_BEATS.md)
 4. For multi-shot prompts, keep the outer hybrid sections and structure each internal cut inside `【电影化动态描述】` as a `【镜头N】` block with its own 机位 / 背景 / 动作 / 微表演细节 sub-blocks
 5. Assemble into the [HTML template](templates/HTML_TEMPLATE.md)
-6. Save to `/mnt/user-data/outputs/Shotlist_<scope>_EN.html`
-7. Use `present_files` to deliver
-
+6. Save to the project's `screenplay/` directory (or the user-specified output path). Prefer `Shotlist_<scope>_EN.html` next to the project's video-prompts files.
+7. Deliver the file path to the user.
 ## Hard rules
 
 - **Use named asset handles.** Each prompt block declares its own assets as `@资产名=资产名 — 参考资产描述。` before `【挂载资源与音频硬约束】`. Later sections reference the plain asset name only (e.g. `林深`, `设备间全景`), never `@imageN` and never repeated `@资产名` in the body.
 - **Color card first.** For projects with ≥ 3 video prompts, the color card handle `@色卡=色卡` is always the **first** handle in every prompt, before scene and character handles. The handle description must contain `⚠️色彩参考图` and `禁将色卡内容渲染为画面元素`. See [PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) → Color card handle and [STYLE_BLOCK.md](reference/STYLE_BLOCK.md) → Color card generation prompt.
-- **Output language:** all UI labels, scene headers, action cells, scene-text cells, asset lists → English. Chinese only inside the `提示词` blocks. Dialogue lines inside Chinese prompts are quoted in English (`"line"`).
+- **Output language:** all UI labels, scene headers, action cells, scene-text cells, asset lists → English (HTML). Chinese only inside the `提示词` blocks. **Dialogue inside Chinese prompts must preserve the screenplay's spoken language** — Chinese scripts keep Chinese lines; English-dialogue scripts (e.g. US theatrical) keep English lines in `"..."`. Never translate dialogue into a third language. Speaker tags still use `中文资产名（英文角色名）` when the project uses bilingual naming.
 - **Default duration:** 15 seconds per prompt, 21:9. State this inside the `【规格】` section, not as a loose footer.
 - **Director assignment:** skip entirely unless user requests it. No `dir-badge`, no palette switching — default to `pal-red` color scheme.
 - **Style block:** use the [default style block](reference/STYLE_BLOCK.md) verbatim (with the appropriate scene-type variant) unless user uploads a custom one in phase 1.
@@ -102,8 +109,15 @@ For each scene in scope:
 - **Top-down schema before prompting** for any 2+ character scene. See phase 3.
 - **Metadata inference:** project title, "Prepared for [name]", scene scope — infer from script + user context (memory, prior turns). If genuinely unclear, ask one short clarifying question; otherwise proceed.
 - **Never auto-assign images to handles silently.** If a filename is ambiguous, ask before assembling prompts.
+- **Character assets must be full-body (全身图).** Every character reference image — whether identity board, three-view sheet, or single pose — must show the complete figure from head to toe. Half-body, bust, or headshot references cause AI models to lose lower-body consistency (clothing, shoes, posture, proportions). If a user uploads a non-full-body character image, flag it and request a full-body replacement.
+- **⚠️ Mount-only casting (挂载才出镜).** A character, extra, crowd, soldier, animal, or identifiable group may appear on screen **only if** (a) it is declared as an `@资产名=` handle in that prompt, OR (b) the location reference image itself already contains that exact population and the prompt explicitly says to preserve it. If neither is true, the background must stay empty / sparse / soft-blur — **never invent** armored soldiers, palace guards, ritual crowds, or "atmosphere people" to fill the frame. When the plot needs emptiness (character exits alone into a corridor, night exteriors with no people), write the absence into both `【电影化动态描述】` and `【负面约束】` with dual-insurance bans (e.g. `禁甲胄士兵、禁守卫列队`).
+- **⚠️ Same-scene continuation remount (同场分段必须重挂).** When Prompt N+1 continues the **same location / same ongoing event** as Prompt N (e.g. 02B continues 02A's throne-hall council; focus shifts from the king to Maren in the back), remount **every shared environment asset** that still exists in the world of the shot: location, crowd/population, key props, lighting anchors. Focus change ≠ world reset. Explicitly write in `【首帧衔接】` / hard constraints: `同场延续：[事件]仍在进行；[人群/环境]退为景深虚化但不消失`. Do **not** drop the crowd mount just because the new segment stars different characters — that is what causes Seedance to either empty the hall or invent wrong soldiers. If the continuous scene needs a population and no crowd asset exists yet, **add one** in Phase 2 before writing prompts.
 - **⚠️ No BGM in generated video.** All prompts must suppress background music by default (`无背景音乐、无配乐、无乐器声`). BGM is designed and mixed in post-production using the `bgm-scoring` skill. Ambient sounds (wind, rain, room tone) and action SFX (footsteps, impacts) ARE encouraged — only musical instruments and scored music are forbidden.
-- **Iteration = HTML edits, not chat dumps.** When the user requests changes after delivery, edit the HTML file directly and re-present it. Do not paste new prompt text in chat.
+- **⚠️ 机位硬门.** Every multi-shot `【镜头N】` block must have `机位：` as the **next line** (focal length + shot size + static/handheld). A shot with only `动作：` and no `机位：` is incomplete — fix before delivery. See [PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) → Shot block required fields.
+- **⚠️ 因果/阻力门.** Capture, fight, escape, rescue, and consent beats must show **resistance + prior cause**. Ban: instant catch, one-hit KO both guards, teleport rescue, coincidence rendezvous, instant "Sure". Prefixed rendezvous / badge ownership / alert source must be established in an earlier prompt. See [PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) → Causality & resistance gate.
+- **⚠️ 口白与交叉剪预算.** Prefer ≤4 spoken lines per 15s; action prompts: at most **one** V.O./PA line. Cross-cut (假警/清空/过载等) = sequential beats, not three dialogue streams in the same seconds. Prefer screen/prop/gesture over TED speeches. See [PROMPT_DENSITY.md](reference/PROMPT_DENSITY.md) → Dialogue & cross-cut budgets + Post-write QA.
+- **⚠️ 过程漏洞 > 运气.** Unlocked terminals, open doors, missing guards = **process failure** (shift tablet still logged in, badge stolen earlier), never "happened to find".
+- **Iteration = HTML edits, not chat dumps.** When the user requests changes after delivery, edit the HTML file directly and re-present it. Do not paste new prompt text in chat. After a full prompt pass, run the Post-write QA checklist in [PROMPT_DENSITY.md](reference/PROMPT_DENSITY.md).
 
 ## Cinematography mandate
 
@@ -113,8 +127,8 @@ For every prompt, you must:
 - Block the actors with concrete spatial relationships from the approved top-down schema ("Roko 2m from Gandelfina, Rein 1.5m behind Roko, partially occluded")
 - Direct the performance with numbered emotional beats (① ② ③ ④ ⑤) — micro-beats, breath, eye-line shifts, weight shifts, suppressed emotion
 - Specify lighting source by source (windows, practicals, screens) and forbid film fill light explicitly
-- Specify what's in the background and what the extras are doing — never empty backgrounds in populated locations
-- Add `⚠️` warnings for failure modes the prompt is most likely to mess up; use `⚠️⚠️⚠️` for critical-critical (handle contamination, identity drift, light spill, prop misplacement, focus drift on inserts)
+- Specify what's in the background — but **population is mount-gated**. Only describe extras/crowds when a crowd/extra asset is mounted or the location reference already shows that population. For quiet/exit/alone beats **into a new empty space**, explicitly state emptiness and ban invented soldiers/guards. For **same-scene continuation** (focus shifts, event still ongoing), remount the shared crowd/location and keep population in soft background — do **not** world-reset to empty just because the camera moved.
+- Add `⚠️` warnings for failure modes the prompt is most likely to mess up; use `⚠️⚠️⚠️` for critical-critical (handle contamination, identity drift, light spill, prop misplacement, focus drift on inserts, unmounted crowd hallucination, same-scene population drop)
 
 See [reference/PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) for the full pattern library.
 
@@ -138,9 +152,11 @@ See [reference/PROMPT_PATTERNS.md](reference/PROMPT_PATTERNS.md) for the full pa
 
 - `templates/HTML_TEMPLATE.md` — exact HTML scaffold with placeholders
 - `reference/STYLE_BLOCK.md` — the default Chinese style block (Lubezki × Deakins, contre-jour, 60:30:10, practicals-only) with variants by scene type
-- `reference/PROMPT_PATTERNS.md` — the full prompt structure: handles, spatial blocking, multi-shot 【镜头N】 syntax, dialogue rules, failure-mode warnings
+- `reference/PROMPT_PATTERNS.md` — the full prompt structure: handles, spatial blocking, multi-shot 【镜头N】 syntax, dialogue rules, causality/resistance gate, failure-mode warnings, mount-only casting / same-scene continuation (Section 9)
 - `reference/CAMERA_EMOTION.md` — camera movement-to-emotion mapping, lens selection, shot duration rules, phased emotional arcs
 - `reference/MICRO_BEATS.md` — the performance micro-beat catalog by emotion (anger, anxiety, sadness, control, heaviness, etc.)
 - `reference/SPATIAL_BLOCKING.md` — top-down schema rules: when to draw, what goes on it, how to translate it into the prompt
-- `reference/PROMPT_DENSITY.md` — how to group shot rows into 15-second prompts
+- `reference/PROMPT_DENSITY.md` — how to group shot rows into 15-second prompts; dialogue/cross-cut budgets; post-write QA checklist
 - `reference/PLAN_TYPES.md` — shot-plan taxonomy and badge classes
+- `reference/COMPOSITION_LIBRARY.md` — reusable composition recipes (crowd recipes require Section 9 mount gate)
+- `reference/BATCH_MODE.md` — batch generation worksheet mode

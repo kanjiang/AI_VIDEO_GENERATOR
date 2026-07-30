@@ -31,8 +31,8 @@ Read the uploaded asset-prompts.md. Extract every asset entry:
 
 For each asset, record:
 - `filename` — the output image filename (e.g. `lin_shen.png`)
-- `category` — one of: **Character** / **Location** / **Prop**
-- `label_zh` — Chinese display name (e.g. `林深`)
+- `category` — one of: **Character** / **Crowd** / **Location** / **Prop** / **ColorCard**
+- `label_zh` — Chinese display name (e.g. `林深`) — this is also the Seedance `@挂载名`
 - `label_en` — English display name (e.g. `Lin Shen`)
 - `prompt_text` — the full Nano Banana prompt text
 - `status` — default: `missing`
@@ -41,9 +41,11 @@ Output a summary table:
 
 ```
 解析完成：共 N 个资产
-角色 Characters   ×  N
-场地 Locations    ×  N
-道具 Props        ×  N
+角色 Characters     ×  N
+人群 Crowds         ×  N
+场地 Locations      ×  N
+道具 Props          ×  N
+色卡 ColorCard      ×  N
 
 即将生成空白 canvas HTML。确认生成？
 ```
@@ -62,7 +64,7 @@ Generate a single self-contained HTML file named `[project]-asset-canvas.html`.
 - Project title (from filename or user input)
 - Generation date
 - Progress bar: "N / Total assets generated"
-- Three category tabs: Characters · Locations · Props (default: all visible)
+- Five category tabs: Characters · Crowds · Locations · Props · ColorCard (default: all visible)
 
 **Card grid:**
 - 3 columns on desktop, 2 on mobile (CSS grid, responsive)
@@ -71,8 +73,9 @@ Generate a single self-contained HTML file named `[project]-asset-canvas.html`.
 **Card anatomy:**
 ```
 ┌─────────────────────────┐
-│  [PLACEHOLDER IMAGE]    │  ← gray #2a2a2a box, aspect 1:1 or 4:3 per category
-│  待生成                  │     Characters: 3:4, Locations: 16:9, Props: 1:1
+│  [PLACEHOLDER IMAGE]    │  ← gray #2a2a2a box, aspect per category
+│  待生成                  │     Characters/Crowds: 3:4, Locations: 16:9,
+│                         │     Props: 1:1, ColorCard: 16:9 strip
 ├─────────────────────────┤
 │  🎭 CHARACTER            │  ← category badge (color-coded)
 │  林深 / Lin Shen         │
@@ -90,8 +93,10 @@ Generate a single self-contained HTML file named `[project]-asset-canvas.html`.
 
 **Category badge colors:**
 - Character: `#818cf8` (indigo)
+- Crowd: `#a78bfa` (violet)
 - Location: `#f472b6` (pink)
 - Prop: `#fb923c` (orange)
+- ColorCard: `#2dd4bf` (teal)
 
 **Visual style:** Dark theme. Background `#111`, cards `#1a1a1a`, text `#e5e7eb`. Match the shotlist house style.
 
@@ -177,3 +182,4 @@ If the user says yes, output a clean spatial summary block that can be pasted di
 4. **Status is never assumed.** An asset is `missing` until the user uploads the image and confirms the filename matches.
 5. **Spatial annotation is optional but recommended.** Flag it, don't block on it.
 6. **Ask before overwriting.** If a canvas file already exists for this project, ask before regenerating.
+7. **⚠️ Character assets must be full-body.** When a character image is uploaded, verify it shows the complete figure from head to toe. If the image is half-body, bust, or headshot only, set the card status to `flagged` (⚠️) and report: `"⚠️ [角色名] 非全身图——缺少下半身，请重新生成全身版本（从头顶到脚底完整可见）"`. This applies to identity boards, three-view sheets, and single-pose character references alike.

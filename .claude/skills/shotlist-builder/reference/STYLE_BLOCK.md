@@ -128,7 +128,7 @@ The thesis forces intentional color choices instead of defaulting to "cinematic 
 The compact form packs everything into one dense paragraph. Use this when prompt token budget is tight:
 
 ```
-风格：8K IMAX。超写实——禁3D渲染，禁游戏引擎，禁游戏CG过场质感。摄影：Emmanuel Lubezki × Roger Deakins。灯光：[方向]45°侧光 + [精准光色]暖金色/冰蓝等 + [软硬]漫射柔光/硬光 + [氛围层]浮尘/暗角/光晕等（最多2个），⚠️严格仅使用场景内实际存在的光源（practicals），禁止一切电影补光，摄影机始终在人物的阴影侧（shadow side）拍摄，全程大气薄雾haze——禁止可见光束（god rays）。色彩：60:30:10——主色/辅色/点缀色。镜头：物理电影镜头。180°快门运动模糊。皮肤：毛孔级写实——汗毛、不对称痣、毛细血管潮红、毛孔阴影匹配现场光源。表演：好莱坞级——反应前微停顿、精准视线、湿润活眼带眼神光、可见呼吸和胸腔起伏。物理：重力惯性真实——质量有真实重量、正确接触阴影。禁漂浮道具。构图：三分法+黄金比例。每人从第一帧开始运动。连续性：角色、道具、环境每个镜头完全一致。禁身份漂移。技术：60fps流畅运动。8K细节。禁抖动（除手持呼吸感）。音频：仅环境SFX。禁音乐。禁字幕。
+风格：超写实真人电影摄影——禁3D渲染，禁游戏引擎，禁游戏CG过场质感。摄影：Emmanuel Lubezki × Roger Deakins。灯光：[方向]45°侧光 + [精准光色]暖金色/冰蓝等 + [软硬]漫射柔光/硬光 + [氛围层]浮尘/暗角/光晕等（最多2个），⚠️严格仅使用场景内实际存在的光源（practicals），禁止一切电影补光，摄影机始终在人物的阴影侧（shadow side）拍摄，全程大气薄雾haze——禁止可见光束（god rays）。色彩：60:30:10——主色/辅色/点缀色。镜头：物理电影镜头。180°快门运动模糊。皮肤：毛孔级写实——汗毛、不对称痣、毛细血管潮红、毛孔阴影匹配现场光源。表演：好莱坞级——反应前微停顿、精准视线、湿润活眼带眼神光、可见呼吸和胸腔起伏。物理：重力惯性真实——质量有真实重量、正确接触阴影。禁漂浮道具。构图：三分法+黄金比例。每人从第一帧开始运动。连续性：角色、道具、环境每个镜头完全一致。禁身份漂移。技术：60fps流畅运动。分辨率与细节写在【规格】（如画质：8K），正文不重复堆砌8K咒语。禁抖动（除手持呼吸感）。音频：仅环境SFX。禁音乐。禁字幕。
 ```
 
 ## The full block (per-dimension form)
@@ -136,7 +136,7 @@ The compact form packs everything into one dense paragraph. Use this when prompt
 The per-dimension form declares each visual parameter on its own labeled line. Use this when you need fine-grained control — adjusting one dimension doesn't require re-reading the entire block, and no dimension gets accidentally dropped. Preferred for projects that need render quality tuning (see `video-render-quality` skill):
 
 ```
-风格：8K IMAX，超写实
+风格：超写实真人电影摄影
 摄影：Emmanuel Lubezki × Roger Deakins
 质感：[胶片型号，如 柯达Vision3 500T / 富士Reala 500D / ARRI Alexa色彩科学]
 光追：[光线追踪反射与光线追踪阴影 / 路径追踪]
@@ -145,14 +145,14 @@ The per-dimension form declares each visual parameter on its own labeled line. U
 动态光源：[窗外车灯短暂扫过 / 烛火跳动 / 树影婆娑 / 云层明暗 / 霓虹闪烁 / 无]
 噪点：[轻微胶片颗粒 / 细腻胶片颗粒 / 无噪点]
 锐化：[极高锐化 / 高锐化边缘增强 / 中等锐化 / 柔和无锐化]
-动态范围：[HDR 10-bit色深 / HDR 12-bit RAW / SDR]
+动态范围：[高宽容度电影动态范围 / SDR]（⚠️禁「HDR感」游戏截图调色；如需高光暗部策略，用文字描述，勿写 HDR 咒语）
 镜头：物理电影镜头，180°快门运动模糊
 皮肤：毛孔级写实——汗毛、不对称痣、毛细血管潮红、毛孔阴影匹配现场光源
 表演：好莱坞级——反应前微停顿、精准视线、湿润活眼带眼神光、可见呼吸和胸腔起伏
 物理：重力惯性真实——质量有真实重量、正确接触阴影。禁漂浮道具
 构图：三分法+黄金比例。每人从第一帧开始运动
 连续性：角色、道具、环境每个镜头完全一致。禁身份漂移
-技术：60fps流畅运动，8K细节，禁抖动（除手持呼吸感）
+技术：60fps流畅运动；分辨率写在【规格】（如画质：8K），此处不重复堆砌8K咒语；禁抖动（除手持呼吸感）
 音频：仅环境SFX。禁音乐。禁字幕
 禁止：禁3D渲染，禁游戏引擎，禁游戏CG过场质感，禁塑料质感，禁平面光，禁CG默认材质
 ```
@@ -314,7 +314,7 @@ When using the per-dimension form, the `灯光：` line now follows the four-dim
 
 Example integration:
 ```
-风格：8K，电影写实
+风格：电影写实（分辨率写在【规格】，此处不堆砌8K）
 摄影：Emmanuel Lubezki × Roger Deakins
 灯光：左侧45°暖金色漫射柔光，窗边透入，低对比柔和阴影，阴影偏青蓝，空气中细微浮尘
 动态光源：窗外树叶婆娑，斑驳树影在墙面缓慢晃动

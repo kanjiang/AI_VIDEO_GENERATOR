@@ -281,17 +281,74 @@ Prompt N+2 (10-15s): Brief 2-person exchange to close — third person reacts vi
 
 Rules for splitting:
 - Each prompt keeps ≤2 speaking characters
-- Non-speaking characters can appear visually (background, reaction shots) but MUST NOT have dialogue in that prompt
-- Use `【首帧衔接】` to maintain spatial continuity across the split
+- Non-speaking characters can appear visually (background, reaction shots) **only if mounted** as `@资产名=` or already present in the location/crowd reference — Section 9 mount gate. They MUST NOT have dialogue in that prompt.
+- Use `【首帧衔接】` + remounted shared location/crowd handles to maintain spatial continuity across the split (same-scene continuation)
 - Add `【停顿 0.5s-1s】` between speaker switches within a prompt
 
 ### Reducing compute load when dialogue is priority
 
 When a prompt is dialogue-heavy, reduce other processing demands:
 - Simplify camera moves (prefer static or slow push over complex tracking)
-- Reduce background activity descriptions
+- Reduce background activity descriptions (still mount-gated — do not invent extras)
 - Minimize simultaneous action choreography
-- Do not stack BGM + SFX + multi-voice in the same prompt — drop BGM for dialogue prompts
+- Do not stack SFX + multi-voice into chaos — BGM is already forbidden at generation time for **all** prompts; never add scored music to compensate
+
+## Dialogue & cross-cut budgets（口白与交叉剪）
+
+### Spoken-line budget (beyond speaker count)
+
+| Prompt type | Max spoken lines (guideline) | Notes |
+|---|---|---|
+| Pure dialogue (static OTS) | 2–4 total | Official Seedance limit |
+| Dialogue + micro-action | ≤3 | Cut filler questions |
+| Fight / chase / escape | **1 V.O. or PA line** + optional 1 short on-screen | Motion owns the rest |
+| Reveal / TED / briefing | **1 gold sentence** + reactions | Put lists on screen UI, not mouth |
+| Reluctant consent / deal | Keep the delay; don't fill silence with extra lines | Silence is the performance |
+
+Cut strategy: delete resume chatter, duplicate status lines ("fleet in 48 hours" twice), and second V.O. paragraphs. Keep plot-critical nouns (rendezvous location, badge type, overload %).
+
+### Parallel / cross-cut budget
+
+When one 15s prompt interleaves **2–3 story lines** (e.g. fake alarm → guards clear → overload start):
+
+1. **Sequence, don't stack** — Line A finishes a beat, then cut to Line B; do not give all three lines dialogue in overlapping seconds
+2. **One voice stream per time slice** — PA may run under action; do not also run Guard radio + hero speech at full volume in the same 2s
+3. **Name the order in `时间分配`** — e.g. `镜头1 假警 → 镜头2 清空 → 镜头3 过载`
+4. If each line still needs full dialogue → **split into separate prompts**
+
+### Information via image, not speech
+
+Prefer these over spoken exposition:
+
+- Screen text / map pins / countdown / NDA sidebar (scene-diegetic, not subtitle bars)
+- Prop state (dead pendant, stolen badge, solvent smoke)
+- Gesture + eyeline (hand on glass, glance at watch)
+
+## Post-write QA checklist（写完必检）
+
+Run after drafting or revising a prompt batch. Fail = fix before telling the user it's done.
+
+**Structure**
+- [ ] Every `【镜头N】` has `机位：` on the next line (focal length + size + move)
+- [ ] `时间分配` totals = declared duration; labels match shot headers
+- [ ] `【首帧衔接】` / `【尾帧转场】` name concrete prior/next image (not vague "continues")
+
+**Causality / resistance** ([PROMPT_PATTERNS §8.5](PROMPT_PATTERNS.md))
+- [ ] No instant catch / dual KO / teleport rescue / coincidence door
+- [ ] Rendezvous, badge, alert source established in an earlier prompt
+- [ ] Consent / alliance has a visible delay beat when stakes are high
+- [ ] Unlocks / empty halls = process hole or prior clear, not luck
+
+**Dialogue / density**
+- [ ] ≤2 speaking characters; prefer ≤4 lines (≤1 V.O. on action prompts)
+- [ ] Cross-cuts are sequential; no three dialogue streams colliding
+- [ ] Briefings cut to gold lines; lists live on screens/props
+- [ ] Same-scene remounts still present (crowd/location not world-reset)
+
+**Continuity**
+- [ ] Prop ownership consistent (whose badge / which pendant state)
+- [ ] Wardrobe / injury / water level / population matches previous tail
+- [ ] Negative constraints ban the specific failure mode this shot invites
 
 ## When in doubt
 
@@ -310,8 +367,8 @@ Use the team's existing shot-plan abbreviations (see [PLAN_TYPES.md](PLAN_TYPES.
 
 ## BGM strategy across prompt sequences
 
-**Default:** all prompts include `无背景音乐` in `【挂载资源与音频硬约束】` — strip AI-generated BGM at the source, add a unified external BGM track in post. This eliminates all transition problems.
+**Default:** all prompts include `无背景音乐` in `【挂载资源与音频硬约束】` — strip AI-generated BGM at the source. Score and mix music later via `bgm-scoring` → `post-production`. Never write BGM into generation prompts.
 
-**If multi-track BGM is needed:** tag each prompt's BGM zone and key in the header. At transition prompts, mark the audio break point and recommend the transition SFX trio (Riser + Whoosh + Hit). Volume layers: BGM 15-25%, dialogue 80-90%.
+**Optional metadata only:** tag intended BGM zones in prompt *headers* for the scoring skill (`# Prompt 05 — [BGM-A: …]`). These tags do **not** instruct Seedance to emit music.
 
 Full strategy, techniques, and production pipeline in [PROMPT_PATTERNS.md → BGM Strategy for Segmented AI Video](PROMPT_PATTERNS.md#bgm-strategy-for-segmented-ai-video-分段视频配乐完整方案).

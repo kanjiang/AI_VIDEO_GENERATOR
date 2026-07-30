@@ -4,6 +4,8 @@ A reusable library of framing and composition patterns for AI video/image prompt
 
 Works with `BATCH_MODE.md`: each entry here can be used as a composition shorthand in the variable module `⑦ 构图句式`.
 
+**⚠️ Crowd mount gate:** Any recipe that uses 人群 / extras / soldiers / audience **requires** a mounted crowd asset (`@议事人群=` / `@会议观众=` / `@保安=` etc.) or an explicit empty-frame ban. See [PROMPT_PATTERNS.md Section 9](PROMPT_PATTERNS.md). Do not invent atmosphere people to satisfy a composition recipe.
+
 ---
 
 ## Composition Pressure System (构图压力系统)
@@ -32,13 +34,13 @@ Traditional composition libraries organize by technique (symmetry, rule-of-third
 
 ```
 构图方法：
-- 隔着玻璃、门缝、帘幕或人群拍摄——观众不拥有完整信息
+- 隔着玻璃、门缝、帘幕或**已挂载人群**拍摄——观众不拥有完整信息（无挂载则改用玻璃/门缝/帘幕，禁脑补人群）
 - 前景观察者只出现肩部/头部/模糊轮廓（参考 CAMERA_EMOTION §8.4 OTS）
 - 关键动作在中远景发生
 - ⚠️摄影机位置必须有理由——"为什么从这里偷看？"
 
 中文 prompt 句式：
-隔着[玻璃/门缝/人群]观察，前景[观察者肩部/帘幕边缘]虚化遮挡，焦点落在中景[主体动作]上，观众视角受限。
+隔着[玻璃/门缝/帘幕/已挂载人群]观察，前景[观察者肩部/帘幕边缘]虚化遮挡，焦点落在中景[主体动作]上，观众视角受限。
 ```
 
 #### CP-B 被困住 (Trapped / Confined)
@@ -78,7 +80,7 @@ Traditional composition libraries organize by technique (symmetry, rule-of-third
 ```
 构图方法：
 - 低机位仰拍或高位俯视（必须有现实摄影机位置）
-- 巨大墙面、台阶、门、屏幕或人群控制人物视觉比例
+- 巨大墙面、台阶、门、屏幕或**已挂载人群**控制人物视觉比例（无挂载人群时用建筑/道具尺度，禁脑补列队）
 - 权力者不一定最大——空间可以为其背书
 
 中文 prompt 句式：

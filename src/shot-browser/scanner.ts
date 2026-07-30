@@ -30,7 +30,7 @@ export type ShotBrowserData = {
 const SKIP_DIRS = new Set([
   "node_modules", ".next", ".next-runtime", ".claude", ".superpowers",
   ".app-data", ".tmp-video-frames", "app", "src", "scripts", "output",
-  "outputs", "video", ".git",
+  "outputs", "video", "assets", "screenplay", ".git",
 ]);
 
 function discoverProjects(workspaceRoot: string): string[] {
@@ -132,14 +132,17 @@ function scanAssetFiles(projectPath: string): AssetFileInfo[] {
 function slugToDisplayName(slug: string): string {
   const nameMap: Record<string, string> = {
     "body-cells-animation-series": "人体细胞动画系列",
+    "car-adventure-the-map": "汽车冒险·地图",
+    "car-number-memory": "汽车记数字",
     "cars-mcqueen-legacy": "汽车总动员·传承之路",
     "cat-dog-soul-swap": "猫狗灵魂互换",
-    "supercar-explode-reassemble": "超跑重生",
     "dingyuxi-concert-qversion": "丁禹兮演唱会Q版",
     "laowang-chibi-mukbang": "老王吃播",
-    "car-adventure-the-map": "汽车冒险·地图",
     "lianaiing-mv": "恋爱ING MV",
-    "zhengci-zhiwai-promo": "证词之外宣传片",
+    "my-cloud-buddy": "我的专属云朵",
+    "supercar-explode-reassemble": "超跑重生",
+    "the-deep-crown": "The Deep Crown 深海王冠",
+    "zhengci-zhiwai-promo": "Q版哈兰德主讲",
   };
 
   if (slug.startsWith("screenplay/")) {
