@@ -44,7 +44,8 @@
 | `screenplay/pacing-lock.md` | Episode cadence and hard rules |
 | `screenplay/treatment.md` | Episode treatment and beat outline |
 | `screenplay/episode-01-screenplay.md` | Episode 1 draft |
+| `screenplay/asset-prompts.md` | Character / location / prop / colorcard generation prompts |
 
 ## Handoff
-Next optional steps, if you want to keep building: `video-prompts.md`, `asset-prompts.md`, and `bgm-composition.md`. Those are deliberately left out of this handoff and should stay uncreated unless production prep starts.
+Next optional steps: `video-prompts.md`（建议先 Ep1）, `bgm-composition.md`, and asset-canvas after images are generated (`build the canvas`).
 
