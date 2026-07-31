@@ -13,6 +13,7 @@
 5. Reality casting: adult male body only for 陆景深/夜/小小
 6. Alter tells: 袖扣整齐=本尊；领口松开/烟=夜；发绳+捏衣角=小小
 7. Villain lock: 陆母 = childhood perpetrator; 叔伯 = inheritance rival only
+8. 小小 gender lock: girl alter because 陆母 stigmatized fear as “像女孩”; not a boy alter, not random casting flavor
 
 ## Usage note
 This lock applies to every later screenplay file in the project. Any future scene, treatment, or episode draft must keep the 3-second hook, 8–15 second information cadence, and open-hook ending.
