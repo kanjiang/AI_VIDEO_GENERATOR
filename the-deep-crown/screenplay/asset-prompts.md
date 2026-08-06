@@ -841,11 +841,11 @@ Abyssal Dynamics 员工门禁卡 + 挂绳。卡面有简约公司Logo、姓名�
 
 ## PROP-07: 公司标志
 
-**文件名：** `prop_ad_logo.png`
+**文件名：** `公司标志.png`
 
-ABYSSAL DYNAMICS 企业Logo设计板。深蓝底，简约深渊/下沉曲线图形，现代科技公司字体。看起来合法、干净、可印在大楼与工牌上。
+ABYSSAL DYNAMICS 普通企业标识贴花/印刷标识设计板。深蓝与钢灰为主，简约深渊/下沉曲线图形，现代科技公司字体；看起来合法、干净、普通公司化。用途是贴在深海探测器外壳、小型工牌或大堂材质表面，⚠️不是独立标题卡、不是海报、不是片头Logo画面。
 
-负面约束：不要邪恶骷髅标志、不要过于军事徽章。
+负面约束：不要邪恶骷髅标志、不要过于军事徽章、不要电影片头Logo、不要独立广告牌主视觉。
 
 ---
 
@@ -894,7 +894,7 @@ Abyssal Dynamics 访客证或 Maren Holt 员工证。姓名 Maren Holt，Marine 
 | 色卡 | `色卡_the_deep_crown.png` |
 | 角色 | `maren_human.png` `maren_mermaid.png` `wexler.png` `jonas.png` `sable.png` `nereus.png` `keeper.png` `scout3.png` `captives.png` |
 | 场景 | `loc_deep_ridge.png` `loc_throne_hall.png` `loc_maren_quarters.png` `loc_ritual_chamber.png` `loc_san_cadena.png` `loc_ad_lobby.png` `loc_ad_research.png` `loc_b3_corridor.png` `loc_b3_control.png` `loc_b3_tanks.png` `loc_server_room.png` `loc_wexler_office.png` `loc_maren_apt.png` `loc_harbor_night.png` `loc_rooftop.png` `loc_coast_dawn.png` |
-| 道具 | `prop_pendant_glow.png` `prop_pendant_dead.png` `prop_probe.png` `prop_watch.png` `prop_badge.png` `prop_crown.png` `prop_ad_logo.png` `prop_notebook.png` |
+| 道具 | `prop_pendant_glow.png` `prop_pendant_dead.png` `prop_probe.png` `prop_watch.png` `prop_badge.png` `prop_crown.png` `公司标志.png` `prop_notebook.png` |
 
 ---
 

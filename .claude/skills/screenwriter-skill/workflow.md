@@ -128,6 +128,24 @@ The pattern: keep the **power dynamic** and **stakes**, replace everything visib
 
 ---
 
+## WHEN THE USER PASTES A NOVEL / WEB-NOVEL CHAPTER
+
+1. **Do not write a Hollywood scene yet.** Read `novel-to-scene.md` and run Phases A–C.
+2. **Deliver the Novel → Scene report** (cut list, shootable beats, optional episode split).
+3. **Ask one next-step question** (write Ep1 screenplay vs. project locks vs. shotlist).
+4. If the target is 漫剧 / 竖屏短剧, apply `manga-drama-pacing.md` when writing episodes.
+
+---
+
+## WHEN THE TARGET IS 漫剧 / VERTICAL SHORT-DRAMA
+
+1. Read `manga-drama-pacing.md`.
+2. Add the **Short-form packaging** block to treatment / synopsis when missing.
+3. Enforce: 0–3s hook, mid-beat cadence, episode cliffhanger (unless user opts out).
+4. Hand off production locks to `shotlist-builder/reference/PROJECT_LOCKS.md` before mass prompting.
+
+---
+
 ## ITERATION
 
 A scene is rarely born perfect on the first pass. A normal iteration looks like this:

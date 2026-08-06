@@ -2,6 +2,8 @@
 
 **The camera is the emotional double of the focal character.** Camera movement, lens, and duration must be chosen by the character's emotional state — not by what looks "cinematic." Anger gets nervous handheld. Calm gets smooth handheld breathing. Shock freezes. This is the most-violated rule in AI video; correct it explicitly in every prompt.
 
+**Chinese move names + ready-to-paste phrases:** see [CAMERA_LEXICON.md](CAMERA_LEXICON.md) (叙事定格 / 景别 / 运动 / 动作 / 情绪). Use this file for *which emotion → which move family*; use the lexicon for *exact wording* in Seedance prompts.
+
 ## 0. Cinematographic philosophy (摄影哲学——所有镜头设计之前)
 
 These three principles override technical rules when they conflict. They are the difference between "technically correct video" and "video that makes people feel something."
@@ -352,6 +354,8 @@ Failure modes:
 Camera orbits around a subject in a complete or partial circle, maintaining consistent distance and height. Creates visual spectacle, emphasizes the subject as center, and reveals the surrounding environment progressively.
 
 **When to use:** hero moments, dramatic emphasis, revealing environment around a character, dance/performance sequences, climactic scenes.
+
+**若主体动作必须定格、碎屑/雨滴悬浮、高速阵列感环绕** → 改用 [BULLET_TIME.md](BULLET_TIME.md)（冻结子弹时间），不要只用本节常速环绕。
 
 Template:
 ```

@@ -719,6 +719,8 @@ Rules:
 
 Use for architectural reveals, landscape traversals, chase-the-subject shots, and any sequence where the camera flies through space at high speed without cuts. The signature is continuous forward momentum through complex spatial structures.
 
+静帧扩图 + 路径标注的完整节点链见 [VLOG_FX_RECIPES.md](VLOG_FX_RECIPES.md) §3。
+
 ```
 低空穿梭视角（FPV），极限低空跟拍，从[起点]极速穿行到[终点]，全程在[空间结构]中飞行。
 无断点一镜到底，无剪辑，无转场，画面丝滑连贯一气呵成。
@@ -826,6 +828,20 @@ Core visual principle: static subject remains tack-sharp while all moving elemen
 **Negative constraints**:
 ```
 禁运动模糊均匀化——残影必须是断续跳帧式鬼影，不是平滑的motion blur；禁角色与背景同等模糊——角色必须是全画面最锐利的元素；禁角色夸张表情——克制、放空、疏离；禁背景完全静止——必须有流动的运动残影制造动静对比。
+```
+
+#### 6.19 Bullet Time freeze + 360° orbit（子弹时间冻结环绕）
+
+Peak-impact **time freeze**: subject locked, debris/rain/cards suspended in natural scatter; camera does a smooth stabilizer/array-style **360° orbit** around the subject. Distinct from §8.5 live orbit and from combat 1–2s slow-mo insert in [SPATIAL_BLOCKING.md](SPATIAL_BLOCKING.md).
+
+Full fill-in template, swap table, and examples (magician cards / drifting car): **[BULLET_TIME.md](BULLET_TIME.md)**.
+
+Core skeleton:
+```
+【主体】正在【峰值动作】，冲击最强瞬间进入子弹时间，时间冻结。
+摄影机以主体为中心平滑稳定360°环绕，阵列感，主体始终清晰。
+主体定格；【悬浮元素】全部悬停，保持真实飞散形态。
+【可选：解冻后后续动作】。场景【环境】，电影灯光，体积光，自然调色。
 ```
 
 #### Adding more visual techniques

@@ -1,6 +1,6 @@
 ---
 name: post-production
-description: Post-production recipes for AI-generated video — text effects, editing transitions, subtitle fixes, color grading, audio repair, and export settings in CapCut (剪映). Use whenever the user asks about editing AI video after generation, adding text effects, title animations, transition effects in the editor, fixing subtitles, fixing pronunciation in post, color grading generated footage, or exporting final video. This skill covers everything AFTER the AI model outputs video, BEFORE final delivery.
+description: Post-production recipes for AI-generated video — text effects, editing transitions, subtitle fixes, color grading, audio repair, export settings in CapCut (剪映), and pre-publish delivery checklist (时长/字幕/配音/BGM/画质/合规). Use whenever the user asks about editing AI video after generation, adding text effects, title animations, transition effects in the editor, fixing subtitles, fixing pronunciation in post, color grading generated footage, exporting final video, or checking if a cut is ready to publish/deliver. This skill covers everything AFTER the AI model outputs video, BEFORE final delivery.
 ---
 
 # Post-Production Skill
@@ -14,13 +14,19 @@ Default tool: **CapCut / 剪映** (mobile + desktop). Recipes use CapCut-native 
 Trigger when the user asks about:
 - Adding text effects, title animations, or kinetic typography to AI video
 - Editing transitions between AI video clips (dissolve, wipe, flash — things NOT handled at the prompt level)
+- Shot continuity / 镜头组接 / 30度原则 / 180度轴线 / 剪辑点选择 — use `reference/SHOT_CONTINUITY.md`
+- Emotion arc edit / 蓄力静默爆发 / 此时无声胜有声 / 慢动作静音再爆发 — use `reference/EMOTION_ARC_EDIT.md`
 - Fixing subtitles after homophone substitution (see polyphonic character workflow in `PROMPT_PATTERNS.md`)
 - Color grading or color correction on generated footage
 - Sound design — SFX placement, music entrance/exit, beat sync, audio transitions (J-Cut, SFX match splice), stem editing, music extension
 - QA / troubleshooting — fixing axis crossing (越轴), unintentional jump cuts, SFX rhythm mismatch in AI-generated footage
 - Audio repair — replacing misread dialogue, syncing replacement audio
 - Export settings for different platforms (Douyin, Bilibili, YouTube, etc.)
+- Pre-publish / 交片 / 定稿 / 上线验收 — run `reference/delivery-checklist.md`
+- After publish-ready cut: hand off to `content-repurpose` for 一源多发（图文衍生）
 - Any "how do I do X in CapCut/剪映" question related to AI video post-processing
+
+Human/AI boundary (WorkBuddy 副驾原则): keep aesthetic and final cut decisions with the user; this skill supplies recipes and checklists, not autonomous “一键成片”. See [`../docs/WorkBuddy-AI视频工作流.md`](../docs/WorkBuddy-AI视频工作流.md).
 
 Do NOT use when:
 - The user is writing prompts for AI generation — use `shotlist-builder` or `video-render-quality`
@@ -44,6 +50,9 @@ Do NOT use when:
 - [reference/editing-techniques.md](reference/editing-techniques.md) — 7 core editing techniques (jump cut, quick cut, flash cut, superimposition, interrupted cut, parallel montage, cross-cutting) with CapCut操作 and parameter tables
 - [reference/sound-design.md](reference/sound-design.md) — 9 sound design & music editing techniques (strong beat cut-off, physical trigger, SFX beat sync, SFX match splice, environment replace / J-Cut, beat-aligned trim, transition SFX stack, stem editing, music extension) + recording best practices and combination guide
 - [reference/ai-footage-qa.md](reference/ai-footage-qa.md) — AI footage QA checklist: 3-step mandatory check (axis crossing, jump cut, SFX mismatch) with diagnosis methods, post-fix recipes, and prompt-level prevention rules
+- [reference/SHOT_CONTINUITY.md](reference/SHOT_CONTINUITY.md) — 镜头组接手册：30°/180°、匹配、时长、剪辑点、景别公式
+- [reference/EMOTION_ARC_EDIT.md](reference/EMOTION_ARC_EDIT.md) — 蓄力→静默→爆发情绪弧剪辑模板（琵琶行式无声胜有声）
+- [reference/delivery-checklist.md](reference/delivery-checklist.md) — pre-publish delivery acceptance (duration, A/V completeness, quality, manga product checks, export)
 - Future: `reference/editing-transitions.md` — editor transition catalog
 - Future: `reference/color-grading.md` — color grading workflows for AI footage
 - Future: `reference/audio-repair.md` — dialogue replacement, audio sync, SFX layering

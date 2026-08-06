@@ -8,6 +8,14 @@
 project-file-guide.md
 ```
 
+可分享的 Claude Skills 整包在：
+
+```text
+.claude/skills/
+```
+
+索引见 `.claude/skills/README.md`；跨 skill 工作流与吸收笔记在 `.claude/skills/docs/`。
+
 ## Storyboard CLI
 
 项目里现在有一个独立的故事板生成器，用来把当前视频工作流压成一个可浏览的故事板页面：

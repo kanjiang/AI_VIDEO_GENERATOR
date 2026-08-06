@@ -1,6 +1,6 @@
 ---
 name: screenwriter
-description: English-language screenwriting skill for feature films and series. Use whenever the user wants to write a screenplay, treatment, scene, beat sheet, dialogue, revisions, estimate runtime, cut length, develop characters, or define world mythology. The skill follows McKee, Campbell, and Aristotle, outputs Hollywood-format .docx files, supports bilingual screenplays (dialogue in one language with translation beneath in parentheses), and audits structure for causality and value shifts. The skill is story-agnostic: the user brings the material.
+description: English-language screenwriting skill for feature films and series. Use whenever the user wants to write a screenplay, treatment, scene, beat sheet, dialogue, revisions, estimate runtime, cut length, develop characters, or define world mythology. Also use for novel/web-novel to shootable-scene adaptation (novel-to-scene) and vertical manga-drama / short-drama pacing (hooks, genre lanes, completion rate). The skill follows McKee, Campbell, and Aristotle, outputs Hollywood-format .docx files, supports bilingual screenplays (dialogue in one language with translation beneath in parentheses), and audits structure for causality and value shifts. The skill is story-agnostic: the user brings the material.
 ---
 
 # Screenwriter Skill
@@ -17,15 +17,17 @@ Read in this order:
 2. **`style-rules.md`** — writing rules: action verbs, brevity, no descriptive prose.
 3. **`workflow.md`** — how to work with the user.
 4. **`timing-and-cutting.md`** — how to estimate runtime and where to cut.
-5. **`tools/build_screenplay.js`** — Hollywood-format `.docx` screenplay builder template.
-6. **`tools/build_bilingual.js`** — bilingual builder for dialogue in one language with a translation in parentheses beneath.
-7. **`templates/`** — blank templates for synopsis, character bible, worldbuilding, and treatment.
+5. **`novel-to-scene.md`** — when input is novel/web-novel: filter shootable beats, cut literary prose (read on that trigger).
+6. **`manga-drama-pacing.md`** — when target is 漫剧/竖屏短剧: hooks, genre lanes, episode cadence (read on that trigger).
+7. **`tools/build_screenplay.js`** — Hollywood-format `.docx` screenplay builder template.
+8. **`tools/build_bilingual.js`** — bilingual builder for dialogue in one language with a translation in parentheses beneath.
+9. **`templates/`** — blank templates for synopsis, character bible, worldbuilding, and treatment.
 
 Then ask the user:
 
-> "Are you bringing an existing story, or are we starting from scratch? If you have materials such as a synopsis, treatment, beat sheet, or existing scenes, send them over. If we're starting from zero, we'll begin with the logline."
+> "Are you bringing an existing story, or are we starting from scratch? If you have materials such as a synopsis, treatment, beat sheet, novel chapter, or existing scenes, send them over. If we're starting from zero, we'll begin with the logline. If this is vertical manga-drama / short-drama, say so — we will apply `manga-drama-pacing.md`."
 
-Do not write a single scene until you have read the user's story context.
+Do not write a single scene until you have read the user's story context. If the user pasted novel prose, run `novel-to-scene.md` before drafting screenplay pages.
 
 ---
 

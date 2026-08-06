@@ -31,6 +31,7 @@ Do NOT use when:
 - The user is making a science explainer — use `science-explainer`
 - The user is doing general post-production editing — use `post-production`
 - The user is extracting visual style from reference — use `style-extractor`
+- The user wants **e-commerce stills** (主图/详情页/产品精修全案) — use `ecommerce-design`
 
 ## Reference files
 

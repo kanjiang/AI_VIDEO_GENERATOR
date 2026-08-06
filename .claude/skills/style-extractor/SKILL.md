@@ -17,7 +17,7 @@ Trigger when:
 - The user is starting a new project and wants to define the visual identity from a reference
 - The user wants to create a **style pack (风格包)** from a movie or a folder of reference images — see "Style Pack Mode" below
 - The user says "拆解电影风格", "制作风格包", "提取电影视觉DNA", or names a specific film and asks for its visual style
-- The user wants to use a **preset style** like "Vox 拼贴风格", "复古报纸风" — see [preset-styles.md](reference/preset-styles.md) for ready-to-use recipes
+- The user wants to use a **preset style** like "Vox 拼贴风格", "复古报纸风", "INS 贴纸", "Notion 线稿", "手账贴纸", "VibePaper", "杂志封面", "祛塑料感", "85mm 艺术海报", "美术指导提示词" — see [preset-styles.md](reference/preset-styles.md) for ready-to-use recipes
 
 Do NOT use when:
 - The user wants to describe what's IN the image (content, characters, props) — that's asset description
@@ -27,7 +27,7 @@ Do NOT use when:
 
 ## Reference files
 
-- [reference/preset-styles.md](reference/preset-styles.md) — Pre-extracted style recipes ready to apply without running Step 1 (Vox Collage, etc.)
+- [reference/preset-styles.md](reference/preset-styles.md) — Presets: Vox Collage, INS/Notion 手账贴纸, Magazine Art Director（杂志级祛塑料感）, etc.
 
 ## Core rule: style ≠ content
 

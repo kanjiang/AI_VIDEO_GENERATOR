@@ -37,6 +37,7 @@ If the user explicitly asks for a **角色身份板 / character identity board**
 ## Reference files
 
 - [reference/storyboard-types.md](reference/storyboard-types.md) — 10 storyboard types with quick selector table, prompt templates, and combination guide. Consult this file to choose the optimal storyboard type based on scene content before defaulting to the 12-panel layout.
+- [reference/character-identity-board-prompt-example.md](reference/character-identity-board-prompt-example.md) — 16:9 角色身份板提示词示例（可直接改写复用）
 
 ## Core output goal
 
@@ -248,6 +249,25 @@ When using this skill, default to one of these two output forms only:
 - **Chinese paragraph-node prompt + short negative prompt line**
 
 Do not output workflow commentary unless the user explicitly asks for reasoning.
+
+## Image generation handoff
+
+If you also generate the storyboard sheet or identity-board image, do not leave the finished image only in Cursor's default generated-assets location. After generation, archive it into the active project's asset tree.
+
+Default target resolution:
+
+- If the source prompt/document is under `episodes/<episode>/screenplay/`, save episode-specific outputs under `episodes/<episode>/assets/`.
+- Character identity boards go under `episodes/<episode>/assets/identity-boards/` unless the character is cross-episode IP canon.
+- Cross-episode character boards go under `<series-root>/assets/identity-boards/`.
+- Storyboard sheets go under `episodes/<episode>/assets/storyboards/`.
+
+Required workflow after each generated image:
+
+1. Infer the active screenplay folder from the file the user is working in, or ask if the target episode is ambiguous.
+2. Create the target asset subfolder if it does not exist.
+3. Copy or move the generated image from Cursor's returned absolute path into the target folder with a production filename, for example `tangtang-identity-board-locked.png` or `s01-storyboard-board.png`.
+4. Report the final project-relative path, not only the temporary generated-assets path.
+5. If no file-management tool is available, report both the generated source path and the intended target path, then ask the user to confirm before continuing downstream work.
 
 ## Example
 

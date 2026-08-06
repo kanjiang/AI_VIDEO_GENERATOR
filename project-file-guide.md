@@ -11,7 +11,8 @@
 | package.json | Node/Next 项目的依赖、脚本和元信息 |
 | README.md | 工程级使用说明，现已补充 storyboard CLI 和 video prompt CLI 入口 |
 | tsconfig.json | TypeScript 编译配置 |
-| video-production-workflow.md | 项目的视频生产流程说明文档 |
+| .claude/skills/README.md | Skills 总索引（可分享整包） |
+| .claude/skills/docs/video-production-workflow.md | 视频生产流程与 skill 调用顺序 |
 | project-file-guide.md | 当前这份总说明书，用于解释工程内各文件用途 |
 
 ## 2. app 目录
@@ -79,14 +80,19 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 | screenplay/build_screenplay.js | 生成或处理剧本文档的脚本 |
 | screenplay/build_storyboard.js | 从 shot list、reference map、prompt 等文件生成 storyboard HTML/JSON |
 | screenplay/build_video_prompts.js | 从 shot list、generation list、reference map 自动生成 act1/2/3 prompt 与 storyboard prompt 源 |
-| screenplay/character-identity-board-prompt-example.md | 角色身份板提示词示例 |
-| screenplay/scene-board-prompt-example.md | 场景板提示词示例 |
-| screenplay/reference-driven-video-prompt-template.md | 参考图驱动的视频提示词模板 |
 | screenplay/file-relationship-map.md | screenplay 目录内部文件关系说明 |
-| screenplay/seedance-emotion-micro-skill.md | Seedance 情绪表达微技能备忘 |
-| screenplay/seedance-master-one-page-cheatsheet.md | Seedance 一页速查表 |
-| screenplay/seedance-master-one-page-cheatsheet-bilingual.md | Seedance 双语速查表 |
-| screenplay/seedance-performance-camera-master-skill.md | Seedance 表演与镜头主技能说明 |
+
+通用 Seedance / 分镜板模板已迁入 skills（分享 skill 时带走）：
+
+| 路径 | 用途 |
+| --- | --- |
+| .claude/skills/storyboard-table-skill/reference/character-identity-board-prompt-example.md | 角色身份板提示词示例 |
+| .claude/skills/scene-board-skill/references/scene-board-prompt-example.md | 场景板提示词示例 |
+| .claude/skills/seedance-2/references/reference-driven-video-prompt-template.md | 参考图驱动的视频提示词模板 |
+| .claude/skills/seedance-2/references/seedance-emotion-micro-skill.md | Seedance 情绪表达微技能备忘 |
+| .claude/skills/seedance-2/references/seedance-master-one-page-cheatsheet.md | Seedance 一页速查表 |
+| .claude/skills/seedance-2/references/seedance-master-one-page-cheatsheet-bilingual.md | Seedance 双语速查表 |
+| .claude/skills/seedance-2/references/seedance-performance-camera-master-skill.md | Seedance 表演与镜头主技能说明 |
 
 ### 6.2 《证词之外》核心真源文件
 
@@ -148,6 +154,22 @@ screenplay 是当前仓库里最重要的生产资料目录，既包含模板工
 | 路径 | 用途 |
 | --- | --- |
 | screenplay/打烊之后/ | 另一个项目的 screenplay 资料目录 |
+| car-adventure-the-map/ | 小汽车 Momo 的迷你冒险系列（母世界） |
+| kiki-english-adventure/ | 《Kiki, Ready Set Go!》学龄前英语启蒙动画，承接 car-adventure-the-map 世界观 |
+
+### 7.1 kiki-english-adventure 关键文件
+
+| 路径 | 用途 |
+| --- | --- |
+| kiki-english-adventure/README.md | 项目总入口，说明目标观众、教学方法、下一步流程 |
+| kiki-english-adventure/screenplay/series-bible.md | 系列 Bible：世界观、教学方法论、集集通用五拍结构 |
+| kiki-english-adventure/screenplay/characters.md | 四个固定角色（Kiki/Momo/Bruno/Rosie）+ 客串 NPC 花名册 |
+| kiki-english-adventure/screenplay/season-01-treatment.md | 第一季 10 集 treatment + 每集英文知识点与糗事视觉爆点 |
+| kiki-english-adventure/screenplay/episode-01-screenplay.md | Ep 01 加油站完整双语剧本 + 制作备忘（可作为其他集写作参考） |
+| kiki-english-adventure/screenplay/asset-prompts.md | 资产提示词总表；Batch 01 包含 4 位固定角色（Kiki/Momo/Bruno/Rosie）身份板 prompts |
+| kiki-english-adventure/screenplay/project-lock.md | 项目级角色 / 场景 / 节奏锁定卡，供后续分镜和 Seedance prompt 防漂移 |
+| kiki-english-adventure/screenplay/episode-01-shotlist-prep.md | Ep 01 分镜 Phase 1/2 准备包：脚本拆读、资产请求、分段建议、空间调度草案 |
+| kiki-english-adventure/assets/identity-boards/ | 4 位固定角色身份板 PNG 存放目录 |
 
 ## 8. 推荐阅读顺序
 

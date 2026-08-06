@@ -22,6 +22,7 @@ Output: a `bgm-composition.md` plan + AI music prompts + SFX timeline + optional
 - **Never rewrite video prompts to make Seedance emit BGM.** Generation-stage prompts must keep `无背景音乐、无配乐、无乐器声`. This skill only consumes clean dialogue/ambient footage and builds music/SFX in post.
 - **Strings-first** for underscoring beds; piano/guitar are highlight accents, not default beds (see Step 0).
 - Deliver stems/mix plans that `post-production` can assemble — do not invent a parallel CapCut workflow that duplicates post-production recipes.
+- When the cut uses **蓄力→静默→爆发** (`post-production/reference/EMOTION_ARC_EDIT.md`), plan an intentional **near-silence bed** then a **hit/drop** aligned to the picture climax — do not fill the silence with continuous melody.
 
 ## Step 0 — Foundational mindset: scoring ≠ songwriting
 

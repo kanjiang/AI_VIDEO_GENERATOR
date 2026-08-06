@@ -1,4 +1,4 @@
-# 《证词之外》参考图驱动生成 SOP
+﻿# 《证词之外》参考图驱动生成 SOP
 
 这份文档现在只承担一个角色：把《证词之外》当前仍在使用的真源文件、执行顺序和排障方法压成一页可操作摘要。
 
@@ -29,7 +29,7 @@
 1. `screenplay/build_video_prompts.js`：同步生成 act video prompts 与 storyboard prompt 的脚本
 2. `screenplay/证词之外/zhengci-zhiwai-storyboard-prompts.md`：storyboard 页面与 JSON 使用的 prompt 源
 3. `screenplay/证词之外/zhengci-zhiwai-test-pack-storyboard-prompts.md`：12 镜测试包用的 12 宫格电影分镜提示词
-4. `screenplay/reference-driven-video-prompt-template.md`：参考图驱动视频提示词模板
+4. `.claude/skills/seedance-2/references/reference-driven-video-prompt-template.md`：参考图驱动视频提示词模板
 5. `screenplay/证词之外/zhengci-zhiwai-storyboard.config.json`：storyboard 配置与 fallback alias 映射
 
 ### 资产与追踪真源
@@ -110,7 +110,7 @@
 当前主入口：
 
 1. `screenplay/证词之外/zhengci-zhiwai-asset-prompts.md`
-2. `screenplay/scene-board-prompt-example.md`
+2. `.claude/skills/scene-board-skill/references/scene-board-prompt-example.md`
 3. `.claude/skills/scene-board-skill/SKILL.md`
 
 执行要求：
@@ -157,7 +157,7 @@
 
 当前视频层入口：
 
-1. `screenplay/reference-driven-video-prompt-template.md`
+1. `.claude/skills/seedance-2/references/reference-driven-video-prompt-template.md`
 2. `screenplay/证词之外/zhengci-zhiwai-test-pack-video-prompts.md`
 3. `screenplay/证词之外/zhengci-zhiwai-act1-video-prompts-shot-by-shot.md`
 4. `screenplay/证词之外/zhengci-zhiwai-act2-video-prompts-shot-by-shot.md`

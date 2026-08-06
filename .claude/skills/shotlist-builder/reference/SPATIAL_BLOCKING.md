@@ -2,6 +2,23 @@
 
 **Rule:** before writing any prompt with 2+ characters, key props on a specific surface, or complex camera geometry — produce a top-down (bird's-eye) SVG schema and get user approval. AI video models hallucinate spatial relationships unless they're declared in absolute terms; the schema is how you lock blocking before the prompt is written.
 
+## 0. Anti–director-desk principle（反导演台）
+
+Do **not** rely on platform “导演台 / 站位控件” as the primary fix for character wander. Those UIs burn time and credits and still drift.
+
+**Primary fix:** put **character staging text** into **every** multi-character Seedance prompt (`⚠️空间布局` or the one-line lock in [CHARACTER_STAGING.md](CHARACTER_STAGING.md)).
+
+| Approach | Use when |
+|----------|----------|
+| Staging sentences every prompt | Default — all 2+ character shots |
+| Top-down SVG (this file §§1–5) | Complex blocking, user must approve |
+| Trajectory overlays (§6) | Chase / fight / repositioning |
+| Director-desk UI | Optional last resort only; never instead of prompt staging |
+
+User/agent one-liner: *「每一段分镜提示词都要增加人物占位空间描写提示词，具体根据画面而定」*
+
+---
+
 ## 1. When to draw a schema
 
 Draw it for:
@@ -363,15 +380,17 @@ Exception: deliberate contact (pushing against wall, grabbing collar) — descri
 左侧男子右手抓住右侧男子衣领，将其推向墙面压制——⚠️仅右手与衣领接触，两人躯干之间仍有间隙，其余肢体不接触。
 ```
 
-### Bullet time insert (子弹时间)
+### Bullet time insert (子弹时间 · 短插)
 
-For combat climax moments, insert a slow-motion beat at the impact point:
+For combat climax moments, insert a **brief** slow-motion beat at the impact point (no mandatory 360° orbit):
 
 ```
 ⚠️[击打/碰撞]瞬间进入短暂子弹时间慢动作（约1-2秒），其余时段正常速度。慢动作过渡自然，无画面撕裂。
 ```
 
 Place this instruction immediately after the impact beat (③ 受力反馈), not at the beginning of the action sequence.
+
+**完整冻结 + 360° 环绕特效秀**（抛牌、漂移、爆炸定格）用专用模板：[BULLET_TIME.md](BULLET_TIME.md)，勿与本短插混用。
 
 ### Integration with other sections
 

@@ -1,5 +1,8 @@
 # Composition Library (构图词库)
 
+**先选意图：** [COMPOSITION_CORE.md](COMPOSITION_CORE.md)（7 大技巧速查：焦点 / 三分 / 三角 / 引导线 / 负空间 / 平衡 / 框中框）。  
+本文提供可粘贴句式编号；CORE 决定「为什么这样构图」。
+
 A reusable library of framing and composition patterns for AI video/image prompts. Organized by **narrative function** — pick the function you need, then select a composition.
 
 Works with `BATCH_MODE.md`: each entry here can be used as a composition shorthand in the variable module `⑦ 构图句式`.

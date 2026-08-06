@@ -31,6 +31,11 @@ Do **not** use this skill for:
 
 If the user explicitly asks to lock **空间 / 场景 / 灯光 / 背景连续性**, prefer this skill over forcing a storyboard-table output.
 
+## Reference files
+
+- [references/scene-board-prompt-example.md](references/scene-board-prompt-example.md) — 场景板提示词示例（可直接改写复用）
+- Composition when locking space: `../shotlist-builder/reference/COMPOSITION_CORE.md`（引导线 / 框中框 / 纵深 / 负空间）
+
 ## Core output goal
 
 Produce one **detail-rich, model-ready scene-board prompt** that describes:
@@ -145,6 +150,24 @@ When using this skill, default to one of these two output forms only:
 - **Chinese paragraph-node prompt + short negative prompt line**
 
 Do not output workflow commentary unless the user explicitly asks for reasoning.
+
+## Image generation handoff
+
+If you also generate the scene-board image, do not leave the finished image only in Cursor's default generated-assets location. Scene boards are production anchors and must be archived next to the active episode.
+
+Default target resolution:
+
+- If the active prompt/document is under `episodes/<episode>/screenplay/`, save generated scene boards under `episodes/<episode>/assets/scenes/`.
+- If the project has no `episodes/<episode>/` structure, save under the nearest screenplay folder's sibling `assets/scenes/`.
+- Use stable production filenames, for example `scene-01-living-room-birthday.png`, `scene-02-bedroom-day.png`, or `scene-05-mouth-fantasy-moonnight.png`.
+
+Required workflow after each generated scene board:
+
+1. Infer the active episode from the screenplay file, scene prompt file, or user's target path.
+2. Create `assets/scenes/` if it does not exist.
+3. Copy or move the generated image from Cursor's returned absolute path into `assets/scenes/`.
+4. Report the final project-relative path and use that path in later shotlist, Seedance, or canvas handoffs.
+5. If no file-management tool is available, report the generated source path plus the intended target path, then ask for confirmation before treating the image as locked.
 
 ## Example
 

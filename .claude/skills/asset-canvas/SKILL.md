@@ -19,6 +19,8 @@ Trigger when the user:
 
 Do NOT trigger for general screenplay questions, prompt writing, or shotlist HTML generation — those use `screenwriter` and `shotlist-builder` instead.
 
+When the project has `character-lock.md` / `scene-lock.md` / `project-lock.md` (see `shotlist-builder/reference/PROJECT_LOCKS.md`), treat lock requirements as completeness criteria: missing full-body character refs or location spatial anchors that the lock demands → keep status `missing` and call them out.
+
 ---
 
 ## THE 3-PHASE LOOP
@@ -156,6 +158,36 @@ These spatial notes are used by `shotlist-builder` Phase 3 to confirm blocking.
 Example: `zhengci-zhiwai-asset-canvas.html`
 
 Save to the `screenplay/` folder unless the user specifies otherwise.
+
+---
+
+## GENERATED IMAGE STORAGE
+
+When images are generated in Cursor, the returned path may point to Cursor's default generated-assets directory. That path is only a temporary source. Before marking an asset as `generated`, archive the file into the active screenplay's project asset tree and make the canvas reference the archived path.
+
+Default target folders:
+
+| Asset type | Default target folder |
+| --- | --- |
+| Character / identity board | `assets/identity-boards/` |
+| Location / scene board | `assets/scenes/` |
+| Prop | `assets/props/` |
+| Crowd | `assets/crowds/` |
+| ColorCard | `assets/color-cards/` |
+
+Target root rules:
+
+- If the asset list lives under `episodes/<episode>/screenplay/`, use `episodes/<episode>/assets/<category-folder>/`.
+- If an asset is explicitly cross-episode IP canon, use `<series-root>/assets/<category-folder>/`.
+- If the folder layout is ambiguous, ask once before moving or marking assets as generated.
+
+Required workflow for generated images:
+
+1. Use the generated absolute path as the source.
+2. Create the target category folder if needed.
+3. Copy or move the image into the target folder using the expected production filename from `asset-prompts.md` or a clear slug.
+4. Update the canvas card to reference the archived project-relative path.
+5. Report both `source` and `archived` paths when there is any ambiguity.
 
 ---
 

@@ -11,6 +11,7 @@
 - ⚠️ **陆景深三人格同脸同体**——本尊 / 夜 / 小小共用同一成年男性五官与身高体型；只改发型细节、袖扣/领口/发绳、站姿与微表情。
 - ⚠️ **小小禁止儿童身体**——现实世界永远是 28 岁成年男体；仅心理年龄约 7 岁的女孩气质（捏衣角、发绳、怯声姿态）。
 - ⚠️ **小小性别锁**——女孩人格因陆母「哭得像女孩」污名而生；不是小男孩，也不是随机反差。
+- ⚠️ **小景名字回收锁**——Ep34 起小小自命名为小景；`CHAR-04` 保留早期“小小”状态，`CHAR-13` 作为 Ep34-Ep40 “小景”终局状态，二者仍必须同脸同体。
 
 ---
 
@@ -36,6 +37,7 @@
 
 **文件名：** `色卡_三个他.png`  
 **label_zh：** 全片色卡  
+**label_en：** Master Palette  
 **category：** ColorCard
 
 ```
@@ -173,13 +175,13 @@
 主体：小小——陆景深的幼态人格。⚠️关键锁：
 1) 必须与 CHAR-02 为同一成年男性脸与 28 岁成年身体（约188cm）；禁止生成真实儿童身体、禁止幼龄化缩小身高、禁止女童脸替换。
 2) 心理年龄约 7 岁的**小女孩气质**（因陆母污名「哭得像女孩」而生），用姿态与小道具表达，不靠变身。
-识别信号：一根发绳歪戴在手腕或松松挂在发间/袖口；手指捏皱西装衣角或袖口；鞋跟轻轻蹭地；肩膀内收；不敢抬眼太久；靠近时会拽可信之人袖口的身体语言。服饰仍是本尊那套西装，但被穿得“不像总裁，像怕黑的孩子偷穿大人衣服”。气质：怯、黏、怕黑、只信任“姐姐”。
+识别信号：一枚小发卡（软黄色/奶白色兔子或星星形状）夹在短发侧边或别在衣领边；一根发绳歪戴在手腕；手指捏住可爱软糯衣服的衣角或袖口；鞋跟轻轻蹭地；肩膀内收；不敢抬眼太久；靠近时会拽可信之人袖口的身体语言。服饰：小小出现时会换成更可爱的成人尺码衣服——奶油白/雾蓝色宽松针织开衫、柔软圆领内搭、浅色家居裤或偏可爱的软质外套；必须是成年男体能穿的真实衣服，不是儿童尺码，不是女童裙装。气质：怯、黏、怕黑、只信任“姐姐”。
 
 背景：深灰纯色；可在脚边放一盏未点亮的小兔夜灯道具作 inset，不改身体年龄。
 
-布局规则：⚠️全身成年男体。英雄全身锚点必须清楚看见发绳+捏衣角。正面/侧面/背面同脸同体。
+布局规则：⚠️全身成年男体。英雄全身锚点必须清楚看见发卡 + 发绳 + 可爱软糯衣服 + 捏衣角。正面/侧面/背面同脸同体。
 
-身份锁定：脸=本尊；识别=发绳+捏衣角+内收站姿。禁儿童身体。禁把小小画成女童或女装伪娘夸张妆造——本片是气质与称呼上的女孩人格，不是变装表演。
+身份锁定：脸=本尊；识别=发卡 + 发绳 + 可爱成人衣服 + 捏衣角 + 内收站姿。禁儿童身体。禁把小小画成女童、女装伪娘夸张妆造或性感变装——本片是气质与称呼上的女孩人格，不是变装表演。
 
 表情研究（inset）：
 - 默认：怯生生抬头，试探
@@ -187,10 +189,10 @@
 - 对姐姐：眼亮半拍，往人袖口靠
 - 禁：卖萌抖音滤镜、挤眉弄眼、成人媚态
 
-细节研究（inset）：发绳材质与戴法、被捏皱的袖口、蹭地的鞋跟、小兔夜灯。
+细节研究（inset）：发卡形状与佩戴位置、发绳材质与戴法、奶油白/雾蓝软糯衣服面料、被捏皱的袖口、蹭地的鞋跟、小兔夜灯。
 
 风格：同全局；暖黄点缀仅来自兔灯，面部仍真实皮肤。
-负面约束：不要儿童身体、不要女童替换脸、不要 Quibi 可爱滤镜、不要半身、不要换脸。
+负面约束：不要儿童身体、不要女童替换脸、不要女童裙装、不要性感女装、不要 Quibi 可爱滤镜、不要半身、不要换脸。
 ```
 
 ---
@@ -302,6 +304,7 @@
 
 **文件名：** `loc_penthouse_rooftop_rain_night.png`  
 **label_zh：** 陆宅天台夜雨  
+**label_en：** Lu Mansion Rooftop Rain Night  
 **category：** Location
 
 ```
@@ -319,6 +322,7 @@
 
 **文件名：** `loc_hospital_corridor_night.png`  
 **label_zh：** 医院走廊夜  
+**label_en：** Hospital Corridor Night  
 **category：** Location
 
 ```
@@ -336,6 +340,7 @@
 
 **文件名：** `loc_lu_mansion_livingroom.png`  
 **label_zh：** 陆宅客厅  
+**label_en：** Lu Mansion Living Room  
 **category：** Location
 
 ```
@@ -352,6 +357,7 @@
 
 **文件名：** `loc_lu_boardroom.png`  
 **label_zh：** 陆氏会议室  
+**label_en：** Lu Boardroom  
 **category：** Location
 
 ```
@@ -368,6 +374,7 @@
 
 **文件名：** `loc_old_children_room_dark.png`  
 **label_zh：** 旧儿童房暗室  
+**label_en：** Old Children Room Dark  
 **category：** Location
 
 ```
@@ -386,6 +393,7 @@
 
 **文件名：** `prop_hair_tie.png`  
 **label_zh：** 发绳  
+**label_en：** Hair Tie  
 **category：** Prop
 
 ```
@@ -400,6 +408,7 @@
 
 **文件名：** `prop_cufflinks.png`  
 **label_zh：** 袖扣  
+**label_en：** Cufflinks  
 **category：** Prop
 
 ```
@@ -414,6 +423,7 @@
 
 **文件名：** `prop_lighter_cigarette.png`  
 **label_zh：** 火机与烟  
+**label_en：** Lighter and Cigarette  
 **category：** Prop
 
 ```
@@ -428,6 +438,7 @@
 
 **文件名：** `prop_medical_clipboard.png`  
 **label_zh：** 病历夹  
+**label_en：** Medical Clipboard  
 **category：** Prop
 
 ```
@@ -442,6 +453,7 @@
 
 **文件名：** `prop_suitcase.png`  
 **label_zh：** 行李箱  
+**label_en：** Suitcase  
 **category：** Prop
 
 ```
@@ -456,6 +468,7 @@
 
 **文件名：** `prop_rabbit_night_light.png`  
 **label_zh：** 兔子夜灯  
+**label_en：** Rabbit Night Light  
 **category：** Prop
 
 ```
@@ -466,11 +479,686 @@
 
 ---
 
+# Additional Color Cards（Act 2-4 扩展色卡）
+
+## COLOR-02: 创伤回潮色卡
+
+**文件名：** `色卡_创伤回潮.png`  
+**label_zh：** 创伤回潮色卡  
+**label_en：** Trauma Memory Palette  
+**category：** ColorCard
+
+```
+生成一张 16:9 抽象色卡参考图。
+
+画面内容：纯抽象色彩构成，无人物、无物体、无文字、无场景。
+
+色彩构成：
+- 主色：旧墙灰 HEX:#6F716D，占 45%
+- 阴影黑：旧儿童房近黑 HEX:#11100E，占 25%
+- 兔灯暖黄：HEX:#E6C27A，占 15%
+- 旧纸黄：HEX:#C8B88A，占 10%
+- 创伤红棕极窄条：HEX:#7E3028，占 5%
+
+分布：大面积灰黑压迫，暖黄只作为细窄亮点出现，像黑暗里唯一小灯。
+质感：轻胶片颗粒、旧照片纸张感、低饱和。
+禁：具象房间、人物、文字、渐变风景、赛博霓虹。
+```
+
+---
+
+## COLOR-03: 公开清账色卡
+
+**文件名：** `色卡_公开清账.png`  
+**label_zh：** 公开清账色卡  
+**label_en：** Public Reckoning Palette  
+**category：** ColorCard
+
+```
+生成一张 16:9 抽象色卡参考图。
+
+画面内容：纯抽象色彩构成，无人物、无物体、无文字、无场景。
+
+色彩构成：
+- 主色：董事会冷炭黑 HEX:#161A20，占 50%
+- 辅色：媒体闪光冷白 HEX:#DDE3EA，占 20%
+- 金属灰：HEX:#737C86，占 15%
+- 香槟金：HEX:#D8B48A，占 10%
+- 余烬红棕：HEX:#8B3A2F，占 5%
+
+分布：冷黑主导，冷白像媒体闪光切片，香槟金只作为制度性高光。
+质感：现代财经发布会、高端集团冷调、真实胶片颗粒。
+禁：logo、文字、人物、会场具象图。
+```
+
+---
+
+## COLOR-04: 终局生活色卡
+
+**文件名：** `色卡_带着他们活.png`  
+**label_zh：** 带着他们活色卡  
+**label_en：** Living With Them Palette  
+**category：** ColorCard
+
+```
+生成一张 16:9 抽象色卡参考图。
+
+画面内容：纯抽象色彩构成，无人物、无物体、无文字、无场景。
+
+色彩构成：
+- 主色：深蓝夜空 HEX:#172033，占 40%
+- 室内暖灯：HEX:#E6C27A，占 20%
+- 冷炭灰：HEX:#1C1F26，占 20%
+- 雾蓝灰：HEX:#8A93A0，占 10%
+- 温柔米白：HEX:#E9DDC7，占 10%
+
+分布：深蓝夜空 + 多个小暖灯点，表达“灯没有再灭”的终局温度。
+质感：柔和但不奶油磨皮，真实夜景电影感，低饱和。
+禁：具象城市、人物、文字、童话感彩虹。
+```
+
+---
+
+# Additional Characters（Act 2-4 新增角色资产）
+
+## CHAR-09: 周姨
+
+**文件名：** `zhou_yi.png`  
+**label_zh：** 周姨  
+**label_en：** Auntie Zhou  
+**category：** Character
+
+```
+生成一张艺术性的 16:9 真人电影级角色身份板。
+
+主体：周姨——60+女性，陆家旧保姆/旧儿童房门外的沉默证人。身高约158cm，微驼但不萎缩，手部有长期家务劳动的粗糙纹理。面容普通、疲惫、眼底有二十年没睡好的愧疚；不是恐怖片老仆，也不是慈祥滤镜奶奶。头发灰白夹黑，低盘或简单短发。服饰：深色朴素针织衫、旧围裙或低饱和外套，布鞋。气质：沉默共犯、共同受害者、迟到的证人。
+
+背景：深灰纯色，可用极淡旧儿童房门缝光作为背景抽象纹理，不出现人物环境。
+
+布局规则：⚠️全身（头顶到脚底）。英雄全身锚点为站在门边、双手紧攥围裙边缘；正面/侧面/背面全身。可选表情 inset：愧疚、想说不敢说、Ep37 证词后松一口气。
+
+细节研究：粗糙手指、旧钥匙串、围裙边缘被攥皱、布鞋、眼下细纹。
+负面约束：不要半身、不要鬼屋老佣人、不要夸张阴森、不要富贵老太太。
+```
+
+---
+
+## CHAR-10: 谢医生
+
+**文件名：** `xie_doctor.png`  
+**label_zh：** 谢医生  
+**label_en：** Doctor Xie  
+**category：** Character
+
+```
+生成一张艺术性的 16:9 真人电影级角色身份板。
+
+主体：谢医生——60+男性，陆家御用精神科医生，20年前真诊断与假诊断的签字人。身高约173cm，偏瘦，白发或灰发，戴细框眼镜。面容有知识分子体面，也有长期妥协后的疲惫；眼神闪躲但不是坏人脸。服饰：深色西装 + 白大褂变体，或正式医学会议装；胸前可有空白名牌但不要可读文字。气质：医学权威、沉默共犯、Ep35 转为独立证人。
+
+背景：深灰纯色，可有模糊病历纸纹理作为抽象背景。
+
+布局规则：⚠️全身。英雄全身锚点为一手拿文件夹、一手扶眼镜，身体略向后退；正面/侧面/背面全身。
+
+表情研究：念稿时的迟疑、看到手写诊断书的震动、决定坦白后的疲惫坚定。
+细节：细框眼镜、老医生手、白大褂袖口、旧签字钢笔。
+负面约束：不要疯狂科学家、不要反派阴笑、不要半身肖像。
+```
+
+---
+
+## CHAR-11: 中年男人（陆承岳私家操盘手）
+
+**文件名：** `middle_aged_operator.png`  
+**label_zh：** 中年男人  
+**label_en：** Middle-aged Operator  
+**category：** Character
+
+```
+生成一张艺术性的 16:9 真人电影级角色身份板。
+
+主体：中年男人——40+男性，陆承岳私下操盘的偷拍视频/手术延期链条执行人，Ep33 转边成为证人。身高约176cm，普通商务身形，长相不显眼，像任何一个写字楼里不会被记住的人。面容：眼下重、嘴唇薄、长期跑灰色事务的疲惫和警惕。服饰：深灰夹克或廉价商务西装，手里可拿旧手机/文件袋。气质：小人物操盘者、被夜识破后求生转边。
+
+背景：深灰纯色，不出现城市街头。
+
+布局规则：⚠️全身。英雄全身锚点为身体半侧、手握手机、眼睛避开镜头；正面/侧面/背面全身。
+
+表情研究：警惕、被抓包后的惊慌、转为证人后的空疲。
+负面约束：不要黑帮杀手、不要持枪、不要夸张纹身、不要半身。
+```
+
+---
+
+## CHAR-12: 员工代表
+
+**文件名：** `employee_representative.png`  
+**label_zh：** 员工代表  
+**label_en：** Employee Representative  
+**category：** Character
+
+```
+生成一张艺术性的 16:9 真人电影级角色身份板。
+
+主体：陆氏普通员工代表——30代男性或女性均可，建议女性，负责 Ep38 大礼堂第一个鼓掌的普通人视角。身高普通，穿低饱和商务通勤装，胸前可有空白工牌但无可读文字。面容真实、不明星化，有加班疲惫，但眼神清醒。气质：普通员工、制度见证者、不是主角但代表公司内部真正接纳的第一声掌声。
+
+背景：深灰纯色。
+
+布局规则：⚠️全身。英雄全身锚点为站在礼堂后排的克制鼓掌姿态；正面/侧面/背面全身。
+
+负面约束：不要网红职场精英、不要夸张笑容、不要半身、不要logo文字。
+```
+
+---
+
+## CHAR-13: 小景（Ep34 起名字回收版）
+
+**文件名：** `lu_jingshen_xiaojing.png`  
+**label_zh：** 小景  
+**label_en：** Xiaojing  
+**category：** Character
+
+```
+生成一张艺术性的 16:9 真人电影级角色身份板。
+
+主体：小景——Ep34 起由“小小”完成名字回收后的幼态人格。⚠️必须与 CHAR-02 陆景深本尊为同一成年男性脸、同一身高体型、同一发色发际线；现实世界永远是28岁成年男体，禁止儿童身体。与 CHAR-04 小小相比，差异不是年龄变大，而是状态更稳：仍有发绳/小兔或星星发卡，但不再只缩着；肩膀仍内收一点，却能抬眼；手会捏衣角，但不是求留，而是在自己确认存在。服饰：成人尺码奶油白/雾蓝柔软针织，旧兔子夜灯暖黄反光可落在衣角。气质：6岁创伤仍在，但已经知道“不是我的错”。
+
+背景：深灰纯色，脚边可放修好的兔子夜灯（暖黄微亮）。
+
+布局规则：⚠️全身成年男体。英雄全身锚点为抱着兔子灯站在旧儿童房门口，门虚掩但背景仍抽象；正面/侧面/背面全身。
+
+表情研究：
+- 默认：小心但能抬眼
+- Ep38公开：说“不是我的错”时的颤但稳
+- Ep40睡前：放心、困倦、灯在旁边
+
+负面约束：不要儿童身体、不要女童脸、不要女童裙装、不要半身、不要可爱滤镜、不要换脸。
+```
+
+---
+
+# Crowds / Groups（群演与公开场合人群）
+
+## CROWD-01: 董事会席位群像
+
+**文件名：** `crowd_board_members.png`  
+**label_zh：** 董事会群像  
+**label_en：** Board Members Crowd  
+**category：** Crowd
+
+```
+生成一张 16:9 真人电影级群像参考图。
+
+主体：陆氏集团董事会席位群像，10-15 位中老年董事与股东代表，商务正装，坐在长桌两侧，表情克制、审视、利益计算。无人必须清晰到像主角脸，但整体真实。可有空白文件夹、透明水杯、麦克风。冷色会议室光。
+
+构图：董事会长桌透视，中心留出主角未来站位空位。不要出现可读 logo 或文字。
+负面约束：不要夸张反派群、不要喜剧表情、不要会议室logo乱码、不要单人半身。
+```
+
+---
+
+## CROWD-02: 媒体发布会人群
+
+**文件名：** `crowd_media_press.png`  
+**label_zh：** 媒体发布会人群  
+**label_en：** Press Crowd  
+**category：** Crowd
+
+```
+生成一张 16:9 真人电影级媒体人群参考图。
+
+主体：30家媒体记者席，摄像机、收音麦、记者笔记本、闪光灯。人群真实但不抢戏，表情专注、追问、等待爆点。画面中可见多个空白话筒牌但无可读文字。
+
+构图：前景虚化相机与麦克风，后景为主席台空位。冷白闪光 + 冷炭灰发布会背景。
+负面约束：不要具体新闻台logo、不要可读文字、不要娱乐红毯、不要过度拥挤失真。
+```
+
+---
+
+## CROWD-03: 陆氏员工代表大会
+
+**文件名：** `crowd_employee_assembly.png`  
+**label_zh：** 员工代表大会  
+**label_en：** Employee Assembly Crowd  
+**category：** Crowd
+
+```
+生成一张 16:9 真人电影级群体场景参考图。
+
+主体：陆氏集团员工代表大会，约200人的礼堂座位氛围。商务通勤装，年龄层从20代到50代，表情不是狂热崇拜，而是紧张、沉默、逐渐被打动。后排可见一个普通员工微微起手鼓掌的瞬间，但不需要清晰主角脸。
+
+构图：从主席台侧后方看向观众席，留出讲台空位。
+负面约束：不要粉丝见面会、不要演唱会灯光、不要logo文字、不要笑得夸张。
+```
+
+---
+
+## CROWD-04: 家族说明会族亲群像
+
+**文件名：** `crowd_lu_family_relatives.png`  
+**label_zh：** 陆家族亲群像  
+**label_en：** Lu Family Relatives Crowd  
+**category：** Crowd
+
+```
+生成一张 16:9 真人电影级群像参考图。
+
+主体：陆家族亲与管理层混合人群，150人说明会氛围。前排是年长族亲、旁支叔伯、董事顾问；后排是年轻家族成员与工作人员。服饰低调昂贵，表情克制、观望、怕站错队。整体是豪门秩序感，不是婚礼宴会。
+
+构图：大礼堂侧面，主席台空位在画面一侧，人群呈阶梯分布。
+负面约束：不要中式婚宴红金、不要宫廷豪门、不要夸张富豪脸谱、不要文字logo。
+```
+
+---
+
+# Additional Location Anchors（Act 2-4 场地无人）
+
+## LOC-06: 陆宅书房
+
+**文件名：** `loc_lu_mansion_study.png`  
+**label_zh：** 陆宅书房  
+**label_en：** Lu Mansion Study  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：陆宅深色现代书房。深木书架、长书桌、落地窗或窄窗、镜面/玻璃反射面。桌上可有合上的文件夹、冷色钢笔、空白纸张。整体冷炭灰主色，香槟暖台灯作为10%暖点。用于 Ep31 三人格同页手写、Ep38 镜中整合、Ep40 抽屉收刀。
+
+空间锚点：书桌在中下三分，书架占后景，右侧需有可放“抽屉里的刀”的柜体/书桌抽屉。
+负面约束：不要人物、不要欧式宫殿书房、不要杂乱漫画书、不要可读文字。
+```
+
+---
+
+## LOC-07: 陆家老宅大礼堂
+
+**文件名：** `loc_lu_mansion_grand_hall.png`  
+**label_zh：** 陆家老宅大礼堂  
+**label_en：** Lu Mansion Grand Hall  
+**category：** Location
+
+```
+生成一张 16:9 场地锚点图（空场无人）。
+
+场景：陆家老宅内部大礼堂/家族说明会场。高端但克制，深木墙面、浅石地面、主席台、讲台、侧面媒体位、前排座椅。不是酒店婚礼厅。用于 Ep35 谢医生坦白、Ep37 陆母主使坐实。
+
+构图：主席台在中轴，讲台居中，左右留媒体席和族亲席空位。
+光线：冷白会议灯 + 少量香槟暖壁灯。
+负面约束：不要人物、不要婚庆鲜花、不要红毯、不要logo文字。
+```
+
+---
+
+## LOC-08: 陆氏集团大礼堂 / 发布会主场
+
+**文件名：** `loc_lu_corporate_auditorium.png`  
+**label_zh：** 陆氏集团大礼堂  
+**label_en：** Lu Corporate Auditorium  
+**category：** Location
+
+```
+生成一张 16:9 或 9:16 场地锚点图（空场无人）。
+
+场景：现代集团总部大礼堂，主席台、巨大无文字深灰背景屏、冷白媒体灯、员工/媒体座位区、侧面机位。用于 Ep38“我是我们”和 Ep40 终局发布会。
+
+空间锚点：主席台有一个主讲位，台下左侧为董事席，右侧为媒体席，后排为员工席。必须无人。
+调色：公开清账色卡，冷黑 + 冷白闪光 + 少量香槟金。
+负面约束：不要可读logo、不要舞台演唱会、不要人物、不要彩色聚光灯。
+```
+
+---
+
+## LOC-09: 旧儿童房 · 灯亮修复版
+
+**文件名：** `loc_old_children_room_light_on.png`  
+**label_zh：** 旧儿童房灯亮  
+**label_en：** Old Children Room Light On  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：陆宅旧儿童房修复后的状态。仍是旧家具、旧窗帘、旧书桌，但房间被打扫过；兔子夜灯放在书桌或床边，暖黄微亮；门保持虚掩，门缝透出走廊微光。画面要有“同一个创伤空间被安全重写”的感觉，不要变成崭新儿童房。
+
+构图：兔子灯作为暖点在下三分，门虚掩在侧边，床/书桌形成空间锚。
+负面约束：不要儿童演员、不要玩具堆满、不要童话粉嫩房、不要恐怖片。
+```
+
+---
+
+## LOC-10: 陆宅后花园
+
+**文件名：** `loc_lu_mansion_garden_dusk.png`  
+**label_zh：** 陆宅后花园黄昏  
+**label_en：** Lu Mansion Garden Dusk  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：陆宅后花园黄昏，修剪克制的庭院、石板路、低矮树影、远处宅邸灯光。用于 Ep36 傍晚手心相扣、公战后的私和。
+
+光线：夕阳穿过树叶，暖香槟点缀但整体仍低饱和。
+负面约束：不要人物、不要欧式喷泉宫殿、不要婚纱照花园、不要过度金黄滤镜。
+```
+
+---
+
+## LOC-11: 陆宅阳台深夜
+
+**文件名：** `loc_lu_mansion_balcony_night.png`  
+**label_zh：** 陆宅阳台深夜  
+**label_en：** Lu Mansion Balcony Night  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：陆宅高层阳台深夜，玻璃栏杆、远处城市深蓝夜景、室内暖灯从身后透出。用于 Ep39/Ep40 深夜关系契约与终局旁白。画面应有安静、呼吸感，不要高危跳楼感。
+
+构图：栏杆中下三分，城市天际线远景虚化，室内暖光在边缘。
+负面约束：不要人物、不要暴雨、不要赛博霓虹、不要恐怖孤独感。
+```
+
+---
+
+## LOC-12: 陆母书房
+
+**文件名：** `loc_madame_lu_study.png`  
+**label_zh：** 陆母书房  
+**label_en：** Madame Lu Study  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：陆母私人书房/会客室。温色高定家具、珍珠白/驼色软装、整齐文件柜、窗边单人椅、可放火盆或碎纸炉的位置。外表温柔、秩序感强，但有控制压迫。用于 Ep35 烧统一口径、Ep36 主使自我确认。
+
+构图：书桌与单人椅对峙，窗光冷，台灯暖。
+负面约束：不要人物、不要宫廷豪奢、不要红木堆满、不要可读文字。
+```
+
+---
+
+## LOC-13: 医院档案室
+
+**文件名：** `loc_hospital_archive_room.png`  
+**label_zh：** 医院档案室  
+**label_en：** Hospital Archive Room  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：高端私立医院旧档案室。金属档案柜、冷白灯、窄走道、封存文件盒、玻璃门。干净但压抑，不像废弃恐怖片。用于 Ep22-Ep27 密码卡与病历原件链条。
+
+构图：档案柜纵深透视，前景可有空白文件盒但无可读文字。
+负面约束：不要人物、不要血腥、不要恐怖废墟、不要明显医院logo文字。
+```
+
+---
+
+## LOC-14: 医院手术等待区
+
+**文件名：** `loc_surgery_waiting_area.png`  
+**label_zh：** 手术等待区  
+**label_en：** Surgery Waiting Area  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：医院手术等待区，冷白灯、电子屏位置但无可读文字、长椅、玻璃门、空走廊。用于 Ep28 手术延期危机与陆承岳私下操盘压力。无人。
+
+情绪：不是恐怖，是制度冷漠和等待焦灼。
+负面约束：不要病人医生、不要血腥、不要急救混乱、不要可读文字。
+```
+
+---
+
+## LOC-15: 江南周姨家
+
+**文件名：** `loc_zhou_yi_jiangnan_home.png`  
+**label_zh：** 周姨江南家  
+**label_en：** Auntie Zhou Jiangnan Home  
+**category：** Location
+
+```
+生成一张 9:16 竖屏场地锚点图（空场无人）。
+
+场景：江南普通老小区家中客厅，简朴、干净、暖色小灯、儿童书包或小鞋在门边但无人。用于 Ep39 周姨离开陆家、Ep40 视频连线抱孙女前的生活锚点。
+
+气质：从豪门控制系统回到自己的生活，温暖但不煽情。
+负面约束：不要人物、不要豪宅、不要旅游古镇、不要过度温馨广告感。
+```
+
+---
+
+# Additional Props（Act 2-4 证据链 / 终局道具）
+
+## PROP-07: 密码卡
+
+**文件名：** `prop_password_card.png`  
+**label_zh：** 密码卡  
+**label_en：** Password Card  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：一张旧式加密门禁/密码卡，深灰或暗蓝色，无可读文字，可有磨损边角和金属芯片。它是 Ep22 打开封存备份的钥匙。
+
+背景：深灰档案室桌面，冷白灯反射。
+负面约束：不要银行卡logo、不要可读数字、不要科幻芯片卡。
+```
+
+---
+
+## PROP-08: 维修单
+
+**文件名：** `prop_repair_order.png`  
+**label_zh：** 维修单  
+**label_en：** Repair Order  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：旧纸质维修单，泛黄、折痕、边角磨损，上面可以有模糊不可读的手写痕迹与签名位置，但禁止出现清晰文字。用于证明兔子灯/旧儿童房那晚的时间链。
+
+背景：深色书桌或档案室桌面。
+负面约束：不要可读具体文字、不要现代快递单、不要过度做旧恐怖感。
+```
+
+---
+
+## PROP-09: 手写诊断书原件
+
+**文件名：** `prop_original_diagnosis.png`  
+**label_zh：** 手写诊断书原件  
+**label_en：** Original Handwritten Diagnosis  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：20年前的手写医学诊断书原件，白纸泛黄，医生签名处有模糊签字，纸张上可有模糊表格线与不可读文字块。不能出现清晰病名文字，避免模型乱码；视觉上要让人理解这是严肃医疗档案原件。
+
+背景：冷白档案室桌面，旁边可有细框眼镜或钢笔。
+负面约束：不要可读文字、不要血迹、不要法院判决书风格。
+```
+
+---
+
+## PROP-10: 替换诊断书
+
+**文件名：** `prop_replaced_diagnosis.png`  
+**label_zh：** 替换诊断书  
+**label_en：** Replaced Diagnosis  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：较新、排版更工整的替换诊断书，纸张比原件更白，签字位置可见模糊签名，表格线整齐但文字不可读。它与 PROP-09 形成真假诊断对照。
+
+背景：深灰桌面，冷白光。可在旁边放冷色金属袖扣作为比例参照。
+负面约束：不要可读病名、不要夸张“伪造”红章、不要法院文件。
+```
+
+---
+
+## PROP-11: 录音笔
+
+**文件名：** `prop_voice_recorder.png`  
+**label_zh：** 录音笔  
+**label_en：** Voice Recorder  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：小型黑色录音笔，金属或磨砂质感，屏幕不显示可读文字。用于 Ep23 陆母亲口录音、Ep30 股东大会播放。
+
+背景：董事会深灰桌面，冷白反光。
+负面约束：不要手机替代、不要录音软件UI、不要可读品牌logo。
+```
+
+---
+
+## PROP-12: 统一口径声明
+
+**文件名：** `prop_control_statement.png`  
+**label_zh：** 统一口径声明  
+**label_en：** Control Statement  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：一叠打印整齐的公关声明文件，标题位置可有模糊黑条但禁止可读文字；纸张边缘有反复修改的便利贴/红笔划线痕迹。用于陆母20年控制话术的物理化道具，Ep35 被烧毁。
+
+背景：陆母书房温色桌面。
+负面约束：不要可读中文标题、不要现代新闻稿模板文字、不要火焰（火焰版另见 PROP-13）。
+```
+
+---
+
+## PROP-13: 烧毁的统一口径声明
+
+**文件名：** `prop_burned_statement.png`  
+**label_zh：** 烧毁声明残页  
+**label_en：** Burned Statement Pages  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：火盆中烧到一半或烧尽的声明纸残页，纸边焦黑，余烬微红，仍看不清任何文字。用于 Ep35 陆母最后一次烧统一口径，控制工具物理销毁。
+
+背景：陆母书房或露台深色地面，低光，余烬红棕点缀。
+负面约束：不要大火灾、不要可读文字、不要人物手。
+```
+
+---
+
+## PROP-14: 防身刀
+
+**文件名：** `prop_defense_knife.png`  
+**label_zh：** 防身刀  
+**label_en：** Defense Knife  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：一把小型冷色金属防身刀/折刀，简洁、非夸张武器，放在深灰抽屉中。用于夜从“用刀保护”到 Ep40“刀入抽屉不锁”的完整弧线。
+
+构图：抽屉半开，刀平放，旁边可有火机但不抢主。
+负面约束：不要血迹、不要战术军刀夸张、不要黑帮武器堆、不要人物手。
+```
+
+---
+
+## PROP-15: 三人格同页手写纸
+
+**文件名：** `prop_three_alters_handwriting.png`  
+**label_zh：** 三人格同页手写纸  
+**label_en：** Three Alters Handwriting Sheet  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：一张白纸上有三种明显不同笔迹的短句/线条痕迹，但文字不可读或以抽象笔迹呈现。纸张放在陆宅书房桌面，旁边有钢笔、袖扣、发绳、火机三个小道具。用于 Ep31 三人格同页手写协作。
+
+重点：三种笔迹差异可见——本尊工整、夜锋利、小景稚拙；但不要生成清晰可读文字。
+负面约束：不要可读中文乱码、不要儿童涂鸦过度卡通、不要人物手。
+```
+
+---
+
+## PROP-16: 股东授权文件
+
+**文件名：** `prop_shareholder_authorization.png`  
+**label_zh：** 股东授权文件  
+**label_en：** Shareholder Authorization File  
+**category：** Prop
+
+```
+生成一张 1:1 或 4:5 道具特写。
+
+主体：高端商务文件夹中夹着几页股东授权/董事会材料，排版正式但文字不可读；有签字页、标签贴、钢笔。用于 Ep32-Ep36 制度反击和继承战。
+
+背景：陆氏董事会桌面，冷白光，水杯边缘可见。
+负面约束：不要可读文字、不要法院判决书、不要红章夸张。
+```
+
+---
+
+## PROP-17: 发布会麦克风
+
+**文件名：** `prop_press_microphone.png`  
+**label_zh：** 发布会麦克风  
+**label_en：** Press Microphone  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：一支黑色发布会麦克风或讲台鹅颈麦，金属质感，放在深灰主席台上。无logo、无文字。用于 Ep35-Ep40 多次公开发言。
+
+背景：冷黑发布会桌面，远处冷白灯虚化。
+负面约束：不要新闻台logo、不要可读文字、不要手持演唱会麦克风。
+```
+
+---
+
+## PROP-18: 空白工牌
+
+**文件名：** `prop_blank_employee_badge.png`  
+**label_zh：** 空白工牌  
+**label_en：** Blank Employee Badge  
+**category：** Prop
+
+```
+生成一张 1:1 道具特写。
+
+主体：陆氏集团员工空白工牌，深灰挂绳，卡面无可读文字或logo，干净商务。用于员工代表/集团场景的统一道具。
+
+背景：冷灰桌面。
+负面约束：不要可读公司名、不要二维码、不要真实品牌logo。
+```
+
+---
+
 # 资产清单速查
 
 | ID | 文件名 | 类别 | 中文名 |
 |----|--------|------|--------|
 | COLOR-01 | `色卡_三个他.png` | ColorCard | 全片色卡 |
+| COLOR-02 | `色卡_创伤回潮.png` | ColorCard | 创伤回潮色卡 |
+| COLOR-03 | `色卡_公开清账.png` | ColorCard | 公开清账色卡 |
+| COLOR-04 | `色卡_带着他们活.png` | ColorCard | 带着他们活色卡 |
 | CHAR-01 | `shen_xingye.png` | Character | 沈星野 |
 | CHAR-02 | `lu_jingshen_host.png` | Character | 陆景深本尊 |
 | CHAR-03 | `lu_jingshen_ye.png` | Character | 夜 |
@@ -479,19 +1167,65 @@
 | CHAR-06 | `lu_chengyue.png` | Character | 陆承岳 |
 | CHAR-07 | `song_wantang.png` | Character | 宋晚棠 |
 | CHAR-08 | `lu_jingshen_alters_board.png` | Character | 三人格对照板 |
+| CHAR-09 | `zhou_yi.png` | Character | 周姨 |
+| CHAR-10 | `xie_doctor.png` | Character | 谢医生 |
+| CHAR-11 | `middle_aged_operator.png` | Character | 中年男人 |
+| CHAR-12 | `employee_representative.png` | Character | 员工代表 |
+| CHAR-13 | `lu_jingshen_xiaojing.png` | Character | 小景 |
+| CROWD-01 | `crowd_board_members.png` | Crowd | 董事会群像 |
+| CROWD-02 | `crowd_media_press.png` | Crowd | 媒体发布会人群 |
+| CROWD-03 | `crowd_employee_assembly.png` | Crowd | 员工代表大会 |
+| CROWD-04 | `crowd_lu_family_relatives.png` | Crowd | 陆家族亲群像 |
 | LOC-01 | `loc_penthouse_rooftop_rain_night.png` | Location | 陆宅天台夜雨 |
 | LOC-02 | `loc_hospital_corridor_night.png` | Location | 医院走廊夜 |
 | LOC-03 | `loc_lu_mansion_livingroom.png` | Location | 陆宅客厅 |
 | LOC-04 | `loc_lu_boardroom.png` | Location | 陆氏会议室 |
 | LOC-05 | `loc_old_children_room_dark.png` | Location | 旧儿童房暗室 |
+| LOC-06 | `loc_lu_mansion_study.png` | Location | 陆宅书房 |
+| LOC-07 | `loc_lu_mansion_grand_hall.png` | Location | 陆家老宅大礼堂 |
+| LOC-08 | `loc_lu_corporate_auditorium.png` | Location | 陆氏集团大礼堂 |
+| LOC-09 | `loc_old_children_room_light_on.png` | Location | 旧儿童房灯亮 |
+| LOC-10 | `loc_lu_mansion_garden_dusk.png` | Location | 陆宅后花园黄昏 |
+| LOC-11 | `loc_lu_mansion_balcony_night.png` | Location | 陆宅阳台深夜 |
+| LOC-12 | `loc_madame_lu_study.png` | Location | 陆母书房 |
+| LOC-13 | `loc_hospital_archive_room.png` | Location | 医院档案室 |
+| LOC-14 | `loc_surgery_waiting_area.png` | Location | 手术等待区 |
+| LOC-15 | `loc_zhou_yi_jiangnan_home.png` | Location | 周姨江南家 |
 | PROP-01 | `prop_hair_tie.png` | Prop | 发绳 |
 | PROP-02 | `prop_cufflinks.png` | Prop | 袖扣 |
 | PROP-03 | `prop_lighter_cigarette.png` | Prop | 火机与烟 |
 | PROP-04 | `prop_medical_clipboard.png` | Prop | 病历夹 |
 | PROP-05 | `prop_suitcase.png` | Prop | 行李箱 |
 | PROP-06 | `prop_rabbit_night_light.png` | Prop | 兔子夜灯 |
+| PROP-07 | `prop_password_card.png` | Prop | 密码卡 |
+| PROP-08 | `prop_repair_order.png` | Prop | 维修单 |
+| PROP-09 | `prop_original_diagnosis.png` | Prop | 手写诊断书原件 |
+| PROP-10 | `prop_replaced_diagnosis.png` | Prop | 替换诊断书 |
+| PROP-11 | `prop_voice_recorder.png` | Prop | 录音笔 |
+| PROP-12 | `prop_control_statement.png` | Prop | 统一口径声明 |
+| PROP-13 | `prop_burned_statement.png` | Prop | 烧毁声明残页 |
+| PROP-14 | `prop_defense_knife.png` | Prop | 防身刀 |
+| PROP-15 | `prop_three_alters_handwriting.png` | Prop | 三人格同页手写纸 |
+| PROP-16 | `prop_shareholder_authorization.png` | Prop | 股东授权文件 |
+| PROP-17 | `prop_press_microphone.png` | Prop | 发布会麦克风 |
+| PROP-18 | `prop_blank_employee_badge.png` | Prop | 空白工牌 |
 
-**建议生成顺序：** COLOR-01 → CHAR-02（脸模母版）→ CHAR-03/04/08 → CHAR-01/05/06/07 → LOCs → PROPs。
+**资产总数：** 54 个  
+- ColorCard × 4  
+- Character × 13  
+- Crowd × 4  
+- Location × 15  
+- Prop × 18  
+
+**建议生成顺序：**
+1. `COLOR-01` → `COLOR-02` → `COLOR-03` → `COLOR-04`
+2. `CHAR-02`（脸模母版）→ `CHAR-03` / `CHAR-04` / `CHAR-13` / `CHAR-08`（同脸一致性优先）
+3. `CHAR-01` / `CHAR-05` / `CHAR-06` / `CHAR-07` / `CHAR-09` / `CHAR-10` / `CHAR-11` / `CHAR-12`
+4. `LOC-01` - `LOC-15`（先旧儿童房暗/亮、陆宅书房、陆氏集团大礼堂）
+5. `PROP-01` - `PROP-18`（先三人格识别物：袖扣/火机/发绳/兔灯，再证据链）
+6. `CROWD-01` - `CROWD-04`（公开场景补充）
+
+**同脸一致性优先级：** `CHAR-02` 是男主脸模母版。生成 `CHAR-03`、`CHAR-04`、`CHAR-13`、`CHAR-08` 时必须挂载/参考 `CHAR-02`，禁止换脸。
 
 ---
 

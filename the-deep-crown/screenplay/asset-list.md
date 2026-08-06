@@ -72,7 +72,7 @@
 | 4 | Wexler的手表 | 深蓝色表盘手表。高端。他的"计算"标记物。 | `prop_watch.png` |
 | 5 | Jonas的门禁卡 | 标准企业门禁卡+挂绳。他经常拨弄它。 | `prop_badge.png` |
 | 6 | 黑珊瑚王冠 | 古老、沉重、黑色珊瑚枝编织的王冠。暗淡无光泽。有重量感。 | `prop_crown.png` |
-| 7 | 公司标志 | ABYSSAL DYNAMICS 的企业logo——深蓝底色+简约深渊图形。 | `prop_ad_logo.png` |
+| 7 | 公司标志 | ABYSSAL DYNAMICS 的普通企业标识贴花/印刷标识；用于探测器外壳、小型工牌或大堂材质表面，不作为独立标题卡。 | `公司标志.png` |
 | 8 | Maren的笔记本 | 普通黑色笔记本，内页画满海底建筑、面孔、地图。手绘风。 | `prop_notebook.png` |
 
 ---

@@ -123,3 +123,7 @@ When doing a global pass, build a quick internal rule for each character, for ex
 - Character A: more hard stops, fewer ellipses
 - Character B: more trailing breath, softer starts
 - Character C: pressure through short questions
+
+## Related performance docs
+
+For full acting timelines (pre-line state → trigger words → AU → end hold), see `../seedance-2/references/PERFORMANCE_EIGHT_DIM.md`. This skill only edits spoken punctuation and delivery marks inside lines.

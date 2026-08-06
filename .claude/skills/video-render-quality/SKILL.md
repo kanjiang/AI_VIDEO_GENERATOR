@@ -19,6 +19,10 @@ The plastic look in AI video is rarely the model's fault. It is almost always a 
 - The user is writing or revising video prompts and wants a visual quality pass.
 - The user asks to "upgrade the render quality" or "make it more cinematic."
 
+**Still magazine / art posters (not video):** use `style-extractor` → [preset-styles.md Recipe 3 Magazine Art Director](../style-extractor/reference/preset-styles.md) — 85mm / f/1.8 / ISO 200, directional soft light, optical micro-imperfections. Same anti-plastic philosophy; different medium.
+
+**Face close-ups that look over-beautified:** add living-skin directives (pores, micro texture, no heavy smooth beauty) and pair with `shotlist-builder` [MICRO_BEATS.md](../shotlist-builder/reference/MICRO_BEATS.md) §8 three-stage facial emotion — emotion acting fails on plastic/wax faces.
+
 ## Core Rule
 
 The plastic look has three root causes. Fix them in this order:
