@@ -22,9 +22,9 @@
 | `screenplay/season-01-treatment.md` | 十集大纲 + 解法归属表 + 制作顺序 | ✅ 完成 |
 | `screenplay/identity-board-prompts.md` | 九张角色身份板出图 prompt + 出图顺序 + 验收清单 | ✅ 完成 |
 | `screenplay/scene-board-prompts.md` | 七个场景板 + 色卡出图 prompt，含烘焙规则与光照签名 | ✅ 完成 |
+| `screenplay/episode-01-screenplay.md` | 第一集《加速》剧本，含场次 / 角色 / 音效 / 合规校验 | ✅ 完成 |
+| `screenplay/episode-01-shot-plan.md` | 第一集 24 个镜头分镜表 + Seedance prompt + 抽卡顺序 | ✅ 完成 |
 | `screenplay/asset-prompts.md` | 道具与资产清单索引 | ⬜ 待做 |
-| `screenplay/episode-01-screenplay.md` | 第一集剧本（加速） | ⬜ 待做 |
-| `screenplay/episode-01-shot-plan.md` | 第一集分镜表 + Seedance prompt | ⬜ 待做 |
 
 设计文档（spec）在 `docs/superpowers/specs/2026-08-09-fruit-jam-island-design.md`。
 
