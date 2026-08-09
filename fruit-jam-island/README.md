@@ -20,7 +20,7 @@
 | `screenplay/characters.md` | 九个角色的完整设定：外形锁、生理机制、声音、关系、drift bans | ✅ 完成 |
 | `screenplay/project-lock.md` | 跨集生产硬锁（英文生产语言）。**写任何 shotlist / 分镜 / 场景板 / Seedance prompt 前必须先查这份** | ✅ 完成 |
 | `screenplay/season-01-treatment.md` | 十集大纲 + 解法归属表 + 制作顺序 | ✅ 完成 |
-| `screenplay/identity-board-prompts.md` | 九张角色身份板出图 prompt | ⬜ 待做 |
+| `screenplay/identity-board-prompts.md` | 九张角色身份板出图 prompt + 出图顺序 + 验收清单 | ✅ 完成 |
 | `screenplay/scene-board-prompts.md` | 六个场景板 + 色卡出图 prompt | ⬜ 待做 |
 | `screenplay/asset-prompts.md` | 道具与资产清单索引 | ⬜ 待做 |
 | `screenplay/episode-01-screenplay.md` | 第一集剧本（加速） | ⬜ 待做 |
